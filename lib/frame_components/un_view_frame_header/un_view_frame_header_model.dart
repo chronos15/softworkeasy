@@ -9,6 +9,8 @@ class UnViewFrameHeaderModel extends FlutterFlowModel<UnViewFrameHeaderWidget> {
 
   ///  State fields for stateful widgets in this component.
 
+  // Stores action output result for [Custom Action - bodyImgApiToUploaded] action in Column widget.
+  FFUploadedFile? returnBodyRequest;
   // State field(s) for MouseRegion widget.
   bool mouseRegionHovered = false;
   // State field(s) for pesquisa widget.

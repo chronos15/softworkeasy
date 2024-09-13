@@ -1986,7 +1986,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                     ].addToStart(SizedBox(
                         height:
                             MediaQuery.sizeOf(context).width < kBreakpointSmall
-                                ? 20.0
+                                ? 40.0
                                 : 0.0)),
                   ),
                 ),

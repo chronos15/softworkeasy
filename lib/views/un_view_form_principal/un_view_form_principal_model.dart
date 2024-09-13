@@ -1,5 +1,6 @@
 import '/backend/schema/enums/enums.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/instant_timer.dart';
 import '/frame_components/un_view_frame_header/un_view_frame_header_widget.dart';
 import '/frame_components/un_view_frame_profile/un_view_frame_profile_widget.dart';
 import '/frame_components/un_view_frame_side_menu/un_view_frame_side_menu_widget.dart';
@@ -19,6 +20,7 @@ class UnViewFormPrincipalModel
 
   ///  State fields for stateful widgets in this page.
 
+  InstantTimer? instantVerifyToken;
   // Model for unViewFrameHeader component.
   late UnViewFrameHeaderModel unViewFrameHeaderModel;
   // Model for unViewFrameSideMenu component.
@@ -61,6 +63,7 @@ class UnViewFormPrincipalModel
 
   @override
   void dispose() {
+    instantVerifyToken?.cancel();
     unViewFrameHeaderModel.dispose();
     unViewFrameSideMenuModel1.dispose();
     unViewFrameHomeModel.dispose();

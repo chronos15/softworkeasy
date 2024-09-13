@@ -1,12 +1,16 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import '/frame_components/un_view_frame_empresa/un_view_frame_empresa_widget.dart';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:provider/provider.dart';
 import 'un_view_frame_profile_model.dart';
 export 'un_view_frame_profile_model.dart';
 
@@ -34,6 +38,11 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
   void initState() {
     super.initState();
     _model = createModel(context, () => UnViewFrameProfileModel());
+
+    // On component load action.
+    SchedulerBinding.instance.addPostFrameCallback((_) async {
+      _model.sVersionReturned = await actions.getVersionNumber();
+    });
 
     animationsMap.addAll({
       'containerOnPageLoadAnimation1': AnimationInfo(
@@ -134,11 +143,14 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
 
   @override
   Widget build(BuildContext context) {
+    context.watch<FFAppState>();
+
     return Container(
       width: double.infinity,
       height: double.infinity,
       decoration: const BoxDecoration(),
       child: SingleChildScrollView(
+        primary: false,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -170,6 +182,9 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                         await actions.winCustomAction(
                           1,
                         );
+                        FFAppState().modalUserMenu =
+                            !(FFAppState().modalUserMenu ?? true);
+                        _model.updatePage(() {});
                       },
                     ),
                     FlutterFlowIconButton(
@@ -186,6 +201,9 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                         await actions.winCustomAction(
                           2,
                         );
+                        FFAppState().modalUserMenu =
+                            !(FFAppState().modalUserMenu ?? true);
+                        _model.updatePage(() {});
                       },
                     ),
                     FlutterFlowIconButton(
@@ -218,13 +236,40 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(4.0),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(12.0),
-                    child: Image.asset(
-                      'assets/images/no-image.png',
-                      width: 100.0,
-                      height: 100.0,
-                      fit: BoxFit.cover,
+                  child: InkWell(
+                    splashColor: Colors.transparent,
+                    focusColor: Colors.transparent,
+                    hoverColor: Colors.transparent,
+                    highlightColor: Colors.transparent,
+                    onTap: () async {
+                      await Navigator.push(
+                        context,
+                        PageTransition(
+                          type: PageTransitionType.fade,
+                          child: FlutterFlowExpandedImageView(
+                            image: Image.asset(
+                              'assets/images/no-image.png',
+                              fit: BoxFit.contain,
+                            ),
+                            allowRotation: false,
+                            tag: 'imageTag',
+                            useHeroAnimation: true,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Hero(
+                      tag: 'imageTag',
+                      transitionOnUserGestures: true,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12.0),
+                        child: Image.asset(
+                          'assets/images/no-image.png',
+                          width: 100.0,
+                          height: 100.0,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -332,63 +377,99 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                   ).animateOnPageLoad(
                       animationsMap['containerOnPageLoadAnimation1']!),
                 ),
-                Padding(
-                  padding:
-                      const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
-                  child: Material(
-                    color: Colors.transparent,
-                    elevation: 0.0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                    child: Container(
-                      width: double.infinity,
-                      height: 45.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8.0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Row(
-                          mainAxisSize: MainAxisSize.max,
-                          children: [
-                            Icon(
-                              Icons.notifications_active_sharp,
-                              color: FlutterFlowTheme.of(context).primary,
-                              size: 24.0,
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    12.0, 0.0, 0.0, 0.0),
-                                child: Text(
-                                  'Configurações de Notificação',
-                                  style: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .override(
-                                        fontFamily: 'Manrope',
-                                        color: FlutterFlowTheme.of(context)
-                                            .secondaryText,
-                                        letterSpacing: 0.0,
-                                        fontWeight: FontWeight.w300,
-                                      ),
+                Builder(
+                  builder: (context) => Padding(
+                    padding:
+                        const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                    child: InkWell(
+                      splashColor: Colors.transparent,
+                      focusColor: Colors.transparent,
+                      hoverColor: Colors.transparent,
+                      highlightColor: Colors.transparent,
+                      onTap: () async {
+                        _model.returnBodyRequest =
+                            await actions.bodyImgApiToUploaded(
+                          'http://${FFAppState().ConfigGlobaisServer.host}:${FFAppState().ConfigGlobaisServer.porta.toString()}/${FFAppState().ConfigGlobaisServer.path}/entities/EMPRESAVIEW(1)/LOGO',
+                          FFAppState().Token,
+                        );
+                        await showDialog(
+                          context: context,
+                          builder: (dialogContext) {
+                            return Dialog(
+                              elevation: 0,
+                              insetPadding: EdgeInsets.zero,
+                              backgroundColor: Colors.transparent,
+                              alignment: const AlignmentDirectional(0.0, 0.0)
+                                  .resolve(Directionality.of(context)),
+                              child: SizedBox(
+                                height: MediaQuery.sizeOf(context).height * 0.9,
+                                width: MediaQuery.sizeOf(context).width * 0.9,
+                                child: UnViewFrameEmpresaWidget(
+                                  uploadedFoto: _model.returnBodyRequest!,
                                 ),
                               ),
+                            );
+                          },
+                        );
+
+                        safeSetState(() {});
+                      },
+                      child: Material(
+                        color: Colors.transparent,
+                        elevation: 0.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Container(
+                          width: double.infinity,
+                          height: 45.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.all(12.0),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.max,
+                              children: [
+                                Icon(
+                                  Icons.home_rounded,
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  size: 24.0,
+                                ),
+                                Expanded(
+                                  child: Padding(
+                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                        12.0, 0.0, 0.0, 0.0),
+                                    child: Text(
+                                      'Empresa',
+                                      style: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .override(
+                                            fontFamily: 'Manrope',
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryText,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w300,
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                                Align(
+                                  alignment: const AlignmentDirectional(0.9, 0.0),
+                                  child: Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: FlutterFlowTheme.of(context).primary,
+                                    size: 15.0,
+                                  ),
+                                ),
+                              ],
                             ),
-                            Align(
-                              alignment: const AlignmentDirectional(0.9, 0.0),
-                              child: Icon(
-                                Icons.arrow_forward_ios,
-                                color: FlutterFlowTheme.of(context).primary,
-                                size: 15.0,
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
                       ),
-                    ),
-                  ).animateOnPageLoad(
-                      animationsMap['containerOnPageLoadAnimation2']!),
+                    ).animateOnPageLoad(
+                        animationsMap['containerOnPageLoadAnimation2']!),
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 0.0, 0.0),
@@ -552,6 +633,10 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                                 .reverse();
                           }
                         }
+
+                        FFAppState().modalUserMenu =
+                            !(FFAppState().modalUserMenu ?? true);
+                        _model.updatePage(() {});
                       },
                       child: Container(
                         width: 80.0,
@@ -636,13 +721,33 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                     ),
                   ),
                 ),
+                Padding(
+                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 35.0, 0.0, 0.0),
+                  child: Text(
+                    valueOrDefault<String>(
+                      _model.sVersionReturned,
+                      '1.0.0',
+                    ),
+                    textAlign: TextAlign.center,
+                    style: FlutterFlowTheme.of(context).bodySmall.override(
+                          fontFamily: 'Outfit',
+                          color: FlutterFlowTheme.of(context).secondaryText,
+                          fontSize: 12.0,
+                          letterSpacing: 0.0,
+                          fontWeight: FontWeight.normal,
+                        ),
+                  ),
+                ),
                 Align(
                   alignment: const AlignmentDirectional(0.0, 0.0),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 45.0, 0.0, 0.0),
+                        const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
+                        FFAppState().modalUserMenu =
+                            !(FFAppState().modalUserMenu ?? true);
+                        safeSetState(() {});
                         GoRouter.of(context).prepareAuthEvent();
                         await authManager.signOut();
                         GoRouter.of(context).clearRedirectLocation();

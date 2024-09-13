@@ -112,36 +112,40 @@ class _UnViewFrameCardProdutoWidgetState
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  RichText(
-                    textScaler: MediaQuery.of(context).textScaler,
-                    text: TextSpan(
-                      children: [
-                        TextSpan(
-                          text: 'R\$ ',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    fontFamily: 'Readex Pro',
-                                    color: FlutterFlowTheme.of(context).primary,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                        ),
-                        const TextSpan(
-                          text: ' ',
-                          style: TextStyle(),
-                        ),
-                        const TextSpan(
-                          text: '99,99',
-                          style: TextStyle(),
-                        )
-                      ],
-                      style: FlutterFlowTheme.of(context).bodyMedium.override(
-                            fontFamily: 'Readex Pro',
-                            letterSpacing: 0.0,
+                  Expanded(
+                    child: RichText(
+                      textScaler: MediaQuery.of(context).textScaler,
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'R\$ ',
+                            style: FlutterFlowTheme.of(context)
+                                .bodyMedium
+                                .override(
+                                  fontFamily: 'Readex Pro',
+                                  color: FlutterFlowTheme.of(context).primary,
+                                  letterSpacing: 0.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
                           ),
+                          const TextSpan(
+                            text: ' ',
+                            style: TextStyle(),
+                          ),
+                          const TextSpan(
+                            text: '99,99',
+                            style: TextStyle(),
+                          )
+                        ],
+                        style: FlutterFlowTheme.of(context).bodyMedium.override(
+                              fontFamily: 'Readex Pro',
+                              letterSpacing: 0.0,
+                            ),
+                      ),
                     ),
                   ),
                   Expanded(
+                    flex: 2,
                     child: FFButtonWidget(
                       onPressed: () {
                         print('Button pressed ...');

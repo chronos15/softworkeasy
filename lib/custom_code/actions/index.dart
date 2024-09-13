@@ -9,3 +9,6 @@ export 'elegant_notification_error.dart' show elegantNotificationError;
 export 'warning_notification.dart' show warningNotification;
 export 'one_call_application.dart' show oneCallApplication;
 export 'custom_loggout_set.dart' show customLoggoutSet;
+export 'action_keyboard_shortcut.dart' show actionKeyboardShortcut;
+export 'body_img_api_to_uploaded.dart' show bodyImgApiToUploaded;
+export 'get_version_number.dart' show getVersionNumber;

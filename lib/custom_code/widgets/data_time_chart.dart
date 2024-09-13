@@ -1,10 +1,12 @@
 // Automatic FlutterFlow imports
 import '/backend/schema/structs/index.dart';
 import '/backend/schema/enums/enums.dart';
+import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'index.dart'; // Imports other custom widgets
 import '/custom_code/actions/index.dart'; // Imports custom actions
+import '/flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
@@ -23,6 +25,7 @@ class DataTimeChart extends StatefulWidget {
     required this.sDateFormat,
     required this.bVisibleMarker,
     required this.colorLine,
+    required this.intervalAxisX,
   });
 
   final double? width;
@@ -33,6 +36,7 @@ class DataTimeChart extends StatefulWidget {
   final String sDateFormat;
   final bool bVisibleMarker;
   final Color colorLine;
+  final double intervalAxisX;
 
   @override
   State<DataTimeChart> createState() => _DataTimeChartState();
@@ -46,8 +50,7 @@ class _DataTimeChartState extends State<DataTimeChart> {
 
   @override
   void initState() {
-    dateFormat = DateFormat(widget.sDateFormat);
-
+    dateFormat = DateFormat(widget.sDateFormat, 'pt_BR');
     _trackballBehavior = TrackballBehavior(
       enable: true,
       activationMode: ActivationMode.singleTap,
@@ -72,6 +75,9 @@ class _DataTimeChartState extends State<DataTimeChart> {
       primaryXAxis: DateTimeAxis(
         majorGridLines: MajorGridLines(width: 0),
         dateFormat: dateFormat,
+        //interval: widget.intervalAxisX != 0 ? widget.intervalAxisX : null,
+        // Define a data mínima para garantir que a primeira label apareça
+        //minimum: widget.sListValueX.first,
       ),
       primaryYAxis: NumericAxis(
         labelFormat: '{value}',
@@ -113,8 +119,8 @@ class _DataTimeChartState extends State<DataTimeChart> {
           dataLabelSettings: DataLabelSettings(isVisible: false),
           color: widget.colorLine,
           markerSettings: MarkerSettings(
-              isVisible: widget.bVisibleMarker,
-              // Marker shape is set to diamond
+              isVisible: (widget.bVisibleMarker &&
+                  chartData.any((data) => data.yValue! > 0)),
               shape: DataMarkerType.diamond)),
     ];
   }

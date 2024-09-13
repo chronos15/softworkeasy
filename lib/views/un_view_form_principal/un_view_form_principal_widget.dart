@@ -1,9 +1,11 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/schema/enums/enums.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/instant_timer.dart';
 import '/frame_components/un_view_frame_header/un_view_frame_header_widget.dart';
 import '/frame_components/un_view_frame_profile/un_view_frame_profile_widget.dart';
 import '/frame_components/un_view_frame_side_menu/un_view_frame_side_menu_widget.dart';
@@ -13,10 +15,11 @@ import '/views/un_view_frame_produtos/un_view_frame_produtos_widget.dart';
 import '/views/un_view_frame_vendas/un_view_frame_vendas_widget.dart';
 import '/views/un_view_lista_clientes/un_view_lista_clientes_widget.dart';
 import 'dart:ui';
+import '/actions/actions.dart' as action_blocks;
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
 import 'un_view_form_principal_model.dart';
@@ -78,16 +81,64 @@ class _UnViewFormPrincipalWidgetState extends State<UnViewFormPrincipalWidget>
         navigate();
         return;
       } else {
-        HapticFeedback.lightImpact();
-      }
+        FFAppState().modalUserMenu = false;
+        FFAppState().SideMenuExpansable = true;
+        FFAppState().update(() {});
+        if (animationsMap['columnOnActionTriggerAnimation'] != null) {
+          await animationsMap['columnOnActionTriggerAnimation']!
+              .controller
+              .forward(from: 0.0);
+        }
+        _model.instantVerifyToken = InstantTimer.periodic(
+          duration: const Duration(milliseconds: 300000),
+          callback: (timer) async {
+            if (!functions.verifyToken(currentAuthTokenExpiration)!) {
+              await action_blocks.getToken(context);
+              safeSetState(() {});
+              authManager.updateAuthUserData(
+                authenticationToken: FFAppState().Token,
+                refreshToken: FFAppState().Token,
+                tokenExpiration:
+                    functions.addTimeDouble(60.0, getCurrentTimestamp),
+                authUid: currentUserUid,
+                userData: UsuarioStruct(
+                  idCodigo: currentUserData?.idCodigo,
+                  codempresa: currentUserData?.codempresa,
+                  usuario: currentUserData?.usuario,
+                  nome: currentUserData?.nome,
+                  funcao: currentUserData?.funcao,
+                  inserir: currentUserData?.inserir,
+                  editar: currentUserData?.editar,
+                  excluir: currentUserData?.excluir,
+                ),
+              );
+              await actions.elegantNotificationInfo(
+                context,
+                'Atualização',
+                'Acesso ao servidor atualizado com sucesso.',
+                FlutterFlowTheme.of(context).primaryText,
+                FlutterFlowTheme.of(context).primaryBackground,
+                () {
+                  if (MediaQuery.sizeOf(context).width < kBreakpointSmall) {
+                    return MediaQuery.sizeOf(context).width;
+                  } else if (MediaQuery.sizeOf(context).width <
+                      kBreakpointMedium) {
+                    return 360.0;
+                  } else if (MediaQuery.sizeOf(context).width <
+                      kBreakpointLarge) {
+                    return 360.0;
+                  } else {
+                    return 360.0;
+                  }
+                }(),
+              );
 
-      FFAppState().modalUserMenu = false;
-      FFAppState().SideMenuExpansable = true;
-      FFAppState().update(() {});
-      if (animationsMap['columnOnActionTriggerAnimation'] != null) {
-        await animationsMap['columnOnActionTriggerAnimation']!
-            .controller
-            .forward(from: 0.0);
+              navigate();
+              return;
+            }
+          },
+          startImmediately: true,
+        );
       }
 
       navigate();
@@ -181,6 +232,10 @@ class _UnViewFormPrincipalWidgetState extends State<UnViewFormPrincipalWidget>
                 callBackHome: () async {
                   _model.pageSelected = Pages.Inicio;
                   safeSetState(() {});
+                  if (scaffoldKey.currentState!.isDrawerOpen ||
+                      scaffoldKey.currentState!.isEndDrawerOpen) {
+                    Navigator.pop(context);
+                  }
                 },
                 callBackPainel: () async {
                   _model.pageSelected = Pages.Painel;
@@ -191,14 +246,26 @@ class _UnViewFormPrincipalWidgetState extends State<UnViewFormPrincipalWidget>
                 callBackClientes: () async {
                   _model.pageSelected = Pages.Clientes;
                   safeSetState(() {});
+                  if (scaffoldKey.currentState!.isDrawerOpen ||
+                      scaffoldKey.currentState!.isEndDrawerOpen) {
+                    Navigator.pop(context);
+                  }
                 },
                 callBackVendas: () async {
                   _model.pageSelected = Pages.Vendas;
                   safeSetState(() {});
+                  if (scaffoldKey.currentState!.isDrawerOpen ||
+                      scaffoldKey.currentState!.isEndDrawerOpen) {
+                    Navigator.pop(context);
+                  }
                 },
                 callBackProdutos: () async {
                   _model.pageSelected = Pages.Produtos;
                   safeSetState(() {});
+                  if (scaffoldKey.currentState!.isDrawerOpen ||
+                      scaffoldKey.currentState!.isEndDrawerOpen) {
+                    Navigator.pop(context);
+                  }
                 },
               ),
             ),

@@ -148,7 +148,7 @@ class _UnViewFrameProdutosWidgetState extends State<UnViewFrameProdutosWidget> {
                                       const Duration(milliseconds: 2000),
                                       () => safeSetState(() {}),
                                     ),
-                                    autofocus: true,
+                                    autofocus: false,
                                     textCapitalization:
                                         TextCapitalization.words,
                                     textInputAction: TextInputAction.search,

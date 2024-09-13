@@ -1,5 +1,10 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/frame_components/message_box/message_box_widget.dart';
+import 'dart:async';
+import '/custom_code/actions/index.dart' as actions;
 import 'un_view_form_login_widget.dart' show UnViewFormLoginWidget;
 import 'package:flutter/material.dart';
 
@@ -18,10 +23,8 @@ class UnViewFormLoginModel extends FlutterFlowModel<UnViewFormLoginWidget> {
   // Stores action output result for [Backend Call - API (GetToken)] action in unViewFormLogin widget.
   ApiCallResponse? gettoken;
   bool autBiometric = false;
-  // Stores action output result for [Backend Call - API (Autentificacao)] action in unViewFormLogin widget.
-  ApiCallResponse? loginActionBiometric;
-  // Stores action output result for [Backend Call - API (EmpresaView)] action in unViewFormLogin widget.
-  ApiCallResponse? resultEmpresaBiometric;
+  // Stores action output result for [Action Block - LoginActionBlock] action in unViewFormLogin widget.
+  UsuarioStruct? actionLoginBiometric;
   // Stores action output result for [Backend Call - API (GetToken)] action in unViewFormLogin widget.
   ApiCallResponse? gettokenSecundario;
   // State field(s) for EmailAddressField widget.
@@ -68,16 +71,12 @@ class UnViewFormLoginModel extends FlutterFlowModel<UnViewFormLoginWidget> {
     return null;
   }
 
-  // Stores action output result for [Backend Call - API (Autentificacao)] action in PasswordField widget.
-  ApiCallResponse? loginActionSubmite;
-  // Stores action output result for [Backend Call - API (EmpresaView)] action in PasswordField widget.
-  ApiCallResponse? resultEmpresaCallOnSignin;
+  // Stores action output result for [Action Block - LoginActionBlock] action in PasswordField widget.
+  UsuarioStruct? loginBlockOnSubmite;
   // State field(s) for CheckboxListTile widget.
   bool? checkboxListTileValue;
-  // Stores action output result for [Backend Call - API (Autentificacao)] action in LogInButton widget.
-  ApiCallResponse? loginAction;
-  // Stores action output result for [Backend Call - API (EmpresaView)] action in LogInButton widget.
-  ApiCallResponse? resultEmpresaCall;
+  // Stores action output result for [Action Block - LoginActionBlock] action in LogInButton widget.
+  UsuarioStruct? loginBlock;
 
   @override
   void initState(BuildContext context) {
@@ -95,5 +94,107 @@ class UnViewFormLoginModel extends FlutterFlowModel<UnViewFormLoginWidget> {
 
     passwordFieldFocusNode?.dispose();
     passwordFieldTextController?.dispose();
+  }
+
+  /// Action blocks.
+  Future<UsuarioStruct?> loginActionBlock(BuildContext context) async {
+    ApiCallResponse? loginActionBlock;
+    ApiCallResponse? resultEmpresaCallBlock;
+
+    loginActionBlock = await AutentificacaoCall.call(
+      ip: FFAppState().ConfigGlobaisServer.host,
+      porta: FFAppState().ConfigGlobaisServer.porta,
+      path: FFAppState().ConfigGlobaisServer.path,
+      token: FFAppState().Token,
+      usuario: emailAddressFieldTextController.text,
+      senha: passwordFieldTextController.text,
+    );
+
+    if (AutentificacaoCall.result(
+      (loginActionBlock.jsonBody ?? ''),
+    )!) {
+      if (checkboxListTileValue!) {
+        FFAppState().updateConfigGlobaisStruct(
+          (e) => e
+            ..usuario = emailAddressFieldTextController.text
+            ..senha = passwordFieldTextController.text
+            ..lembrar = checkboxListTileValue,
+        );
+        FFAppState().isOpenAppLoggin = false;
+      } else {
+        FFAppState().updateConfigGlobaisStruct(
+          (e) => e
+            ..usuario = null
+            ..senha = null
+            ..lembrar = null,
+        );
+        FFAppState().isOpenAppLoggin = false;
+      }
+
+      resultEmpresaCallBlock = await EmpresaViewCall.call(
+        ip: FFAppState().ConfigGlobaisServer.host,
+        porta: FFAppState().ConfigGlobaisServer.porta,
+        path: FFAppState().ConfigGlobaisServer.path,
+        token: FFAppState().Token,
+      );
+
+      if ((resultEmpresaCallBlock.succeeded ?? true)) {
+        FFAppState().Empresa = EmpresaViewCall.empresa(
+          (resultEmpresaCallBlock.jsonBody ?? ''),
+        )!;
+        return AutentificacaoCall.usuario(
+          (loginActionBlock.jsonBody ?? ''),
+        );
+      } else {
+        await actions.elegantNotificationError(
+          context,
+          'Falha',
+          'Erro ao realizar conexão com a tabela empresa!',
+          FlutterFlowTheme.of(context).primaryText,
+          FlutterFlowTheme.of(context).secondaryBackground,
+          MediaQuery.sizeOf(context).width < kBreakpointSmall
+              ? MediaQuery.sizeOf(context).width
+              : 360.0,
+        );
+        return null;
+      }
+    } else {
+      await showDialog(
+        context: context,
+        builder: (dialogContext) {
+          return Dialog(
+            elevation: 0,
+            insetPadding: EdgeInsets.zero,
+            backgroundColor: Colors.transparent,
+            alignment: const AlignmentDirectional(0.0, 0.0)
+                .resolve(Directionality.of(context)),
+            child: GestureDetector(
+              onTap: () => FocusScope.of(dialogContext).unfocus(),
+              child: SizedBox(
+                height: 190.0,
+                width: 450.0,
+                child: MessageBoxWidget(
+                  sTitulo: 'Falha',
+                  sText: AutentificacaoCall.message(
+                    (loginActionBlock?.jsonBody ?? ''),
+                  )!,
+                  corPrincipal: FlutterFlowTheme.of(context).error,
+                  enableCancel: false,
+                  sTextoConfirma: 'Ok',
+                  actionConfirm: () async {
+                    Navigator.pop(context);
+                  },
+                  actionCancel: () async {
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+            ),
+          );
+        },
+      );
+
+      return null;
+    }
   }
 }

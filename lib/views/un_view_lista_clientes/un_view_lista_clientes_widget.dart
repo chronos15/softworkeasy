@@ -167,7 +167,7 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
                                               const Duration(milliseconds: 2000),
                                               () => safeSetState(() {}),
                                             ),
-                                            autofocus: true,
+                                            autofocus: false,
                                             textCapitalization:
                                                 TextCapitalization.words,
                                             textInputAction:

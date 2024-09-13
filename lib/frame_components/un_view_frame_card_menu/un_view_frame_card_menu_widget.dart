@@ -1,6 +1,6 @@
-import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'un_view_frame_card_menu_model.dart';
@@ -16,6 +16,7 @@ class UnViewFrameCardMenuWidget extends StatefulWidget {
     required this.colorText,
     required this.colorSubText,
     this.colorSubIcon,
+    required this.sToolTipMessage,
   });
 
   final String? sTitulo;
@@ -25,6 +26,7 @@ class UnViewFrameCardMenuWidget extends StatefulWidget {
   final Color? colorText;
   final Color? colorSubText;
   final Color? colorSubIcon;
+  final String? sToolTipMessage;
 
   @override
   State<UnViewFrameCardMenuWidget> createState() =>
@@ -113,21 +115,48 @@ class _UnViewFrameCardMenuWidgetState extends State<UnViewFrameCardMenuWidget> {
                               Column(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
-                                  Align(
-                                    alignment:
-                                        const AlignmentDirectional(-0.81, 0.04),
-                                    child: FlutterFlowIconButton(
-                                      borderRadius: 12.0,
-                                      borderWidth: 1.0,
-                                      buttonSize: 50.0,
-                                      fillColor: valueOrDefault<Color>(
+                                  AlignedTooltip(
+                                    content: Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Text(
+                                        widget.sToolTipMessage!,
+                                        style: FlutterFlowTheme.of(context)
+                                            .bodyLarge
+                                            .override(
+                                              fontFamily: 'Outfit',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .info,
+                                              fontSize: 12.0,
+                                              letterSpacing: 0.0,
+                                            ),
+                                      ),
+                                    ),
+                                    offset: 4.0,
+                                    preferredDirection: AxisDirection.down,
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    backgroundColor: widget.colorBase!,
+                                    elevation: 2.0,
+                                    tailBaseWidth: 20.0,
+                                    tailLength: 16.0,
+                                    waitDuration: const Duration(milliseconds: 100),
+                                    showDuration: const Duration(milliseconds: 3000),
+                                    triggerMode: TooltipTriggerMode.tap,
+                                    child: Card(
+                                      clipBehavior: Clip.antiAliasWithSaveLayer,
+                                      color: valueOrDefault<Color>(
                                         widget.colorSubIcon,
                                         FlutterFlowTheme.of(context).accent1,
                                       ),
-                                      icon: widget.icon!,
-                                      onPressed: () {
-                                        print('IconButton pressed ...');
-                                      },
+                                      elevation: 0.0,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(10.0),
+                                        child: widget.icon!,
+                                      ),
                                     ),
                                   ),
                                   Row(
@@ -151,14 +180,23 @@ class _UnViewFrameCardMenuWidgetState extends State<UnViewFrameCardMenuWidget> {
                                             style: FlutterFlowTheme.of(context)
                                                 .titleSmall
                                                 .override(
-                                                  fontFamily: 'Outfit',
+                                              fontFamily: 'Outfit',
+                                              color:
+                                                  FlutterFlowTheme.of(context)
+                                                      .info,
+                                              fontSize: 7.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w300,
+                                              shadows: [
+                                                Shadow(
                                                   color: FlutterFlowTheme.of(
                                                           context)
-                                                      .info,
-                                                  fontSize: 7.0,
-                                                  letterSpacing: 0.0,
-                                                  fontWeight: FontWeight.w300,
-                                                ),
+                                                      .secondaryText,
+                                                  offset: const Offset(1.0, 1.0),
+                                                  blurRadius: 0.5,
+                                                )
+                                              ],
+                                            ),
                                           ),
                                         ),
                                       ),

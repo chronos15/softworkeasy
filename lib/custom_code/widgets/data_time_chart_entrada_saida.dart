@@ -1,10 +1,12 @@
 // Automatic FlutterFlow imports
 import '/backend/schema/structs/index.dart';
 import '/backend/schema/enums/enums.dart';
+import '/actions/actions.dart' as action_blocks;
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'index.dart'; // Imports other custom widgets
 import '/custom_code/actions/index.dart'; // Imports custom actions
+import '/flutter_flow/custom_functions.dart'; // Imports custom functions
 import 'package:flutter/material.dart';
 // Begin custom widget code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
@@ -128,6 +130,8 @@ class _DataTimeChartEntradaSaidaState extends State<DataTimeChartEntradaSaida> {
         yValueMapper: (ChartSampleData data, _) => data.yValue,
         name: 'Entrada',
         color: const Color.fromRGBO(242, 117, 7, 1),
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(7), topRight: Radius.circular(7)),
       ),
       ColumnSeries<ChartSampleData, DateTime>(
         dataSource: chartData2,
@@ -135,6 +139,8 @@ class _DataTimeChartEntradaSaidaState extends State<DataTimeChartEntradaSaida> {
         yValueMapper: (ChartSampleData data, _) => data.yValue,
         name: 'Saída',
         color: const Color.fromRGBO(0, 153, 255, 1),
+        borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(7), topRight: Radius.circular(7)),
       ),
     ];
   }

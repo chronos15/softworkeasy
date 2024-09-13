@@ -169,6 +169,131 @@ class EmpresaViewCall {
       ));
 }
 
+class VendaDashTotaisCall {
+  static Future<ApiCallResponse> call({
+    String? ip = '',
+    int? porta,
+    String? path = '',
+    String? token = '',
+    String? filterDate = '',
+  }) async {
+    return ApiManager.instance.makeApiCall(
+      callName: 'VendaDashTotais',
+      apiUrl:
+          'http://$ip:$porta/$path/Entities/VendaDashTotais$filterDate',
+      callType: ApiCallType.GET,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+      },
+      params: {},
+      returnBody: true,
+      encodeBodyUtf8: false,
+      decodeUtf8: true,
+      cache: false,
+      isStreamingApi: false,
+      alwaysAllowBody: false,
+    );
+  }
+
+  static List? valueList(dynamic response) => getJsonField(
+        response,
+        r'''$.value''',
+        true,
+      ) as List?;
+  static List<String>? valueX(dynamic response) => (getJsonField(
+        response,
+        r'''$.value[:].DATA''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<double>? valueY(dynamic response) => (getJsonField(
+        response,
+        r'''$.value[:].TOTAL''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<double>(x))
+          .withoutNulls
+          .toList();
+  static List<int>? pedido(dynamic response) => (getJsonField(
+        response,
+        r'''$.value[:].NUMERO''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<int>(x))
+          .withoutNulls
+          .toList();
+  static List<double>? custo(dynamic response) => (getJsonField(
+        response,
+        r'''$.value[:].CUSTO''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<double>(x))
+          .withoutNulls
+          .toList();
+  static List<double>? lucro(dynamic response) => (getJsonField(
+        response,
+        r'''$.value[:].LUCRO''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<double>(x))
+          .withoutNulls
+          .toList();
+  static List<double>? margemLucro(dynamic response) => (getJsonField(
+        response,
+        r'''$.value[:].MARGEMLUCRO''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<double>(x))
+          .withoutNulls
+          .toList();
+  static List<double>? variacaoMargem(dynamic response) => (getJsonField(
+        response,
+        r'''$.value[:].VARIACAOMARGEM''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<double>(x))
+          .withoutNulls
+          .toList();
+  static List<double>? variacaoValor(dynamic response) => (getJsonField(
+        response,
+        r'''$.value[:].VARIACAOVALOR''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<double>(x))
+          .withoutNulls
+          .toList();
+  static List<String>? dataAnt(dynamic response) => (getJsonField(
+        response,
+        r'''$.value[:].DATA_ANTERIOR''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<String>(x))
+          .withoutNulls
+          .toList();
+  static List<double>? valorMedia(dynamic response) => (getJsonField(
+        response,
+        r'''$.value[:].VALORMEDIA''',
+        true,
+      ) as List?)
+          ?.withoutNulls
+          .map((x) => castToType<double>(x))
+          .withoutNulls
+          .toList();
+}
+
 class ApiPagingParams {
   int nextPageNumber = 0;
   int numItems = 0;

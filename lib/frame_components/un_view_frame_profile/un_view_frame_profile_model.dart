@@ -4,6 +4,13 @@ import 'package:flutter/material.dart';
 
 class UnViewFrameProfileModel
     extends FlutterFlowModel<UnViewFrameProfileWidget> {
+  ///  State fields for stateful widgets in this component.
+
+  // Stores action output result for [Custom Action - getVersionNumber] action in unViewFrameProfile widget.
+  String? sVersionReturned;
+  // Stores action output result for [Custom Action - bodyImgApiToUploaded] action in Container widget.
+  FFUploadedFile? returnBodyRequest;
+
   @override
   void initState(BuildContext context) {}
 

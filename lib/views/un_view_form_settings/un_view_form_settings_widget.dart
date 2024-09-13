@@ -1,6 +1,5 @@
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
-import '/flutter_flow/flutter_flow_button_tabbar.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
@@ -234,55 +233,52 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                           child: Padding(
                                             padding:
                                                 const EdgeInsetsDirectional.fromSTEB(
-                                                    0.0, 10.0, 0.0, 0.0),
+                                                    5.0, 10.0, 5.0, 0.0),
                                             child: Column(
                                               children: [
                                                 Align(
-                                                  alignment: const Alignment(-1.0, 0),
-                                                  child:
-                                                      FlutterFlowButtonTabBar(
-                                                    useToggleButtonStyle: true,
+                                                  alignment: const Alignment(0.0, 0),
+                                                  child: TabBar(
+                                                    labelColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .primary,
+                                                    unselectedLabelColor:
+                                                        FlutterFlowTheme.of(
+                                                                context)
+                                                            .secondaryText,
+                                                    labelPadding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(5.0, 2.0,
+                                                                5.0, 2.0),
                                                     labelStyle: FlutterFlowTheme
                                                             .of(context)
                                                         .titleMedium
                                                         .override(
                                                           fontFamily: 'Outfit',
-                                                          fontSize: 16.0,
+                                                          fontSize: 14.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w300,
                                                         ),
                                                     unselectedLabelStyle:
-                                                        const TextStyle(),
-                                                    labelColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
-                                                            .info,
-                                                    unselectedLabelColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .secondaryText,
-                                                    backgroundColor:
+                                                            .titleMedium
+                                                            .override(
+                                                              fontFamily:
+                                                                  'Outfit',
+                                                              fontSize: 14.0,
+                                                              letterSpacing:
+                                                                  0.0,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w300,
+                                                            ),
+                                                    indicatorColor:
                                                         FlutterFlowTheme.of(
                                                                 context)
                                                             .primary,
-                                                    unselectedBackgroundColor:
-                                                        FlutterFlowTheme.of(
-                                                                context)
-                                                            .secondaryBackground,
-                                                    borderColor:
-                                                        const Color(0x244B39EF),
-                                                    borderWidth: 2.0,
-                                                    borderRadius: 50.0,
-                                                    elevation: 0.0,
-                                                    labelPadding:
-                                                        const EdgeInsetsDirectional
-                                                            .fromSTEB(5.0, 2.0,
-                                                                5.0, 2.0),
-                                                    buttonMargin:
-                                                        const EdgeInsetsDirectional
-                                                            .fromSTEB(8.0, 0.0,
-                                                                8.0, 0.0),
                                                     tabs: const [
                                                       Row(
                                                         mainAxisAlignment:

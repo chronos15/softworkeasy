@@ -72,16 +72,21 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       initialLocation: '/',
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
-      errorBuilder: (context, state) => appStateNotifier.loggedIn
-          ? const UnViewFormPrincipalWidget()
-          : const UnViewFormLoginWidget(),
+      errorBuilder: (context, state) => RootPageContext.wrap(
+        appStateNotifier.loggedIn
+            ? const UnViewFormPrincipalWidget()
+            : const UnViewFormLoginWidget(),
+        errorRoute: state.uri.toString(),
+      ),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => appStateNotifier.loggedIn
-              ? const UnViewFormPrincipalWidget()
-              : const UnViewFormLoginWidget(),
+          builder: (context, _) => RootPageContext.wrap(
+            appStateNotifier.loggedIn
+                ? const UnViewFormPrincipalWidget()
+                : const UnViewFormLoginWidget(),
+          ),
         ),
         FFRoute(
           name: 'unViewFormLogin',
