@@ -25,6 +25,8 @@ class DataTimeChartEntradaSaida extends StatefulWidget {
     required this.sDateFormat,
     required this.sListValueX2,
     required this.vListValueY2,
+    required this.colorColumn1,
+    required this.colorColumn2,
   });
 
   final double? width;
@@ -39,7 +41,8 @@ class DataTimeChartEntradaSaida extends StatefulWidget {
       sListValueX2; // Lista de datas para o segundo conjunto de dados
   final List<double>
       vListValueY2; // Lista de valores para o segundo conjunto de dados
-
+  final Color colorColumn1;
+  final Color colorColumn2;
   @override
   State<DataTimeChartEntradaSaida> createState() =>
       _DataTimeChartEntradaSaidaState();
@@ -87,6 +90,19 @@ class _DataTimeChartEntradaSaidaState extends State<DataTimeChartEntradaSaida> {
         majorTickLines: const MajorTickLines(size: 0),
         numberFormat: realFormatter,
       ),
+      legend: Legend(
+        isVisible: true,
+        position: LegendPosition.bottom,
+        toggleSeriesVisibility:
+            true, // Habilita o comportamento interativo de esconder/mostrar as séries
+        textStyle: TextStyle(
+          fontSize: 14.0, // Define o tamanho da fonte da legenda
+          fontWeight: FontWeight.normal,
+        ),
+        itemPadding: 20,
+        iconHeight: 20.0, // Define a altura do ícone da legenda
+        iconWidth: 20.0, // Define a largura do ícone da legenda
+      ),
       series: _getColumnSeries(),
       trackballBehavior: _trackballBehavior,
     );
@@ -129,7 +145,7 @@ class _DataTimeChartEntradaSaidaState extends State<DataTimeChartEntradaSaida> {
         xValueMapper: (ChartSampleData data, _) => data.x!,
         yValueMapper: (ChartSampleData data, _) => data.yValue,
         name: 'Entrada',
-        color: const Color.fromRGBO(242, 117, 7, 1),
+        color: widget.colorColumn1,
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(7), topRight: Radius.circular(7)),
       ),
@@ -138,7 +154,7 @@ class _DataTimeChartEntradaSaidaState extends State<DataTimeChartEntradaSaida> {
         xValueMapper: (ChartSampleData data, _) => data.x!,
         yValueMapper: (ChartSampleData data, _) => data.yValue,
         name: 'Saída',
-        color: const Color.fromRGBO(0, 153, 255, 1),
+        color: widget.colorColumn2,
         borderRadius: BorderRadius.only(
             topLeft: Radius.circular(7), topRight: Radius.circular(7)),
       ),

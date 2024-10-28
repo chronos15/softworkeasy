@@ -176,7 +176,7 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                                 HapticFeedback.selectionClick();
                                               },
                                               child: Icon(
-                                                Icons.close_fullscreen,
+                                                Icons.menu,
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .primary,
@@ -369,29 +369,39 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
                                                                         .info,
-                                                                    letterSpacing:
-                                                                        0.0,
-                                                                  ),
-                                                            ),
-                                                            AutoSizeText(
-                                                              FFAppState()
-                                                                  .Empresa
-                                                                  .cnpj,
-                                                              maxLines: 1,
-                                                              style: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .bodyMedium
-                                                                  .override(
-                                                                    fontFamily:
-                                                                        'Outfit',
-                                                                    color: const Color(
-                                                                        0xFFC3C3C3),
                                                                     fontSize:
-                                                                        12.0,
+                                                                        24.0,
                                                                     letterSpacing:
                                                                         0.0,
                                                                   ),
                                                             ),
+                                                            if (responsiveVisibility(
+                                                              context: context,
+                                                              phone: false,
+                                                              tablet: false,
+                                                              tabletLandscape:
+                                                                  false,
+                                                              desktop: false,
+                                                            ))
+                                                              AutoSizeText(
+                                                                FFAppState()
+                                                                    .Empresa
+                                                                    .cnpj,
+                                                                maxLines: 1,
+                                                                style: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .bodyMedium
+                                                                    .override(
+                                                                      fontFamily:
+                                                                          'Outfit',
+                                                                      color: const Color(
+                                                                          0xFFC3C3C3),
+                                                                      fontSize:
+                                                                          12.0,
+                                                                      letterSpacing:
+                                                                          0.0,
+                                                                    ),
+                                                              ),
                                                           ],
                                                         ),
                                                       ),
@@ -418,7 +428,7 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                                         letterSpacing: 0.0,
                                                       ),
                                             ),
-                                        ],
+                                        ].addToStart(const SizedBox(height: 5.0)),
                                       ),
                                     ),
                                   ],
@@ -785,7 +795,8 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                                         currentUserData?.nome,
                                                         'Usuário',
                                                       ).maybeHandleOverflow(
-                                                          maxChars: 8),
+                                                        maxChars: 8,
+                                                      ),
                                                       maxLines: 1,
                                                       minFontSize: 8.0,
                                                       style:

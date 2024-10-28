@@ -315,8 +315,9 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                 0,
                 12.0,
                 0,
-                50.0,
+                0.0,
               ),
+              primary: false,
               shrinkWrap: true,
               scrollDirection: Axis.vertical,
               children: [
@@ -783,7 +784,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                 ),
               ],
             ),
-          ],
+          ].addToEnd(const SizedBox(height: 50.0)),
         ),
       ),
     );

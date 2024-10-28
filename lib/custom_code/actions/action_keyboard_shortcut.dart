@@ -16,26 +16,25 @@ Future actionKeyboardShortcut(
   BuildContext context,
   Future Function()? actionShortcut,
 ) async {
+  // Use FocusNode para escutar eventos do teclado
   FocusNode _focusNode = FocusNode();
 
-  // Adiciona o Listener de eventos de teclado ao FocusNode
+  // Adiciona o listener de eventos de teclado no PostFrameCallback
   WidgetsBinding.instance.addPostFrameCallback((_) {
     FocusScope.of(context).requestFocus(_focusNode);
-  });
 
-  // Usa o KeyboardListener para escutar eventos de teclado
-  return KeyboardListener(
-    focusNode: _focusNode,
-    onKeyEvent: (KeyEvent event) {
-      if (event is KeyDownEvent && event.logicalKey == LogicalKeyboardKey.f5) {
-        // Executa a ação quando a tecla F5 é pressionada
-        print("A tecla F5 foi pressionada!");
-        if (actionShortcut != null) {
-          actionShortcut();
+    // Adiciona o Listener de teclado
+    _focusNode.addListener(() {
+      RawKeyboard.instance.addListener((RawKeyEvent event) {
+        if (event is RawKeyDownEvent &&
+            event.logicalKey == LogicalKeyboardKey.f5) {
+          // Executa a ação quando a tecla F5 é pressionada
+          print("A tecla F5 foi pressionada!");
+          if (actionShortcut != null) {
+            actionShortcut();
+          }
         }
-      }
-    },
-    child:
-        Container(), // Pode ser substituído pelo seu widget ou lógica específica
-  );
+      });
+    });
+  });
 }

@@ -26,6 +26,7 @@ class DataTimeChart extends StatefulWidget {
     required this.bVisibleMarker,
     required this.colorLine,
     required this.intervalAxisX,
+    required this.numberDate,
   });
 
   final double? width;
@@ -37,6 +38,7 @@ class DataTimeChart extends StatefulWidget {
   final bool bVisibleMarker;
   final Color colorLine;
   final double intervalAxisX;
+  final int numberDate;
 
   @override
   State<DataTimeChart> createState() => _DataTimeChartState();
@@ -69,11 +71,20 @@ class _DataTimeChartState extends State<DataTimeChart> {
   }
 
   SfCartesianChart _buildDefaultDateTimeAxisChart() {
+    final int daysToShow = widget.numberDate; // Por exemplo, últimos 30 dias
+    final DateTime today = DateTime.now();
+    final DateTime startDate = today.subtract(Duration(days: daysToShow));
+
     return SfCartesianChart(
       plotAreaBorderWidth: 0,
       title: ChartTitle(text: widget.sTitulo),
       primaryXAxis: DateTimeAxis(
         majorGridLines: MajorGridLines(width: 0),
+        minimum: widget.sListValueX.isNotEmpty
+            ? widget.sListValueX.first
+            : startDate,
+        maximum:
+            widget.sListValueX.isNotEmpty ? widget.sListValueX.last : today,
         dateFormat: dateFormat,
         //interval: widget.intervalAxisX != 0 ? widget.intervalAxisX : null,
         // Define a data mínima para garantir que a primeira label apareça
@@ -118,6 +129,8 @@ class _DataTimeChartState extends State<DataTimeChart> {
               realFormatter.format(data.yValue),
           dataLabelSettings: DataLabelSettings(isVisible: false),
           color: widget.colorLine,
+          pointColorMapper: (ChartSampleData data, _) =>
+              data.yValue == 0 ? Colors.transparent : widget.colorLine,
           markerSettings: MarkerSettings(
               isVisible: (widget.bVisibleMarker &&
                   chartData.any((data) => data.yValue! > 0)),

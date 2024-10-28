@@ -4,6 +4,7 @@
 
 list(APPEND FLUTTER_PLUGIN_LIST
   bitsdojo_window_windows
+  connectivity_plus
   local_auth_windows
   url_launcher_windows
   windows_single_instance

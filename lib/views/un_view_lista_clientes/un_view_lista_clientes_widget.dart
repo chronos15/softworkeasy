@@ -588,7 +588,7 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
                                           borderColor: Colors.transparent,
                                           borderRadius: 20.0,
                                           borderWidth: 1.0,
-                                          buttonSize: 35.0,
+                                          buttonSize: 40.0,
                                           fillColor:
                                               FlutterFlowTheme.of(context)
                                                   .secondaryBackground,

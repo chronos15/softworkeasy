@@ -76,8 +76,7 @@ class FFAppState extends ChangeNotifier {
   late SharedPreferences prefs;
 
   ConfigGlobaisServerStruct _ConfigGlobaisServer =
-      ConfigGlobaisServerStruct.fromSerializableMap(jsonDecode(
-          '{\"HOST_PRIMARIO\":\"192.168.1.231\",\"HOST_SECUNDARIO\":\"127.0.0.1\",\"PORTA\":\"3040\",\"PATH\":\"easyduilson\",\"CNPJ\":\"01.717.652/0001-04\"}'));
+      ConfigGlobaisServerStruct.fromSerializableMap(jsonDecode('{}'));
   ConfigGlobaisServerStruct get ConfigGlobaisServer => _ConfigGlobaisServer;
   set ConfigGlobaisServer(ConfigGlobaisServerStruct value) {
     _ConfigGlobaisServer = value;
@@ -201,6 +200,12 @@ class FFAppState extends ChangeNotifier {
     sDataTeste.insert(index, value);
     prefs.setStringList('ff_sDataTeste',
         _sDataTeste.map((x) => x.millisecondsSinceEpoch.toString()).toList());
+  }
+
+  bool _isConnected = false;
+  bool get isConnected => _isConnected;
+  set isConnected(bool value) {
+    _isConnected = value;
   }
 }
 

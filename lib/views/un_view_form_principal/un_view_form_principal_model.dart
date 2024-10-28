@@ -9,6 +9,7 @@ import '/views/un_view_frame_home/un_view_frame_home_widget.dart';
 import '/views/un_view_frame_produtos/un_view_frame_produtos_widget.dart';
 import '/views/un_view_frame_vendas/un_view_frame_vendas_widget.dart';
 import '/views/un_view_lista_clientes/un_view_lista_clientes_widget.dart';
+import '/views/unview_frame_dashboard_financeiro/unview_frame_dashboard_financeiro_widget.dart';
 import 'un_view_form_principal_widget.dart' show UnViewFormPrincipalWidget;
 import 'package:flutter/material.dart';
 
@@ -33,10 +34,12 @@ class UnViewFormPrincipalModel
   late UnViewListaClientesModel unViewListaClientesModel;
   // Model for unViewFrameVendas component.
   late UnViewFrameVendasModel unViewFrameVendasModel;
-  // Model for unViewFrameProfile component.
-  late UnViewFrameProfileModel unViewFrameProfileModel;
   // Model for unViewFrameProdutos component.
   late UnViewFrameProdutosModel unViewFrameProdutosModel;
+  // Model for unviewFrameDashboardFinanceiro component.
+  late UnviewFrameDashboardFinanceiroModel unviewFrameDashboardFinanceiroModel;
+  // Model for unViewFrameProfile component.
+  late UnViewFrameProfileModel unViewFrameProfileModel;
   // Model for unViewFrameSideMenu component.
   late UnViewFrameSideMenuModel unViewFrameSideMenuModel2;
 
@@ -53,10 +56,12 @@ class UnViewFormPrincipalModel
         createModel(context, () => UnViewListaClientesModel());
     unViewFrameVendasModel =
         createModel(context, () => UnViewFrameVendasModel());
-    unViewFrameProfileModel =
-        createModel(context, () => UnViewFrameProfileModel());
     unViewFrameProdutosModel =
         createModel(context, () => UnViewFrameProdutosModel());
+    unviewFrameDashboardFinanceiroModel =
+        createModel(context, () => UnviewFrameDashboardFinanceiroModel());
+    unViewFrameProfileModel =
+        createModel(context, () => UnViewFrameProfileModel());
     unViewFrameSideMenuModel2 =
         createModel(context, () => UnViewFrameSideMenuModel());
   }
@@ -70,8 +75,9 @@ class UnViewFormPrincipalModel
     unViewFrameDashPainelModel.dispose();
     unViewListaClientesModel.dispose();
     unViewFrameVendasModel.dispose();
-    unViewFrameProfileModel.dispose();
     unViewFrameProdutosModel.dispose();
+    unviewFrameDashboardFinanceiroModel.dispose();
+    unViewFrameProfileModel.dispose();
     unViewFrameSideMenuModel2.dispose();
   }
 }

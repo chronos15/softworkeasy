@@ -21,14 +21,77 @@ Future elegantNotificationError(
   Color colorText,
   Color colorBackground,
   double vWidth,
+  String positionAlingment,
+  String animationType,
 ) async {
   // Add your function code here!
+  Alignment getAlignmentFromString(String alignment) {
+    switch (alignment.toLowerCase()) {
+      case 'topcenter':
+        return Alignment.topCenter;
+      case 'topright':
+        return Alignment.topRight;
+      case 'topleft':
+        return Alignment.topLeft;
+      case 'center':
+        return Alignment.center;
+      case 'bottomcenter':
+        return Alignment.bottomCenter;
+      case 'bottomright':
+        return Alignment.bottomRight;
+      case 'bottomleft':
+        return Alignment.bottomLeft;
+      default:
+        return Alignment.bottomCenter; // Alinhamento padrão
+    }
+  }
+
+  // Função para mapear a string de animação para o valor correspondente
+  AnimationType getAnimationFromString(String animation) {
+    switch (animation.toLowerCase()) {
+      case 'fromtop':
+        return AnimationType.fromTop;
+      case 'fromleft':
+        return AnimationType.fromLeft;
+      case 'fromright':
+        return AnimationType.fromRight;
+      default:
+        return AnimationType.fromBottom; // Animação padrão
+    }
+  }
+
+  // Função para verificar se a combinação de alinhamento e animação é válida
+  bool isValidAnimationForAlignment(
+      AnimationType animation, Alignment alignment) {
+    // Proibindo certas combinações de animação e alinhamento
+    if (animation == AnimationType.fromLeft ||
+        animation == AnimationType.fromBottom) {
+      // Restringindo para evitar conflitos
+      if (alignment == Alignment.topCenter ||
+          alignment == Alignment.topLeft ||
+          alignment == Alignment.topRight) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  // Pegando o alinhamento e a animação
+  AnimationType animation = getAnimationFromString(animationType);
+  Alignment alignment = getAlignmentFromString(positionAlingment);
+
+  // Verificando se a animação é válida para o alinhamento
+  if (!isValidAnimationForAlignment(animation, alignment)) {
+    // Se a combinação não for válida, defina a animação padrão
+    //animation = AnimationType.scale; // Alterando para uma animação segura
+  }
+
   ElegantNotification.error(
     width: vWidth,
     background: colorBackground,
     isDismissable: true,
-    position: Alignment.bottomCenter,
-    animation: AnimationType.fromBottom,
+    position: alignment,
+    animation: animation,
     title: Text(title,
         style: TextStyle(
           color: colorText,

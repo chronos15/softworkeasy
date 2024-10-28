@@ -75,7 +75,7 @@ class _UnViewFrameVazioWidgetState extends State<UnViewFrameVazioWidget>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Lottie.asset(
-                'assets/lottie_animations/Animation_-_1710523844531.json',
+                'assets/jsons/Animation_-_1710523844531.json',
                 width: 150.0,
                 height: 160.0,
                 fit: BoxFit.scaleDown,

@@ -14,6 +14,7 @@ import '/views/un_view_frame_home/un_view_frame_home_widget.dart';
 import '/views/un_view_frame_produtos/un_view_frame_produtos_widget.dart';
 import '/views/un_view_frame_vendas/un_view_frame_vendas_widget.dart';
 import '/views/un_view_lista_clientes/un_view_lista_clientes_widget.dart';
+import '/views/unview_frame_dashboard_financeiro/unview_frame_dashboard_financeiro_widget.dart';
 import 'dart:ui';
 import '/actions/actions.dart' as action_blocks;
 import '/custom_code/actions/index.dart' as actions;
@@ -224,6 +225,8 @@ class _UnViewFormPrincipalWidgetState extends State<UnViewFormPrincipalWidget>
                     return Pages.Vendas;
                   } else if (_model.pageSelected == Pages.Produtos) {
                     return Pages.Produtos;
+                  } else if (_model.pageSelected == Pages.Financeiro) {
+                    return Pages.Financeiro;
                   } else {
                     return Pages.Clientes;
                   }
@@ -261,6 +264,14 @@ class _UnViewFormPrincipalWidgetState extends State<UnViewFormPrincipalWidget>
                 },
                 callBackProdutos: () async {
                   _model.pageSelected = Pages.Produtos;
+                  safeSetState(() {});
+                  if (scaffoldKey.currentState!.isDrawerOpen ||
+                      scaffoldKey.currentState!.isEndDrawerOpen) {
+                    Navigator.pop(context);
+                  }
+                },
+                callBackFinanceiro: () async {
+                  _model.pageSelected = Pages.Financeiro;
                   safeSetState(() {});
                   if (scaffoldKey.currentState!.isDrawerOpen ||
                       scaffoldKey.currentState!.isEndDrawerOpen) {
@@ -352,7 +363,6 @@ class _UnViewFormPrincipalWidgetState extends State<UnViewFormPrincipalWidget>
                                   child: wrapWithModel(
                                     model: _model.unViewFrameSideMenuModel1,
                                     updateCallback: () => safeSetState(() {}),
-                                    updateOnChange: true,
                                     child: UnViewFrameSideMenuWidget(
                                       pageSelected: () {
                                         if (_model.pageSelected ==
@@ -367,6 +377,9 @@ class _UnViewFormPrincipalWidgetState extends State<UnViewFormPrincipalWidget>
                                         } else if (_model.pageSelected ==
                                             Pages.Produtos) {
                                           return Pages.Produtos;
+                                        } else if (_model.pageSelected ==
+                                            Pages.Financeiro) {
+                                          return Pages.Financeiro;
                                         } else {
                                           return Pages.Clientes;
                                         }
@@ -383,7 +396,6 @@ class _UnViewFormPrincipalWidgetState extends State<UnViewFormPrincipalWidget>
                                       },
                                       mouseRegionEnter: () async {
                                         FFAppState().modalUserMenu = false;
-                                        safeSetState(() {});
                                       },
                                       mouseRegionExit: () async {},
                                       callBackClientes: () async {
@@ -396,6 +408,10 @@ class _UnViewFormPrincipalWidgetState extends State<UnViewFormPrincipalWidget>
                                       },
                                       callBackProdutos: () async {
                                         _model.pageSelected = Pages.Produtos;
+                                        safeSetState(() {});
+                                      },
+                                      callBackFinanceiro: () async {
+                                        _model.pageSelected = Pages.Financeiro;
                                         safeSetState(() {});
                                       },
                                     ),
@@ -621,6 +637,22 @@ class _UnViewFormPrincipalWidgetState extends State<UnViewFormPrincipalWidget>
                                             safeSetState(() {}),
                                         child: const UnViewFrameVendasWidget(),
                                       ),
+                                    if (_model.pageSelected == Pages.Produtos)
+                                      wrapWithModel(
+                                        model: _model.unViewFrameProdutosModel,
+                                        updateCallback: () =>
+                                            safeSetState(() {}),
+                                        child: const UnViewFrameProdutosWidget(),
+                                      ),
+                                    if (_model.pageSelected == Pages.Financeiro)
+                                      wrapWithModel(
+                                        model: _model
+                                            .unviewFrameDashboardFinanceiroModel,
+                                        updateCallback: () =>
+                                            safeSetState(() {}),
+                                        child:
+                                            const UnviewFrameDashboardFinanceiroWidget(),
+                                      ),
                                     if (FFAppState().modalUserMenu)
                                       Align(
                                         alignment:
@@ -702,13 +734,6 @@ class _UnViewFormPrincipalWidgetState extends State<UnViewFormPrincipalWidget>
                                             ),
                                           ),
                                         ),
-                                      ),
-                                    if (_model.pageSelected == Pages.Produtos)
-                                      wrapWithModel(
-                                        model: _model.unViewFrameProdutosModel,
-                                        updateCallback: () =>
-                                            safeSetState(() {}),
-                                        child: const UnViewFrameProdutosWidget(),
                                       ),
                                   ],
                                 ),

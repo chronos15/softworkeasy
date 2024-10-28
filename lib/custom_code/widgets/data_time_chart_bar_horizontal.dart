@@ -89,8 +89,8 @@ class _DataTimeChartBarHorizontalState
       primaryXAxis: CategoryAxis(
         majorGridLines: MajorGridLines(width: 0),
         title: AxisTitle(text: 'Horários'),
-        labelPlacement: LabelPlacement.onTicks,
-        edgeLabelPlacement: EdgeLabelPlacement.shift,
+        //labelPlacement: LabelPlacement.onTicks,
+        //edgeLabelPlacement: EdgeLabelPlacement.shift,
       ),
       primaryYAxis: NumericAxis(
         labelFormat: '{value}',

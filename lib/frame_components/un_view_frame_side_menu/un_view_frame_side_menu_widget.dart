@@ -24,6 +24,7 @@ class UnViewFrameSideMenuWidget extends StatefulWidget {
     this.callBackClientes,
     required this.callBackVendas,
     required this.callBackProdutos,
+    required this.callBackFinanceiro,
   }) : isExpansible = isExpansible ?? false;
 
   final Pages? pageSelected;
@@ -35,6 +36,7 @@ class UnViewFrameSideMenuWidget extends StatefulWidget {
   final Future Function()? callBackClientes;
   final Future Function()? callBackVendas;
   final Future Function()? callBackProdutos;
+  final Future Function()? callBackFinanceiro;
 
   @override
   State<UnViewFrameSideMenuWidget> createState() =>
@@ -983,98 +985,109 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                                         5.0,
                                                                         0.0,
                                                                         0.0),
-                                                            child: Material(
-                                                              color: Colors
+                                                            child: InkWell(
+                                                              splashColor: Colors
                                                                   .transparent,
-                                                              elevation: 0.0,
-                                                              shape:
-                                                                  RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            12.0),
-                                                              ),
-                                                              child: Container(
-                                                                width: double
-                                                                    .infinity,
-                                                                height: 40.0,
-                                                                decoration:
-                                                                    BoxDecoration(
+                                                              focusColor: Colors
+                                                                  .transparent,
+                                                              hoverColor: Colors
+                                                                  .transparent,
+                                                              highlightColor:
+                                                                  Colors
+                                                                      .transparent,
+                                                              onTap: () async {
+                                                                await widget
+                                                                    .callBackFinanceiro
+                                                                    ?.call();
+                                                                _model.subMenuCadastro =
+                                                                    false;
+                                                                safeSetState(
+                                                                    () {});
+                                                              },
+                                                              child: Material(
+                                                                color: Colors
+                                                                    .transparent,
+                                                                elevation: 0.0,
+                                                                shape:
+                                                                    RoundedRectangleBorder(
                                                                   borderRadius:
                                                                       BorderRadius
                                                                           .circular(
                                                                               12.0),
                                                                 ),
-                                                                child: Row(
-                                                                  mainAxisSize:
-                                                                      MainAxisSize
-                                                                          .max,
-                                                                  mainAxisAlignment:
-                                                                      MainAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    Stack(
-                                                                      alignment:
-                                                                          const AlignmentDirectional(
-                                                                              -1.0,
-                                                                              0.0),
-                                                                      children: [
-                                                                        Padding(
-                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
-                                                                              7.0,
-                                                                              0.0,
-                                                                              7.0,
-                                                                              0.0),
-                                                                          child:
-                                                                              Icon(
-                                                                            Icons.attach_money_rounded,
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).alternate,
-                                                                            size:
-                                                                                24.0,
-                                                                          ).animateOnPageLoad(animationsMap['iconOnPageLoadAnimation7']!),
-                                                                        ),
-                                                                        Material(
-                                                                          color:
-                                                                              Colors.transparent,
-                                                                          elevation:
-                                                                              0.0,
-                                                                          shape:
-                                                                              RoundedRectangleBorder(
-                                                                            borderRadius:
-                                                                                BorderRadius.circular(10.0),
+                                                                child:
+                                                                    Container(
+                                                                  width: double
+                                                                      .infinity,
+                                                                  height: 40.0,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            12.0),
+                                                                  ),
+                                                                  child: Row(
+                                                                    mainAxisSize:
+                                                                        MainAxisSize
+                                                                            .max,
+                                                                    mainAxisAlignment:
+                                                                        MainAxisAlignment
+                                                                            .center,
+                                                                    children: [
+                                                                      Stack(
+                                                                        alignment: const AlignmentDirectional(
+                                                                            -1.0,
+                                                                            0.0),
+                                                                        children: [
+                                                                          Padding(
+                                                                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                                7.0,
+                                                                                0.0,
+                                                                                7.0,
+                                                                                0.0),
+                                                                            child:
+                                                                                Icon(
+                                                                              Icons.attach_money_rounded,
+                                                                              color: FlutterFlowTheme.of(context).alternate,
+                                                                              size: 24.0,
+                                                                            ).animateOnPageLoad(animationsMap['iconOnPageLoadAnimation7']!),
                                                                           ),
-                                                                          child:
-                                                                              Container(
-                                                                            width:
-                                                                                3.0,
-                                                                            height:
-                                                                                30.0,
-                                                                            decoration:
-                                                                                BoxDecoration(
-                                                                              color: widget.pageSelected == Pages.Financeiro ? FlutterFlowTheme.of(context).primary : Colors.transparent,
+                                                                          Material(
+                                                                            color:
+                                                                                Colors.transparent,
+                                                                            elevation:
+                                                                                0.0,
+                                                                            shape:
+                                                                                RoundedRectangleBorder(
                                                                               borderRadius: BorderRadius.circular(10.0),
                                                                             ),
+                                                                            child:
+                                                                                Container(
+                                                                              width: 3.0,
+                                                                              height: 30.0,
+                                                                              decoration: BoxDecoration(
+                                                                                color: widget.pageSelected == Pages.Financeiro ? FlutterFlowTheme.of(context).primary : Colors.transparent,
+                                                                                borderRadius: BorderRadius.circular(10.0),
+                                                                              ),
+                                                                            ),
+                                                                          ),
+                                                                        ],
+                                                                      ),
+                                                                      if (widget
+                                                                          .isExpansible)
+                                                                        Expanded(
+                                                                          child:
+                                                                              Text(
+                                                                            'Financeiro',
+                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                  fontFamily: 'Outfit',
+                                                                                  color: FlutterFlowTheme.of(context).alternate,
+                                                                                  letterSpacing: 0.0,
+                                                                                ),
                                                                           ),
                                                                         ),
-                                                                      ],
-                                                                    ),
-                                                                    if (widget
-                                                                        .isExpansible)
-                                                                      Expanded(
-                                                                        child:
-                                                                            Text(
-                                                                          'Financeiro',
-                                                                          style: FlutterFlowTheme.of(context)
-                                                                              .bodyMedium
-                                                                              .override(
-                                                                                fontFamily: 'Outfit',
-                                                                                color: FlutterFlowTheme.of(context).alternate,
-                                                                                letterSpacing: 0.0,
-                                                                              ),
-                                                                        ),
-                                                                      ),
-                                                                  ],
+                                                                    ],
+                                                                  ),
                                                                 ),
                                                               ),
                                                             ),

@@ -72,7 +72,9 @@ class _UnViewFrameCardHorWidgetState extends State<UnViewFrameCardHorWidget> {
                     valueOrDefault<String>(
                       widget.sTitulo,
                       'Menu',
-                    ).maybeHandleOverflow(maxChars: 12),
+                    ).maybeHandleOverflow(
+                      maxChars: 12,
+                    ),
                     textAlign: TextAlign.start,
                     maxLines: 1,
                     minFontSize: 10.0,

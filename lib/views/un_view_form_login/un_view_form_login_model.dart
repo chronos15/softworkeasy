@@ -155,6 +155,8 @@ class UnViewFormLoginModel extends FlutterFlowModel<UnViewFormLoginWidget> {
           MediaQuery.sizeOf(context).width < kBreakpointSmall
               ? MediaQuery.sizeOf(context).width
               : 360.0,
+          'bottomcenter',
+          'frombottom',
         );
         return null;
       }

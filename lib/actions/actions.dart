@@ -2,6 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
+import '/actions/actions.dart' as action_blocks;
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 
@@ -63,10 +64,47 @@ Future getToken(BuildContext context) async {
                 return 360.0;
               }
             }(),
+            'bottomcenter',
+            'frombottom',
           );
         }(),
       );
       return;
     }
   }
+}
+
+Future changeOrientation(
+  BuildContext context, {
+  bool? landscape,
+}) async {
+  unawaited(
+    () async {
+      await action_blocks.changeOrientation(
+        context,
+        landscape: landscape,
+      );
+    }(),
+  );
+}
+
+Future verifyConnection(BuildContext context) async {
+  bool? connectionTrue;
+
+  connectionTrue = await actions.testConnectionServer(
+    'http://${FFAppState().ConfigGlobaisServer.host}:${FFAppState().ConfigGlobaisServer.porta.toString()}/${FFAppState().ConfigGlobaisServer.path}/auth/testconnection',
+  );
+  if (!connectionTrue) {
+    await actions.elegantNotificationError(
+      context,
+      'Falha',
+      'Servidor não está respondendo. Verifique sua conexão ou tente novamente!',
+      FlutterFlowTheme.of(context).primaryText,
+      FlutterFlowTheme.of(context).secondaryBackground,
+      360.0,
+      'topright',
+      'fromright',
+    );
+  }
+  FFAppState().isConnected = connectionTrue;
 }

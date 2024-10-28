@@ -899,264 +899,280 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                           mainAxisSize:
                                                               MainAxisSize.max,
                                                           children: [
-                                                            SwitchListTile
-                                                                .adaptive(
-                                                              value: _model
-                                                                      .swLogPersistenteValue ??=
-                                                                  FFAppState()
-                                                                      .ConfigGlobais
-                                                                      .logPersistente,
-                                                              onChanged:
-                                                                  (newValue) async {
-                                                                safeSetState(() =>
-                                                                    _model.swLogPersistenteValue =
-                                                                        newValue);
-                                                              },
-                                                              title: Text(
-                                                                'Usuário Persistente',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleLarge
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Outfit',
-                                                                      fontSize:
-                                                                          14.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w300,
-                                                                    ),
-                                                              ),
-                                                              subtitle: Text(
-                                                                'Fechar o app não desloga o usuário, mantendo persistência na nova inicialização.',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      fontSize:
-                                                                          12.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                              tileColor: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryBackground,
-                                                              activeColor:
-                                                                  FlutterFlowTheme.of(
+                                                            Material(
+                                                              color: Colors
+                                                                  .transparent,
+                                                              child:
+                                                                  SwitchListTile
+                                                                      .adaptive(
+                                                                value: _model
+                                                                        .swLogPersistenteValue ??=
+                                                                    FFAppState()
+                                                                        .ConfigGlobais
+                                                                        .logPersistente,
+                                                                onChanged:
+                                                                    (newValue) async {
+                                                                  safeSetState(() =>
+                                                                      _model.swLogPersistenteValue =
+                                                                          newValue);
+                                                                },
+                                                                title: Text(
+                                                                  'Usuário Persistente',
+                                                                  style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .info,
-                                                              activeTrackColor:
-                                                                  FlutterFlowTheme.of(
+                                                                      .titleLarge
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Outfit',
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight:
+                                                                            FontWeight.w300,
+                                                                      ),
+                                                                ),
+                                                                subtitle: Text(
+                                                                  'Fechar o app não desloga o usuário, mantendo persistência na nova inicialização.',
+                                                                  style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .primary,
-                                                              dense: true,
-                                                              controlAffinity:
-                                                                  ListTileControlAffinity
-                                                                      .leading,
+                                                                      .labelMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Readex Pro',
+                                                                        fontSize:
+                                                                            12.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                ),
+                                                                tileColor: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryBackground,
+                                                                activeColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .info,
+                                                                activeTrackColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primary,
+                                                                dense: true,
+                                                                controlAffinity:
+                                                                    ListTileControlAffinity
+                                                                        .leading,
+                                                              ),
                                                             ),
-                                                            SwitchListTile
-                                                                .adaptive(
-                                                              value: _model
-                                                                      .swAutLocalValue ??=
-                                                                  FFAppState()
-                                                                      .ConfigGlobais
-                                                                      .autLocal,
-                                                              onChanged: !isAndroid
-                                                                  ? null
-                                                                  : (newValue) async {
-                                                                      safeSetState(() =>
-                                                                          _model.swAutLocalValue =
-                                                                              newValue);
-                                                                    },
-                                                              title: Text(
-                                                                'Sistema de Biometria (mobile)',
-                                                                style: FlutterFlowTheme.of(
+                                                            Material(
+                                                              color: Colors
+                                                                  .transparent,
+                                                              child:
+                                                                  SwitchListTile
+                                                                      .adaptive(
+                                                                value: _model
+                                                                        .swAutLocalValue ??=
+                                                                    FFAppState()
+                                                                        .ConfigGlobais
+                                                                        .autLocal,
+                                                                onChanged:
+                                                                    !isAndroid
+                                                                        ? null
+                                                                        : (newValue) async {
+                                                                            safeSetState(() =>
+                                                                                _model.swAutLocalValue = newValue);
+                                                                          },
+                                                                title: Text(
+                                                                  'Sistema de Biometria (mobile)',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .titleLarge
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Outfit',
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight:
+                                                                            FontWeight.w300,
+                                                                      ),
+                                                                ),
+                                                                subtitle: Text(
+                                                                  'Usa sistema de autentificação local para acessar o aplicativo.',
+                                                                  style: FlutterFlowTheme.of(
+                                                                          context)
+                                                                      .labelMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Readex Pro',
+                                                                        fontSize:
+                                                                            12.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                ),
+                                                                tileColor: FlutterFlowTheme.of(
                                                                         context)
-                                                                    .titleLarge
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Outfit',
-                                                                      fontSize:
-                                                                          14.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w300,
-                                                                    ),
+                                                                    .secondaryBackground,
+                                                                activeColor: !isAndroid
+                                                                    ? FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .accent4
+                                                                    : FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .info,
+                                                                activeTrackColor: !isAndroid
+                                                                    ? FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .alternate
+                                                                    : FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primary,
+                                                                dense: true,
+                                                                controlAffinity:
+                                                                    ListTileControlAffinity
+                                                                        .leading,
                                                               ),
-                                                              subtitle: Text(
-                                                                'Usa sistema de autentificação local para acessar o aplicativo.',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      fontSize:
-                                                                          12.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                              tileColor: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryBackground,
-                                                              activeColor: !isAndroid
-                                                                  ? FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .accent4
-                                                                  : FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .info,
-                                                              activeTrackColor: !isAndroid
-                                                                  ? FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .alternate
-                                                                  : FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primary,
-                                                              dense: true,
-                                                              controlAffinity:
-                                                                  ListTileControlAffinity
-                                                                      .leading,
                                                             ),
-                                                            SwitchListTile
-                                                                .adaptive(
-                                                              value: _model
-                                                                      .swNotificacaoValue1 ??=
-                                                                  FFAppState()
-                                                                      .ConfigGlobais
-                                                                      .ativaNotificacoes,
-                                                              onChanged:
-                                                                  (newValue) async {
-                                                                safeSetState(() =>
-                                                                    _model.swNotificacaoValue1 =
-                                                                        newValue);
-                                                              },
-                                                              title: Text(
-                                                                'Notificações',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleLarge
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Outfit',
-                                                                      fontSize:
-                                                                          14.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w300,
-                                                                    ),
-                                                              ),
-                                                              subtitle: Text(
-                                                                'Ativa notificações locais no aplicativo.',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      fontSize:
-                                                                          12.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                              tileColor: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryBackground,
-                                                              activeColor:
-                                                                  FlutterFlowTheme.of(
+                                                            Material(
+                                                              color: Colors
+                                                                  .transparent,
+                                                              child:
+                                                                  SwitchListTile
+                                                                      .adaptive(
+                                                                value: _model
+                                                                        .swNotificacaoValue1 ??=
+                                                                    FFAppState()
+                                                                        .ConfigGlobais
+                                                                        .ativaNotificacoes,
+                                                                onChanged:
+                                                                    (newValue) async {
+                                                                  safeSetState(() =>
+                                                                      _model.swNotificacaoValue1 =
+                                                                          newValue);
+                                                                },
+                                                                title: Text(
+                                                                  'Notificações',
+                                                                  style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .info,
-                                                              activeTrackColor:
-                                                                  FlutterFlowTheme.of(
+                                                                      .titleLarge
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Outfit',
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight:
+                                                                            FontWeight.w300,
+                                                                      ),
+                                                                ),
+                                                                subtitle: Text(
+                                                                  'Ativa notificações locais no aplicativo.',
+                                                                  style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .primary,
-                                                              dense: true,
-                                                              controlAffinity:
-                                                                  ListTileControlAffinity
-                                                                      .leading,
+                                                                      .labelMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Readex Pro',
+                                                                        fontSize:
+                                                                            12.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                ),
+                                                                tileColor: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryBackground,
+                                                                activeColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .info,
+                                                                activeTrackColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primary,
+                                                                dense: true,
+                                                                controlAffinity:
+                                                                    ListTileControlAffinity
+                                                                        .leading,
+                                                              ),
                                                             ),
-                                                            SwitchListTile
-                                                                .adaptive(
-                                                              value: _model
-                                                                      .swNotificacaoValue2 ??=
-                                                                  Theme.of(context)
-                                                                          .brightness ==
-                                                                      Brightness
-                                                                          .dark,
-                                                              onChanged:
-                                                                  (newValue) async {
-                                                                safeSetState(() =>
-                                                                    _model.swNotificacaoValue2 =
-                                                                        newValue);
-                                                                if (newValue) {
-                                                                  setDarkModeSetting(
-                                                                      context,
-                                                                      ThemeMode
-                                                                          .dark);
-                                                                } else {
-                                                                  setDarkModeSetting(
-                                                                      context,
-                                                                      ThemeMode
-                                                                          .light);
-                                                                }
-                                                              },
-                                                              title: Text(
-                                                                'Tema Escuro',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .titleLarge
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Outfit',
-                                                                      fontSize:
-                                                                          14.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                      fontWeight:
-                                                                          FontWeight
-                                                                              .w300,
-                                                                    ),
-                                                              ),
-                                                              subtitle: Text(
-                                                                'Ativa tema escuro em todo aplicativo.',
-                                                                style: FlutterFlowTheme.of(
-                                                                        context)
-                                                                    .labelMedium
-                                                                    .override(
-                                                                      fontFamily:
-                                                                          'Readex Pro',
-                                                                      fontSize:
-                                                                          12.0,
-                                                                      letterSpacing:
-                                                                          0.0,
-                                                                    ),
-                                                              ),
-                                                              tileColor: FlutterFlowTheme
-                                                                      .of(context)
-                                                                  .secondaryBackground,
-                                                              activeColor:
-                                                                  FlutterFlowTheme.of(
+                                                            Material(
+                                                              color: Colors
+                                                                  .transparent,
+                                                              child:
+                                                                  SwitchListTile
+                                                                      .adaptive(
+                                                                value: _model
+                                                                    .swNotificacaoValue2 ??= Theme.of(
+                                                                            context)
+                                                                        .brightness ==
+                                                                    Brightness
+                                                                        .dark,
+                                                                onChanged:
+                                                                    (newValue) async {
+                                                                  safeSetState(() =>
+                                                                      _model.swNotificacaoValue2 =
+                                                                          newValue);
+                                                                  if (newValue) {
+                                                                    setDarkModeSetting(
+                                                                        context,
+                                                                        ThemeMode
+                                                                            .dark);
+                                                                  } else {
+                                                                    setDarkModeSetting(
+                                                                        context,
+                                                                        ThemeMode
+                                                                            .light);
+                                                                  }
+                                                                },
+                                                                title: Text(
+                                                                  'Tema Escuro',
+                                                                  style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .info,
-                                                              activeTrackColor:
-                                                                  FlutterFlowTheme.of(
+                                                                      .titleLarge
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Outfit',
+                                                                        fontSize:
+                                                                            14.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                        fontWeight:
+                                                                            FontWeight.w300,
+                                                                      ),
+                                                                ),
+                                                                subtitle: Text(
+                                                                  'Ativa tema escuro em todo aplicativo.',
+                                                                  style: FlutterFlowTheme.of(
                                                                           context)
-                                                                      .primary,
-                                                              dense: true,
-                                                              controlAffinity:
-                                                                  ListTileControlAffinity
-                                                                      .leading,
+                                                                      .labelMedium
+                                                                      .override(
+                                                                        fontFamily:
+                                                                            'Readex Pro',
+                                                                        fontSize:
+                                                                            12.0,
+                                                                        letterSpacing:
+                                                                            0.0,
+                                                                      ),
+                                                                ),
+                                                                tileColor: FlutterFlowTheme.of(
+                                                                        context)
+                                                                    .secondaryBackground,
+                                                                activeColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .info,
+                                                                activeTrackColor:
+                                                                    FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primary,
+                                                                dense: true,
+                                                                controlAffinity:
+                                                                    ListTileControlAffinity
+                                                                        .leading,
+                                                              ),
                                                             ),
                                                           ],
                                                         ),

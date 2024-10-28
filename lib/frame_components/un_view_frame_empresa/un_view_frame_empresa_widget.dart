@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_static_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:mapbox_search/mapbox_search.dart' as mapbox;
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -340,8 +341,10 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                                             MainAxisAlignment
                                                                 .center,
                                                         children: [
-                                                          Text(
+                                                          AutoSizeText(
                                                             '37',
+                                                            maxLines: 1,
+                                                            minFontSize: 5.0,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .labelMedium
@@ -358,10 +361,12 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                                                           .w300,
                                                                 ),
                                                           ),
-                                                          Text(
+                                                          AutoSizeText(
                                                             'Vendas',
                                                             textAlign: TextAlign
                                                                 .center,
+                                                            maxLines: 1,
+                                                            minFontSize: 8.0,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .labelMedium
@@ -389,8 +394,10 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                                             MainAxisAlignment
                                                                 .center,
                                                         children: [
-                                                          Text(
+                                                          AutoSizeText(
                                                             '17',
+                                                            maxLines: 1,
+                                                            minFontSize: 5.0,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .labelMedium
@@ -407,10 +414,12 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                                                           .w300,
                                                                 ),
                                                           ),
-                                                          Text(
+                                                          AutoSizeText(
                                                             'Funcionários',
                                                             textAlign: TextAlign
                                                                 .center,
+                                                            maxLines: 1,
+                                                            minFontSize: 8.0,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .labelMedium
@@ -438,8 +447,10 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                                             MainAxisAlignment
                                                                 .center,
                                                         children: [
-                                                          Text(
+                                                          AutoSizeText(
                                                             '2.350',
+                                                            maxLines: 1,
+                                                            minFontSize: 5.0,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .labelMedium
@@ -456,10 +467,12 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                                                           .w300,
                                                                 ),
                                                           ),
-                                                          Text(
+                                                          AutoSizeText(
                                                             'Clientes',
                                                             textAlign: TextAlign
                                                                 .center,
+                                                            maxLines: 1,
+                                                            minFontSize: 8.0,
                                                             style: FlutterFlowTheme
                                                                     .of(context)
                                                                 .labelMedium
@@ -491,58 +504,62 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                             child: Padding(
                                               padding: const EdgeInsetsDirectional
                                                   .fromSTEB(5.0, 0.0, 5.0, 5.0),
-                                              child: ListTile(
-                                                leading: Icon(
-                                                  Icons.location_on_sharp,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .primary,
-                                                ),
-                                                title: Text(
-                                                  '${FFAppState().Empresa.endereco}, ${FFAppState().Empresa.numero}, ${FFAppState().Empresa.bairro}',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .titleLarge
-                                                      .override(
-                                                        fontFamily: 'Outfit',
-                                                        fontSize: 14.0,
-                                                        letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.w300,
-                                                      ),
-                                                ),
-                                                subtitle: Text(
-                                                  '${FFAppState().Empresa.cidade} - ${FFAppState().Empresa.uf}',
-                                                  style: FlutterFlowTheme.of(
-                                                          context)
-                                                      .labelMedium
-                                                      .override(
-                                                        fontFamily:
-                                                            'Readex Pro',
-                                                        fontSize: 12.0,
-                                                        letterSpacing: 0.0,
-                                                      ),
-                                                ),
-                                                trailing: Icon(
-                                                  Icons
-                                                      .arrow_forward_ios_rounded,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  size: 18.0,
-                                                ),
-                                                tileColor:
-                                                    FlutterFlowTheme.of(context)
-                                                        .primaryBackground,
-                                                dense: true,
-                                                contentPadding:
-                                                    const EdgeInsetsDirectional
-                                                        .fromSTEB(20.0, 0.0,
-                                                            20.0, 0.0),
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
+                                              child: Material(
+                                                color: Colors.transparent,
+                                                child: ListTile(
+                                                  leading: Icon(
+                                                    Icons.location_on_sharp,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .primary,
+                                                  ),
+                                                  title: Text(
+                                                    '${FFAppState().Empresa.endereco}, ${FFAppState().Empresa.numero}, ${FFAppState().Empresa.bairro}',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .titleLarge
+                                                        .override(
+                                                          fontFamily: 'Outfit',
+                                                          fontSize: 14.0,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.w300,
+                                                        ),
+                                                  ),
+                                                  subtitle: Text(
+                                                    '${FFAppState().Empresa.cidade} - ${FFAppState().Empresa.uf}',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .labelMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          fontSize: 12.0,
+                                                          letterSpacing: 0.0,
+                                                        ),
+                                                  ),
+                                                  trailing: Icon(
+                                                    Icons
+                                                        .arrow_forward_ios_rounded,
+                                                    color: FlutterFlowTheme.of(
+                                                            context)
+                                                        .secondaryText,
+                                                    size: 18.0,
+                                                  ),
+                                                  tileColor:
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primaryBackground,
+                                                  dense: true,
+                                                  contentPadding:
+                                                      const EdgeInsetsDirectional
+                                                          .fromSTEB(20.0, 0.0,
+                                                              20.0, 0.0),
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            8.0),
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -636,59 +653,26 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  await launchURL(
-                                                      'https://www.facebook.com');
-                                                },
-                                                child: FaIcon(
-                                                  FontAwesomeIcons.facebook,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  size: 24.0,
-                                                ),
+                                              FaIcon(
+                                                FontAwesomeIcons.facebook,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                size: 24.0,
                                               ),
-                                              InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  await launchURL(
-                                                      'https://www.instagram.com');
-                                                },
-                                                child: FaIcon(
-                                                  FontAwesomeIcons.instagram,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  size: 24.0,
-                                                ),
+                                              FaIcon(
+                                                FontAwesomeIcons.instagram,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                size: 24.0,
                                               ),
-                                              InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  await launchURL(
-                                                      'https://www.youtube.com');
-                                                },
-                                                child: FaIcon(
-                                                  FontAwesomeIcons.youtube,
-                                                  color: FlutterFlowTheme.of(
-                                                          context)
-                                                      .secondaryText,
-                                                  size: 24.0,
-                                                ),
+                                              FaIcon(
+                                                FontAwesomeIcons.youtube,
+                                                color:
+                                                    FlutterFlowTheme.of(context)
+                                                        .secondaryText,
+                                                size: 24.0,
                                               ),
                                             ].divide(const SizedBox(width: 30.0)),
                                           ),
