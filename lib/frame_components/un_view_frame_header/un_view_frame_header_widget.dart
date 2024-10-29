@@ -7,6 +7,8 @@ import '/custom_code/actions/index.dart' as actions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'un_view_frame_header_model.dart';
 export 'un_view_frame_header_model.dart';
@@ -105,7 +107,7 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                 Expanded(
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -132,7 +134,7 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
-                                        if ((widget.isPrincipal ?? true) &&
+                                        if ((widget!.isPrincipal ?? true) &&
                                             responsiveVisibility(
                                               context: context,
                                               desktop: false,
@@ -153,7 +155,7 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                               await widget.drawerAction?.call();
                                             },
                                           ),
-                                        if ((widget.isPrincipal ?? true) &&
+                                        if ((widget!.isPrincipal ?? true) &&
                                             responsiveVisibility(
                                               context: context,
                                               phone: false,
@@ -163,7 +165,7 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                           Container(
                                             width: 40.0,
                                             height: 40.0,
-                                            decoration: const BoxDecoration(),
+                                            decoration: BoxDecoration(),
                                             child: InkWell(
                                               splashColor: Colors.transparent,
                                               focusColor: Colors.transparent,
@@ -184,7 +186,7 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                               ),
                                             ),
                                           ),
-                                        if (!widget.isPrincipal!)
+                                        if (!widget!.isPrincipal!)
                                           FlutterFlowIconButton(
                                             borderColor: Colors.transparent,
                                             borderRadius: 12.0,
@@ -235,7 +237,7 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                                   ))
                                                 Align(
                                                   alignment:
-                                                      const AlignmentDirectional(
+                                                      AlignmentDirectional(
                                                           -1.0, 0.0),
                                                   child: ClipRRect(
                                                     borderRadius:
@@ -256,7 +258,7 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                                       kBreakpointSmall))
                                                 Align(
                                                   alignment:
-                                                      const AlignmentDirectional(
+                                                      AlignmentDirectional(
                                                           -1.0, 0.0),
                                                   child: ClipRRect(
                                                     borderRadius:
@@ -270,7 +272,7 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                                     ),
                                                   ),
                                                 ),
-                                              if ((widget.isPrincipal! &&
+                                              if ((widget!.isPrincipal! &&
                                                       !_model.openSearch) &&
                                                   responsiveVisibility(
                                                     context: context,
@@ -282,7 +284,7 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                                     builder: (context) =>
                                                         Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   20.0,
                                                                   0.0,
@@ -316,14 +318,14 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                                                 backgroundColor:
                                                                     Colors
                                                                         .transparent,
-                                                                alignment: const AlignmentDirectional(
+                                                                alignment: AlignmentDirectional(
                                                                         0.0,
                                                                         0.0)
                                                                     .resolve(
                                                                         Directionality.of(
                                                                             context)),
                                                                 child:
-                                                                    SizedBox(
+                                                                    Container(
                                                                   height: MediaQuery.sizeOf(
                                                                               context)
                                                                           .height *
@@ -394,7 +396,7 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                                                     .override(
                                                                       fontFamily:
                                                                           'Outfit',
-                                                                      color: const Color(
+                                                                      color: Color(
                                                                           0xFFC3C3C3),
                                                                       fontSize:
                                                                           12.0,
@@ -410,10 +412,10 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                                 ),
                                             ],
                                           ),
-                                          if (!widget.isPrincipal!)
+                                          if (!widget!.isPrincipal!)
                                             Text(
                                               valueOrDefault<String>(
-                                                widget.sNamePag,
+                                                widget!.sNamePag,
                                                 'Inicio',
                                               ),
                                               style:
@@ -428,19 +430,19 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                                         letterSpacing: 0.0,
                                                       ),
                                             ),
-                                        ].addToStart(const SizedBox(height: 5.0)),
+                                        ].addToStart(SizedBox(height: 5.0)),
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
-                            ].divide(const SizedBox(width: 8.0)).addToStart(SizedBox(
+                            ].divide(SizedBox(width: 8.0)).addToStart(SizedBox(
                                 width: FFAppState().SideMenuExpansable
                                     ? 0.0
                                     : 10.0)),
                           ),
                         ),
-                        if (widget.isPrincipal ?? true)
+                        if (widget!.isPrincipal ?? true)
                           Expanded(
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
@@ -450,16 +452,8 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                   opaque: true,
                                   cursor: SystemMouseCursors.click ??
                                       MouseCursor.defer,
-                                  onEnter: ((event) async {
-                                    safeSetState(
-                                        () => _model.mouseRegionHovered = true);
-                                  }),
-                                  onExit: ((event) async {
-                                    safeSetState(() =>
-                                        _model.mouseRegionHovered = false);
-                                  }),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 12.0, 0.0),
                                     child: InkWell(
                                       splashColor: Colors.transparent,
@@ -505,13 +499,13 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                                     if (_model.openSearch)
                                                       Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     2.0,
                                                                     2.0,
                                                                     0.0,
                                                                     2.0),
-                                                        child: SizedBox(
+                                                        child: Container(
                                                           width: 180.0,
                                                           child: TextFormField(
                                                             controller: _model
@@ -621,13 +615,13 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                                                             8.0),
                                                               ),
                                                               contentPadding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           14.0,
                                                                           10.0,
                                                                           14.0,
                                                                           10.0),
-                                                              prefixIcon: const Icon(
+                                                              prefixIcon: Icon(
                                                                 Icons
                                                                     .search_rounded,
                                                               ),
@@ -671,7 +665,7 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                                     if (_model.openSearch)
                                                       Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     2.0,
                                                                     2.0,
@@ -701,7 +695,7 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                                     if (!_model.openSearch)
                                                       Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     2.0,
                                                                     2.0,
@@ -731,7 +725,7 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                                     if (_model.openSearch)
                                                       Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     2.0,
                                                                     2.0,
@@ -769,7 +763,7 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                                 ),
                                               ),
                                             ),
-                                          if (widget.isPrincipal! &&
+                                          if (widget!.isPrincipal! &&
                                               !_model.openSearch)
                                             Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -783,11 +777,11 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                                 ),
                                                 Align(
                                                   alignment:
-                                                      const AlignmentDirectional(
+                                                      AlignmentDirectional(
                                                           1.0, 0.0),
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(5.0, 0.0,
                                                                 0.0, 0.0),
                                                     child: AutoSizeText(
@@ -836,10 +830,18 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                                                   ),
                                               ],
                                             ),
-                                        ].divide(const SizedBox(width: 10.0)),
+                                        ].divide(SizedBox(width: 10.0)),
                                       ),
                                     ),
                                   ),
+                                  onEnter: ((event) async {
+                                    safeSetState(
+                                        () => _model.mouseRegionHovered = true);
+                                  }),
+                                  onExit: ((event) async {
+                                    safeSetState(() =>
+                                        _model.mouseRegionHovered = false);
+                                  }),
                                 ),
                               ],
                             ),
@@ -861,13 +863,13 @@ class _UnViewFrameHeaderWidgetState extends State<UnViewFrameHeaderWidget> {
                         if ((!isAndroid &&
                                 !isiOS &&
                                 !isWeb &&
-                                widget.isPrincipal!) &&
+                                widget!.isPrincipal!) &&
                             responsiveVisibility(
                               context: context,
                               phone: false,
                             ))
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 5.0, 0.0, 0.0, 0.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,

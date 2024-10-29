@@ -1,11 +1,13 @@
 import '/auth/custom_auth/auth_util.dart';
 import '/backend/api_requests/api_calls.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
+import 'dart:math';
 import '/actions/actions.dart' as action_blocks;
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -15,6 +17,8 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -48,7 +52,8 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
       if (RootPageContext.isInactiveRootPage(context)) {
         return;
       }
-      if (FFAppState().ConfigGlobaisServer.hostPrimario != '') {
+      if (FFAppState().ConfigGlobaisServer.hostPrimario != null &&
+          FFAppState().ConfigGlobaisServer.hostPrimario != '') {
         if (isWeb) {
           await action_blocks.verifyConfigFromIni(context);
         }
@@ -86,12 +91,12 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
           safeSetState(() {});
           if (FFAppState().ConfigGlobais.autLocal &&
               FFAppState().ConfigGlobais.lembrar) {
-            final localAuth = LocalAuthentication();
-            bool isBiometricSupported = await localAuth.isDeviceSupported();
+            final _localAuth = LocalAuthentication();
+            bool _isBiometricSupported = await _localAuth.isDeviceSupported();
 
-            if (isBiometricSupported) {
+            if (_isBiometricSupported) {
               try {
-                _model.autBiometric = await localAuth.authenticate(
+                _model.autBiometric = await _localAuth.authenticate(
                     localizedReason:
                         'Por favor, entre com sua biometria ou outra forma de autentificação para conectar ao sistema.');
               } on PlatformException {
@@ -100,7 +105,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
               safeSetState(() {});
             }
 
-            if (_model.autBiometric) {
+            if (_model.autBiometric!) {
               _model.actionLoginBiometric =
                   await _model.loginActionBlock(context);
               GoRouter.of(context).prepareAuthEvent();
@@ -216,7 +221,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
               ),
             }.withoutNulls,
             extra: <String, dynamic>{
-              kTransitionInfoKey: const TransitionInfo(
+              kTransitionInfoKey: TransitionInfo(
                 hasTransition: true,
                 transitionType: PageTransitionType.bottomToTop,
               ),
@@ -289,7 +294,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
             curve: Curves.easeInOut,
             delay: 160.0.ms,
             duration: 600.0.ms,
-            color: const Color(0xFFF1F4F8),
+            color: Color(0xFFF1F4F8),
             angle: 0.524,
           ),
         ],
@@ -303,8 +308,8 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 100.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 100.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -357,12 +362,12 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
             child: Stack(
               children: [
                 Align(
-                  alignment: const AlignmentDirectional(0.0, 0.0),
+                  alignment: AlignmentDirectional(0.0, 0.0),
                   child: Container(
                     width: 440.0,
-                    decoration: const BoxDecoration(),
+                    decoration: BoxDecoration(),
                     child: Align(
-                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -381,9 +386,9 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                       .secondaryBackground,
                                   borderRadius: BorderRadius.circular(0.0),
                                 ),
-                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                alignment: AlignmentDirectional(0.0, 0.0),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       32.0, 12.0, 32.0, 12.0),
                                   child: SingleChildScrollView(
                                     child: Column(
@@ -393,7 +398,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                       children: [
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 40.0, 0.0, 24.0),
                                           child: Material(
                                             color: Colors.transparent,
@@ -409,7 +414,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                 color:
                                                     FlutterFlowTheme.of(context)
                                                         .secondaryBackground,
-                                                boxShadow: const [
+                                                boxShadow: [
                                                   BoxShadow(
                                                     blurRadius: 8.0,
                                                     color: Color(0x1917171C),
@@ -424,7 +429,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                     BorderRadius.circular(12.0),
                                               ),
                                               child: Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     0.0, 0.0),
                                                 child: Lottie.asset(
                                                   'assets/jsons/Animation_-_1706711829998.json',
@@ -459,7 +464,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                         )),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 12.0, 0.0, 0.0),
                                           child: SelectionArea(
                                               child: Text(
@@ -484,7 +489,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                             mainAxisSize: MainAxisSize.max,
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 24.0, 0.0, 0.0),
                                                 child: Column(
@@ -547,7 +552,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                         enabledBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              const BorderSide(
+                                                              BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -605,7 +610,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                                     context)
                                                                 .primaryBackground,
                                                         contentPadding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     14.0,
                                                                     10.0,
@@ -650,7 +655,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                 ),
                                               ),
                                               Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         0.0, 20.0, 0.0, 0.0),
                                                 child: Column(
@@ -666,7 +671,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                           .passwordFieldFocusNode,
                                                       onFieldSubmitted:
                                                           (_) async {
-                                                        var shouldSetState =
+                                                        var _shouldSetState =
                                                             false;
                                                         if (_model.formKey
                                                                     .currentState ==
@@ -693,7 +698,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                             await _model
                                                                 .loginActionBlock(
                                                                     context);
-                                                        shouldSetState = true;
+                                                        _shouldSetState = true;
                                                         if (_model
                                                                 .loginBlockOnSubmite!
                                                                 .idCodigo >=
@@ -713,9 +718,8 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                                 .loginBlockOnSubmite,
                                                           );
                                                         } else {
-                                                          if (shouldSetState) {
+                                                          if (_shouldSetState)
                                                             safeSetState(() {});
-                                                          }
                                                           return;
                                                         }
 
@@ -723,9 +727,8 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                             'unViewFormPrincipal',
                                                             context.mounted);
 
-                                                        if (shouldSetState) {
+                                                        if (_shouldSetState)
                                                           safeSetState(() {});
-                                                        }
                                                       },
                                                       autofocus: false,
                                                       textInputAction:
@@ -775,7 +778,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                         enabledBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              const BorderSide(
+                                                              BorderSide(
                                                             color: Color(
                                                                 0x00000000),
                                                             width: 1.0,
@@ -802,7 +805,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                         errorBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              const BorderSide(
+                                                              BorderSide(
                                                             color: Color(
                                                                 0xFFFDA29B),
                                                             width: 1.0,
@@ -815,7 +818,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                         focusedErrorBorder:
                                                             OutlineInputBorder(
                                                           borderSide:
-                                                              const BorderSide(
+                                                              BorderSide(
                                                             color: Color(
                                                                 0xFFFDA29B),
                                                             width: 1.0,
@@ -831,7 +834,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                                     context)
                                                                 .primaryBackground,
                                                         contentPadding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     14.0,
                                                                     10.0,
@@ -894,7 +897,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 12.0, 0.0, 12.0),
                                           child: Material(
                                             color: Colors.transparent,
@@ -947,7 +950,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 16.0, 0.0, 0.0),
                                           child: SelectionArea(
                                               child: Text(
@@ -966,13 +969,13 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 16.0, 0.0, 0.0),
                                           child: FFButtonWidget(
                                             onPressed: _model.disableByError
                                                 ? null
                                                 : () async {
-                                                    var shouldSetState = false;
+                                                    var _shouldSetState = false;
                                                     if (_model.formKey
                                                                 .currentState ==
                                                             null ||
@@ -998,7 +1001,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                         await _model
                                                             .loginActionBlock(
                                                                 context);
-                                                    shouldSetState = true;
+                                                    _shouldSetState = true;
                                                     if (_model.loginBlock!
                                                             .idCodigo >=
                                                         1) {
@@ -1016,9 +1019,8 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                             _model.loginBlock,
                                                       );
                                                     } else {
-                                                      if (shouldSetState) {
+                                                      if (_shouldSetState)
                                                         safeSetState(() {});
-                                                      }
                                                       return;
                                                     }
 
@@ -1026,21 +1028,20 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                         'unViewFormPrincipal',
                                                         context.mounted);
 
-                                                    if (shouldSetState) {
+                                                    if (_shouldSetState)
                                                       safeSetState(() {});
-                                                    }
                                                   },
                                             text: 'Entrar',
-                                            icon: const Icon(
+                                            icon: Icon(
                                               Icons.login_rounded,
                                               size: 22.0,
                                             ),
                                             options: FFButtonOptions(
                                               width: double.infinity,
                                               height: 60.0,
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                              iconPadding: const EdgeInsetsDirectional
+                                              iconPadding: EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -1055,13 +1056,13 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                     fontWeight: FontWeight.w300,
                                                   ),
                                               elevation: 2.0,
-                                              borderSide: const BorderSide(
+                                              borderSide: BorderSide(
                                                 color: Colors.transparent,
                                                 width: 1.0,
                                               ),
                                               borderRadius:
                                                   BorderRadius.circular(8.0),
-                                              disabledColor: const Color(0xFFDBDBDB),
+                                              disabledColor: Color(0xFFDBDBDB),
                                               disabledTextColor:
                                                   FlutterFlowTheme.of(context)
                                                       .secondaryText,
@@ -1072,7 +1073,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                         if (!isWeb)
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     0.0, 24.0, 0.0, 24.0),
                                             child: Row(
                                               mainAxisSize: MainAxisSize.max,
@@ -1116,7 +1117,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                       }.withoutNulls,
                                                       extra: <String, dynamic>{
                                                         kTransitionInfoKey:
-                                                            const TransitionInfo(
+                                                            TransitionInfo(
                                                           hasTransition: true,
                                                           transitionType:
                                                               PageTransitionType
@@ -1142,7 +1143,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                         ),
                                                   ),
                                                 ),
-                                              ].divide(const SizedBox(width: 5.0)),
+                                              ].divide(SizedBox(width: 5.0)),
                                             ),
                                           ),
                                       ],
@@ -1156,9 +1157,9 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                               ? MediaQuery.viewInsetsOf(context).bottom > 0
                               : _isKeyboardVisible))
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 1.0),
+                              alignment: AlignmentDirectional(0.0, 1.0),
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 10.0),
                                 child: Row(
                                   mainAxisSize: MainAxisSize.max,
@@ -1168,7 +1169,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                       child: Container(
                                         width: 360.0,
                                         height: 50.0,
-                                        decoration: const BoxDecoration(
+                                        decoration: BoxDecoration(
                                           borderRadius: BorderRadius.only(
                                             bottomLeft: Radius.circular(0.0),
                                             bottomRight: Radius.circular(0.0),
@@ -1218,7 +1219,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                             ),
                                             if (_model.bTentarNovamente ?? true)
                                               Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     -1.0, 0.0),
                                                 child: FFButtonWidget(
                                                   onPressed: () async {
@@ -1226,7 +1227,7 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                       'unViewFormLogin',
                                                       extra: <String, dynamic>{
                                                         kTransitionInfoKey:
-                                                            const TransitionInfo(
+                                                            TransitionInfo(
                                                           hasTransition: true,
                                                           transitionType:
                                                               PageTransitionType
@@ -1242,11 +1243,11 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                     width: 120.0,
                                                     height: 40.0,
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                                 0.0, 0.0),
                                                     iconPadding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(0.0, 0.0,
                                                                 0.0, 0.0),
                                                     color: Colors.transparent,
@@ -1256,14 +1257,14 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                         .override(
                                                           fontFamily: 'Outfit',
                                                           color:
-                                                              const Color(0xFFFF8D00),
+                                                              Color(0xFFFF8D00),
                                                           fontSize: 10.0,
                                                           letterSpacing: 0.0,
                                                           fontWeight:
                                                               FontWeight.w300,
                                                         ),
                                                     elevation: 0.0,
-                                                    borderSide: const BorderSide(
+                                                    borderSide: BorderSide(
                                                       color: Color(0xFFFF8D00),
                                                       width: 1.0,
                                                     ),
@@ -1275,9 +1276,9 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                     'buttonOnPageLoadAnimation2']!),
                                               ),
                                           ]
-                                              .divide(const SizedBox(width: 10.0))
-                                              .addToStart(const SizedBox(width: 10.0))
-                                              .addToEnd(const SizedBox(width: 10.0)),
+                                              .divide(SizedBox(width: 10.0))
+                                              .addToStart(SizedBox(width: 10.0))
+                                              .addToEnd(SizedBox(width: 10.0)),
                                         ),
                                       ),
                                     ),
@@ -1298,10 +1299,10 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                       phone: false,
                     ))
                   Align(
-                    alignment: const AlignmentDirectional(1.0, -1.0),
+                    alignment: AlignmentDirectional(1.0, -1.0),
                     child: Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.end,

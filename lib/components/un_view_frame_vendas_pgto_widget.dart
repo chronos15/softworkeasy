@@ -7,6 +7,9 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'un_view_frame_vendas_pgto_model.dart';
 export 'un_view_frame_vendas_pgto_model.dart';
 
@@ -18,8 +21,8 @@ class UnViewFrameVendasPgtoWidget extends StatefulWidget {
     int? numeroAcumulado,
     required this.dateInicial,
     required this.dateFinal,
-  })  : totalAcumulado = totalAcumulado ?? 0.0,
-        numeroAcumulado = numeroAcumulado ?? 0;
+  })  : this.totalAcumulado = totalAcumulado ?? 0.0,
+        this.numeroAcumulado = numeroAcumulado ?? 0;
 
   final List<dynamic>? listJson;
   final double totalAcumulado;
@@ -65,11 +68,11 @@ class _UnViewFrameVendasPgtoWidgetState
       child: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: const BoxDecoration(),
+        decoration: BoxDecoration(),
         child: Stack(
           children: [
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
+              padding: EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -110,12 +113,12 @@ class _UnViewFrameVendasPgtoWidgetState
                                       subtitle: Text(
                                         '${dateTimeFormat(
                                           "dd/MM/yyyy",
-                                          widget.dateFinal,
+                                          widget!.dateFinal,
                                           locale: FFLocalizations.of(context)
                                               .languageCode,
                                         )} - ${dateTimeFormat(
                                           "dd/MM/yyyy",
-                                          widget.dateInicial,
+                                          widget!.dateInicial,
                                           locale: FFLocalizations.of(context)
                                               .languageCode,
                                         )}'
@@ -134,14 +137,14 @@ class _UnViewFrameVendasPgtoWidgetState
                                       ),
                                       dense: true,
                                       contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
+                                          EdgeInsetsDirectional.fromSTEB(
                                               10.0, 0.0, 0.0, 0.0),
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                            if ((widget.listJson!.isNotEmpty) &&
+                            if ((widget!.listJson!.length >= 1) &&
                                 responsiveVisibility(
                                   context: context,
                                   phone: false,
@@ -154,7 +157,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                   elevation: 0.0,
                                   child: Container(
                                     width: 100.0,
-                                    decoration: const BoxDecoration(),
+                                    decoration: BoxDecoration(),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.min,
                                       children: [
@@ -182,7 +185,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                                 valueOrDefault<String>(
                                                   functions.realFormat(
                                                       valueOrDefault<String>(
-                                                    widget.totalAcumulado
+                                                    widget!.totalAcumulado
                                                         .toString(),
                                                     '0',
                                                   )),
@@ -206,7 +209,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 0.0, 12.0, 0.0),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.max,
@@ -229,7 +232,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                               ),
                                               AutoSizeText(
                                                 valueOrDefault<String>(
-                                                  widget.numeroAcumulado
+                                                  widget!.numeroAcumulado
                                                       .toString(),
                                                   '0',
                                                 ),
@@ -249,14 +252,14 @@ class _UnViewFrameVendasPgtoWidgetState
                                             ],
                                           ),
                                         ),
-                                      ].divide(const SizedBox(width: 10.0)),
+                                      ].divide(SizedBox(width: 10.0)),
                                     ),
                                   ),
                                 ),
                               ),
-                          ].divide(const SizedBox(width: 10.0)),
+                          ].divide(SizedBox(width: 10.0)),
                         ),
-                        if ((widget.listJson!.isNotEmpty) &&
+                        if ((widget!.listJson!.length >= 1) &&
                             responsiveVisibility(
                               context: context,
                               tabletLandscape: false,
@@ -286,7 +289,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                       valueOrDefault<String>(
                                         functions
                                             .realFormat(valueOrDefault<String>(
-                                          widget.totalAcumulado.toString(),
+                                          widget!.totalAcumulado.toString(),
                                           '0',
                                         )),
                                         '0',
@@ -306,7 +309,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 12.0, 0.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
@@ -326,7 +329,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                     ),
                                     AutoSizeText(
                                       valueOrDefault<String>(
-                                        widget.numeroAcumulado.toString(),
+                                        widget!.numeroAcumulado.toString(),
                                         '0',
                                       ),
                                       maxLines: 1,
@@ -343,7 +346,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                   ],
                                 ),
                               ),
-                            ].divide(const SizedBox(width: 10.0)),
+                            ].divide(SizedBox(width: 10.0)),
                           ),
                         Expanded(
                           child: Row(
@@ -354,19 +357,19 @@ class _UnViewFrameVendasPgtoWidgetState
                                 child: Container(
                                   width: double.infinity,
                                   height: double.infinity,
-                                  decoration: const BoxDecoration(),
+                                  decoration: BoxDecoration(),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      if (widget.listJson!.isNotEmpty)
+                                      if (widget!.listJson!.length >= 1)
                                         Expanded(
                                           flex: 4,
                                           child: Builder(
                                             builder: (context) {
                                               final listVendedor =
-                                                  widget.listJson!.toList();
+                                                  widget!.listJson!.toList();
 
                                               return FlutterFlowDataTable<
                                                   dynamic>(
@@ -436,7 +439,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                                       softWrap: true,
                                                       child: Align(
                                                         alignment:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 0.0, 0.0),
                                                         child: AutoSizeText(
                                                           'N° Vendas',
@@ -470,7 +473,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                                       softWrap: true,
                                                       child: Align(
                                                         alignment:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 0.0, 0.0),
                                                         child: Text(
                                                           'Ticket Médio',
@@ -504,7 +507,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                                       softWrap: true,
                                                       child: Align(
                                                         alignment:
-                                                            const AlignmentDirectional(
+                                                            AlignmentDirectional(
                                                                 0.0, 0.0),
                                                         child: Text(
                                                           'Mix Produtos',
@@ -540,7 +543,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                                             onSelectChanged) =>
                                                         DataRow(
                                                   color:
-                                                      WidgetStateProperty.all(
+                                                      MaterialStateProperty.all(
                                                     listVendedorIndex % 2 == 0
                                                         ? FlutterFlowTheme.of(
                                                                 context)
@@ -553,7 +556,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                                     AlignedTooltip(
                                                       content: Padding(
                                                         padding:
-                                                            const EdgeInsets.all(4.0),
+                                                            EdgeInsets.all(4.0),
                                                         child: Text(
                                                           'Faturamento: ${valueOrDefault<String>(
                                                             functions.realFormat(
@@ -602,9 +605,9 @@ class _UnViewFrameVendasPgtoWidgetState
                                                       elevation: 4.0,
                                                       tailBaseWidth: 24.0,
                                                       tailLength: 12.0,
-                                                      waitDuration: const Duration(
+                                                      waitDuration: Duration(
                                                           milliseconds: 100),
-                                                      showDuration: const Duration(
+                                                      showDuration: Duration(
                                                           milliseconds: 1500),
                                                       triggerMode:
                                                           TooltipTriggerMode
@@ -633,7 +636,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                                                   .circular(
                                                                       50.0),
                                                         ),
-                                                        child: const Padding(
+                                                        child: Padding(
                                                           padding:
                                                               EdgeInsets.all(
                                                                   7.0),
@@ -718,14 +721,14 @@ class _UnViewFrameVendasPgtoWidgetState
                                                               ),
                                                         ),
                                                       ]
-                                                          .addToStart(const SizedBox(
+                                                          .addToStart(SizedBox(
                                                               height: 5.0))
-                                                          .addToEnd(const SizedBox(
+                                                          .addToEnd(SizedBox(
                                                               height: 5.0)),
                                                     ),
                                                     Align(
                                                       alignment:
-                                                          const AlignmentDirectional(
+                                                          AlignmentDirectional(
                                                               0.0, 0.0),
                                                       child: AutoSizeText(
                                                         valueOrDefault<String>(
@@ -760,7 +763,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                                     ),
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   5.0,
@@ -782,7 +785,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                                           height: 30.0,
                                                           decoration:
                                                               BoxDecoration(
-                                                            color: const Color(
+                                                            color: Color(
                                                                 0x194B39EF),
                                                             borderRadius:
                                                                 BorderRadius
@@ -791,11 +794,11 @@ class _UnViewFrameVendasPgtoWidgetState
                                                           ),
                                                           child: Align(
                                                             alignment:
-                                                                const AlignmentDirectional(
+                                                                AlignmentDirectional(
                                                                     0.0, 0.0),
                                                             child: Padding(
                                                               padding:
-                                                                  const EdgeInsets
+                                                                  EdgeInsets
                                                                       .all(5.0),
                                                               child:
                                                                   AutoSizeText(
@@ -841,7 +844,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                                     ),
                                                     Align(
                                                       alignment:
-                                                          const AlignmentDirectional(
+                                                          AlignmentDirectional(
                                                               0.0, 0.0),
                                                       child: AutoSizeText(
                                                         valueOrDefault<String>(
@@ -860,7 +863,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                                             .override(
                                                               fontFamily:
                                                                   'Urbanist',
-                                                              color: const Color(
+                                                              color: Color(
                                                                   0xFF00A13C),
                                                               fontSize: 12.0,
                                                               letterSpacing:
@@ -892,7 +895,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                             },
                                           ),
                                         ),
-                                      if ((widget.listJson!.isNotEmpty) &&
+                                      if ((widget!.listJson!.length >= 1) &&
                                           responsiveVisibility(
                                             context: context,
                                             tabletLandscape: false,
@@ -908,9 +911,9 @@ class _UnViewFrameVendasPgtoWidgetState
                                               Expanded(
                                                 child: Align(
                                                   alignment:
-                                                      const AlignmentDirectional(
+                                                      AlignmentDirectional(
                                                           0.0, 0.0),
-                                                  child: SizedBox(
+                                                  child: Container(
                                                     width: double.infinity,
                                                     height: double.infinity,
                                                     child: custom_widgets
@@ -919,7 +922,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                                       height: double.infinity,
                                                       sTitulo: '',
                                                       bLegendsVisible: false,
-                                                      sListXValue: widget
+                                                      sListXValue: widget!
                                                           .listJson!
                                                           .map((e) =>
                                                               getJsonField(
@@ -931,7 +934,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                                               e.toString())
                                                           .toList(),
                                                       vListYValue: functions
-                                                          .valuesJsonToDoubleList(widget
+                                                          .valuesJsonToDoubleList(widget!
                                                               .listJson
                                                               ?.map((e) =>
                                                                   getJsonField(
@@ -939,10 +942,10 @@ class _UnViewFrameVendasPgtoWidgetState
                                                                     r'''$..total''',
                                                                   ))
                                                               .toList()
-                                                              .map((e) =>
+                                                              ?.map((e) =>
                                                                   e.toString())
                                                               .toList()
-                                                              .toList())!,
+                                                              ?.toList())!,
                                                       colorslist: FFAppConstants
                                                           .colorsArrayCondPag,
                                                     ),
@@ -956,7 +959,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                   ),
                                 ),
                               ),
-                              if ((widget.listJson!.isNotEmpty) &&
+                              if ((widget!.listJson!.length >= 1) &&
                                   responsiveVisibility(
                                     context: context,
                                     phone: false,
@@ -971,8 +974,8 @@ class _UnViewFrameVendasPgtoWidgetState
                                       Expanded(
                                         child: Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, 0.0),
-                                          child: SizedBox(
+                                              AlignmentDirectional(0.0, 0.0),
+                                          child: Container(
                                             width: double.infinity,
                                             height: double.infinity,
                                             child:
@@ -981,7 +984,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                               height: double.infinity,
                                               sTitulo: '',
                                               bLegendsVisible: false,
-                                              sListXValue: widget.listJson!
+                                              sListXValue: widget!.listJson!
                                                   .map((e) => getJsonField(
                                                         e,
                                                         r'''$..tipo_venda''',
@@ -991,17 +994,17 @@ class _UnViewFrameVendasPgtoWidgetState
                                                   .toList(),
                                               vListYValue: functions
                                                   .valuesJsonToDoubleList(
-                                                      widget.listJson
+                                                      widget!.listJson
                                                           ?.map((e) =>
                                                               getJsonField(
                                                                 e,
                                                                 r'''$..total''',
                                                               ))
                                                           .toList()
-                                                          .map((e) =>
+                                                          ?.map((e) =>
                                                               e.toString())
                                                           .toList()
-                                                          .toList())!,
+                                                          ?.toList())!,
                                               colorslist: FFAppConstants
                                                   .colorsArrayCondPag,
                                             ),
@@ -1020,20 +1023,20 @@ class _UnViewFrameVendasPgtoWidgetState
                 ],
               ),
             ),
-            if (widget.listJson!.isEmpty)
+            if (widget!.listJson!.length <= 0)
               Align(
-                alignment: const AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 110.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 110.0, 0.0, 0.0),
                   child: Container(
                     width: double.infinity,
                     height: double.infinity,
-                    decoration: const BoxDecoration(),
+                    decoration: BoxDecoration(),
                     child: wrapWithModel(
                       model: _model.unViewFrameVazioModel,
                       updateCallback: () => safeSetState(() {}),
                       updateOnChange: true,
-                      child: const UnViewFrameVazioWidget(
+                      child: UnViewFrameVazioWidget(
                         sTitulo: 'Lista Vazia',
                         sMessage: 'Não existem dados nesse período',
                       ),

@@ -3,6 +3,9 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'un_view_frame_card_menu_model.dart';
 export 'un_view_frame_card_menu_model.dart';
 
@@ -70,7 +73,7 @@ class _UnViewFrameCardMenuWidgetState extends State<UnViewFrameCardMenuWidget> {
         height: double.infinity,
         decoration: BoxDecoration(
           color: valueOrDefault<Color>(
-            widget.colorBase,
+            widget!.colorBase,
             FlutterFlowTheme.of(context).primary,
           ),
           borderRadius: BorderRadius.circular(16.0),
@@ -78,13 +81,13 @@ class _UnViewFrameCardMenuWidgetState extends State<UnViewFrameCardMenuWidget> {
         child: Stack(
           children: [
             Align(
-              alignment: const AlignmentDirectional(1.0, 1.0),
+              alignment: AlignmentDirectional(1.0, 1.0),
               child: Container(
                 width: 75.0,
                 height: 75.0,
                 decoration: BoxDecoration(
-                  color: widget.colorSubIcon,
-                  borderRadius: const BorderRadius.only(
+                  color: widget!.colorSubIcon,
+                  borderRadius: BorderRadius.only(
                     bottomLeft: Radius.circular(0.0),
                     bottomRight: Radius.circular(16.0),
                     topLeft: Radius.circular(150.0),
@@ -99,14 +102,14 @@ class _UnViewFrameCardMenuWidgetState extends State<UnViewFrameCardMenuWidget> {
                 Expanded(
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 0.0, 10.0),
                           child: Row(
                             mainAxisSize: MainAxisSize.max,
@@ -117,9 +120,9 @@ class _UnViewFrameCardMenuWidgetState extends State<UnViewFrameCardMenuWidget> {
                                 children: [
                                   AlignedTooltip(
                                     content: Padding(
-                                      padding: const EdgeInsets.all(10.0),
+                                      padding: EdgeInsets.all(10.0),
                                       child: Text(
-                                        widget.sToolTipMessage!,
+                                        widget!.sToolTipMessage!,
                                         style: FlutterFlowTheme.of(context)
                                             .bodyLarge
                                             .override(
@@ -135,17 +138,17 @@ class _UnViewFrameCardMenuWidgetState extends State<UnViewFrameCardMenuWidget> {
                                     offset: 4.0,
                                     preferredDirection: AxisDirection.down,
                                     borderRadius: BorderRadius.circular(8.0),
-                                    backgroundColor: const Color(0xFFFF8800),
+                                    backgroundColor: Color(0xFFFF8800),
                                     elevation: 4.0,
                                     tailBaseWidth: 20.0,
                                     tailLength: 16.0,
-                                    waitDuration: const Duration(milliseconds: 100),
-                                    showDuration: const Duration(milliseconds: 3000),
+                                    waitDuration: Duration(milliseconds: 100),
+                                    showDuration: Duration(milliseconds: 3000),
                                     triggerMode: TooltipTriggerMode.tap,
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,
                                       color: valueOrDefault<Color>(
-                                        widget.colorSubIcon,
+                                        widget!.colorSubIcon,
                                         FlutterFlowTheme.of(context).accent1,
                                       ),
                                       elevation: 0.0,
@@ -154,8 +157,8 @@ class _UnViewFrameCardMenuWidgetState extends State<UnViewFrameCardMenuWidget> {
                                             BorderRadius.circular(8.0),
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(10.0),
-                                        child: widget.icon!,
+                                        padding: EdgeInsets.all(10.0),
+                                        child: widget!.icon!,
                                       ),
                                     ),
                                   ),
@@ -164,14 +167,14 @@ class _UnViewFrameCardMenuWidgetState extends State<UnViewFrameCardMenuWidget> {
                                     children: [
                                       Container(
                                         decoration: BoxDecoration(
-                                          color: widget.colorSubIcon,
+                                          color: widget!.colorSubIcon,
                                           borderRadius:
                                               BorderRadius.circular(100.0),
                                           shape: BoxShape.rectangle,
                                         ),
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   10.0, 0.0, 10.0, 0.0),
                                           child: AutoSizeText(
                                             '+ 15%',
@@ -192,7 +195,7 @@ class _UnViewFrameCardMenuWidgetState extends State<UnViewFrameCardMenuWidget> {
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .secondaryText,
-                                                  offset: const Offset(1.0, 1.0),
+                                                  offset: Offset(1.0, 1.0),
                                                   blurRadius: 0.5,
                                                 )
                                               ],
@@ -202,7 +205,7 @@ class _UnViewFrameCardMenuWidgetState extends State<UnViewFrameCardMenuWidget> {
                                       ),
                                     ],
                                   ),
-                                ].divide(const SizedBox(height: 10.0)),
+                                ].divide(SizedBox(height: 10.0)),
                               ),
                               Expanded(
                                 child: Column(
@@ -212,7 +215,7 @@ class _UnViewFrameCardMenuWidgetState extends State<UnViewFrameCardMenuWidget> {
                                   children: [
                                     AutoSizeText(
                                       valueOrDefault<String>(
-                                        widget.sTitulo,
+                                        widget!.sTitulo,
                                         'Menu',
                                       ),
                                       maxLines: 1,
@@ -220,7 +223,7 @@ class _UnViewFrameCardMenuWidgetState extends State<UnViewFrameCardMenuWidget> {
                                           .titleSmall
                                           .override(
                                             fontFamily: 'Outfit',
-                                            color: widget.colorText,
+                                            color: widget!.colorText,
                                             fontSize: 26.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w300,
@@ -228,7 +231,7 @@ class _UnViewFrameCardMenuWidgetState extends State<UnViewFrameCardMenuWidget> {
                                     ),
                                     AutoSizeText(
                                       valueOrDefault<String>(
-                                        widget.sSubtitulo,
+                                        widget!.sSubtitulo,
                                         '--',
                                       ),
                                       maxLines: 1,
@@ -237,7 +240,7 @@ class _UnViewFrameCardMenuWidgetState extends State<UnViewFrameCardMenuWidget> {
                                           .titleSmall
                                           .override(
                                             fontFamily: 'Outfit',
-                                            color: widget.colorText,
+                                            color: widget!.colorText,
                                             fontSize: 16.0,
                                             letterSpacing: 0.0,
                                             fontWeight: FontWeight.w300,
@@ -246,17 +249,17 @@ class _UnViewFrameCardMenuWidgetState extends State<UnViewFrameCardMenuWidget> {
                                   ],
                                 ),
                               ),
-                            ].divide(const SizedBox(width: 10.0)),
+                            ].divide(SizedBox(width: 10.0)),
                           ),
                         ),
                       ]
-                          .divide(const SizedBox(height: 5.0))
-                          .addToStart(const SizedBox(height: 10.0))
-                          .addToEnd(const SizedBox(height: 5.0)),
+                          .divide(SizedBox(height: 5.0))
+                          .addToStart(SizedBox(height: 10.0))
+                          .addToEnd(SizedBox(height: 5.0)),
                     ),
                   ),
                 ),
-              ].divide(const SizedBox(height: 5.0)),
+              ].divide(SizedBox(height: 5.0)),
             ),
           ],
         ),

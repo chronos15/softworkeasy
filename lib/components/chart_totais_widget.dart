@@ -1,9 +1,14 @@
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'chart_totais_model.dart';
 export 'chart_totais_model.dart';
 
@@ -16,8 +21,8 @@ class ChartTotaisWidget extends StatefulWidget {
     required this.titAnterior,
     double? percentDifAtual,
     bool? isCompareted,
-  })  : percentDifAtual = percentDifAtual ?? 0.0,
-        isCompareted = isCompareted ?? true;
+  })  : this.percentDifAtual = percentDifAtual ?? 0.0,
+        this.isCompareted = isCompareted ?? true;
 
   final String? valueAtual;
   final String? valueAnterior;
@@ -75,27 +80,27 @@ class _ChartTotaisWidgetState extends State<ChartTotaisWidget>
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: const AlignmentDirectional(-1.0, 0.0),
+      alignment: AlignmentDirectional(-1.0, 0.0),
       children: [
         Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+          padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 10.0, 0.0),
                   child: Container(
                     width: 150.0,
-                    decoration: const BoxDecoration(),
+                    decoration: BoxDecoration(),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         AutoSizeText(
                           valueOrDefault<String>(
-                            widget.titAtual,
+                            widget!.titAtual,
                             '--',
                           ),
                           maxLines: 1,
@@ -112,7 +117,7 @@ class _ChartTotaisWidgetState extends State<ChartTotaisWidget>
                         ),
                         AutoSizeText(
                           valueOrDefault<String>(
-                            widget.valueAtual,
+                            widget!.valueAtual,
                             '0',
                           ),
                           maxLines: 1,
@@ -132,17 +137,17 @@ class _ChartTotaisWidgetState extends State<ChartTotaisWidget>
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 30.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 30.0, 0.0),
                   child: Container(
                     width: 150.0,
-                    decoration: const BoxDecoration(),
+                    decoration: BoxDecoration(),
                     child: Column(
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         AutoSizeText(
                           valueOrDefault<String>(
-                            widget.titAnterior,
+                            widget!.titAnterior,
                             '--',
                           ),
                           maxLines: 1,
@@ -159,7 +164,7 @@ class _ChartTotaisWidgetState extends State<ChartTotaisWidget>
                         ),
                         AutoSizeText(
                           valueOrDefault<String>(
-                            widget.valueAnterior,
+                            widget!.valueAnterior,
                             '0',
                           ),
                           maxLines: 1,
@@ -177,17 +182,17 @@ class _ChartTotaisWidgetState extends State<ChartTotaisWidget>
                   ),
                 ),
               ),
-            ].divide(const SizedBox(width: 10.0)).addToStart(const SizedBox(width: 0.0)),
+            ].divide(SizedBox(width: 10.0)).addToStart(SizedBox(width: 0.0)),
           ),
         ),
-        if (widget.isCompareted &&
+        if (widget!.isCompareted &&
             responsiveVisibility(
               context: context,
               phone: false,
               tablet: false,
             ))
           Align(
-            alignment: const AlignmentDirectional(-0.75, 0.0),
+            alignment: AlignmentDirectional(-0.75, 0.0),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -197,7 +202,7 @@ class _ChartTotaisWidgetState extends State<ChartTotaisWidget>
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 0.0, 0.0),
                       child: Material(
                         color: Colors.transparent,
                         elevation: 0.0,
@@ -212,7 +217,7 @@ class _ChartTotaisWidgetState extends State<ChartTotaisWidget>
                                 FlutterFlowTheme.of(context).primaryBackground,
                             borderRadius: BorderRadius.circular(500.0),
                             border: Border.all(
-                              color: const Color(0x4A57636C),
+                              color: Color(0x4A57636C),
                             ),
                           ),
                           child: Row(
@@ -222,7 +227,7 @@ class _ChartTotaisWidgetState extends State<ChartTotaisWidget>
                               AutoSizeText(
                                 '${valueOrDefault<String>(
                                   formatNumber(
-                                    widget.percentDifAtual,
+                                    widget!.percentDifAtual,
                                     formatType: FormatType.custom,
                                     format: '##.##',
                                     locale: 'pt_br',
@@ -241,29 +246,29 @@ class _ChartTotaisWidgetState extends State<ChartTotaisWidget>
                                       fontWeight: FontWeight.w300,
                                     ),
                               ),
-                              if (widget.percentDifAtual < 0.0)
+                              if (widget!.percentDifAtual < 0.0)
                                 Icon(
                                   Icons.trending_down_rounded,
                                   color: FlutterFlowTheme.of(context).error,
                                   size: 17.0,
                                 ),
-                              if (widget.percentDifAtual >= 0.0)
+                              if (widget!.percentDifAtual >= 0.0)
                                 Icon(
                                   Icons.trending_up_sharp,
                                   color: FlutterFlowTheme.of(context).success,
                                   size: 17.0,
                                 ),
                             ]
-                                .divide(const SizedBox(width: 2.0))
-                                .addToStart(const SizedBox(width: 10.0))
-                                .addToEnd(const SizedBox(width: 5.0)),
+                                .divide(SizedBox(width: 2.0))
+                                .addToStart(SizedBox(width: 10.0))
+                                .addToEnd(SizedBox(width: 5.0)),
                           ),
                         ),
                       ),
                     ),
                   ],
                 ),
-              ].divide(const SizedBox(width: 5.0)),
+              ].divide(SizedBox(width: 5.0)),
             ),
           ),
       ],

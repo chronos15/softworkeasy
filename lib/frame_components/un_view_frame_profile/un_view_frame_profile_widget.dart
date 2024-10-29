@@ -6,10 +6,14 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/frame_components/un_view_frame_empresa/un_view_frame_empresa_widget.dart';
+import 'dart:math';
 import '/custom_code/actions/index.dart' as actions;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'un_view_frame_profile_model.dart';
 export 'un_view_frame_profile_model.dart';
@@ -105,8 +109,8 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 300.0.ms,
-            begin: const Offset(-40.0, 0.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(-40.0, 0.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -117,7 +121,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
             curve: Curves.easeInOut,
             delay: 230.0.ms,
             duration: 600.0.ms,
-            color: const Color(0xFFF28080),
+            color: Color(0xFFF28080),
             begin: 1.0,
             end: 0.0,
           ),
@@ -148,7 +152,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
     return Container(
       width: double.infinity,
       height: double.infinity,
-      decoration: const BoxDecoration(),
+      decoration: BoxDecoration(),
       child: SingleChildScrollView(
         primary: false,
         child: Column(
@@ -163,7 +167,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                   desktop: false,
                 ))
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 0.0, 0.0),
                 child: Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -226,7 +230,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                 ),
               ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
+              padding: EdgeInsetsDirectional.fromSTEB(0.0, 16.0, 0.0, 16.0),
               child: Container(
                 width: 75.0,
                 height: 75.0,
@@ -235,7 +239,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                   borderRadius: BorderRadius.circular(16.0),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(4.0),
+                  padding: EdgeInsets.all(4.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -293,7 +297,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                       ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                   child: Text(
                     valueOrDefault<String>(
                       currentUserData?.funcao,
@@ -311,7 +315,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
               ],
             ),
             ListView(
-              padding: const EdgeInsets.fromLTRB(
+              padding: EdgeInsets.fromLTRB(
                 0,
                 12.0,
                 0,
@@ -322,7 +326,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
               scrollDirection: Axis.vertical,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                   child: Material(
                     color: Colors.transparent,
                     elevation: 0.0,
@@ -336,7 +340,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: EdgeInsets.all(12.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -347,7 +351,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                             ),
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     12.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   'Editar Perfil',
@@ -364,7 +368,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                               ),
                             ),
                             Align(
-                              alignment: const AlignmentDirectional(0.9, 0.0),
+                              alignment: AlignmentDirectional(0.9, 0.0),
                               child: Icon(
                                 Icons.arrow_forward_ios,
                                 color: FlutterFlowTheme.of(context).primary,
@@ -381,7 +385,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                 Builder(
                   builder: (context) => Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -400,9 +404,9 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                               elevation: 0,
                               insetPadding: EdgeInsets.zero,
                               backgroundColor: Colors.transparent,
-                              alignment: const AlignmentDirectional(0.0, 0.0)
+                              alignment: AlignmentDirectional(0.0, 0.0)
                                   .resolve(Directionality.of(context)),
-                              child: SizedBox(
+                              child: Container(
                                 height: MediaQuery.sizeOf(context).height * 0.9,
                                 width: MediaQuery.sizeOf(context).width * 0.9,
                                 child: UnViewFrameEmpresaWidget(
@@ -428,7 +432,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                             borderRadius: BorderRadius.circular(8.0),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.all(12.0),
+                            padding: EdgeInsets.all(12.0),
                             child: Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
@@ -439,7 +443,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                                 ),
                                 Expanded(
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         12.0, 0.0, 0.0, 0.0),
                                     child: Text(
                                       'Empresa',
@@ -456,7 +460,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                                   ),
                                 ),
                                 Align(
-                                  alignment: const AlignmentDirectional(0.9, 0.0),
+                                  alignment: AlignmentDirectional(0.9, 0.0),
                                   child: Icon(
                                     Icons.arrow_forward_ios,
                                     color: FlutterFlowTheme.of(context).primary,
@@ -473,7 +477,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(24.0, 16.0, 0.0, 0.0),
                   child: Text(
                     'Configurações do App',
                     style: FlutterFlowTheme.of(context).labelMedium.override(
@@ -486,7 +490,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                 ),
                 Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                      EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
                   child: Material(
                     color: Colors.transparent,
                     elevation: 0.0,
@@ -499,9 +503,9 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
-                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       child: Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: EdgeInsets.all(12.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -512,7 +516,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                             ),
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     12.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   'Suporte',
@@ -529,7 +533,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                               ),
                             ),
                             Align(
-                              alignment: const AlignmentDirectional(0.9, 0.0),
+                              alignment: AlignmentDirectional(0.9, 0.0),
                               child: Icon(
                                 Icons.arrow_forward_ios,
                                 color: FlutterFlowTheme.of(context).primary,
@@ -545,7 +549,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                 ),
                 Padding(
                   padding:
-                      const EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
+                      EdgeInsetsDirectional.fromSTEB(16.0, 12.0, 16.0, 0.0),
                   child: Material(
                     color: Colors.transparent,
                     elevation: 0.0,
@@ -558,9 +562,9 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.0),
                       ),
-                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       child: Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: EdgeInsets.all(12.0),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -571,7 +575,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                             ),
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     12.0, 0.0, 0.0, 0.0),
                                 child: Text(
                                   'Termos de Serviço',
@@ -588,7 +592,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                               ),
                             ),
                             Align(
-                              alignment: const AlignmentDirectional(0.9, 0.0),
+                              alignment: AlignmentDirectional(0.9, 0.0),
                               child: Icon(
                                 Icons.arrow_forward_ios,
                                 color: FlutterFlowTheme.of(context).primary,
@@ -603,10 +607,10 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                       animationsMap['containerOnPageLoadAnimation4']!),
                 ),
                 Align(
-                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(24.0, 10.0, 12.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(24.0, 10.0, 12.0, 0.0),
                     child: InkWell(
                       splashColor: Colors.transparent,
                       focusColor: Colors.transparent,
@@ -652,14 +656,14 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                           ),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(2.0),
+                          padding: EdgeInsets.all(2.0),
                           child: Stack(
-                            alignment: const AlignmentDirectional(0.0, 0.0),
+                            alignment: AlignmentDirectional(0.0, 0.0),
                             children: [
                               Align(
-                                alignment: const AlignmentDirectional(-0.9, 0.0),
+                                alignment: AlignmentDirectional(-0.9, 0.0),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       6.0, 0.0, 0.0, 0.0),
                                   child: Icon(
                                     Icons.wb_sunny_rounded,
@@ -670,9 +674,9 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                                 ),
                               ),
                               Align(
-                                alignment: const AlignmentDirectional(1.0, 0.0),
+                                alignment: AlignmentDirectional(1.0, 0.0),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 0.0, 6.0, 0.0),
                                   child: Icon(
                                     Icons.mode_night_rounded,
@@ -683,7 +687,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                                 ),
                               ),
                               Align(
-                                alignment: const AlignmentDirectional(1.0, 0.0),
+                                alignment: AlignmentDirectional(1.0, 0.0),
                                 child: Material(
                                   color: Colors.transparent,
                                   elevation: 1.0,
@@ -696,7 +700,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                                     decoration: BoxDecoration(
                                       color: FlutterFlowTheme.of(context)
                                           .primaryBackground,
-                                      boxShadow: const [
+                                      boxShadow: [
                                         BoxShadow(
                                           blurRadius: 4.0,
                                           color: Color(0x430B0D0F),
@@ -723,7 +727,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 35.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 35.0, 0.0, 0.0),
                   child: Text(
                     valueOrDefault<String>(
                       _model.sVersionReturned,
@@ -740,10 +744,10 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                   ),
                 ),
                 Align(
-                  alignment: const AlignmentDirectional(0.0, 0.0),
+                  alignment: AlignmentDirectional(0.0, 0.0),
                   child: Padding(
                     padding:
-                        const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                        EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () async {
                         FFAppState().modalUserMenu =
@@ -760,9 +764,9 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                         width: 100.0,
                         height: 35.0,
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: Colors.transparent,
                         textStyle:
                             FlutterFlowTheme.of(context).labelLarge.override(
@@ -784,7 +788,7 @@ class _UnViewFrameProfileWidgetState extends State<UnViewFrameProfileWidget>
                 ),
               ],
             ),
-          ].addToEnd(const SizedBox(height: 50.0)),
+          ].addToEnd(SizedBox(height: 50.0)),
         ),
       ),
     );

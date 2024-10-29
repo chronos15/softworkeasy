@@ -2,6 +2,9 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'un_view_frame_card_hor_model.dart';
 export 'un_view_frame_card_hor_model.dart';
 
@@ -54,7 +57,7 @@ class _UnViewFrameCardHorWidgetState extends State<UnViewFrameCardHorWidget> {
       width: double.infinity,
       height: double.infinity,
       decoration: BoxDecoration(
-        color: widget.colorGrad01,
+        color: widget!.colorGrad01,
         borderRadius: BorderRadius.circular(5.0),
       ),
       child: Column(
@@ -66,11 +69,11 @@ class _UnViewFrameCardHorWidgetState extends State<UnViewFrameCardHorWidget> {
             child: Row(
               mainAxisSize: MainAxisSize.max,
               children: [
-                widget.icon!,
+                widget!.icon!,
                 Expanded(
                   child: AutoSizeText(
                     valueOrDefault<String>(
-                      widget.sTitulo,
+                      widget!.sTitulo,
                       'Menu',
                     ).maybeHandleOverflow(
                       maxChars: 12,
@@ -93,9 +96,9 @@ class _UnViewFrameCardHorWidgetState extends State<UnViewFrameCardHorWidget> {
                   size: 25.0,
                 ),
               ]
-                  .divide(const SizedBox(width: 5.0))
-                  .addToStart(const SizedBox(width: 10.0))
-                  .addToEnd(const SizedBox(width: 10.0)),
+                  .divide(SizedBox(width: 5.0))
+                  .addToStart(SizedBox(width: 10.0))
+                  .addToEnd(SizedBox(width: 10.0)),
             ),
           ),
         ],

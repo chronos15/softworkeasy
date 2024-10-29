@@ -1,7 +1,11 @@
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'un_view_frame_card_produto_model.dart';
 export 'un_view_frame_card_produto_model.dart';
 
@@ -74,7 +78,7 @@ class _UnViewFrameCardProdutoWidgetState
               ),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -90,7 +94,7 @@ class _UnViewFrameCardProdutoWidgetState
               ),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -107,7 +111,7 @@ class _UnViewFrameCardProdutoWidgetState
               ),
             ),
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(12.0, 5.0, 12.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(12.0, 5.0, 12.0, 0.0),
               child: Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -128,11 +132,11 @@ class _UnViewFrameCardProdutoWidgetState
                                   fontWeight: FontWeight.bold,
                                 ),
                           ),
-                          const TextSpan(
+                          TextSpan(
                             text: ' ',
                             style: TextStyle(),
                           ),
-                          const TextSpan(
+                          TextSpan(
                             text: '99,99',
                             style: TextStyle(),
                           )
@@ -158,10 +162,10 @@ class _UnViewFrameCardProdutoWidgetState
                       ),
                       options: FFButtonOptions(
                         height: 40.0,
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             24.0, 0.0, 24.0, 0.0),
                         iconPadding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 0.0),
                         color: FlutterFlowTheme.of(context).primary,
                         textStyle:
                             FlutterFlowTheme.of(context).titleSmall.override(
@@ -171,7 +175,7 @@ class _UnViewFrameCardProdutoWidgetState
                                   fontWeight: FontWeight.w300,
                                 ),
                         elevation: 0.0,
-                        borderSide: const BorderSide(
+                        borderSide: BorderSide(
                           color: Colors.transparent,
                           width: 1.0,
                         ),
@@ -179,10 +183,10 @@ class _UnViewFrameCardProdutoWidgetState
                       ),
                     ),
                   ),
-                ].divide(const SizedBox(width: 5.0)),
+                ].divide(SizedBox(width: 5.0)),
               ),
             ),
-          ].divide(const SizedBox(height: 5.0)).addToEnd(const SizedBox(height: 12.0)),
+          ].divide(SizedBox(height: 5.0)).addToEnd(SizedBox(height: 12.0)),
         ),
       ),
     );

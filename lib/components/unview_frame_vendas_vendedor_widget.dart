@@ -5,7 +5,10 @@ import '/frame_components/un_view_frame_vazio/un_view_frame_vazio_widget.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import 'package:provider/provider.dart';
 import 'unview_frame_vendas_vendedor_model.dart';
 export 'unview_frame_vendas_vendedor_model.dart';
 
@@ -61,7 +64,7 @@ class _UnviewFrameVendasVendedorWidgetState
       width: double.infinity,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondaryBackground,
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
             blurRadius: 7.0,
             color: Color(0x2F1D2429),
@@ -74,7 +77,7 @@ class _UnviewFrameVendasVendedorWidgetState
         borderRadius: BorderRadius.circular(8.0),
       ),
       child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
+        padding: EdgeInsetsDirectional.fromSTEB(5.0, 5.0, 5.0, 5.0),
         child: Row(
           mainAxisSize: MainAxisSize.max,
           mainAxisAlignment: MainAxisAlignment.start,
@@ -115,12 +118,12 @@ class _UnviewFrameVendasVendedorWidgetState
                                 subtitle: Text(
                                   '${dateTimeFormat(
                                     "dd/MM/yyyy",
-                                    widget.dateFinal,
+                                    widget!.dateFinal,
                                     locale: FFLocalizations.of(context)
                                         .languageCode,
                                   )} - ${dateTimeFormat(
                                     "dd/MM/yyyy",
-                                    widget.dateInicial,
+                                    widget!.dateInicial,
                                     locale: FFLocalizations.of(context)
                                         .languageCode,
                                   )}'
@@ -138,9 +141,9 @@ class _UnviewFrameVendasVendedorWidgetState
                                       ),
                                 ),
                                 dense: true,
-                                contentPadding: const EdgeInsetsDirectional.fromSTEB(
+                                contentPadding: EdgeInsetsDirectional.fromSTEB(
                                     10.0, 0.0, 0.0, 0.0),
-                                shape: const RoundedRectangleBorder(
+                                shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.only(
                                     bottomLeft: Radius.circular(0.0),
                                     bottomRight: Radius.circular(0.0),
@@ -153,7 +156,7 @@ class _UnviewFrameVendasVendedorWidgetState
                           ],
                         ),
                       ),
-                      if ((widget.valueJson!.isNotEmpty) &&
+                      if ((widget!.valueJson!.length >= 1) &&
                           responsiveVisibility(
                             context: context,
                             phone: false,
@@ -166,7 +169,7 @@ class _UnviewFrameVendasVendedorWidgetState
                             elevation: 0.0,
                             child: Container(
                               width: 100.0,
-                              decoration: const BoxDecoration(),
+                              decoration: BoxDecoration(),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 children: [
@@ -193,7 +196,7 @@ class _UnviewFrameVendasVendedorWidgetState
                                           valueOrDefault<String>(
                                             functions.realFormat(
                                                 valueOrDefault<String>(
-                                              widget.totalAcumulado
+                                              widget!.totalAcumulado
                                                   ?.toString(),
                                               '0',
                                             )),
@@ -215,7 +218,7 @@ class _UnviewFrameVendasVendedorWidgetState
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 12.0, 0.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
@@ -236,7 +239,7 @@ class _UnviewFrameVendasVendedorWidgetState
                                         ),
                                         AutoSizeText(
                                           valueOrDefault<String>(
-                                            widget.numeroAcumulado?.toString(),
+                                            widget!.numeroAcumulado?.toString(),
                                             '0',
                                           ),
                                           maxLines: 1,
@@ -254,14 +257,14 @@ class _UnviewFrameVendasVendedorWidgetState
                                       ],
                                     ),
                                   ),
-                                ].divide(const SizedBox(width: 10.0)),
+                                ].divide(SizedBox(width: 10.0)),
                               ),
                             ),
                           ),
                         ),
-                    ].divide(const SizedBox(width: 10.0)),
+                    ].divide(SizedBox(width: 10.0)),
                   ),
-                  if ((widget.valueJson!.isNotEmpty) &&
+                  if ((widget!.valueJson!.length >= 1) &&
                       responsiveVisibility(
                         context: context,
                         tabletLandscape: false,
@@ -290,7 +293,7 @@ class _UnviewFrameVendasVendedorWidgetState
                               AutoSizeText(
                                 valueOrDefault<String>(
                                   functions.realFormat(valueOrDefault<String>(
-                                    widget.totalAcumulado?.toString(),
+                                    widget!.totalAcumulado?.toString(),
                                     '0',
                                   )),
                                   '0',
@@ -310,7 +313,7 @@ class _UnviewFrameVendasVendedorWidgetState
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 12.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -330,7 +333,7 @@ class _UnviewFrameVendasVendedorWidgetState
                               ),
                               AutoSizeText(
                                 valueOrDefault<String>(
-                                  widget.numeroAcumulado?.toString(),
+                                  widget!.numeroAcumulado?.toString(),
                                   '0',
                                 ),
                                 maxLines: 1,
@@ -347,15 +350,15 @@ class _UnviewFrameVendasVendedorWidgetState
                             ],
                           ),
                         ),
-                      ].divide(const SizedBox(width: 10.0)),
+                      ].divide(SizedBox(width: 10.0)),
                     ),
                   Expanded(
                     child: Builder(
                       builder: (context) {
-                        final listVendedor = widget.valueJson!.toList();
+                        final listVendedor = widget!.valueJson!.toList();
                         if (listVendedor.isEmpty) {
-                          return const Center(
-                            child: SizedBox(
+                          return Center(
+                            child: Container(
                               width: double.infinity,
                               height: double.infinity,
                               child: UnViewFrameVazioWidget(
@@ -469,7 +472,7 @@ class _UnviewFrameVendasVendedorWidgetState
                           dataRowBuilder: (listVendedorItem, listVendedorIndex,
                                   selected, onSelectChanged) =>
                               DataRow(
-                            color: WidgetStateProperty.all(
+                            color: MaterialStateProperty.all(
                               listVendedorIndex % 2 == 0
                                   ? FlutterFlowTheme.of(context)
                                       .secondaryBackground
@@ -501,7 +504,7 @@ class _UnviewFrameVendasVendedorWidgetState
                                           ),
                                     ),
                                   ),
-                                ].divide(const SizedBox(width: 3.0)),
+                                ].divide(SizedBox(width: 3.0)),
                               ),
                               Column(
                                 mainAxisSize: MainAxisSize.max,
@@ -525,7 +528,7 @@ class _UnviewFrameVendasVendedorWidgetState
                                                       100) /
                                                   valueOrDefault<double>(
                                                     getJsonField(
-                                                      widget.valueJson?.first,
+                                                      widget!.valueJson?.first,
                                                       r'''$..total''',
                                                     ),
                                                     0.0,
@@ -545,7 +548,7 @@ class _UnviewFrameVendasVendedorWidgetState
                                             FlutterFlowTheme.of(context)
                                                 .primary,
                                           ),
-                                          backgroundColor: const Color(0x1B525252),
+                                          backgroundColor: Color(0x1B525252),
                                           center: Text(
                                             valueOrDefault<String>(
                                               functions.firstUpper(
@@ -574,13 +577,13 @@ class _UnviewFrameVendasVendedorWidgetState
                                                   fontWeight: FontWeight.normal,
                                                 ),
                                           ),
-                                          barRadius: const Radius.circular(50.0),
+                                          barRadius: Radius.circular(50.0),
                                           padding: EdgeInsets.zero,
                                         ),
                                       ),
                                       Container(
                                         width: 50.0,
-                                        decoration: const BoxDecoration(),
+                                        decoration: BoxDecoration(),
                                         child: AutoSizeText(
                                           valueOrDefault<String>(
                                             '${valueOrDefault<String>(
@@ -591,7 +594,7 @@ class _UnviewFrameVendasVendedorWidgetState
                                                         ) *
                                                         100) /
                                                     valueOrDefault<double>(
-                                                      widget.totalAcumulado,
+                                                      widget!.totalAcumulado,
                                                       0.0,
                                                     ),
                                                 formatType: FormatType.custom,
@@ -626,7 +629,7 @@ class _UnviewFrameVendasVendedorWidgetState
                                               ),
                                         ),
                                       ),
-                                    ].divide(const SizedBox(width: 2.0)),
+                                    ].divide(SizedBox(width: 2.0)),
                                   ),
                                 ],
                               ),
@@ -652,7 +655,7 @@ class _UnviewFrameVendasVendedorWidgetState
                                     ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 5.0, 0.0, 5.0),
                                 child: Material(
                                   color: Colors.transparent,
@@ -664,11 +667,11 @@ class _UnviewFrameVendasVendedorWidgetState
                                     width: 120.0,
                                     height: 30.0,
                                     decoration: BoxDecoration(
-                                      color: const Color(0x194B39EF),
+                                      color: Color(0x194B39EF),
                                       borderRadius: BorderRadius.circular(12.0),
                                     ),
                                     child: Align(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: AutoSizeText(
                                         functions
                                             .valuesJsonToInt(getJsonField(
@@ -711,7 +714,7 @@ class _UnviewFrameVendasVendedorWidgetState
                                     .bodyMedium
                                     .override(
                                       fontFamily: 'Outfit',
-                                      color: const Color(0xFF00A13C),
+                                      color: Color(0xFF00A13C),
                                       fontSize: 14.0,
                                       letterSpacing: 0.0,
                                       fontWeight: FontWeight.w300,
@@ -719,8 +722,8 @@ class _UnviewFrameVendasVendedorWidgetState
                               ),
                             ].map((c) => DataCell(c)).toList(),
                           ),
-                          emptyBuilder: () => const Center(
-                            child: SizedBox(
+                          emptyBuilder: () => Center(
+                            child: Container(
                               width: double.infinity,
                               height: double.infinity,
                               child: UnViewFrameVazioWidget(

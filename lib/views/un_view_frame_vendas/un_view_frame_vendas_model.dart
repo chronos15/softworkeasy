@@ -1,10 +1,32 @@
 import '/backend/api_requests/api_calls.dart';
 import '/components/un_view_frame_chart_vendas_widget.dart';
+import '/components/un_view_frame_loading_widget.dart';
+import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_data_table.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/frame_components/message_box/message_box_widget.dart';
+import '/frame_components/un_view_frame_filter_date/un_view_frame_filter_date_widget.dart';
+import 'dart:math';
+import '/custom_code/widgets/index.dart' as custom_widgets;
+import '/flutter_flow/custom_functions.dart' as functions;
+import '/flutter_flow/random_data_util.dart' as random_data;
 import 'dart:async';
+import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'un_view_frame_vendas_widget.dart' show UnViewFrameVendasWidget;
+import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_debounce/easy_debounce.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 
 class UnViewFrameVendasModel extends FlutterFlowModel<UnViewFrameVendasWidget> {
   ///  Local state fields for this component.
@@ -62,7 +84,7 @@ class UnViewFrameVendasModel extends FlutterFlowModel<UnViewFrameVendasWidget> {
   }) async {
     final stopwatch = Stopwatch()..start();
     while (true) {
-      await Future.delayed(const Duration(milliseconds: 50));
+      await Future.delayed(Duration(milliseconds: 50));
       final timeElapsed = stopwatch.elapsedMilliseconds;
       final requestComplete = apiRequestCompleter?.isCompleted ?? false;
       if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {

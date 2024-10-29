@@ -3,11 +3,14 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/frame_components/un_view_frame_card_hor/un_view_frame_card_hor_widget.dart';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'un_view_frame_home_model.dart';
 export 'un_view_frame_home_model.dart';
@@ -111,7 +114,7 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
             curve: Curves.easeInOut,
             delay: 50.0.ms,
             duration: 650.0.ms,
-            color: const Color(0xFF0064DA),
+            color: Color(0xFF0064DA),
             begin: 1.0,
             end: 0.0,
           ),
@@ -157,7 +160,7 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
       children: [
         Expanded(
           child: Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -208,7 +211,7 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
                                         }
                                       }(),
                                       height: 60.0,
-                                      decoration: const BoxDecoration(),
+                                      decoration: BoxDecoration(),
                                       child: wrapWithModel(
                                         model: _model.unViewFrameCardHorModel1,
                                         updateCallback: () =>
@@ -224,7 +227,7 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
                                           colorGrad01:
                                               FlutterFlowTheme.of(context)
                                                   .primary,
-                                          colorGrad02: const Color(0xFFCB0002),
+                                          colorGrad02: Color(0xFFCB0002),
                                         ),
                                       ),
                                     ),
@@ -251,7 +254,7 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
                                         }
                                       }(),
                                       height: 60.0,
-                                      decoration: const BoxDecoration(),
+                                      decoration: BoxDecoration(),
                                       child: wrapWithModel(
                                         model: _model.unViewFrameCardHorModel2,
                                         updateCallback: () =>
@@ -264,8 +267,8 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
                                                 .info,
                                             size: 25.0,
                                           ),
-                                          colorGrad01: const Color(0xFF6F0092),
-                                          colorGrad02: const Color(0xFF54A4FF),
+                                          colorGrad01: Color(0xFF6F0092),
+                                          colorGrad02: Color(0xFF54A4FF),
                                         ),
                                       ),
                                     ),
@@ -292,7 +295,7 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
                                         }
                                       }(),
                                       height: 60.0,
-                                      decoration: const BoxDecoration(),
+                                      decoration: BoxDecoration(),
                                       child: wrapWithModel(
                                         model: _model.unViewFrameCardHorModel3,
                                         updateCallback: () =>
@@ -305,8 +308,8 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
                                                 .info,
                                             size: 25.0,
                                           ),
-                                          colorGrad01: const Color(0xFFFF8100),
-                                          colorGrad02: const Color(0xFFFF8100),
+                                          colorGrad01: Color(0xFFFF8100),
+                                          colorGrad02: Color(0xFFFF8100),
                                         ),
                                       ),
                                     ),
@@ -325,7 +328,7 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
                                       }
                                     }(),
                                     height: 60.0,
-                                    decoration: const BoxDecoration(),
+                                    decoration: BoxDecoration(),
                                     child: wrapWithModel(
                                       model: _model.unViewFrameCardHorModel4,
                                       updateCallback: () => safeSetState(() {}),
@@ -337,8 +340,8 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
                                               FlutterFlowTheme.of(context).info,
                                           size: 25.0,
                                         ),
-                                        colorGrad01: const Color(0xFF00BF64),
-                                        colorGrad02: const Color(0xFF067100),
+                                        colorGrad01: Color(0xFF00BF64),
+                                        colorGrad02: Color(0xFF067100),
                                       ),
                                     ),
                                   ),
@@ -356,7 +359,7 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
                                       }
                                     }(),
                                     height: 60.0,
-                                    decoration: const BoxDecoration(),
+                                    decoration: BoxDecoration(),
                                     child: wrapWithModel(
                                       model: _model.unViewFrameCardHorModel5,
                                       updateCallback: () => safeSetState(() {}),
@@ -370,7 +373,7 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
                                         ),
                                         colorGrad01:
                                             FlutterFlowTheme.of(context).error,
-                                        colorGrad02: const Color(0xFF6F0092),
+                                        colorGrad02: Color(0xFF6F0092),
                                       ),
                                     ),
                                   ),
@@ -386,18 +389,18 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
                               borderRadius: BorderRadius.circular(12.0),
                             ),
                             child: Align(
-                              alignment: const AlignmentDirectional(0.0, 0.0),
+                              alignment: AlignmentDirectional(0.0, 0.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 10.0, 0.0),
                                     child: FlutterFlowIconButton(
                                       borderRadius: 50.0,
                                       buttonSize: 45.0,
-                                      hoverColor: const Color(0x5B0C7FFF),
+                                      hoverColor: Color(0x5B0C7FFF),
                                       hoverIconColor:
                                           FlutterFlowTheme.of(context)
                                               .primaryText,
@@ -484,9 +487,9 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
           ),
         ),
       ]
-          .divide(const SizedBox(height: 10.0))
-          .addToStart(const SizedBox(height: 10.0))
-          .addToEnd(const SizedBox(height: 10.0)),
+          .divide(SizedBox(height: 10.0))
+          .addToStart(SizedBox(height: 10.0))
+          .addToEnd(SizedBox(height: 10.0)),
     );
   }
 }

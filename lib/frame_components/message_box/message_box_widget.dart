@@ -3,9 +3,14 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'message_box_model.dart';
 export 'message_box_model.dart';
 
@@ -19,8 +24,8 @@ class MessageBoxWidget extends StatefulWidget {
     required this.corPrincipal,
     bool? enableCancel,
     String? sTextoConfirma,
-  })  : enableCancel = enableCancel ?? false,
-        sTextoConfirma = sTextoConfirma ?? 'Ok';
+  })  : this.enableCancel = enableCancel ?? false,
+        this.sTextoConfirma = sTextoConfirma ?? 'Ok';
 
   final Future Function()? actionConfirm;
   final Future Function()? actionCancel;
@@ -104,11 +109,11 @@ class _MessageBoxWidgetState extends State<MessageBoxWidget>
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: const AlignmentDirectional(0.0, 0.0),
+      alignment: AlignmentDirectional(0.0, 0.0),
       child: Container(
         width: double.infinity,
         height: double.infinity,
-        constraints: const BoxConstraints(
+        constraints: BoxConstraints(
           minHeight: 180.0,
           maxHeight: 260.0,
         ),
@@ -119,12 +124,12 @@ class _MessageBoxWidgetState extends State<MessageBoxWidget>
         child: Stack(
           children: [
             Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 0.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 5.0),
                     child: Row(
                       mainAxisSize: MainAxisSize.max,
                       children: [
@@ -135,11 +140,11 @@ class _MessageBoxWidgetState extends State<MessageBoxWidget>
                                     fontSize: 18.0,
                                     letterSpacing: 0.0,
                                   ),
-                          duration: const Duration(milliseconds: 600),
+                          duration: Duration(milliseconds: 600),
                           curve: Curves.easeIn,
                           child: Text(
                             valueOrDefault<String>(
-                              widget.sTitulo,
+                              widget!.sTitulo,
                               'Confirmar',
                             ),
                           ),
@@ -154,7 +159,7 @@ class _MessageBoxWidgetState extends State<MessageBoxWidget>
                       Expanded(
                         child: AutoSizeText(
                           valueOrDefault<String>(
-                            widget.sText,
+                            widget!.sText,
                             '...',
                           ),
                           maxLines: 3,
@@ -175,15 +180,15 @@ class _MessageBoxWidgetState extends State<MessageBoxWidget>
                   ),
                   Expanded(
                     child: Align(
-                      alignment: const AlignmentDirectional(1.0, 1.0),
+                      alignment: AlignmentDirectional(1.0, 1.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: [
-                          if (widget.enableCancel)
+                          if (widget!.enableCancel)
                             Expanded(
                               child: Align(
-                                alignment: const AlignmentDirectional(1.0, 1.0),
+                                alignment: AlignmentDirectional(1.0, 1.0),
                                 child: FFButtonWidget(
                                   onPressed: () async {
                                     await widget.actionCancel?.call();
@@ -192,9 +197,9 @@ class _MessageBoxWidgetState extends State<MessageBoxWidget>
                                   options: FFButtonOptions(
                                     width: 140.0,
                                     height: 45.0,
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         24.0, 0.0, 24.0, 0.0),
-                                    iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                    iconPadding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 0.0, 0.0, 0.0),
                                     color: Colors.transparent,
                                     textStyle: FlutterFlowTheme.of(context)
@@ -207,7 +212,7 @@ class _MessageBoxWidgetState extends State<MessageBoxWidget>
                                           fontWeight: FontWeight.normal,
                                         ),
                                     elevation: 0.0,
-                                    borderSide: const BorderSide(
+                                    borderSide: BorderSide(
                                       color: Color(0x5557636C),
                                       width: 1.0,
                                     ),
@@ -217,20 +222,20 @@ class _MessageBoxWidgetState extends State<MessageBoxWidget>
                               ),
                             ),
                           Align(
-                            alignment: const AlignmentDirectional(1.0, 1.0),
+                            alignment: AlignmentDirectional(1.0, 1.0),
                             child: FFButtonWidget(
                               onPressed: () async {
                                 await widget.actionConfirm?.call();
                               },
-                              text: widget.sTextoConfirma,
+                              text: widget!.sTextoConfirma,
                               options: FFButtonOptions(
                                 width: 140.0,
                                 height: 45.0,
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     24.0, 0.0, 24.0, 0.0),
-                                iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                                iconPadding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 0.0, 0.0, 0.0),
-                                color: widget.corPrincipal,
+                                color: widget!.corPrincipal,
                                 textStyle: FlutterFlowTheme.of(context)
                                     .titleSmall
                                     .override(
@@ -240,7 +245,7 @@ class _MessageBoxWidgetState extends State<MessageBoxWidget>
                                       fontWeight: FontWeight.normal,
                                     ),
                                 elevation: 0.0,
-                                borderSide: const BorderSide(
+                                borderSide: BorderSide(
                                   color: Colors.transparent,
                                   width: 0.0,
                                 ),
@@ -250,21 +255,21 @@ class _MessageBoxWidgetState extends State<MessageBoxWidget>
                                 animationsMap['buttonOnPageLoadAnimation']!),
                           ),
                         ]
-                            .divide(const SizedBox(width: 5.0))
-                            .addToStart(const SizedBox(width: 20.0))
-                            .addToEnd(const SizedBox(width: 0.0)),
+                            .divide(SizedBox(width: 5.0))
+                            .addToStart(SizedBox(width: 20.0))
+                            .addToEnd(SizedBox(width: 0.0)),
                       ),
                     ),
                   ),
                 ]
-                    .addToStart(const SizedBox(height: 15.0))
-                    .addToEnd(const SizedBox(height: 10.0)),
+                    .addToStart(SizedBox(height: 15.0))
+                    .addToEnd(SizedBox(height: 10.0)),
               ),
             ),
             Align(
-              alignment: const AlignmentDirectional(1.0, -1.0),
+              alignment: AlignmentDirectional(1.0, -1.0),
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 5.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 5.0, 0.0),
                 child: FlutterFlowIconButton(
                   borderRadius: 20.0,
                   borderWidth: 1.0,

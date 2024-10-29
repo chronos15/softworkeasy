@@ -8,6 +8,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/frame_components/message_box/message_box_widget.dart';
 import '/frame_components/un_view_frame_filter_date/un_view_frame_filter_date_widget.dart';
+import 'dart:math';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import '/flutter_flow/random_data_util.dart' as random_data;
@@ -15,10 +16,13 @@ import 'dart:async';
 import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_debounce/easy_debounce.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
@@ -92,7 +96,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
             curve: Curves.easeInOut,
             delay: 280.0.ms,
             duration: 300.0.ms,
-            color: const Color(0x80FFFFFF),
+            color: Color(0x80FFFFFF),
             angle: 0.524,
           ),
         ],
@@ -111,8 +115,8 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
             curve: Curves.elasticOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(-100.0, 0.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(-100.0, 0.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -131,8 +135,8 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 100.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 100.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -151,8 +155,8 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 100.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 100.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -170,8 +174,8 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            begin: const Offset(0.0, 15.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 15.0),
+            end: Offset(0.0, 0.0),
           ),
         ],
       ),
@@ -205,7 +209,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
 
     return Shortcuts(
       shortcuts: {
-        const SingleActivator(
+        SingleActivator(
           LogicalKeyboardKey.f5,
         ): VoidCallbackIntent(() async {
           _model.isAllLoading = true;
@@ -227,7 +231,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
           focusNode: _model.unViewFrameVendasShortcutsFocusNode,
           child: GestureDetector(
               onTap: () => _model
-                      .unViewFrameVendasShortcutsFocusNode.canRequestFocus
+                      .unViewFrameVendasShortcutsFocusNode!.canRequestFocus
                   ? FocusScope.of(context)
                       .requestFocus(_model.unViewFrameVendasShortcutsFocusNode)
                   : FocusScope.of(context).unfocus(),
@@ -238,14 +242,14 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                   children: [
                     Padding(
                       padding:
-                          const EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 0.0),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Align(
-                            alignment: const AlignmentDirectional(-1.0, 0.0),
+                            alignment: AlignmentDirectional(-1.0, 0.0),
                             child: Text(
                               'Vendas',
                               style: FlutterFlowTheme.of(context)
@@ -268,7 +272,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                               hoverColor: Colors.transparent,
                               highlightColor: Colors.transparent,
                               onTap: () async {
-                                final datePickedDate = await showDatePicker(
+                                final _datePickedDate = await showDatePicker(
                                   context: context,
                                   initialDate:
                                       (_model.dateSelected ?? DateTime.now()),
@@ -311,12 +315,12 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                   },
                                 );
 
-                                if (datePickedDate != null) {
+                                if (_datePickedDate != null) {
                                   safeSetState(() {
                                     _model.datePicked = DateTime(
-                                      datePickedDate.year,
-                                      datePickedDate.month,
-                                      datePickedDate.day,
+                                      _datePickedDate.year,
+                                      _datePickedDate.month,
+                                      _datePickedDate.day,
                                     );
                                   });
                                 }
@@ -345,7 +349,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                   decoration: BoxDecoration(
                                     color: FlutterFlowTheme.of(context)
                                         .secondaryBackground,
-                                    boxShadow: const [
+                                    boxShadow: [
                                       BoxShadow(
                                         blurRadius: 4.0,
                                         color: Color(0x33000000),
@@ -380,7 +384,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                 MainAxisAlignment.center,
                                             children: [
                                               Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     0.0, 0.0),
                                                 child: AutoSizeText(
                                                   dateTimeFormat(
@@ -409,7 +413,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                 ),
                                               ),
                                               Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     0.0, 0.0),
                                                 child: AutoSizeText(
                                                   dateTimeFormat(
@@ -439,15 +443,15 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                               ),
                                             ],
                                           ),
-                                          const Icon(
+                                          Icon(
                                             Icons.keyboard_arrow_down,
                                             color: Color(0x800C7FFF),
                                             size: 24.0,
                                           ),
                                         ]
-                                            .divide(const SizedBox(width: 5.0))
-                                            .addToStart(const SizedBox(width: 5.0))
-                                            .addToEnd(const SizedBox(width: 5.0)),
+                                            .divide(SizedBox(width: 5.0))
+                                            .addToStart(SizedBox(width: 5.0))
+                                            .addToEnd(SizedBox(width: 5.0)),
                                       ),
                                     ],
                                   ),
@@ -460,7 +464,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                             desktop: false,
                           ))
                             Align(
-                              alignment: const AlignmentDirectional(1.0, -1.0),
+                              alignment: AlignmentDirectional(1.0, -1.0),
                               child: FlutterFlowIconButton(
                                 borderColor:
                                     FlutterFlowTheme.of(context).primary,
@@ -472,7 +476,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                   size: 20.0,
                                 ),
                                 onPressed: () async {
-                                  var shouldSetState = false;
+                                  var _shouldSetState = false;
                                   await showModalBottomSheet(
                                     isScrollControlled: true,
                                     backgroundColor: Colors.transparent,
@@ -481,7 +485,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                       return Padding(
                                         padding:
                                             MediaQuery.viewInsetsOf(context),
-                                        child: SizedBox(
+                                        child: Container(
                                           height: 300.0,
                                           child: UnViewFrameFilterDateWidget(
                                             sDate: _model.dateSelected!,
@@ -492,7 +496,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                   ).then((value) => safeSetState(
                                       () => _model.actionReturnDate = value));
 
-                                  shouldSetState = true;
+                                  _shouldSetState = true;
                                   if (_model.actionReturnDate != null) {
                                     if (animationsMap[
                                             'containerOnActionTriggerAnimation'] !=
@@ -501,7 +505,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                           () => hasContainerTriggered = true);
                                       SchedulerBinding.instance
                                           .addPostFrameCallback((_) async =>
-                                              animationsMap[
+                                              await animationsMap[
                                                       'containerOnActionTriggerAnimation']!
                                                   .controller
                                                 ..reset()
@@ -528,17 +532,17 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                   .forward());
                                     }
                                   } else {
-                                    if (shouldSetState) safeSetState(() {});
+                                    if (_shouldSetState) safeSetState(() {});
                                     return;
                                   }
 
-                                  if (shouldSetState) safeSetState(() {});
+                                  if (_shouldSetState) safeSetState(() {});
                                 },
                               ),
                             ),
                           Expanded(
                             child: Align(
-                              alignment: const AlignmentDirectional(1.0, 0.0),
+                              alignment: AlignmentDirectional(1.0, 0.0),
                               child: Material(
                                 color: Colors.transparent,
                                 elevation: 0.0,
@@ -553,7 +557,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                         .secondaryBackground,
                                     borderRadius: BorderRadius.circular(8.0),
                                     border: Border.all(
-                                      color: const Color(0x8E636B91),
+                                      color: Color(0x8E636B91),
                                     ),
                                   ),
                                   child: Row(
@@ -562,9 +566,9 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                       Expanded(
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   2.0, 2.0, 0.0, 2.0),
-                                          child: SizedBox(
+                                          child: Container(
                                             width: 220.0,
                                             child: TextFormField(
                                               controller:
@@ -574,7 +578,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                               onChanged: (_) =>
                                                   EasyDebounce.debounce(
                                                 '_model.pesquisaTextController',
-                                                const Duration(milliseconds: 2000),
+                                                Duration(milliseconds: 2000),
                                                 () => safeSetState(() {}),
                                               ),
                                               autofocus: false,
@@ -615,7 +619,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                     ),
                                                 enabledBorder:
                                                     OutlineInputBorder(
-                                                  borderSide: const BorderSide(
+                                                  borderSide: BorderSide(
                                                     color: Color(0x00000000),
                                                     width: 1.0,
                                                   ),
@@ -659,7 +663,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                           8.0),
                                                 ),
                                                 contentPadding:
-                                                    const EdgeInsetsDirectional
+                                                    EdgeInsetsDirectional
                                                         .fromSTEB(14.0, 10.0,
                                                             14.0, 10.0),
                                                 prefixIcon: Icon(
@@ -721,7 +725,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             2.0, 2.0, 2.0, 2.0),
                                         child: FlutterFlowIconButton(
                                           borderColor: Colors.transparent,
@@ -745,7 +749,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                               ),
                             ),
                           ),
-                        ].divide(const SizedBox(width: 10.0)),
+                        ].divide(SizedBox(width: 10.0)),
                       ),
                     ),
                     Row(
@@ -759,7 +763,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.all(12.0),
+                                  padding: EdgeInsets.all(12.0),
                                   child: Container(
                                     width: double.infinity,
                                     height: 370.0,
@@ -768,7 +772,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                           .secondaryBackground,
                                       borderRadius: BorderRadius.circular(12.0),
                                       border: Border.all(
-                                        color: const Color(0x69636B91),
+                                        color: Color(0x69636B91),
                                       ),
                                     ),
                                     child: Visibility(
@@ -802,7 +806,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.
                                           if (!snapshot.hasData) {
-                                            return const Center(
+                                            return Center(
                                               child: UnViewFrameLoadingWidget(),
                                             );
                                           }
@@ -826,7 +830,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                 children: [
                                                   Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(12.0, 0.0,
                                                                 12.0, 0.0),
                                                     child: Column(
@@ -851,7 +855,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                         ),
                                                         Padding(
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       0.0,
@@ -878,7 +882,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                         ),
                                                         Padding(
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       10.0,
@@ -939,7 +943,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                           children: [
                                                                             Expanded(
                                                                               child: Padding(
-                                                                                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 12.0),
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 12.0),
                                                                                 child: Column(
                                                                                   mainAxisSize: MainAxisSize.max,
                                                                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -959,13 +963,13 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                                       mainAxisSize: MainAxisSize.max,
                                                                                       children: [
                                                                                         Padding(
-                                                                                          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 4.0, 0.0),
+                                                                                          padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 4.0, 0.0),
                                                                                           child: Text(
                                                                                             valueOrDefault<String>(
                                                                                               functions.realFormat(valueOrDefault<String>(
                                                                                                 VendaDashTotaisCall.variacaoValor(
                                                                                                   containerVendaDashTotaisResponse.jsonBody,
-                                                                                                )?.first.toString(),
+                                                                                                )?.first?.toString(),
                                                                                                 '0',
                                                                                               )),
                                                                                               '0',
@@ -995,7 +999,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                                                     functions
                                                                                                         .dateFormatToDateTimeList(VendaDashTotaisCall.dataAnt(
                                                                                                           containerVendaDashTotaisResponse.jsonBody,
-                                                                                                        )?.take(1).toList().toList())
+                                                                                                        )?.take(1).toList()?.toList())
                                                                                                         ?.first,
                                                                                                     locale: FFLocalizations.of(context).languageCode,
                                                                                                   ),
@@ -1009,7 +1013,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                                                       fontWeight: FontWeight.w300,
                                                                                                     ),
                                                                                               ),
-                                                                                              const TextSpan(
+                                                                                              TextSpan(
                                                                                                 text: ' - ',
                                                                                                 style: TextStyle(),
                                                                                               ),
@@ -1020,7 +1024,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                                                     functions
                                                                                                         .dateFormatToDateTimeList(VendaDashTotaisCall.valueX(
                                                                                                           containerVendaDashTotaisResponse.jsonBody,
-                                                                                                        )?.take(1).toList().toList())
+                                                                                                        )?.take(1).toList()?.toList())
                                                                                                         ?.first,
                                                                                                     locale: FFLocalizations.of(context).languageCode,
                                                                                                   ),
@@ -1051,23 +1055,25 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                         ),
                                                                         if (VendaDashTotaisCall.valueList(
                                                                               containerVendaDashTotaisResponse.jsonBody,
-                                                                            )!.isNotEmpty)
+                                                                            )!
+                                                                                .length >=
+                                                                            1)
                                                                           Column(
                                                                             mainAxisSize:
                                                                                 MainAxisSize.min,
                                                                             children: [
                                                                               Expanded(
                                                                                 child: Padding(
-                                                                                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 5.0, 5.0),
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 5.0, 5.0),
                                                                                   child: Container(
                                                                                     height: 50.0,
-                                                                                    decoration: const BoxDecoration(),
+                                                                                    decoration: BoxDecoration(),
                                                                                     child: Stack(
-                                                                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                                                                      alignment: AlignmentDirectional(0.0, 0.0),
                                                                                       children: [
                                                                                         Align(
-                                                                                          alignment: const AlignmentDirectional(0.0, 0.0),
-                                                                                          child: SizedBox(
+                                                                                          alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                          child: Container(
                                                                                             width: 100.0,
                                                                                             height: 100.0,
                                                                                             child: custom_widgets.DegradeCircular(
@@ -1088,7 +1094,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                                           ),
                                                                                         ),
                                                                                         Align(
-                                                                                          alignment: const AlignmentDirectional(0.0, 0.0),
+                                                                                          alignment: AlignmentDirectional(0.0, 0.0),
                                                                                           child: Row(
                                                                                             mainAxisSize: MainAxisSize.min,
                                                                                             mainAxisAlignment: MainAxisAlignment.center,
@@ -1104,7 +1110,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                                                     true,
                                                                                                   ))
                                                                                                     Padding(
-                                                                                                      padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 4.0, 0.0),
+                                                                                                      padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 4.0, 0.0),
                                                                                                       child: Icon(
                                                                                                         Icons.arrow_upward_rounded,
                                                                                                         color: FlutterFlowTheme.of(context).success,
@@ -1120,7 +1126,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                                                     true,
                                                                                                   ))
                                                                                                     Padding(
-                                                                                                      padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 4.0, 0.0),
+                                                                                                      padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 4.0, 0.0),
                                                                                                       child: Icon(
                                                                                                         Icons.arrow_downward_rounded,
                                                                                                         color: FlutterFlowTheme.of(context).error,
@@ -1130,7 +1136,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                                                 ],
                                                                                               ),
                                                                                               Padding(
-                                                                                                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+                                                                                                padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                                                                                                 child: Text(
                                                                                                   '${valueOrDefault<String>(
                                                                                                     formatNumber(
@@ -1168,19 +1174,19 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                               ),
                                                                             ],
                                                                           ),
-                                                                      ].addToStart(const SizedBox(width: 12.0)).addToEnd(
-                                                                              const SizedBox(width: 12.0)),
+                                                                      ].addToStart(SizedBox(width: 12.0)).addToEnd(
+                                                                              SizedBox(width: 12.0)),
                                                                     ),
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ].divide(const SizedBox(
+                                                            ].divide(SizedBox(
                                                                 width: 10.0)),
                                                           ),
                                                         ),
                                                         Padding(
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       10.0,
@@ -1207,7 +1213,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                   ),
                                                                   child:
                                                                       Padding(
-                                                                    padding: const EdgeInsetsDirectional
+                                                                    padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             12.0,
                                                                             0.0,
@@ -1238,7 +1244,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                                   functions.realFormat(valueOrDefault<String>(
                                                                                     VendaDashTotaisCall.valueY(
                                                                                       containerVendaDashTotaisResponse.jsonBody,
-                                                                                    )?.first.toString(),
+                                                                                    )?.first?.toString(),
                                                                                     '0',
                                                                                   )),
                                                                                   '0',
@@ -1253,7 +1259,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                                     ),
                                                                               ),
                                                                             ),
-                                                                          ].divide(const SizedBox(width: 10.0)),
+                                                                          ].divide(SizedBox(width: 10.0)),
                                                                         ),
                                                                         Row(
                                                                           mainAxisSize:
@@ -1295,7 +1301,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                   ),
                                                                   child:
                                                                       Padding(
-                                                                    padding: const EdgeInsetsDirectional
+                                                                    padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             12.0,
                                                                             0.0,
@@ -1325,7 +1331,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                                 valueOrDefault<String>(
                                                                                   VendaDashTotaisCall.pedido(
                                                                                     containerVendaDashTotaisResponse.jsonBody,
-                                                                                  )?.first.toString(),
+                                                                                  )?.first?.toString(),
                                                                                   '0',
                                                                                 ),
                                                                                 maxLines: 1,
@@ -1338,7 +1344,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                                     ),
                                                                               ),
                                                                             ),
-                                                                          ].divide(const SizedBox(width: 10.0)),
+                                                                          ].divide(SizedBox(width: 10.0)),
                                                                         ),
                                                                         Row(
                                                                           mainAxisSize:
@@ -1364,13 +1370,13 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ].divide(const SizedBox(
+                                                            ].divide(SizedBox(
                                                                 width: 10.0)),
                                                           ),
                                                         ),
                                                         Padding(
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       10.0,
@@ -1397,7 +1403,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                   ),
                                                                   child:
                                                                       Padding(
-                                                                    padding: const EdgeInsetsDirectional
+                                                                    padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             12.0,
                                                                             0.0,
@@ -1432,7 +1438,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                                       functions.realFormat(valueOrDefault<String>(
                                                                                         VendaDashTotaisCall.lucro(
                                                                                           containerVendaDashTotaisResponse.jsonBody,
-                                                                                        )?.first.toString(),
+                                                                                        )?.first?.toString(),
                                                                                         '0',
                                                                                       )),
                                                                                       '0',
@@ -1449,10 +1455,10 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                                 ],
                                                                               ),
                                                                             ),
-                                                                          ].divide(const SizedBox(width: 10.0)),
+                                                                          ].divide(SizedBox(width: 10.0)),
                                                                         ),
                                                                         Padding(
-                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
                                                                               0.0,
                                                                               5.0,
                                                                               0.0,
@@ -1479,7 +1485,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                               ),
                                                                               AlignedTooltip(
                                                                                 content: Padding(
-                                                                                  padding: const EdgeInsetsDirectional.fromSTEB(12.0, 4.0, 12.0, 4.0),
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(12.0, 4.0, 12.0, 4.0),
                                                                                   child: Text(
                                                                                     'Margem (%) de lucro.',
                                                                                     style: FlutterFlowTheme.of(context).bodyLarge.override(
@@ -1496,8 +1502,8 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                                 elevation: 4.0,
                                                                                 tailBaseWidth: 24.0,
                                                                                 tailLength: 12.0,
-                                                                                waitDuration: const Duration(milliseconds: 100),
-                                                                                showDuration: const Duration(milliseconds: 1500),
+                                                                                waitDuration: Duration(milliseconds: 100),
+                                                                                showDuration: Duration(milliseconds: 1500),
                                                                                 triggerMode: TooltipTriggerMode.tap,
                                                                                 child: Container(
                                                                                   width: 100.0,
@@ -1513,7 +1519,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                                       '${valueOrDefault<String>(
                                                                                         VendaDashTotaisCall.margemLucro(
                                                                                           containerVendaDashTotaisResponse.jsonBody,
-                                                                                        )?.first.toString(),
+                                                                                        )?.first?.toString(),
                                                                                         '0',
                                                                                       )}%',
                                                                                       '0',
@@ -1529,7 +1535,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                                   ),
                                                                                 ),
                                                                               ),
-                                                                            ].divide(const SizedBox(width: 5.0)),
+                                                                            ].divide(SizedBox(width: 5.0)),
                                                                           ),
                                                                         ),
                                                                       ],
@@ -1553,7 +1559,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                   ),
                                                                   child:
                                                                       Padding(
-                                                                    padding: const EdgeInsetsDirectional
+                                                                    padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             12.0,
                                                                             0.0,
@@ -1584,7 +1590,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                                   functions.realFormat(valueOrDefault<String>(
                                                                                     VendaDashTotaisCall.valorMedia(
                                                                                       containerVendaDashTotaisResponse.jsonBody,
-                                                                                    )?.first.toString(),
+                                                                                    )?.first?.toString(),
                                                                                     '0',
                                                                                   )),
                                                                                   '0',
@@ -1599,7 +1605,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                                     ),
                                                                               ),
                                                                             ),
-                                                                          ].divide(const SizedBox(width: 10.0)),
+                                                                          ].divide(SizedBox(width: 10.0)),
                                                                         ),
                                                                         Row(
                                                                           mainAxisSize:
@@ -1625,24 +1631,24 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ].divide(const SizedBox(
+                                                            ].divide(SizedBox(
                                                                 width: 10.0)),
                                                           ),
                                                         ),
                                                       ]
-                                                          .addToStart(const SizedBox(
+                                                          .addToStart(SizedBox(
                                                               height: 15.0))
-                                                          .addToEnd(const SizedBox(
+                                                          .addToEnd(SizedBox(
                                                               height: 10.0)),
                                                     ),
                                                   ),
                                                   Align(
                                                     alignment:
-                                                        const AlignmentDirectional(
+                                                        AlignmentDirectional(
                                                             1.0, -1.0),
                                                     child: Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   10.0,
@@ -1704,7 +1710,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                   wrapWithModel(
                                     model: _model.unViewFrameChartVendasModel1,
                                     updateCallback: () => safeSetState(() {}),
-                                    child: const UnViewFrameChartVendasWidget(),
+                                    child: UnViewFrameChartVendasWidget(),
                                   ),
                                 if (responsiveVisibility(
                                   context: context,
@@ -1712,7 +1718,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                   desktop: false,
                                 ))
                                   Padding(
-                                    padding: const EdgeInsets.all(12.0),
+                                    padding: EdgeInsets.all(12.0),
                                     child: Material(
                                       color: Colors.transparent,
                                       elevation: 0.0,
@@ -1728,12 +1734,12 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                           borderRadius:
                                               BorderRadius.circular(12.0),
                                           border: Border.all(
-                                            color: const Color(0x69636B91),
+                                            color: Color(0x69636B91),
                                           ),
                                         ),
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   12.0, 0.0, 12.0, 0.0),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
@@ -1770,7 +1776,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     12.0,
                                                                     0.0,
@@ -1818,7 +1824,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                         ),
                                                                   ),
                                                                 ),
-                                                              ].divide(const SizedBox(
+                                                              ].divide(SizedBox(
                                                                   width: 10.0)),
                                                             ),
                                                           ],
@@ -1840,7 +1846,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     12.0,
                                                                     0.0,
@@ -1886,7 +1892,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                         ),
                                                                   ),
                                                                 ),
-                                                              ].divide(const SizedBox(
+                                                              ].divide(SizedBox(
                                                                   width: 10.0)),
                                                             ),
                                                           ],
@@ -1894,7 +1900,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                       ),
                                                     ),
                                                   ),
-                                                ].divide(const SizedBox(width: 10.0)),
+                                                ].divide(SizedBox(width: 10.0)),
                                               ),
                                               Row(
                                                 mainAxisSize: MainAxisSize.max,
@@ -1913,7 +1919,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     12.0,
                                                                     0.0,
@@ -1961,7 +1967,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                         ),
                                                                   ),
                                                                 ),
-                                                              ].divide(const SizedBox(
+                                                              ].divide(SizedBox(
                                                                   width: 10.0)),
                                                             ),
                                                           ],
@@ -1983,7 +1989,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     12.0,
                                                                     0.0,
@@ -2029,7 +2035,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                         ),
                                                                   ),
                                                                 ),
-                                                              ].divide(const SizedBox(
+                                                              ].divide(SizedBox(
                                                                   width: 10.0)),
                                                             ),
                                                           ],
@@ -2037,21 +2043,21 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                       ),
                                                     ),
                                                   ),
-                                                ].divide(const SizedBox(width: 10.0)),
+                                                ].divide(SizedBox(width: 10.0)),
                                               ),
                                             ]
-                                                .divide(const SizedBox(height: 10.0))
+                                                .divide(SizedBox(height: 10.0))
                                                 .addToStart(
-                                                    const SizedBox(height: 25.0))
+                                                    SizedBox(height: 25.0))
                                                 .addToEnd(
-                                                    const SizedBox(height: 10.0)),
+                                                    SizedBox(height: 10.0)),
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
                                 Padding(
-                                  padding: const EdgeInsets.all(12.0),
+                                  padding: EdgeInsets.all(12.0),
                                   child: Material(
                                     color: Colors.transparent,
                                     elevation: 0.0,
@@ -2065,11 +2071,11 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                         borderRadius:
                                             BorderRadius.circular(12.0),
                                         border: Border.all(
-                                          color: const Color(0x69636B91),
+                                          color: Color(0x69636B91),
                                         ),
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             12.0, 0.0, 12.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.min,
@@ -2089,7 +2095,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                       ),
                                             ),
                                             ListView(
-                                              padding: const EdgeInsets.fromLTRB(
+                                              padding: EdgeInsets.fromLTRB(
                                                 0,
                                                 10.0,
                                                 0,
@@ -2190,10 +2196,10 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                     ),
                                                   ]
                                                       .divide(
-                                                          const SizedBox(width: 10.0))
+                                                          SizedBox(width: 10.0))
                                                       .addToStart(
-                                                          const SizedBox(width: 10.0))
-                                                      .addToEnd(const SizedBox(
+                                                          SizedBox(width: 10.0))
+                                                      .addToEnd(SizedBox(
                                                           width: 10.0)),
                                                 ),
                                                 Row(
@@ -2287,25 +2293,25 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                     ),
                                                   ]
                                                       .divide(
-                                                          const SizedBox(width: 10.0))
+                                                          SizedBox(width: 10.0))
                                                       .addToStart(
-                                                          const SizedBox(width: 10.0))
-                                                      .addToEnd(const SizedBox(
+                                                          SizedBox(width: 10.0))
+                                                      .addToEnd(SizedBox(
                                                           width: 10.0)),
                                                 ),
-                                              ].divide(const SizedBox(height: 5.0)),
+                                              ].divide(SizedBox(height: 5.0)),
                                             ),
                                           ]
                                               .addToStart(
-                                                  const SizedBox(height: 10.0))
-                                              .addToEnd(const SizedBox(height: 10.0)),
+                                                  SizedBox(height: 10.0))
+                                              .addToEnd(SizedBox(height: 10.0)),
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.all(12.0),
+                                  padding: EdgeInsets.all(12.0),
                                   child: Material(
                                     color: Colors.transparent,
                                     elevation: 0.0,
@@ -2321,11 +2327,11 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                         borderRadius:
                                             BorderRadius.circular(12.0),
                                         border: Border.all(
-                                          color: const Color(0x69636B91),
+                                          color: Color(0x69636B91),
                                         ),
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             12.0, 0.0, 12.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.min,
@@ -2472,7 +2478,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                             onSelectChanged) =>
                                                         DataRow(
                                                       color:
-                                                          WidgetStateProperty
+                                                          MaterialStateProperty
                                                               .all(
                                                         erdsasdIndex % 2 == 0
                                                             ? FlutterFlowTheme
@@ -2516,7 +2522,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                             Expanded(
                                                               child: Align(
                                                                 alignment:
-                                                                    const AlignmentDirectional(
+                                                                    AlignmentDirectional(
                                                                         -1.0,
                                                                         0.0),
                                                                 child:
@@ -2613,17 +2619,17 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                               ),
                                             ),
                                           ]
-                                              .divide(const SizedBox(height: 20.0))
+                                              .divide(SizedBox(height: 20.0))
                                               .addToStart(
-                                                  const SizedBox(height: 10.0))
-                                              .addToEnd(const SizedBox(height: 10.0)),
+                                                  SizedBox(height: 10.0))
+                                              .addToEnd(SizedBox(height: 10.0)),
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.all(12.0),
+                                  padding: EdgeInsets.all(12.0),
                                   child: Material(
                                     color: Colors.transparent,
                                     elevation: 0.0,
@@ -2638,11 +2644,11 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                         borderRadius:
                                             BorderRadius.circular(12.0),
                                         border: Border.all(
-                                          color: const Color(0x69636B91),
+                                          color: Color(0x69636B91),
                                         ),
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             12.0, 0.0, 12.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.min,
@@ -2689,7 +2695,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     5.0,
@@ -2714,8 +2720,8 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                         0.0,
                                                                   ),
                                                             ),
-                                                            const Expanded(
-                                                              child: SizedBox(
+                                                            Expanded(
+                                                              child: Container(
                                                                 width: double
                                                                     .infinity,
                                                                 height: 85.0,
@@ -2760,7 +2766,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     5.0,
@@ -2785,8 +2791,8 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                         0.0,
                                                                   ),
                                                             ),
-                                                            const Expanded(
-                                                              child: SizedBox(
+                                                            Expanded(
+                                                              child: Container(
                                                                 width: double
                                                                     .infinity,
                                                                 height: 85.0,
@@ -2808,19 +2814,19 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                     ),
                                                   ),
                                                 ),
-                                              ].divide(const SizedBox(width: 10.0)),
+                                              ].divide(SizedBox(width: 10.0)),
                                             ),
                                           ]
                                               .addToStart(
-                                                  const SizedBox(height: 10.0))
-                                              .addToEnd(const SizedBox(height: 10.0)),
+                                                  SizedBox(height: 10.0))
+                                              .addToEnd(SizedBox(height: 10.0)),
                                         ),
                                       ),
                                     ),
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.all(12.0),
+                                  padding: EdgeInsets.all(12.0),
                                   child: Material(
                                     color: Colors.transparent,
                                     elevation: 0.0,
@@ -2835,11 +2841,11 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                         borderRadius:
                                             BorderRadius.circular(12.0),
                                         border: Border.all(
-                                          color: const Color(0x69636B91),
+                                          color: Color(0x69636B91),
                                         ),
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             12.0, 0.0, 12.0, 0.0),
                                         child: Column(
                                           mainAxisSize: MainAxisSize.min,
@@ -2847,8 +2853,8 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                               CrossAxisAlignment.start,
                                           children: <Widget>[]
                                               .addToStart(
-                                                  const SizedBox(height: 10.0))
-                                              .addToEnd(const SizedBox(height: 10.0)),
+                                                  SizedBox(height: 10.0))
+                                              .addToEnd(SizedBox(height: 10.0)),
                                         ),
                                       ),
                                     ),
@@ -2880,10 +2886,10 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                       model:
                                           _model.unViewFrameChartVendasModel2,
                                       updateCallback: () => safeSetState(() {}),
-                                      child: const UnViewFrameChartVendasWidget(),
+                                      child: UnViewFrameChartVendasWidget(),
                                     ),
                                   Padding(
-                                    padding: const EdgeInsets.all(12.0),
+                                    padding: EdgeInsets.all(12.0),
                                     child: Material(
                                       color: Colors.transparent,
                                       elevation: 0.0,
@@ -2899,12 +2905,12 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                           borderRadius:
                                               BorderRadius.circular(12.0),
                                           border: Border.all(
-                                            color: const Color(0x69636B91),
+                                            color: Color(0x69636B91),
                                           ),
                                         ),
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   12.0, 0.0, 12.0, 0.0),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
@@ -2941,7 +2947,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     12.0,
                                                                     0.0,
@@ -2985,7 +2991,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                             FontWeight.w300,
                                                                       ),
                                                                 ),
-                                                              ].divide(const SizedBox(
+                                                              ].divide(SizedBox(
                                                                   width: 10.0)),
                                                             ),
                                                           ],
@@ -3007,7 +3013,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     12.0,
                                                                     0.0,
@@ -3049,7 +3055,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                             FontWeight.w300,
                                                                       ),
                                                                 ),
-                                                              ].divide(const SizedBox(
+                                                              ].divide(SizedBox(
                                                                   width: 10.0)),
                                                             ),
                                                           ],
@@ -3057,7 +3063,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                       ),
                                                     ),
                                                   ),
-                                                ].divide(const SizedBox(width: 10.0)),
+                                                ].divide(SizedBox(width: 10.0)),
                                               ),
                                               Row(
                                                 mainAxisSize: MainAxisSize.max,
@@ -3076,7 +3082,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     12.0,
                                                                     0.0,
@@ -3118,7 +3124,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                             FontWeight.w300,
                                                                       ),
                                                                 ),
-                                                              ].divide(const SizedBox(
+                                                              ].divide(SizedBox(
                                                                   width: 10.0)),
                                                             ),
                                                           ],
@@ -3140,7 +3146,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                       ),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     12.0,
                                                                     0.0,
@@ -3182,7 +3188,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                             FontWeight.w300,
                                                                       ),
                                                                 ),
-                                                              ].divide(const SizedBox(
+                                                              ].divide(SizedBox(
                                                                   width: 10.0)),
                                                             ),
                                                           ],
@@ -3190,21 +3196,21 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                       ),
                                                     ),
                                                   ),
-                                                ].divide(const SizedBox(width: 10.0)),
+                                                ].divide(SizedBox(width: 10.0)),
                                               ),
                                             ]
-                                                .divide(const SizedBox(height: 10.0))
+                                                .divide(SizedBox(height: 10.0))
                                                 .addToStart(
-                                                    const SizedBox(height: 10.0))
+                                                    SizedBox(height: 10.0))
                                                 .addToEnd(
-                                                    const SizedBox(height: 10.0)),
+                                                    SizedBox(height: 10.0)),
                                           ),
                                         ),
                                       ),
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.all(12.0),
+                                    padding: EdgeInsets.all(12.0),
                                     child: Material(
                                       color: Colors.transparent,
                                       elevation: 0.0,
@@ -3221,12 +3227,12 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                           borderRadius:
                                               BorderRadius.circular(12.0),
                                           border: Border.all(
-                                            color: const Color(0x69636B91),
+                                            color: Color(0x69636B91),
                                           ),
                                         ),
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   12.0, 0.0, 12.0, 0.0),
                                           child: Column(
                                             mainAxisSize: MainAxisSize.min,
@@ -3425,7 +3431,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                               onSelectChanged) =>
                                                           DataRow(
                                                         color:
-                                                            WidgetStateProperty
+                                                            MaterialStateProperty
                                                                 .all(
                                                           erdsIndex % 2 == 0
                                                               ? FlutterFlowTheme
@@ -3535,7 +3541,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         5.0,
@@ -3557,7 +3563,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                 height: 30.0,
                                                                 decoration:
                                                                     BoxDecoration(
-                                                                  color: const Color(
+                                                                  color: Color(
                                                                       0x194B39EF),
                                                                   borderRadius:
                                                                       BorderRadius
@@ -3566,7 +3572,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                 ),
                                                                 child: Align(
                                                                   alignment:
-                                                                      const AlignmentDirectional(
+                                                                      AlignmentDirectional(
                                                                           0.0,
                                                                           0.0),
                                                                   child:
@@ -3602,7 +3608,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                 .override(
                                                                   fontFamily:
                                                                       'Outfit',
-                                                                  color: const Color(
+                                                                  color: Color(
                                                                       0xFF00A13C),
                                                                   fontSize:
                                                                       14.0,
@@ -3643,7 +3649,7 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                   fillColor: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryBackground,
-                                                                  icon: const Icon(
+                                                                  icon: Icon(
                                                                     Icons
                                                                         .edit_note_outlined,
                                                                     color: Color(
@@ -3711,9 +3717,9 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                             backgroundColor:
                                                                                 Colors.transparent,
                                                                             alignment:
-                                                                                const AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
                                                                             child:
-                                                                                SizedBox(
+                                                                                Container(
                                                                               height: 190.0,
                                                                               width: 360.0,
                                                                               child: MessageBoxWidget(
@@ -3772,11 +3778,11 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                 ),
                                               ),
                                             ]
-                                                .divide(const SizedBox(height: 20.0))
+                                                .divide(SizedBox(height: 20.0))
                                                 .addToStart(
-                                                    const SizedBox(height: 10.0))
+                                                    SizedBox(height: 10.0))
                                                 .addToEnd(
-                                                    const SizedBox(height: 10.0)),
+                                                    SizedBox(height: 10.0)),
                                           ),
                                         ),
                                       ),

@@ -5,6 +5,9 @@ import '/flutter_flow/flutter_flow_widgets.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'un_view_frame_produtos_model.dart';
 export 'un_view_frame_produtos_model.dart';
 
@@ -53,7 +56,7 @@ class _UnViewFrameProdutosWidgetState extends State<UnViewFrameProdutosWidget> {
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: Padding(
-        padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+        padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
         child: Column(
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -75,7 +78,7 @@ class _UnViewFrameProdutosWidgetState extends State<UnViewFrameProdutosWidget> {
                 ))
                   Expanded(
                     child: Align(
-                      alignment: const AlignmentDirectional(-1.0, 0.0),
+                      alignment: AlignmentDirectional(-1.0, 0.0),
                       child: FFButtonWidget(
                         onPressed: () {
                           print('Button pressed ...');
@@ -88,9 +91,9 @@ class _UnViewFrameProdutosWidgetState extends State<UnViewFrameProdutosWidget> {
                         ),
                         options: FFButtonOptions(
                           height: 35.0,
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               24.0, 0.0, 24.0, 0.0),
-                          iconPadding: const EdgeInsets.all(0.0),
+                          iconPadding: EdgeInsets.all(0.0),
                           color: Colors.transparent,
                           textStyle: FlutterFlowTheme.of(context)
                               .titleSmall
@@ -102,7 +105,7 @@ class _UnViewFrameProdutosWidgetState extends State<UnViewFrameProdutosWidget> {
                                 fontWeight: FontWeight.w300,
                               ),
                           elevation: 0.0,
-                          borderSide: const BorderSide(
+                          borderSide: BorderSide(
                             color: Color(0x8E636B91),
                             width: 1.0,
                           ),
@@ -113,7 +116,7 @@ class _UnViewFrameProdutosWidgetState extends State<UnViewFrameProdutosWidget> {
                   ),
                 Expanded(
                   child: Align(
-                    alignment: const AlignmentDirectional(1.0, 0.0),
+                    alignment: AlignmentDirectional(1.0, 0.0),
                     child: Material(
                       color: Colors.transparent,
                       elevation: 0.0,
@@ -128,7 +131,7 @@ class _UnViewFrameProdutosWidgetState extends State<UnViewFrameProdutosWidget> {
                               FlutterFlowTheme.of(context).secondaryBackground,
                           borderRadius: BorderRadius.circular(8.0),
                           border: Border.all(
-                            color: const Color(0x8E636B91),
+                            color: Color(0x8E636B91),
                           ),
                         ),
                         child: Row(
@@ -136,16 +139,16 @@ class _UnViewFrameProdutosWidgetState extends State<UnViewFrameProdutosWidget> {
                           children: [
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     2.0, 2.0, 0.0, 2.0),
-                                child: SizedBox(
+                                child: Container(
                                   width: 220.0,
                                   child: TextFormField(
                                     controller: _model.pesquisaTextController,
                                     focusNode: _model.pesquisaFocusNode,
                                     onChanged: (_) => EasyDebounce.debounce(
                                       '_model.pesquisaTextController',
-                                      const Duration(milliseconds: 2000),
+                                      Duration(milliseconds: 2000),
                                       () => safeSetState(() {}),
                                     ),
                                     autofocus: false,
@@ -177,7 +180,7 @@ class _UnViewFrameProdutosWidgetState extends State<UnViewFrameProdutosWidget> {
                                             lineHeight: 1.5,
                                           ),
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
+                                        borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1.0,
                                         ),
@@ -212,7 +215,7 @@ class _UnViewFrameProdutosWidgetState extends State<UnViewFrameProdutosWidget> {
                                             BorderRadius.circular(8.0),
                                       ),
                                       contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
+                                          EdgeInsetsDirectional.fromSTEB(
                                               14.0, 10.0, 14.0, 10.0),
                                       prefixIcon: Icon(
                                         Icons.search_rounded,
@@ -265,7 +268,7 @@ class _UnViewFrameProdutosWidgetState extends State<UnViewFrameProdutosWidget> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   2.0, 2.0, 2.0, 2.0),
                               child: FlutterFlowIconButton(
                                 borderColor: Colors.transparent,
@@ -288,9 +291,9 @@ class _UnViewFrameProdutosWidgetState extends State<UnViewFrameProdutosWidget> {
                     ),
                   ),
                 ),
-              ].divide(const SizedBox(width: 10.0)),
+              ].divide(SizedBox(width: 10.0)),
             ),
-          ].addToStart(const SizedBox(height: 12.0)).addToEnd(const SizedBox(height: 12.0)),
+          ].addToStart(SizedBox(height: 12.0)).addToEnd(SizedBox(height: 12.0)),
         ),
       ),
     );

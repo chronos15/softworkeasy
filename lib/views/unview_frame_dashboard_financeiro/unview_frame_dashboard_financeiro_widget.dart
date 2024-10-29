@@ -9,6 +9,8 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'unview_frame_dashboard_financeiro_model.dart';
@@ -60,14 +62,14 @@ class _UnviewFrameDashboardFinanceiroWidgetState
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-            padding: const EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 0.0),
+            padding: EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 0.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Align(
-                  alignment: const AlignmentDirectional(-1.0, 0.0),
+                  alignment: AlignmentDirectional(-1.0, 0.0),
                   child: Text(
                     'Financeiro',
                     style: FlutterFlowTheme.of(context).bodyMedium.override(
@@ -83,7 +85,7 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                   tablet: false,
                 ))
                   Align(
-                    alignment: const AlignmentDirectional(-1.0, 0.0),
+                    alignment: AlignmentDirectional(-1.0, 0.0),
                     child: FFButtonWidget(
                       onPressed: () {
                         print('Button pressed ...');
@@ -96,9 +98,9 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                       ),
                       options: FFButtonOptions(
                         height: 35.0,
-                        padding: const EdgeInsetsDirectional.fromSTEB(
+                        padding: EdgeInsetsDirectional.fromSTEB(
                             24.0, 0.0, 24.0, 0.0),
-                        iconPadding: const EdgeInsets.all(0.0),
+                        iconPadding: EdgeInsets.all(0.0),
                         color: FlutterFlowTheme.of(context).secondaryBackground,
                         textStyle: FlutterFlowTheme.of(context)
                             .titleSmall
@@ -135,7 +137,7 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                       height: 35.0,
                       decoration: BoxDecoration(
                         color: FlutterFlowTheme.of(context).secondaryBackground,
-                        boxShadow: const [
+                        boxShadow: [
                           BoxShadow(
                             blurRadius: 4.0,
                             color: Color(0x33000000),
@@ -152,9 +154,9 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                         ),
                       ),
                       child: Align(
-                        alignment: const AlignmentDirectional(-1.0, 0.0),
+                        alignment: AlignmentDirectional(-1.0, 0.0),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               12.0, 0.0, 12.0, 0.0),
                           child: AutoSizeText(
                             '19/09/2024',
@@ -179,7 +181,7 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                   desktop: false,
                 ))
                   Align(
-                    alignment: const AlignmentDirectional(1.0, -1.0),
+                    alignment: AlignmentDirectional(1.0, -1.0),
                     child: FlutterFlowIconButton(
                       borderColor: FlutterFlowTheme.of(context).primary,
                       borderRadius: 8.0,
@@ -196,7 +198,7 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                   ),
                 Expanded(
                   child: Align(
-                    alignment: const AlignmentDirectional(1.0, 0.0),
+                    alignment: AlignmentDirectional(1.0, 0.0),
                     child: Material(
                       color: Colors.transparent,
                       elevation: 0.0,
@@ -211,7 +213,7 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                               FlutterFlowTheme.of(context).secondaryBackground,
                           borderRadius: BorderRadius.circular(8.0),
                           border: Border.all(
-                            color: const Color(0x8E636B91),
+                            color: Color(0x8E636B91),
                           ),
                         ),
                         child: Row(
@@ -219,16 +221,16 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                           children: [
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     2.0, 2.0, 0.0, 2.0),
-                                child: SizedBox(
+                                child: Container(
                                   width: 220.0,
                                   child: TextFormField(
                                     controller: _model.pesquisaTextController,
                                     focusNode: _model.pesquisaFocusNode,
                                     onChanged: (_) => EasyDebounce.debounce(
                                       '_model.pesquisaTextController',
-                                      const Duration(milliseconds: 2000),
+                                      Duration(milliseconds: 2000),
                                       () => safeSetState(() {}),
                                     ),
                                     autofocus: false,
@@ -261,7 +263,7 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                                             lineHeight: 1.5,
                                           ),
                                       enabledBorder: OutlineInputBorder(
-                                        borderSide: const BorderSide(
+                                        borderSide: BorderSide(
                                           color: Color(0x00000000),
                                           width: 1.0,
                                         ),
@@ -296,7 +298,7 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                                             BorderRadius.circular(8.0),
                                       ),
                                       contentPadding:
-                                          const EdgeInsetsDirectional.fromSTEB(
+                                          EdgeInsetsDirectional.fromSTEB(
                                               14.0, 10.0, 14.0, 10.0),
                                       prefixIcon: Icon(
                                         Icons.search_rounded,
@@ -349,7 +351,7 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   2.0, 2.0, 2.0, 2.0),
                               child: FlutterFlowIconButton(
                                 borderColor: Colors.transparent,
@@ -372,7 +374,7 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                     ),
                   ),
                 ),
-              ].divide(const SizedBox(width: 10.0)),
+              ].divide(SizedBox(width: 10.0)),
             ),
           ),
           Row(
@@ -390,7 +392,7 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                         children: [
                           Expanded(
                             child: Padding(
-                              padding: const EdgeInsets.all(12.0),
+                              padding: EdgeInsets.all(12.0),
                               child: Material(
                                 color: Colors.transparent,
                                 elevation: 0.0,
@@ -405,17 +407,17 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                                         .secondaryBackground,
                                     borderRadius: BorderRadius.circular(12.0),
                                     border: Border.all(
-                                      color: const Color(0x69636B91),
+                                      color: Color(0x69636B91),
                                     ),
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 5.0, 0.0, 5.0),
                                     child: Row(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Expanded(
-                                          child: SizedBox(
+                                          child: Container(
                                             width: double.infinity,
                                             height: double.infinity,
                                             child: custom_widgets
@@ -425,7 +427,7 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                                               sTitulo: 'teste',
                                               sDateFormat: 'teste',
                                               bVisibleMarker: true,
-                                              colorLine: const Color(0x730C7FFF),
+                                              colorLine: Color(0x730C7FFF),
                                               intervalAxisX: 0.0,
                                               colorLine2:
                                                   FlutterFlowTheme.of(context)
@@ -450,7 +452,7 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                                           ),
                                         ),
                                         Expanded(
-                                          child: SizedBox(
+                                          child: Container(
                                             width: double.infinity,
                                             height: double.infinity,
                                             child: custom_widgets
@@ -473,25 +475,25 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                                                       7, 7),
                                                   (index) => random_data
                                                       .randomDouble(0.0, 10.0)),
-                                              colorColumn1: const Color(0x770C7FFF),
-                                              colorColumn2: const Color(0x78FF5963),
+                                              colorColumn1: Color(0x770C7FFF),
+                                              colorColumn2: Color(0x78FF5963),
                                             ),
                                           ),
                                         ),
                                       ]
-                                          .divide(const SizedBox(width: 5.0))
-                                          .addToStart(const SizedBox(width: 5.0))
-                                          .addToEnd(const SizedBox(width: 5.0)),
+                                          .divide(SizedBox(width: 5.0))
+                                          .addToStart(SizedBox(width: 5.0))
+                                          .addToEnd(SizedBox(width: 5.0)),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ].divide(const SizedBox(width: 10.0)),
+                        ].divide(SizedBox(width: 10.0)),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: EdgeInsets.all(12.0),
                         child: Material(
                           color: Colors.transparent,
                           elevation: 0.0,
@@ -504,11 +506,11 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                                   .secondaryBackground,
                               borderRadius: BorderRadius.circular(12.0),
                               border: Border.all(
-                                color: const Color(0x69636B91),
+                                color: Color(0x69636B91),
                               ),
                             ),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 0.0, 12.0, 0.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -525,7 +527,7 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                                         ),
                                   ),
                                   ListView(
-                                    padding: const EdgeInsets.fromLTRB(
+                                    padding: EdgeInsets.fromLTRB(
                                       0,
                                       10.0,
                                       0,
@@ -611,9 +613,9 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                                             },
                                           ),
                                         ]
-                                            .divide(const SizedBox(width: 10.0))
-                                            .addToStart(const SizedBox(width: 10.0))
-                                            .addToEnd(const SizedBox(width: 10.0)),
+                                            .divide(SizedBox(width: 10.0))
+                                            .addToStart(SizedBox(width: 10.0))
+                                            .addToEnd(SizedBox(width: 10.0)),
                                       ),
                                       Row(
                                         mainAxisSize: MainAxisSize.max,
@@ -691,22 +693,22 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                                             },
                                           ),
                                         ]
-                                            .divide(const SizedBox(width: 10.0))
-                                            .addToStart(const SizedBox(width: 10.0))
-                                            .addToEnd(const SizedBox(width: 10.0)),
+                                            .divide(SizedBox(width: 10.0))
+                                            .addToStart(SizedBox(width: 10.0))
+                                            .addToEnd(SizedBox(width: 10.0)),
                                       ),
-                                    ].divide(const SizedBox(height: 5.0)),
+                                    ].divide(SizedBox(height: 5.0)),
                                   ),
                                 ]
-                                    .addToStart(const SizedBox(height: 10.0))
-                                    .addToEnd(const SizedBox(height: 10.0)),
+                                    .addToStart(SizedBox(height: 10.0))
+                                    .addToEnd(SizedBox(height: 10.0)),
                               ),
                             ),
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(12.0),
+                        padding: EdgeInsets.all(12.0),
                         child: Material(
                           color: Colors.transparent,
                           elevation: 0.0,
@@ -721,11 +723,11 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                                   .secondaryBackground,
                               borderRadius: BorderRadius.circular(12.0),
                               border: Border.all(
-                                color: const Color(0x69636B91),
+                                color: Color(0x69636B91),
                               ),
                             ),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 0.0, 12.0, 0.0),
                               child: Column(
                                 mainAxisSize: MainAxisSize.min,
@@ -850,7 +852,7 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                                                   selected,
                                                   onSelectChanged) =>
                                               DataRow(
-                                            color: WidgetStateProperty.all(
+                                            color: MaterialStateProperty.all(
                                               erdsasdIndex % 2 == 0
                                                   ? FlutterFlowTheme.of(context)
                                                       .secondaryBackground
@@ -886,7 +888,7 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                                                   Expanded(
                                                     child: Align(
                                                       alignment:
-                                                          const AlignmentDirectional(
+                                                          AlignmentDirectional(
                                                               -1.0, 0.0),
                                                       child: AutoSizeText(
                                                         'Produto ABC Teste',
@@ -972,9 +974,9 @@ class _UnviewFrameDashboardFinanceiroWidgetState
                                     ),
                                   ),
                                 ]
-                                    .divide(const SizedBox(height: 20.0))
-                                    .addToStart(const SizedBox(height: 10.0))
-                                    .addToEnd(const SizedBox(height: 10.0)),
+                                    .divide(SizedBox(height: 20.0))
+                                    .addToStart(SizedBox(height: 10.0))
+                                    .addToEnd(SizedBox(height: 10.0)),
                               ),
                             ),
                           ),

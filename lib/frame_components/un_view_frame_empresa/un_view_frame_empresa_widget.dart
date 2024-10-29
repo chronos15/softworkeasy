@@ -4,11 +4,17 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_static_map.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/lat_lng.dart';
+import 'dart:math';
 import 'package:mapbox_search/mapbox_search.dart' as mapbox;
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 import 'un_view_frame_empresa_model.dart';
 export 'un_view_frame_empresa_model.dart';
@@ -86,7 +92,7 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
           color: FlutterFlowTheme.of(context).primaryBackground,
           borderRadius: BorderRadius.circular(12.0),
         ),
-        child: SizedBox(
+        child: Container(
           width: double.infinity,
           height: double.infinity,
           child: Stack(
@@ -95,7 +101,7 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(12.0),
+                    padding: EdgeInsets.all(12.0),
                     child: Material(
                       color: Colors.transparent,
                       elevation: 0.0,
@@ -121,7 +127,7 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                 decoration: BoxDecoration(
                                   color: FlutterFlowTheme.of(context)
                                       .secondaryBackground,
-                                  boxShadow: const [
+                                  boxShadow: [
                                     BoxShadow(
                                       blurRadius: 4.0,
                                       color: Color(0x33000000),
@@ -150,7 +156,7 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                         type: PageTransitionType.fade,
                                         child: FlutterFlowExpandedImageView(
                                           image: Image.memory(
-                                            widget.uploadedFoto?.bytes ??
+                                            widget!.uploadedFoto?.bytes ??
                                                 Uint8List.fromList([]),
                                             fit: BoxFit.contain,
                                             errorBuilder:
@@ -174,11 +180,11 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                       width: 200.0,
                                       height: 200.0,
                                       clipBehavior: Clip.antiAlias,
-                                      decoration: const BoxDecoration(
+                                      decoration: BoxDecoration(
                                         shape: BoxShape.circle,
                                       ),
                                       child: Image.memory(
-                                        widget.uploadedFoto?.bytes ??
+                                        widget!.uploadedFoto?.bytes ??
                                             Uint8List.fromList([]),
                                         fit: BoxFit.cover,
                                         errorBuilder:
@@ -195,7 +201,7 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                             ),
                             Expanded(
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     20.0, 0.0, 0.0, 0.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
@@ -216,7 +222,7 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                           ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 4.0, 0.0, 0.0),
                                       child: Text(
                                         FFAppState().Empresa.nomeFantasia,
@@ -253,8 +259,8 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                               ),
                             ),
                           ]
-                              .addToStart(const SizedBox(width: 20.0))
-                              .addToEnd(const SizedBox(width: 20.0)),
+                              .addToStart(SizedBox(width: 20.0))
+                              .addToEnd(SizedBox(width: 20.0)),
                         ),
                       ),
                     ),
@@ -266,7 +272,7 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                       child: Container(
                         width: double.infinity,
                         height: double.infinity,
-                        decoration: const BoxDecoration(),
+                        decoration: BoxDecoration(),
                         child: Row(
                           mainAxisSize: MainAxisSize.max,
                           children: [
@@ -277,12 +283,12 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                 child: Container(
                                   width: 360.0,
                                   height: double.infinity,
-                                  decoration: const BoxDecoration(),
+                                  decoration: BoxDecoration(),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
                                     children: [
                                       ListView(
-                                        padding: const EdgeInsets.fromLTRB(
+                                        padding: EdgeInsets.fromLTRB(
                                           0,
                                           12.0,
                                           0,
@@ -293,7 +299,7 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                         children: [
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     24.0, 0.0, 0.0, 0.0),
                                             child: Text(
                                               'Informações Básicas',
@@ -312,7 +318,7 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 10.0, 16.0, 0.0),
                                             child: Material(
                                               color: Colors.transparent,
@@ -500,9 +506,9 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                           ),
                                           Align(
                                             alignment:
-                                                const AlignmentDirectional(0.0, 1.0),
+                                                AlignmentDirectional(0.0, 1.0),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(5.0, 0.0, 5.0, 5.0),
                                               child: Material(
                                                 color: Colors.transparent,
@@ -552,7 +558,7 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                                           .primaryBackground,
                                                   dense: true,
                                                   contentPadding:
-                                                      const EdgeInsetsDirectional
+                                                      EdgeInsetsDirectional
                                                           .fromSTEB(20.0, 0.0,
                                                               20.0, 0.0),
                                                   shape: RoundedRectangleBorder(
@@ -566,7 +572,7 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     16.0, 0.0, 16.0, 5.0),
                                             child: Material(
                                               color: Colors.transparent,
@@ -582,7 +588,7 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                                   color: FlutterFlowTheme.of(
                                                           context)
                                                       .info,
-                                                  boxShadow: const [
+                                                  boxShadow: [
                                                     BoxShadow(
                                                       blurRadius: 4.0,
                                                       color: Color(0x33000000),
@@ -600,10 +606,10 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                                   children: [
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsets.all(5.0),
+                                                          EdgeInsets.all(5.0),
                                                       child:
                                                           FlutterFlowStaticMap(
-                                                        location: const LatLng(
+                                                        location: LatLng(
                                                             9.341465,
                                                             -79.891704),
                                                         apiKey:
@@ -614,7 +620,7 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                                         height: 300.0,
                                                         fit: BoxFit.cover,
                                                         borderRadius:
-                                                            const BorderRadius.only(
+                                                            BorderRadius.only(
                                                           bottomLeft:
                                                               Radius.circular(
                                                                   0.0),
@@ -647,7 +653,7 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                       Expanded(
                                         child: Align(
                                           alignment:
-                                              const AlignmentDirectional(0.0, 1.0),
+                                              AlignmentDirectional(0.0, 1.0),
                                           child: Row(
                                             mainAxisSize: MainAxisSize.max,
                                             mainAxisAlignment:
@@ -674,16 +680,16 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                                         .secondaryText,
                                                 size: 24.0,
                                               ),
-                                            ].divide(const SizedBox(width: 30.0)),
+                                            ].divide(SizedBox(width: 30.0)),
                                           ),
                                         ),
                                       ),
-                                    ].addToEnd(const SizedBox(height: 20.0)),
+                                    ].addToEnd(SizedBox(height: 20.0)),
                                   ),
                                 ),
                               ),
                             ),
-                            const VerticalDivider(
+                            VerticalDivider(
                               width: 1.0,
                               thickness: 2.0,
                               indent: 20.0,
@@ -703,7 +709,7 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                                   child: Container(
                                     width: 100.0,
                                     height: double.infinity,
-                                    decoration: const BoxDecoration(),
+                                    decoration: BoxDecoration(),
                                   ),
                                 ),
                               ),
@@ -715,9 +721,9 @@ class _UnViewFrameEmpresaWidgetState extends State<UnViewFrameEmpresaWidget>
                 ],
               ),
               Align(
-                alignment: const AlignmentDirectional(1.0, -1.0),
+                alignment: AlignmentDirectional(1.0, -1.0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 10.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 10.0, 0.0),
                   child: FlutterFlowIconButton(
                     borderRadius: 8.0,
                     buttonSize: 45.0,

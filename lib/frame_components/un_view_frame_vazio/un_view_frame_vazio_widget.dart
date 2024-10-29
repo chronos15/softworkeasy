@@ -1,10 +1,15 @@
 import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:math';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
+import 'package:provider/provider.dart';
 import 'un_view_frame_vazio_model.dart';
 export 'un_view_frame_vazio_model.dart';
 
@@ -90,10 +95,10 @@ class _UnViewFrameVazioWidgetState extends State<UnViewFrameVazioWidget>
           children: [
             Expanded(
               child: Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
                 child: AutoSizeText(
                   valueOrDefault<String>(
-                    widget.sTitulo,
+                    widget!.sTitulo,
                     'Falha',
                   ),
                   textAlign: TextAlign.center,
@@ -109,7 +114,7 @@ class _UnViewFrameVazioWidgetState extends State<UnViewFrameVazioWidget>
           ],
         ),
         Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
+          padding: EdgeInsetsDirectional.fromSTEB(16.0, 0.0, 16.0, 0.0),
           child: Row(
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -118,7 +123,7 @@ class _UnViewFrameVazioWidgetState extends State<UnViewFrameVazioWidget>
               Expanded(
                 child: Text(
                   valueOrDefault<String>(
-                    widget.sMessage,
+                    widget!.sMessage,
                     'Verifique seus dados e conexão ou tente novamente!',
                   ),
                   textAlign: TextAlign.center,
@@ -134,9 +139,9 @@ class _UnViewFrameVazioWidgetState extends State<UnViewFrameVazioWidget>
           ),
         ),
       ]
-          .divide(const SizedBox(height: 12.0))
-          .addToStart(const SizedBox(height: 30.0))
-          .addToEnd(const SizedBox(height: 30.0)),
+          .divide(SizedBox(height: 12.0))
+          .addToStart(SizedBox(height: 30.0))
+          .addToEnd(SizedBox(height: 30.0)),
     ).animateOnPageLoad(animationsMap['columnOnPageLoadAnimation']!);
   }
 }

@@ -9,6 +9,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'un_view_lista_clientes_model.dart';
 export 'un_view_lista_clientes_model.dart';
 
@@ -50,7 +53,7 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 12.0),
+      padding: EdgeInsetsDirectional.fromSTEB(12.0, 12.0, 12.0, 12.0),
       child: Material(
         color: Colors.transparent,
         elevation: 1.0,
@@ -67,7 +70,7 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
           child: Stack(
             children: [
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,7 +93,7 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
                         ))
                           Expanded(
                             child: Align(
-                              alignment: const AlignmentDirectional(-1.0, 0.0),
+                              alignment: AlignmentDirectional(-1.0, 0.0),
                               child: FFButtonWidget(
                                 onPressed: () {
                                   print('Button pressed ...');
@@ -104,9 +107,9 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
                                 ),
                                 options: FFButtonOptions(
                                   height: 35.0,
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       24.0, 0.0, 24.0, 0.0),
-                                  iconPadding: const EdgeInsets.all(0.0),
+                                  iconPadding: EdgeInsets.all(0.0),
                                   color: Colors.transparent,
                                   textStyle: FlutterFlowTheme.of(context)
                                       .titleSmall
@@ -119,7 +122,7 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
                                         fontWeight: FontWeight.w300,
                                       ),
                                   elevation: 0.0,
-                                  borderSide: const BorderSide(
+                                  borderSide: BorderSide(
                                     color: Color(0x8E636B91),
                                     width: 1.0,
                                   ),
@@ -130,7 +133,7 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
                           ),
                         Expanded(
                           child: Align(
-                            alignment: const AlignmentDirectional(1.0, 0.0),
+                            alignment: AlignmentDirectional(1.0, 0.0),
                             child: Material(
                               color: Colors.transparent,
                               elevation: 0.0,
@@ -145,7 +148,7 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
                                       .secondaryBackground,
                                   borderRadius: BorderRadius.circular(8.0),
                                   border: Border.all(
-                                    color: const Color(0x8E636B91),
+                                    color: Color(0x8E636B91),
                                   ),
                                 ),
                                 child: Row(
@@ -153,9 +156,9 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
                                   children: [
                                     Expanded(
                                       child: Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             2.0, 2.0, 0.0, 2.0),
-                                        child: SizedBox(
+                                        child: Container(
                                           width: 220.0,
                                           child: TextFormField(
                                             controller:
@@ -164,7 +167,7 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
                                             onChanged: (_) =>
                                                 EasyDebounce.debounce(
                                               '_model.pesquisaTextController',
-                                              const Duration(milliseconds: 2000),
+                                              Duration(milliseconds: 2000),
                                               () => safeSetState(() {}),
                                             ),
                                             autofocus: false,
@@ -201,7 +204,7 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
                                                     lineHeight: 1.5,
                                                   ),
                                               enabledBorder: OutlineInputBorder(
-                                                borderSide: const BorderSide(
+                                                borderSide: BorderSide(
                                                   color: Color(0x00000000),
                                                   width: 1.0,
                                                 ),
@@ -240,7 +243,7 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
                                                     BorderRadius.circular(8.0),
                                               ),
                                               contentPadding:
-                                                  const EdgeInsetsDirectional
+                                                  EdgeInsetsDirectional
                                                       .fromSTEB(14.0, 10.0,
                                                           14.0, 10.0),
                                               prefixIcon: Icon(
@@ -301,7 +304,7 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
                                       ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           2.0, 2.0, 2.0, 2.0),
                                       child: FlutterFlowIconButton(
                                         borderColor: Colors.transparent,
@@ -325,7 +328,7 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
                             ),
                           ),
                         ),
-                      ].divide(const SizedBox(width: 10.0)),
+                      ].divide(SizedBox(width: 10.0)),
                     ),
                     Expanded(
                       child: Builder(
@@ -435,7 +438,7 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
                             dataRowBuilder: (erdsItem, erdsIndex, selected,
                                     onSelectChanged) =>
                                 DataRow(
-                              color: WidgetStateProperty.all(
+                              color: MaterialStateProperty.all(
                                 erdsIndex % 2 == 0
                                     ? FlutterFlowTheme.of(context)
                                         .secondaryBackground
@@ -506,7 +509,7 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
                                       ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 5.0, 0.0, 5.0),
                                   child: Material(
                                     color: Colors.transparent,
@@ -518,13 +521,13 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
                                       width: 80.0,
                                       height: 25.0,
                                       decoration: BoxDecoration(
-                                        color: const Color(0x194B39EF),
+                                        color: Color(0x194B39EF),
                                         borderRadius:
                                             BorderRadius.circular(12.0),
                                       ),
                                       child: Align(
                                         alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
+                                            AlignmentDirectional(0.0, 0.0),
                                         child: AutoSizeText(
                                           'Ativo',
                                           textAlign: TextAlign.center,
@@ -563,7 +566,7 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
                                         buttonSize: 35.0,
                                         fillColor: FlutterFlowTheme.of(context)
                                             .secondaryBackground,
-                                        icon: const Icon(
+                                        icon: Icon(
                                           Icons.edit_note_outlined,
                                           color: Color(0xA7636B91),
                                           size: 15.0,
@@ -608,12 +611,12 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
                                                   backgroundColor:
                                                       Colors.transparent,
                                                   alignment:
-                                                      const AlignmentDirectional(
+                                                      AlignmentDirectional(
                                                               0.0, 0.0)
                                                           .resolve(
                                                               Directionality.of(
                                                                   context)),
-                                                  child: SizedBox(
+                                                  child: Container(
                                                     height: 190.0,
                                                     width: 360.0,
                                                     child: MessageBoxWidget(
@@ -621,7 +624,7 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
                                                       sText:
                                                           'Deseja excluir esse cliente?',
                                                       corPrincipal:
-                                                          const Color(0xFFFFC200),
+                                                          Color(0xFFFFC200),
                                                       enableCancel: true,
                                                       sTextoConfirma: 'Excluir',
                                                       actionConfirm: () async {
@@ -664,15 +667,15 @@ class _UnViewListaClientesWidgetState extends State<UnViewListaClientesWidget> {
                       ),
                     ),
                   ]
-                      .divide(const SizedBox(height: 10.0))
-                      .addToStart(const SizedBox(height: 10.0))
-                      .addToEnd(const SizedBox(height: 10.0)),
+                      .divide(SizedBox(height: 10.0))
+                      .addToStart(SizedBox(height: 10.0))
+                      .addToEnd(SizedBox(height: 10.0)),
                 ),
               ),
               Align(
-                alignment: const AlignmentDirectional(1.0, 1.0),
+                alignment: AlignmentDirectional(1.0, 1.0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 16.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 16.0, 16.0),
                   child: FloatingActionButton(
                     onPressed: () {
                       print('FloatingActionButton pressed ...');

@@ -1,14 +1,23 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:go_router/go_router.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 import '/backend/schema/structs/index.dart';
+import '/backend/schema/enums/enums.dart';
 
 import '/auth/custom_auth/custom_auth_user_provider.dart';
 
 import '/index.dart';
+import '/main.dart';
+import '/flutter_flow/flutter_flow_theme.dart';
+import '/flutter_flow/lat_lng.dart';
+import '/flutter_flow/place.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'serialization_util.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -74,8 +83,8 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       refreshListenable: appStateNotifier,
       errorBuilder: (context, state) => RootPageContext.wrap(
         appStateNotifier.loggedIn
-            ? const UnViewFormPrincipalWidget()
-            : const UnViewFormLoginWidget(),
+            ? UnViewFormPrincipalWidget()
+            : UnViewFormLoginWidget(),
         errorRoute: state.uri.toString(),
       ),
       routes: [
@@ -84,20 +93,20 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
           path: '/',
           builder: (context, _) => RootPageContext.wrap(
             appStateNotifier.loggedIn
-                ? const UnViewFormPrincipalWidget()
-                : const UnViewFormLoginWidget(),
+                ? UnViewFormPrincipalWidget()
+                : UnViewFormLoginWidget(),
           ),
         ),
         FFRoute(
           name: 'unViewFormLogin',
           path: '/Login',
-          builder: (context, params) => const UnViewFormLoginWidget(),
+          builder: (context, params) => UnViewFormLoginWidget(),
         ),
         FFRoute(
           name: 'unViewFormPrincipal',
           path: '/Principal',
           requireAuth: true,
-          builder: (context, params) => const UnViewFormPrincipalWidget(),
+          builder: (context, params) => UnViewFormPrincipalWidget(),
         ),
         FFRoute(
           name: 'unViewFormSettings',
@@ -357,7 +366,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {

@@ -4,9 +4,14 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/frame_components/un_view_frame_header/un_view_frame_header_widget.dart';
+import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 import 'un_view_form_settings_model.dart';
 export 'un_view_form_settings_model.dart';
@@ -42,7 +47,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
       length: 2,
       initialIndex: min(
           valueOrDefault<int>(
-            widget.iTabInitial,
+            widget!.iTabInitial,
             0,
           ),
           1),
@@ -151,7 +156,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
             curve: Curves.easeInOut,
             delay: 160.0.ms,
             duration: 600.0.ms,
-            color: const Color(0xFFF1F4F8),
+            color: Color(0xFFF1F4F8),
             angle: 0.524,
           ),
         ],
@@ -199,14 +204,14 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                 children: [
                   Expanded(
                     child: Align(
-                      alignment: const AlignmentDirectional(0.0, 0.0),
+                      alignment: AlignmentDirectional(0.0, 0.0),
                       child: Container(
-                        constraints: const BoxConstraints(
+                        constraints: BoxConstraints(
                           maxWidth: 440.0,
                         ),
-                        decoration: const BoxDecoration(),
+                        decoration: BoxDecoration(),
                         child: Align(
-                          alignment: const AlignmentDirectional(0.0, 0.0),
+                          alignment: AlignmentDirectional(0.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
                             mainAxisAlignment: MainAxisAlignment.center,
@@ -225,19 +230,19 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                           .secondaryBackground,
                                       borderRadius: BorderRadius.circular(0.0),
                                     ),
-                                    alignment: const AlignmentDirectional(0.0, 0.0),
+                                    alignment: AlignmentDirectional(0.0, 0.0),
                                     child: Column(
                                       mainAxisSize: MainAxisSize.max,
                                       children: [
                                         Expanded(
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     5.0, 10.0, 5.0, 0.0),
                                             child: Column(
                                               children: [
                                                 Align(
-                                                  alignment: const Alignment(0.0, 0),
+                                                  alignment: Alignment(0.0, 0),
                                                   child: TabBar(
                                                     labelColor:
                                                         FlutterFlowTheme.of(
@@ -248,7 +253,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                 context)
                                                             .secondaryText,
                                                     labelPadding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(5.0, 2.0,
                                                                 5.0, 2.0),
                                                     labelStyle: FlutterFlowTheme
@@ -279,7 +284,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                         FlutterFlowTheme.of(
                                                                 context)
                                                             .primary,
-                                                    tabs: const [
+                                                    tabs: [
                                                       Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
@@ -346,7 +351,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                         builder: (context) =>
                                                             Padding(
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       32.0,
                                                                       12.0,
@@ -374,7 +379,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                             .max,
                                                                     children: [
                                                                       Padding(
-                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
                                                                             0.0,
                                                                             24.0,
                                                                             0.0,
@@ -426,14 +431,14 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                                   borderRadius: BorderRadius.circular(8.0),
                                                                                 ),
                                                                                 errorBorder: OutlineInputBorder(
-                                                                                  borderSide: const BorderSide(
+                                                                                  borderSide: BorderSide(
                                                                                     color: Color(0xFFFDA29B),
                                                                                     width: 1.0,
                                                                                   ),
                                                                                   borderRadius: BorderRadius.circular(8.0),
                                                                                 ),
                                                                                 focusedErrorBorder: OutlineInputBorder(
-                                                                                  borderSide: const BorderSide(
+                                                                                  borderSide: BorderSide(
                                                                                     color: Color(0xFFFDA29B),
                                                                                     width: 1.0,
                                                                                   ),
@@ -441,7 +446,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                                 ),
                                                                                 filled: true,
                                                                                 fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                contentPadding: const EdgeInsetsDirectional.fromSTEB(14.0, 10.0, 14.0, 10.0),
+                                                                                contentPadding: EdgeInsetsDirectional.fromSTEB(14.0, 10.0, 14.0, 10.0),
                                                                               ),
                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                     fontFamily: 'Outfit',
@@ -459,7 +464,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                         ),
                                                                       ),
                                                                       Padding(
-                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
                                                                             0.0,
                                                                             24.0,
                                                                             0.0,
@@ -511,14 +516,14 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                                   borderRadius: BorderRadius.circular(8.0),
                                                                                 ),
                                                                                 errorBorder: OutlineInputBorder(
-                                                                                  borderSide: const BorderSide(
+                                                                                  borderSide: BorderSide(
                                                                                     color: Color(0xFFFDA29B),
                                                                                     width: 1.0,
                                                                                   ),
                                                                                   borderRadius: BorderRadius.circular(8.0),
                                                                                 ),
                                                                                 focusedErrorBorder: OutlineInputBorder(
-                                                                                  borderSide: const BorderSide(
+                                                                                  borderSide: BorderSide(
                                                                                     color: Color(0xFFFDA29B),
                                                                                     width: 1.0,
                                                                                   ),
@@ -526,7 +531,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                                 ),
                                                                                 filled: true,
                                                                                 fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                contentPadding: const EdgeInsetsDirectional.fromSTEB(14.0, 10.0, 14.0, 10.0),
+                                                                                contentPadding: EdgeInsetsDirectional.fromSTEB(14.0, 10.0, 14.0, 10.0),
                                                                               ),
                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                     fontFamily: 'Outfit',
@@ -548,7 +553,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                         ),
                                                                       ),
                                                                       Padding(
-                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
                                                                             0.0,
                                                                             24.0,
                                                                             0.0,
@@ -600,14 +605,14 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                                   borderRadius: BorderRadius.circular(8.0),
                                                                                 ),
                                                                                 errorBorder: OutlineInputBorder(
-                                                                                  borderSide: const BorderSide(
+                                                                                  borderSide: BorderSide(
                                                                                     color: Color(0xFFFDA29B),
                                                                                     width: 1.0,
                                                                                   ),
                                                                                   borderRadius: BorderRadius.circular(8.0),
                                                                                 ),
                                                                                 focusedErrorBorder: OutlineInputBorder(
-                                                                                  borderSide: const BorderSide(
+                                                                                  borderSide: BorderSide(
                                                                                     color: Color(0xFFFDA29B),
                                                                                     width: 1.0,
                                                                                   ),
@@ -615,7 +620,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                                 ),
                                                                                 filled: true,
                                                                                 fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                contentPadding: const EdgeInsetsDirectional.fromSTEB(14.0, 10.0, 14.0, 10.0),
+                                                                                contentPadding: EdgeInsetsDirectional.fromSTEB(14.0, 10.0, 14.0, 10.0),
                                                                               ),
                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                     fontFamily: 'Outfit',
@@ -634,7 +639,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                         ),
                                                                       ),
                                                                       Padding(
-                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
                                                                             0.0,
                                                                             24.0,
                                                                             0.0,
@@ -686,14 +691,14 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                                   borderRadius: BorderRadius.circular(8.0),
                                                                                 ),
                                                                                 errorBorder: OutlineInputBorder(
-                                                                                  borderSide: const BorderSide(
+                                                                                  borderSide: BorderSide(
                                                                                     color: Color(0xFFFDA29B),
                                                                                     width: 1.0,
                                                                                   ),
                                                                                   borderRadius: BorderRadius.circular(8.0),
                                                                                 ),
                                                                                 focusedErrorBorder: OutlineInputBorder(
-                                                                                  borderSide: const BorderSide(
+                                                                                  borderSide: BorderSide(
                                                                                     color: Color(0xFFFDA29B),
                                                                                     width: 1.0,
                                                                                   ),
@@ -701,7 +706,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                                 ),
                                                                                 filled: true,
                                                                                 fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                contentPadding: const EdgeInsetsDirectional.fromSTEB(14.0, 10.0, 14.0, 10.0),
+                                                                                contentPadding: EdgeInsetsDirectional.fromSTEB(14.0, 10.0, 14.0, 10.0),
                                                                               ),
                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                     fontFamily: 'Outfit',
@@ -720,7 +725,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                         ),
                                                                       ),
                                                                       Padding(
-                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
                                                                             0.0,
                                                                             24.0,
                                                                             0.0,
@@ -772,14 +777,14 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                                   borderRadius: BorderRadius.circular(8.0),
                                                                                 ),
                                                                                 errorBorder: OutlineInputBorder(
-                                                                                  borderSide: const BorderSide(
+                                                                                  borderSide: BorderSide(
                                                                                     color: Color(0xFFFDA29B),
                                                                                     width: 1.0,
                                                                                   ),
                                                                                   borderRadius: BorderRadius.circular(8.0),
                                                                                 ),
                                                                                 focusedErrorBorder: OutlineInputBorder(
-                                                                                  borderSide: const BorderSide(
+                                                                                  borderSide: BorderSide(
                                                                                     color: Color(0xFFFDA29B),
                                                                                     width: 1.0,
                                                                                   ),
@@ -787,7 +792,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                                 ),
                                                                                 filled: true,
                                                                                 fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                contentPadding: const EdgeInsetsDirectional.fromSTEB(14.0, 10.0, 14.0, 10.0),
+                                                                                contentPadding: EdgeInsetsDirectional.fromSTEB(14.0, 10.0, 14.0, 10.0),
                                                                               ),
                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                     fontFamily: 'Outfit',
@@ -806,7 +811,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                         ),
                                                                       ),
                                                                       Padding(
-                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                        padding: EdgeInsetsDirectional.fromSTEB(
                                                                             0.0,
                                                                             24.0,
                                                                             0.0,
@@ -858,14 +863,14 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                                   borderRadius: BorderRadius.circular(8.0),
                                                                                 ),
                                                                                 errorBorder: OutlineInputBorder(
-                                                                                  borderSide: const BorderSide(
+                                                                                  borderSide: BorderSide(
                                                                                     color: Color(0xFFFDA29B),
                                                                                     width: 1.0,
                                                                                   ),
                                                                                   borderRadius: BorderRadius.circular(8.0),
                                                                                 ),
                                                                                 focusedErrorBorder: OutlineInputBorder(
-                                                                                  borderSide: const BorderSide(
+                                                                                  borderSide: BorderSide(
                                                                                     color: Color(0xFFFDA29B),
                                                                                     width: 1.0,
                                                                                   ),
@@ -873,7 +878,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                                 ),
                                                                                 filled: true,
                                                                                 fillColor: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                contentPadding: const EdgeInsetsDirectional.fromSTEB(14.0, 10.0, 14.0, 10.0),
+                                                                                contentPadding: EdgeInsetsDirectional.fromSTEB(14.0, 10.0, 14.0, 10.0),
                                                                               ),
                                                                               style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                     fontFamily: 'Outfit',
@@ -920,7 +925,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                     (newValue) async {
                                                                   safeSetState(() =>
                                                                       _model.swLogPersistenteValue =
-                                                                          newValue);
+                                                                          newValue!);
                                                                 },
                                                                 title: Text(
                                                                   'Usuário Persistente',
@@ -985,7 +990,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                         ? null
                                                                         : (newValue) async {
                                                                             safeSetState(() =>
-                                                                                _model.swAutLocalValue = newValue);
+                                                                                _model.swAutLocalValue = newValue!);
                                                                           },
                                                                 title: Text(
                                                                   'Sistema de Biometria (mobile)',
@@ -1055,7 +1060,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                     (newValue) async {
                                                                   safeSetState(() =>
                                                                       _model.swNotificacaoValue1 =
-                                                                          newValue);
+                                                                          newValue!);
                                                                 },
                                                                 title: Text(
                                                                   'Notificações',
@@ -1120,8 +1125,8 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                     (newValue) async {
                                                                   safeSetState(() =>
                                                                       _model.swNotificacaoValue2 =
-                                                                          newValue);
-                                                                  if (newValue) {
+                                                                          newValue!);
+                                                                  if (newValue!) {
                                                                     setDarkModeSetting(
                                                                         context,
                                                                         ThemeMode
@@ -1192,7 +1197,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   24.0, 16.0, 24.0, 10.0),
                                           child: FFButtonWidget(
                                             onPressed: () async {
@@ -1232,7 +1237,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                       .swNotificacaoValue1,
                                               );
                                               safeSetState(() {});
-                                              if (widget.iTabInitial == 0) {
+                                              if (widget!.iTabInitial == 0) {
                                                 context.pushNamed(
                                                     'unViewFormLogin');
                                               } else {
@@ -1243,9 +1248,9 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                             options: FFButtonOptions(
                                               width: double.infinity,
                                               height: 55.0,
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                              iconPadding: const EdgeInsetsDirectional
+                                              iconPadding: EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -1261,7 +1266,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                     fontWeight: FontWeight.w300,
                                                   ),
                                               elevation: 2.0,
-                                              borderSide: const BorderSide(
+                                              borderSide: BorderSide(
                                                 color: Colors.transparent,
                                                 width: 1.0,
                                               ),

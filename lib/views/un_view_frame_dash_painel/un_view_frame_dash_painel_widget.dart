@@ -12,6 +12,7 @@ import '/frame_components/un_view_frame_card_menu/un_view_frame_card_menu_widget
 import '/frame_components/un_view_frame_chart_expansive/un_view_frame_chart_expansive_widget.dart';
 import '/frame_components/un_view_frame_indicadores/un_view_frame_indicadores_widget.dart';
 import '/frame_components/un_view_frame_vazio/un_view_frame_vazio_widget.dart';
+import 'dart:math';
 import '/actions/actions.dart' as action_blocks;
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -20,9 +21,12 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'un_view_frame_dash_painel_model.dart';
 export 'un_view_frame_dash_painel_model.dart';
@@ -74,7 +78,7 @@ class _UnViewFrameDashPainelWidgetState
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            color: const Color(0x80FFFFFF),
+            color: Color(0x80FFFFFF),
             angle: 0.524,
           ),
         ],
@@ -87,7 +91,7 @@ class _UnViewFrameDashPainelWidgetState
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            color: const Color(0x80FFFFFF),
+            color: Color(0x80FFFFFF),
             angle: 0.524,
           ),
         ],
@@ -99,7 +103,7 @@ class _UnViewFrameDashPainelWidgetState
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            color: const Color(0x80FFFFFF),
+            color: Color(0x80FFFFFF),
             angle: 0.524,
           ),
         ],
@@ -111,7 +115,7 @@ class _UnViewFrameDashPainelWidgetState
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            color: const Color(0x80FFFFFF),
+            color: Color(0x80FFFFFF),
             angle: 0.524,
           ),
         ],
@@ -123,7 +127,7 @@ class _UnViewFrameDashPainelWidgetState
             curve: Curves.easeInOut,
             delay: 0.0.ms,
             duration: 600.0.ms,
-            color: const Color(0x80FFFFFF),
+            color: Color(0x80FFFFFF),
             angle: 0.524,
           ),
         ],
@@ -164,7 +168,7 @@ class _UnViewFrameDashPainelWidgetState
 
     return Shortcuts(
       shortcuts: {
-        const SingleActivator(
+        SingleActivator(
           LogicalKeyboardKey.f5,
         ): VoidCallbackIntent(() async {
           _model.iDateSub = () {
@@ -234,7 +238,7 @@ class _UnViewFrameDashPainelWidgetState
           focusNode: _model.unViewFrameDashPainelShortcutsFocusNode,
           child: GestureDetector(
               onTap: () => _model
-                      .unViewFrameDashPainelShortcutsFocusNode.canRequestFocus
+                      .unViewFrameDashPainelShortcutsFocusNode!.canRequestFocus
                   ? FocusScope.of(context).requestFocus(
                       _model.unViewFrameDashPainelShortcutsFocusNode)
                   : FocusScope.of(context).unfocus(),
@@ -247,7 +251,7 @@ class _UnViewFrameDashPainelWidgetState
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               16.0, 12.0, 16.0, 0.0),
                           child: Wrap(
                             spacing: 5.0,
@@ -268,7 +272,7 @@ class _UnViewFrameDashPainelWidgetState
                                       ? 160.0
                                       : 230.0,
                                   height: 105.0,
-                                  decoration: const BoxDecoration(),
+                                  decoration: BoxDecoration(),
                                   child: wrapWithModel(
                                     model: _model.unViewFrameCardMenuModel1,
                                     updateCallback: () => safeSetState(() {}),
@@ -281,12 +285,12 @@ class _UnViewFrameDashPainelWidgetState
                                             .primaryBackground,
                                         size: 25.0,
                                       ),
-                                      colorBase: const Color(0xFF00BC5B),
+                                      colorBase: Color(0xFF00BC5B),
                                       colorText:
                                           FlutterFlowTheme.of(context).info,
                                       colorSubText:
                                           FlutterFlowTheme.of(context).info,
-                                      colorSubIcon: const Color(0xFF00D063),
+                                      colorSubIcon: Color(0xFF00D063),
                                       sToolTipMessage:
                                           'Total de vendas em reais.',
                                     ),
@@ -302,7 +306,7 @@ class _UnViewFrameDashPainelWidgetState
                                       ? 160.0
                                       : 230.0,
                                   height: 105.0,
-                                  decoration: const BoxDecoration(),
+                                  decoration: BoxDecoration(),
                                   child: wrapWithModel(
                                     model: _model.unViewFrameCardMenuModel2,
                                     updateCallback: () => safeSetState(() {}),
@@ -321,7 +325,7 @@ class _UnViewFrameDashPainelWidgetState
                                           FlutterFlowTheme.of(context).info,
                                       colorSubText:
                                           FlutterFlowTheme.of(context).info,
-                                      colorSubIcon: const Color(0xFFFF828A),
+                                      colorSubIcon: Color(0xFFFF828A),
                                       sToolTipMessage:
                                           'Total do fluxo de caixa  em reais.',
                                     ),
@@ -337,7 +341,7 @@ class _UnViewFrameDashPainelWidgetState
                                       ? 160.0
                                       : 230.0,
                                   height: 105.0,
-                                  decoration: const BoxDecoration(),
+                                  decoration: BoxDecoration(),
                                   child: wrapWithModel(
                                     model: _model.unViewFrameCardMenuModel3,
                                     updateCallback: () => safeSetState(() {}),
@@ -356,7 +360,7 @@ class _UnViewFrameDashPainelWidgetState
                                           FlutterFlowTheme.of(context).info,
                                       colorSubText:
                                           FlutterFlowTheme.of(context).info,
-                                      colorSubIcon: const Color(0xFF62A9FF),
+                                      colorSubIcon: Color(0xFF62A9FF),
                                       sToolTipMessage:
                                           'Total de contas à receber em reais.',
                                     ),
@@ -372,7 +376,7 @@ class _UnViewFrameDashPainelWidgetState
                                       ? 160.0
                                       : 230.0,
                                   height: 105.0,
-                                  decoration: const BoxDecoration(),
+                                  decoration: BoxDecoration(),
                                   child: wrapWithModel(
                                     model: _model.unViewFrameCardMenuModel4,
                                     updateCallback: () => safeSetState(() {}),
@@ -385,12 +389,12 @@ class _UnViewFrameDashPainelWidgetState
                                             .primaryBackground,
                                         size: 25.0,
                                       ),
-                                      colorBase: const Color(0xFFFFC200),
+                                      colorBase: Color(0xFFFFC200),
                                       colorText:
                                           FlutterFlowTheme.of(context).info,
                                       colorSubText:
                                           FlutterFlowTheme.of(context).info,
-                                      colorSubIcon: const Color(0xFFFFD95A),
+                                      colorSubIcon: Color(0xFFFFD95A),
                                       sToolTipMessage:
                                           'Total de contas à pagar em reais.',
                                     ),
@@ -407,7 +411,7 @@ class _UnViewFrameDashPainelWidgetState
                             Expanded(
                               flex: 4,
                               child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     12.0, 0.0, 12.0, 0.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.max,
@@ -418,7 +422,7 @@ class _UnViewFrameDashPainelWidgetState
                                       children: [
                                         Expanded(
                                           child: FlutterFlowChoiceChips(
-                                            options: const [
+                                            options: [
                                               ChipData(
                                                   'Hoje', Icons.update_sharp),
                                               ChipData(
@@ -542,7 +546,7 @@ class _UnViewFrameDashPainelWidgetState
                                                       .info,
                                               iconSize: 18.0,
                                               labelPadding:
-                                                  const EdgeInsetsDirectional
+                                                  EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           5.0, 5.0, 15.0, 5.0),
                                               elevation: 3.0,
@@ -572,7 +576,7 @@ class _UnViewFrameDashPainelWidgetState
                                                       .secondaryText,
                                               iconSize: 17.0,
                                               labelPadding:
-                                                  const EdgeInsetsDirectional
+                                                  EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           5.0, 5.0, 15.0, 5.0),
                                               elevation: 3.0,
@@ -604,14 +608,14 @@ class _UnViewFrameDashPainelWidgetState
                                           child: Container(
                                             width: 100.0,
                                             height: 280.0,
-                                            constraints: const BoxConstraints(
+                                            constraints: BoxConstraints(
                                               maxHeight: 280.0,
                                             ),
                                             decoration: BoxDecoration(
                                               color:
                                                   FlutterFlowTheme.of(context)
                                                       .secondaryBackground,
-                                              boxShadow: const [
+                                              boxShadow: [
                                                 BoxShadow(
                                                   blurRadius: 4.0,
                                                   color: Color(0x33000000),
@@ -625,7 +629,7 @@ class _UnViewFrameDashPainelWidgetState
                                                   BorderRadius.circular(12.0),
                                             ),
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       0.0, 10.0, 0.0, 10.0),
                                               child: Row(
@@ -658,7 +662,7 @@ class _UnViewFrameDashPainelWidgetState
                                                               '',
                                                             ).image,
                                                           ),
-                                                          boxShadow: const [
+                                                          boxShadow: [
                                                             BoxShadow(
                                                               blurRadius: 4.0,
                                                               color: Color(
@@ -714,7 +718,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                     // Customize what your widget looks like when it's loading.
                                                                     if (!snapshot
                                                                         .hasData) {
-                                                                      return const Center(
+                                                                      return Center(
                                                                         child:
                                                                             UnViewFrameLoadingWidget(),
                                                                       );
@@ -740,7 +744,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                         height:
                                                                             280.0,
                                                                         constraints:
-                                                                            const BoxConstraints(
+                                                                            BoxConstraints(
                                                                           maxHeight:
                                                                               280.0,
                                                                         ),
@@ -768,7 +772,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                                 (context, snapshot) {
                                                                               // Customize what your widget looks like when it's loading.
                                                                               if (!snapshot.hasData) {
-                                                                                return const Center(
+                                                                                return Center(
                                                                                   child: UnViewFrameLoadingWidget(),
                                                                                 );
                                                                               }
@@ -780,10 +784,12 @@ class _UnViewFrameDashPainelWidgetState
                                                                                       (FFAppState().isConnected &&
                                                                                           (VendaDashDiaHoraCall.valueLista(
                                                                                                 containerVendaDashDiaHoraResponse.jsonBody,
-                                                                                              )!.isNotEmpty)))
+                                                                                              )!
+                                                                                                  .length >=
+                                                                                              1)))
                                                                                     Align(
-                                                                                      alignment: const AlignmentDirectional(0.0, 0.0),
-                                                                                      child: SizedBox(
+                                                                                      alignment: AlignmentDirectional(0.0, 0.0),
+                                                                                      child: Container(
                                                                                         width: double.infinity,
                                                                                         height: double.infinity,
                                                                                         child: custom_widgets.DataTimeChartWithAreaString(
@@ -812,8 +818,10 @@ class _UnViewFrameDashPainelWidgetState
                                                                                       (FFAppState().isConnected &&
                                                                                           (VendaDashTotaisCall.valueList(
                                                                                                 stackDashTotaisVendaDashTotaisResponse.jsonBody,
-                                                                                              )!.isNotEmpty)))
-                                                                                    SizedBox(
+                                                                                              )!
+                                                                                                  .length >=
+                                                                                              1)))
+                                                                                    Container(
                                                                                       width: double.infinity,
                                                                                       height: double.infinity,
                                                                                       child: custom_widgets.DataTimeChartWithArea(
@@ -851,15 +859,17 @@ class _UnViewFrameDashPainelWidgetState
                                                                                   if ((!FFAppState().isConnected ||
                                                                                           (VendaDashDiaHoraCall.valueLista(
                                                                                                 containerVendaDashDiaHoraResponse.jsonBody,
-                                                                                              )!.isEmpty)) &&
+                                                                                              )!
+                                                                                                  .length <=
+                                                                                              0)) &&
                                                                                       (_model.iDateSub! <= 2))
                                                                                     Align(
-                                                                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                                                                      alignment: AlignmentDirectional(0.0, 0.0),
                                                                                       child: wrapWithModel(
                                                                                         model: _model.unViewFrameVazioHoraModel1,
                                                                                         updateCallback: () => safeSetState(() {}),
                                                                                         updateOnChange: true,
-                                                                                        child: const UnViewFrameVazioWidget(
+                                                                                        child: UnViewFrameVazioWidget(
                                                                                           sTitulo: 'Não existem dados nesse período',
                                                                                           sMessage: 'Verifique seus filtros e tente novamente!',
                                                                                         ),
@@ -867,12 +877,12 @@ class _UnViewFrameDashPainelWidgetState
                                                                                     ),
                                                                                   if ((_model.iDateSub! >= 7) && !FFAppState().isConnected)
                                                                                     Align(
-                                                                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                                                                      alignment: AlignmentDirectional(0.0, 0.0),
                                                                                       child: wrapWithModel(
                                                                                         model: _model.unViewFrameVazioDashTotaisModel,
                                                                                         updateCallback: () => safeSetState(() {}),
                                                                                         updateOnChange: true,
-                                                                                        child: const UnViewFrameVazioWidget(
+                                                                                        child: UnViewFrameVazioWidget(
                                                                                           sTitulo: 'Não existem dados nesse período',
                                                                                           sMessage: 'Verifique seus filtros e tente novamente!',
                                                                                         ),
@@ -880,10 +890,10 @@ class _UnViewFrameDashPainelWidgetState
                                                                                     ),
                                                                                   if ((FFAppState().isConnected && (_model.iDateSub! >= 7)) || (FFAppState().isConnected && (_model.iDateSub! <= 2)))
                                                                                     Align(
-                                                                                      alignment: const AlignmentDirectional(1.0, -1.0),
+                                                                                      alignment: AlignmentDirectional(1.0, -1.0),
                                                                                       child: Builder(
                                                                                         builder: (context) => Padding(
-                                                                                          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 3.0, 3.0, 0.0),
+                                                                                          padding: EdgeInsetsDirectional.fromSTEB(0.0, 3.0, 3.0, 0.0),
                                                                                           child: FlutterFlowIconButton(
                                                                                             borderColor: Colors.transparent,
                                                                                             borderRadius: 7.0,
@@ -902,8 +912,8 @@ class _UnViewFrameDashPainelWidgetState
                                                                                                     elevation: 0,
                                                                                                     insetPadding: EdgeInsets.zero,
                                                                                                     backgroundColor: Colors.transparent,
-                                                                                                    alignment: const AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
-                                                                                                    child: SizedBox(
+                                                                                                    alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                                    child: Container(
                                                                                                       height: MediaQuery.sizeOf(context).height * 0.9,
                                                                                                       width: MediaQuery.sizeOf(context).width * 0.9,
                                                                                                       child: UnViewFrameChartExpansiveWidget(
@@ -1033,7 +1043,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                   // Customize what your widget looks like when it's loading.
                                                                   if (!snapshot
                                                                       .hasData) {
-                                                                    return const Center(
+                                                                    return Center(
                                                                       child:
                                                                           UnViewFrameLoadingWidget(),
                                                                     );
@@ -1044,7 +1054,7 @@ class _UnViewFrameDashPainelWidgetState
 
                                                                   return Stack(
                                                                     alignment:
-                                                                        const AlignmentDirectional(
+                                                                        AlignmentDirectional(
                                                                             0.0,
                                                                             0.0),
                                                                     children: [
@@ -1369,7 +1379,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                       if (!FFAppState()
                                                                           .isConnected)
                                                                         Align(
-                                                                          alignment: const AlignmentDirectional(
+                                                                          alignment: AlignmentDirectional(
                                                                               0.0,
                                                                               0.0),
                                                                           child:
@@ -1381,7 +1391,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                             updateOnChange:
                                                                                 true,
                                                                             child:
-                                                                                const UnViewFrameVazioWidget(
+                                                                                UnViewFrameVazioWidget(
                                                                               sTitulo: 'Falha',
                                                                               sMessage: 'Verifique sua conexão e tente novamente!',
                                                                             ),
@@ -1400,9 +1410,9 @@ class _UnViewFrameDashPainelWidgetState
                                                     ),
                                                 ]
                                                     .divide(
-                                                        const SizedBox(width: 10.0))
+                                                        SizedBox(width: 10.0))
                                                     .around(
-                                                        const SizedBox(width: 10.0)),
+                                                        SizedBox(width: 10.0)),
                                               ),
                                             ),
                                           ),
@@ -1494,7 +1504,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                 // Customize what your widget looks like when it's loading.
                                                                 if (!snapshot
                                                                     .hasData) {
-                                                                  return const Center(
+                                                                  return Center(
                                                                     child:
                                                                         UnViewFrameLoadingWidget(),
                                                                   );
@@ -1505,7 +1515,7 @@ class _UnViewFrameDashPainelWidgetState
 
                                                                 return Stack(
                                                                   alignment:
-                                                                      const AlignmentDirectional(
+                                                                      AlignmentDirectional(
                                                                           0.0,
                                                                           0.0),
                                                                   children: [
@@ -1831,7 +1841,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                     if (!FFAppState()
                                                                         .isConnected)
                                                                       Align(
-                                                                        alignment: const AlignmentDirectional(
+                                                                        alignment: AlignmentDirectional(
                                                                             0.0,
                                                                             0.0),
                                                                         child:
@@ -1843,7 +1853,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                           updateOnChange:
                                                                               true,
                                                                           child:
-                                                                              const UnViewFrameVazioWidget(
+                                                                              UnViewFrameVazioWidget(
                                                                             sTitulo:
                                                                                 'Falha',
                                                                             sMessage:
@@ -1922,7 +1932,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                   color: FlutterFlowTheme.of(
                                                                           context)
                                                                       .secondaryBackground,
-                                                                  boxShadow: const [
+                                                                  boxShadow: [
                                                                     BoxShadow(
                                                                       blurRadius:
                                                                           4.0,
@@ -1973,7 +1983,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                           // Customize what your widget looks like when it's loading.
                                                                           if (!snapshot
                                                                               .hasData) {
-                                                                            return const Center(
+                                                                            return Center(
                                                                               child: UnViewFrameLoadingWidget(),
                                                                             );
                                                                           }
@@ -2049,7 +2059,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
                                                                         .secondaryBackground,
-                                                                    boxShadow: const [
+                                                                    boxShadow: [
                                                                       BoxShadow(
                                                                         blurRadius:
                                                                             4.0,
@@ -2099,7 +2109,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                               (context, snapshot) {
                                                                             // Customize what your widget looks like when it's loading.
                                                                             if (!snapshot.hasData) {
-                                                                              return const Center(
+                                                                              return Center(
                                                                                 child: UnViewFrameLoadingWidget(),
                                                                               );
                                                                             }
@@ -2143,12 +2153,12 @@ class _UnViewFrameDashPainelWidgetState
                                                                 ),
                                                               ),
                                                             ),
-                                                        ].divide(const SizedBox(
+                                                        ].divide(SizedBox(
                                                             width: 5.0)),
                                                       ),
                                                     ),
                                                   ),
-                                                ].divide(const SizedBox(width: 5.0)),
+                                                ].divide(SizedBox(width: 5.0)),
                                               ),
                                               if (responsiveVisibility(
                                                 context: context,
@@ -2196,7 +2206,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                     color: FlutterFlowTheme.of(
                                                                             context)
                                                                         .secondaryBackground,
-                                                                    boxShadow: const [
+                                                                    boxShadow: [
                                                                       BoxShadow(
                                                                         blurRadius:
                                                                             4.0,
@@ -2249,7 +2259,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                         // Customize what your widget looks like when it's loading.
                                                                         if (!snapshot
                                                                             .hasData) {
-                                                                          return const Center(
+                                                                          return Center(
                                                                             child:
                                                                                 UnViewFrameLoadingWidget(),
                                                                           );
@@ -2300,13 +2310,13 @@ class _UnViewFrameDashPainelWidgetState
                                                                 ),
                                                               ),
                                                             ),
-                                                          ].divide(const SizedBox(
+                                                          ].divide(SizedBox(
                                                               width: 5.0)),
                                                         ),
                                                       ),
                                                     ),
                                                   ].divide(
-                                                      const SizedBox(width: 5.0)),
+                                                      SizedBox(width: 5.0)),
                                                 ),
                                               if (responsiveVisibility(
                                                 context: context,
@@ -2352,7 +2362,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                     .circular(
                                                                         7.0),
                                                           ),
-                                                          child: SizedBox(
+                                                          child: Container(
                                                             width:
                                                                 double.infinity,
                                                             height:
@@ -2447,7 +2457,7 @@ class _UnViewFrameDashPainelWidgetState
                                                               color: FlutterFlowTheme
                                                                       .of(context)
                                                                   .secondaryBackground,
-                                                              boxShadow: const [
+                                                              boxShadow: [
                                                                 BoxShadow(
                                                                   blurRadius:
                                                                       4.0,
@@ -2501,7 +2511,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                     ),
                                                                     dense: true,
                                                                     contentPadding:
-                                                                        const EdgeInsetsDirectional.fromSTEB(
+                                                                        EdgeInsetsDirectional.fromSTEB(
                                                                             10.0,
                                                                             0.0,
                                                                             0.0,
@@ -2509,7 +2519,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                   ),
                                                                 ),
                                                                 Padding(
-                                                                  padding: const EdgeInsetsDirectional
+                                                                  padding: EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           12.0,
                                                                           12.0,
@@ -2551,7 +2561,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                             ),
                                                                           ),
                                                                           Padding(
-                                                                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
                                                                                 0.0,
                                                                                 0.0,
                                                                                 12.0,
@@ -2583,7 +2593,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                           ),
                                                                         ],
                                                                       ),
-                                                                      const Divider(
+                                                                      Divider(
                                                                         thickness:
                                                                             1.0,
                                                                       ),
@@ -2638,7 +2648,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                                 ),
                                                                               ),
                                                                               child: Padding(
-                                                                                padding: const EdgeInsetsDirectional.fromSTEB(12.0, 8.0, 12.0, 8.0),
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(12.0, 8.0, 12.0, 8.0),
                                                                                 child: Row(
                                                                                   mainAxisSize: MainAxisSize.max,
                                                                                   children: [
@@ -2648,14 +2658,14 @@ class _UnViewFrameDashPainelWidgetState
                                                                                         Container(
                                                                                           width: 45.0,
                                                                                           height: 45.0,
-                                                                                          decoration: const BoxDecoration(
+                                                                                          decoration: BoxDecoration(
                                                                                             color: Color(0x4D0064DA),
                                                                                             shape: BoxShape.circle,
                                                                                           ),
                                                                                           child: Align(
-                                                                                            alignment: const AlignmentDirectional(0.0, 0.0),
+                                                                                            alignment: AlignmentDirectional(0.0, 0.0),
                                                                                             child: Padding(
-                                                                                              padding: const EdgeInsets.all(4.0),
+                                                                                              padding: EdgeInsets.all(4.0),
                                                                                               child: InkWell(
                                                                                                 splashColor: Colors.transparent,
                                                                                                 focusColor: Colors.transparent,
@@ -2665,7 +2675,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                                                   await showModalBottomSheet<bool>(
                                                                                                       context: context,
                                                                                                       builder: (context) {
-                                                                                                        final datePickedCupertinoTheme = CupertinoTheme.of(context);
+                                                                                                        final _datePickedCupertinoTheme = CupertinoTheme.of(context);
                                                                                                         return ScrollConfiguration(
                                                                                                           behavior: const MaterialScrollBehavior().copyWith(
                                                                                                             dragDevices: {
@@ -2680,8 +2690,8 @@ class _UnViewFrameDashPainelWidgetState
                                                                                                             width: MediaQuery.of(context).size.width,
                                                                                                             color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                                             child: CupertinoTheme(
-                                                                                                              data: datePickedCupertinoTheme.copyWith(
-                                                                                                                textTheme: datePickedCupertinoTheme.textTheme.copyWith(
+                                                                                                              data: _datePickedCupertinoTheme.copyWith(
+                                                                                                                textTheme: _datePickedCupertinoTheme.textTheme.copyWith(
                                                                                                                   dateTimePickerTextStyle: FlutterFlowTheme.of(context).headlineMedium.override(
                                                                                                                         fontFamily: 'Outfit',
                                                                                                                         color: FlutterFlowTheme.of(context).primaryText,
@@ -2714,7 +2724,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                                             ),
                                                                                           ),
                                                                                         ),
-                                                                                      ].divide(const SizedBox(height: 5.0)),
+                                                                                      ].divide(SizedBox(height: 5.0)),
                                                                                     ),
                                                                                     Expanded(
                                                                                       child: Column(
@@ -2743,7 +2753,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                                                   fontWeight: FontWeight.w500,
                                                                                                 ),
                                                                                           ),
-                                                                                        ].divide(const SizedBox(height: 4.0)),
+                                                                                        ].divide(SizedBox(height: 4.0)),
                                                                                       ),
                                                                                     ),
                                                                                     Column(
@@ -2761,9 +2771,9 @@ class _UnViewFrameDashPainelWidgetState
                                                                                                 fontWeight: FontWeight.w500,
                                                                                               ),
                                                                                         ),
-                                                                                      ].divide(const SizedBox(height: 5.0)),
+                                                                                      ].divide(SizedBox(height: 5.0)),
                                                                                     ),
-                                                                                  ].divide(const SizedBox(width: 8.0)),
+                                                                                  ].divide(SizedBox(width: 8.0)),
                                                                                 ),
                                                                               ),
                                                                             ),
@@ -2775,7 +2785,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                   ),
                                                                 ),
                                                               ].addToStart(
-                                                                  const SizedBox(
+                                                                  SizedBox(
                                                                       height:
                                                                           12.0)),
                                                             ),
@@ -2783,7 +2793,7 @@ class _UnViewFrameDashPainelWidgetState
                                                         ),
                                                       ),
                                                   ].divide(
-                                                      const SizedBox(width: 5.0)),
+                                                      SizedBox(width: 5.0)),
                                                 ),
                                               if (responsiveVisibility(
                                                 context: context,
@@ -2829,7 +2839,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                     .circular(
                                                                         7.0),
                                                           ),
-                                                          child: SizedBox(
+                                                          child: Container(
                                                             width:
                                                                 double.infinity,
                                                             height:
@@ -2857,7 +2867,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                   'dd/MM',
                                                               bVisibleMarker:
                                                                   true,
-                                                              colorLine: const Color(
+                                                              colorLine: Color(
                                                                   0xFFFF691A),
                                                               intervalAxisX:
                                                                   0.0,
@@ -2869,15 +2879,15 @@ class _UnViewFrameDashPainelWidgetState
                                                     ),
                                                   ],
                                                 ),
-                                            ].divide(const SizedBox(height: 5.0)),
+                                            ].divide(SizedBox(height: 5.0)),
                                           ),
                                         ),
                                       ],
                                     ),
                                   ]
-                                      .divide(const SizedBox(height: 5.0))
-                                      .addToStart(const SizedBox(height: 20.0))
-                                      .addToEnd(const SizedBox(height: 16.0)),
+                                      .divide(SizedBox(height: 5.0))
+                                      .addToStart(SizedBox(height: 20.0))
+                                      .addToEnd(SizedBox(height: 16.0)),
                                 ),
                               ),
                             ),

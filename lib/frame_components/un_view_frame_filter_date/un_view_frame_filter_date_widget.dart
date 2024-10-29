@@ -2,10 +2,15 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
+import 'dart:math';
 import '/flutter_flow/custom_functions.dart' as functions;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'un_view_frame_filter_date_model.dart';
 export 'un_view_frame_filter_date_model.dart';
 
@@ -42,7 +47,7 @@ class _UnViewFrameFilterDateWidgetState
     // On component load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
       await Future.delayed(const Duration(milliseconds: 300));
-      _model.datePickedReturn = widget.sDate;
+      _model.datePickedReturn = widget!.sDate;
       safeSetState(() {});
     });
 
@@ -74,11 +79,11 @@ class _UnViewFrameFilterDateWidgetState
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+      padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
       child: Container(
         decoration: BoxDecoration(
           color: FlutterFlowTheme.of(context).secondaryBackground,
-          borderRadius: const BorderRadius.only(
+          borderRadius: BorderRadius.only(
             bottomLeft: Radius.circular(0.0),
             bottomRight: Radius.circular(0.0),
             topLeft: Radius.circular(16.0),
@@ -86,7 +91,7 @@ class _UnViewFrameFilterDateWidgetState
           ),
         ),
         child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(16.0, 10.0, 16.0, 0.0),
+          padding: EdgeInsetsDirectional.fromSTEB(16.0, 10.0, 16.0, 0.0),
           child: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -94,7 +99,7 @@ class _UnViewFrameFilterDateWidgetState
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -103,7 +108,7 @@ class _UnViewFrameFilterDateWidgetState
                         width: 75.0,
                         height: 5.0,
                         decoration: BoxDecoration(
-                          color: const Color(0x2B4B39EF),
+                          color: Color(0x2B4B39EF),
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
@@ -111,7 +116,7 @@ class _UnViewFrameFilterDateWidgetState
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                   child: Text(
                     'Filtrar por Data',
                     style: FlutterFlowTheme.of(context).headlineSmall.override(
@@ -129,16 +134,16 @@ class _UnViewFrameFilterDateWidgetState
                     Expanded(
                       child: Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
                         child: InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,
                           hoverColor: Colors.transparent,
                           highlightColor: Colors.transparent,
                           onTap: () async {
-                            final datePickedDate = await showDatePicker(
+                            final _datePickedDate = await showDatePicker(
                               context: context,
-                              initialDate: (widget.sDate ?? DateTime.now()),
+                              initialDate: (widget!.sDate ?? DateTime.now()),
                               firstDate: (functions.addTimeDouble(
                                       -128160.0, getCurrentTimestamp) ??
                                   DateTime(1900)),
@@ -175,12 +180,12 @@ class _UnViewFrameFilterDateWidgetState
                               },
                             );
 
-                            if (datePickedDate != null) {
+                            if (_datePickedDate != null) {
                               safeSetState(() {
                                 _model.datePicked = DateTime(
-                                  datePickedDate.year,
-                                  datePickedDate.month,
-                                  datePickedDate.day,
+                                  _datePickedDate.year,
+                                  _datePickedDate.month,
+                                  _datePickedDate.day,
                                 );
                               });
                             }
@@ -194,12 +199,12 @@ class _UnViewFrameFilterDateWidgetState
                                   .secondaryBackground,
                               borderRadius: BorderRadius.circular(8.0),
                               border: Border.all(
-                                color: const Color(0x3457636C),
+                                color: Color(0x3457636C),
                                 width: 1.0,
                               ),
                             ),
                             child: Padding(
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   12.0, 5.0, 12.0, 5.0),
                               child: Row(
                                 mainAxisSize: MainAxisSize.max,
@@ -239,17 +244,17 @@ class _UnViewFrameFilterDateWidgetState
                         ),
                       ),
                     ),
-                  ].divide(const SizedBox(width: 8.0)),
+                  ].divide(SizedBox(width: 8.0)),
                 ),
                 Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 30.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 24.0, 0.0, 30.0),
                   child: Row(
                     mainAxisSize: MainAxisSize.max,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 0.0, 8.0, 0.0),
                           child: FFButtonWidget(
                             onPressed: () async {
@@ -259,9 +264,9 @@ class _UnViewFrameFilterDateWidgetState
                             options: FFButtonOptions(
                               width: MediaQuery.sizeOf(context).width * 0.75,
                               height: 55.0,
-                              padding: const EdgeInsetsDirectional.fromSTEB(
+                              padding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
-                              iconPadding: const EdgeInsetsDirectional.fromSTEB(
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
                                   0.0, 0.0, 0.0, 0.0),
                               color: FlutterFlowTheme.of(context).primary,
                               textStyle: FlutterFlowTheme.of(context)
@@ -279,7 +284,7 @@ class _UnViewFrameFilterDateWidgetState
                     ],
                   ),
                 ),
-              ].divide(const SizedBox(height: 16.0)),
+              ].divide(SizedBox(height: 16.0)),
             ),
           ),
         ),

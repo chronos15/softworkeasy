@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 import '../schema/structs/index.dart';
 
 import 'package:flutter/foundation.dart';
@@ -20,20 +21,20 @@ class GetTokenCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "username": "$path",
-  "Password": "$cnpj",
+  "username": "${path}",
+  "Password": "${cnpj}",
   "ChaveToken": "secret_my@msswfppa2010-nowjverps#avancarsempre"
 }''';
     return FFApiInterceptor.makeApiCall(
       ApiCallOptions(
         callName: 'GetToken',
-        apiUrl: 'http://$ip:$porta/$path/auth/token',
+        apiUrl: 'http://${ip}:${porta}/${path}/auth/token',
         callType: ApiCallType.POST,
-        headers: const {
+        headers: {
           'Access-Control-Allow-Origin': '*',
           'Content-Type': 'application/json',
         },
-        params: const {},
+        params: {},
         body: ffApiRequestBody,
         bodyType: BodyType.JSON,
         returnBody: true,
@@ -68,10 +69,10 @@ class AutentificacaoCall {
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'Autentificacao',
-      apiUrl: 'http://$ip:$porta/$path/services/Autentificacao',
+      apiUrl: 'http://${ip}:${porta}/${path}/services/Autentificacao',
       callType: ApiCallType.GET,
       headers: {
-        'Authorization': 'Bearer $token',
+        'Authorization': 'Bearer ${token}',
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
       },
@@ -112,10 +113,10 @@ class EmpresaViewCall {
   }) async {
     return ApiManager.instance.makeApiCall(
       callName: 'EmpresaView',
-      apiUrl: 'http://$ip:$porta/$path/Entities/EmpresaView',
+      apiUrl: 'http://${ip}:${porta}/${path}/Entities/EmpresaView',
       callType: ApiCallType.GET,
       headers: {
-        'Authorization': 'Bearer $token',
+        'Authorization': 'Bearer ${token}',
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
       },
@@ -189,15 +190,15 @@ class GetEntitiesCall {
   }) async {
     final ffApiRequestBody = '''
 {
-  "ClassName": "$className",
-  "FieldOperation": "$fieldOperation"
+  "ClassName": "${className}",
+  "FieldOperation": "${fieldOperation}"
 }''';
     return ApiManager.instance.makeApiCall(
       callName: 'GetEntities',
-      apiUrl: 'http://$ip:$porta/$path/Services/$serviceName',
+      apiUrl: 'http://${ip}:${porta}/${path}/Services/${serviceName}',
       callType: ApiCallType.POST,
       headers: {
-        'Authorization': 'Bearer $token',
+        'Authorization': 'Bearer ${token}',
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
       },
@@ -227,15 +228,15 @@ class VendaDashTotaisCall {
       ApiCallOptions(
         callName: 'VendaDashTotais',
         apiUrl:
-            'http://$ip:$porta/$path/Entities/VendaDashTotais$filterDate',
+            'http://${ip}:${porta}/${path}/Entities/VendaDashTotais${filterDate}',
         callType: ApiCallType.GET,
         headers: {
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer ${token}',
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
-          'User-Agent': '$userAgent',
+          'User-Agent': '${userAgent}',
         },
-        params: const {},
+        params: {},
         returnBody: true,
         encodeBodyUtf8: false,
         decodeUtf8: true,
@@ -361,14 +362,14 @@ class VendaDashMesSemanaCall {
       ApiCallOptions(
         callName: 'VendaDashMesSemana',
         apiUrl:
-            'http://$ip:$porta/$path/Entities/VendaDashMesSemana$filterDate&\$orderby=MES desc',
+            'http://${ip}:${porta}/${path}/Entities/VendaDashMesSemana${filterDate}&\$orderby=MES desc',
         callType: ApiCallType.GET,
         headers: {
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer ${token}',
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
         },
-        params: const {},
+        params: {},
         returnBody: true,
         encodeBodyUtf8: false,
         decodeUtf8: true,
@@ -426,14 +427,14 @@ class VendaDashMesDiaCall {
       ApiCallOptions(
         callName: 'VendaDashMesDia',
         apiUrl:
-            'http://$ip:$porta/$path/Entities/VendaDashMesDia$filterDate&\$orderby=MES desc',
+            'http://${ip}:${porta}/${path}/Entities/VendaDashMesDia${filterDate}&\$orderby=MES desc',
         callType: ApiCallType.GET,
         headers: {
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer ${token}',
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
         },
-        params: const {},
+        params: {},
         returnBody: true,
         encodeBodyUtf8: false,
         decodeUtf8: true,
@@ -473,14 +474,14 @@ class VendaDashDiaHoraCall {
       ApiCallOptions(
         callName: 'VendaDashDiaHora',
         apiUrl:
-            'http://$ip:$porta/$path/Entities/VendaDashDiaHora$filterDate',
+            'http://${ip}:${porta}/${path}/Entities/VendaDashDiaHora${filterDate}',
         callType: ApiCallType.GET,
         headers: {
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer ${token}',
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
         },
-        params: const {},
+        params: {},
         returnBody: true,
         encodeBodyUtf8: false,
         decodeUtf8: true,
@@ -538,14 +539,14 @@ class VendaDashAnoMesCall {
       ApiCallOptions(
         callName: 'VendaDashAnoMes',
         apiUrl:
-            'http://$ip:$porta/$path/Entities/VendaDashAnoMes$filterDate&\$orderby=ANO desc',
+            'http://${ip}:${porta}/${path}/Entities/VendaDashAnoMes${filterDate}&\$orderby=ANO desc',
         callType: ApiCallType.GET,
         headers: {
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer ${token}',
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
         },
-        params: const {},
+        params: {},
         returnBody: true,
         encodeBodyUtf8: false,
         decodeUtf8: true,
@@ -651,14 +652,14 @@ class VendaTotalIndicadoresCall {
       ApiCallOptions(
         callName: 'VendaTotalIndicadores',
         apiUrl:
-            'http://$ip:$porta/$path/Services/VendaTotalIndicadores?ADataInicio=$dataInicio&ADataFinal=$dataFinal',
+            'http://${ip}:${porta}/${path}/Services/VendaTotalIndicadores?ADataInicio=${dataInicio}&ADataFinal=${dataFinal}',
         callType: ApiCallType.GET,
         headers: {
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer ${token}',
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
         },
-        params: const {},
+        params: {},
         returnBody: true,
         encodeBodyUtf8: false,
         decodeUtf8: true,
@@ -757,14 +758,14 @@ class VendaDashTotaisVendedorCall {
       ApiCallOptions(
         callName: 'VendaDashTotaisVendedor',
         apiUrl:
-            'http://$ip:$porta/$path/Services/VendaTotalVendedores?ADataInicio=$dataInicial&ADataFinal=$dataFinal',
+            'http://${ip}:${porta}/${path}/Services/VendaTotalVendedores?ADataInicio=${dataInicial}&ADataFinal=${dataFinal}',
         callType: ApiCallType.GET,
         headers: {
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer ${token}',
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
         },
-        params: const {},
+        params: {},
         returnBody: true,
         encodeBodyUtf8: false,
         decodeUtf8: true,
@@ -808,14 +809,14 @@ class VendaDashTotaisPagamentoCall {
       ApiCallOptions(
         callName: 'VendaDashTotaisPagamento',
         apiUrl:
-            'http://$ip:$porta/$path/Services/VendaTotalTiposPagamento?ADataInicio=$dataInicial&ADataFinal=$dataFinal',
+            'http://${ip}:${porta}/${path}/Services/VendaTotalTiposPagamento?ADataInicio=${dataInicial}&ADataFinal=${dataFinal}',
         callType: ApiCallType.GET,
         headers: {
-          'Authorization': 'Bearer $token',
+          'Authorization': 'Bearer ${token}',
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*',
         },
-        params: const {},
+        params: {},
         returnBody: true,
         encodeBodyUtf8: false,
         decodeUtf8: true,

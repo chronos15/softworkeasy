@@ -4,7 +4,10 @@ import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:aligned_tooltip/aligned_tooltip.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'un_view_frame_indicadores_model.dart';
 export 'un_view_frame_indicadores_model.dart';
 
@@ -28,18 +31,18 @@ class UnViewFrameIndicadoresWidget extends StatefulWidget {
     double? difDescontos,
     double? cmv,
     double? difCmv,
-  })  : rentabilidade = rentabilidade ?? 0.0,
-        margemLucro = margemLucro ?? 0.0,
-        ticketMedio = ticketMedio ?? 0.0,
-        faturamento = faturamento ?? 0.0,
-        difFaturamento = difFaturamento ?? 0.0,
-        difMargem = difMargem ?? 0.0,
-        difTicketMedio = difTicketMedio ?? 0.0,
-        difMixProduto = difMixProduto ?? 0.0,
-        descontos = descontos ?? 0.0,
-        difDescontos = difDescontos ?? 0.0,
-        cmv = cmv ?? 0.0,
-        difCmv = difCmv ?? 0.0;
+  })  : this.rentabilidade = rentabilidade ?? 0.0,
+        this.margemLucro = margemLucro ?? 0.0,
+        this.ticketMedio = ticketMedio ?? 0.0,
+        this.faturamento = faturamento ?? 0.0,
+        this.difFaturamento = difFaturamento ?? 0.0,
+        this.difMargem = difMargem ?? 0.0,
+        this.difTicketMedio = difTicketMedio ?? 0.0,
+        this.difMixProduto = difMixProduto ?? 0.0,
+        this.descontos = descontos ?? 0.0,
+        this.difDescontos = difDescontos ?? 0.0,
+        this.cmv = cmv ?? 0.0,
+        this.difCmv = difCmv ?? 0.0;
 
   final double rentabilidade;
   final double? clientes;
@@ -104,7 +107,7 @@ class _UnViewFrameIndicadoresWidgetState
             height: 260.0,
             decoration: BoxDecoration(
               color: FlutterFlowTheme.of(context).secondaryBackground,
-              boxShadow: const [
+              boxShadow: [
                 BoxShadow(
                   blurRadius: 4.0,
                   color: Color(0x33000000),
@@ -117,7 +120,7 @@ class _UnViewFrameIndicadoresWidgetState
               borderRadius: BorderRadius.circular(12.0),
             ),
             child: Padding(
-              padding: const EdgeInsetsDirectional.fromSTEB(12.0, 5.0, 12.0, 0.0),
+              padding: EdgeInsetsDirectional.fromSTEB(12.0, 5.0, 12.0, 0.0),
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
@@ -136,7 +139,7 @@ class _UnViewFrameIndicadoresWidgetState
                       ),
                       dense: true,
                       contentPadding:
-                          const EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
+                          EdgeInsetsDirectional.fromSTEB(10.0, 0.0, 0.0, 0.0),
                     ),
                   ),
                   Row(
@@ -151,13 +154,13 @@ class _UnViewFrameIndicadoresWidgetState
                               children: [
                                 AlignedTooltip(
                                   content: Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                    padding: EdgeInsets.all(10.0),
                                     child: Text(
                                       valueOrDefault<String>(
                                         'Faturamento: ${valueOrDefault<String>(
                                           functions.realFormat(
                                               valueOrDefault<String>(
-                                            widget.faturamento.toString(),
+                                            widget!.faturamento.toString(),
                                             '0',
                                           )),
                                           '0',
@@ -178,25 +181,17 @@ class _UnViewFrameIndicadoresWidgetState
                                   offset: 4.0,
                                   preferredDirection: AxisDirection.down,
                                   borderRadius: BorderRadius.circular(8.0),
-                                  backgroundColor: const Color(0xFFFF8800),
+                                  backgroundColor: Color(0xFFFF8800),
                                   elevation: 4.0,
                                   tailBaseWidth: 20.0,
                                   tailLength: 16.0,
-                                  waitDuration: const Duration(milliseconds: 0),
-                                  showDuration: const Duration(milliseconds: 0),
+                                  waitDuration: Duration(milliseconds: 0),
+                                  showDuration: Duration(milliseconds: 0),
                                   triggerMode: TooltipTriggerMode.tap,
                                   child: MouseRegion(
                                     opaque: true,
                                     cursor: SystemMouseCursors.click ??
                                         MouseCursor.defer,
-                                    onEnter: ((event) async {
-                                      safeSetState(() =>
-                                          _model.mouseRegionHovered1 = true);
-                                    }),
-                                    onExit: ((event) async {
-                                      safeSetState(() =>
-                                          _model.mouseRegionHovered1 = false);
-                                    }),
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,
                                       color:
@@ -207,7 +202,7 @@ class _UnViewFrameIndicadoresWidgetState
                                             BorderRadius.circular(8.0),
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(7.0),
+                                        padding: EdgeInsets.all(7.0),
                                         child: FaIcon(
                                           FontAwesomeIcons.coins,
                                           color:
@@ -216,6 +211,14 @@ class _UnViewFrameIndicadoresWidgetState
                                         ),
                                       ),
                                     ),
+                                    onEnter: ((event) async {
+                                      safeSetState(() =>
+                                          _model.mouseRegionHovered1 = true);
+                                    }),
+                                    onExit: ((event) async {
+                                      safeSetState(() =>
+                                          _model.mouseRegionHovered1 = false);
+                                    }),
                                   ),
                                 ),
                                 Expanded(
@@ -227,7 +230,7 @@ class _UnViewFrameIndicadoresWidgetState
                                       AutoSizeText(
                                         valueOrDefault<String>(
                                           functions.realFormat(
-                                              widget.faturamento.toString()),
+                                              widget!.faturamento.toString()),
                                           '0',
                                         ),
                                         maxLines: 1,
@@ -267,7 +270,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                         ),
                                                   ),
                                                 ),
-                                                if (widget.difFaturamento >=
+                                                if (widget!.difFaturamento >=
                                                     0.0)
                                                   Icon(
                                                     Icons.trending_up,
@@ -276,7 +279,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                         .success,
                                                     size: 17.0,
                                                   ),
-                                                if (widget.difFaturamento <
+                                                if (widget!.difFaturamento <
                                                     0.0)
                                                   Icon(
                                                     Icons
@@ -286,13 +289,13 @@ class _UnViewFrameIndicadoresWidgetState
                                                         .error,
                                                     size: 17.0,
                                                   ),
-                                                if (widget.difFaturamento >=
+                                                if (widget!.difFaturamento >=
                                                     -200.0)
                                                   AutoSizeText(
                                                     valueOrDefault<String>(
                                                       '${valueOrDefault<String>(
                                                         formatNumber(
-                                                          widget
+                                                          widget!
                                                               .difFaturamento,
                                                           formatType:
                                                               FormatType.custom,
@@ -312,7 +315,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                             .override(
                                                               fontFamily:
                                                                   'Outfit',
-                                                              color: widget
+                                                              color: widget!
                                                                           .difFaturamento <
                                                                       0.0
                                                                   ? FlutterFlowTheme.of(
@@ -329,22 +332,22 @@ class _UnViewFrameIndicadoresWidgetState
                                               ],
                                             ),
                                           ),
-                                        ].divide(const SizedBox(width: 2.0)),
+                                        ].divide(SizedBox(width: 2.0)),
                                       ),
                                     ],
                                   ),
                                 ),
-                              ].divide(const SizedBox(width: 5.0)),
+                              ].divide(SizedBox(width: 5.0)),
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 AlignedTooltip(
                                   content: Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                    padding: EdgeInsets.all(10.0),
                                     child: Text(
                                       valueOrDefault<String>(
-                                        'Rentabilidade: ${functions.realFormat(widget.rentabilidade.toString())}',
+                                        'Rentabilidade: ${functions.realFormat(widget!.rentabilidade.toString())}',
                                         '0',
                                       ),
                                       style: FlutterFlowTheme.of(context)
@@ -361,35 +364,27 @@ class _UnViewFrameIndicadoresWidgetState
                                   offset: 4.0,
                                   preferredDirection: AxisDirection.down,
                                   borderRadius: BorderRadius.circular(8.0),
-                                  backgroundColor: const Color(0xFFFF8800),
+                                  backgroundColor: Color(0xFFFF8800),
                                   elevation: 4.0,
                                   tailBaseWidth: 20.0,
                                   tailLength: 16.0,
-                                  waitDuration: const Duration(milliseconds: 0),
-                                  showDuration: const Duration(milliseconds: 0),
+                                  waitDuration: Duration(milliseconds: 0),
+                                  showDuration: Duration(milliseconds: 0),
                                   triggerMode: TooltipTriggerMode.tap,
                                   child: MouseRegion(
                                     opaque: true,
                                     cursor: SystemMouseCursors.click ??
                                         MouseCursor.defer,
-                                    onEnter: ((event) async {
-                                      safeSetState(() =>
-                                          _model.mouseRegionHovered2 = true);
-                                    }),
-                                    onExit: ((event) async {
-                                      safeSetState(() =>
-                                          _model.mouseRegionHovered2 = false);
-                                    }),
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      color: const Color(0xFF005DC7),
+                                      color: Color(0xFF005DC7),
                                       elevation: 0.0,
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(7.0),
+                                        padding: EdgeInsets.all(7.0),
                                         child: Icon(
                                           Icons.percent_rounded,
                                           color:
@@ -398,6 +393,14 @@ class _UnViewFrameIndicadoresWidgetState
                                         ),
                                       ),
                                     ),
+                                    onEnter: ((event) async {
+                                      safeSetState(() =>
+                                          _model.mouseRegionHovered2 = true);
+                                    }),
+                                    onExit: ((event) async {
+                                      safeSetState(() =>
+                                          _model.mouseRegionHovered2 = false);
+                                    }),
                                   ),
                                 ),
                                 Expanded(
@@ -410,7 +413,7 @@ class _UnViewFrameIndicadoresWidgetState
                                         valueOrDefault<String>(
                                           '${valueOrDefault<String>(
                                             formatNumber(
-                                              widget.margemLucro,
+                                              widget!.margemLucro,
                                               formatType: FormatType.custom,
                                               format: '##.##',
                                               locale: 'pt_br',
@@ -456,7 +459,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                         ),
                                                   ),
                                                 ),
-                                                if (widget.difMargem >= 0.0)
+                                                if (widget!.difMargem >= 0.0)
                                                   Icon(
                                                     Icons.trending_up,
                                                     color: FlutterFlowTheme.of(
@@ -464,7 +467,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                         .success,
                                                     size: 17.0,
                                                   ),
-                                                if (widget.difMargem < 0.0)
+                                                if (widget!.difMargem < 0.0)
                                                   Icon(
                                                     Icons
                                                         .trending_down_outlined,
@@ -473,11 +476,11 @@ class _UnViewFrameIndicadoresWidgetState
                                                         .error,
                                                     size: 17.0,
                                                   ),
-                                                if (widget.difMargem >= -200.0)
+                                                if (widget!.difMargem >= -200.0)
                                                   AutoSizeText(
                                                     valueOrDefault<String>(
                                                       '${formatNumber(
-                                                        widget.difMargem,
+                                                        widget!.difMargem,
                                                         formatType:
                                                             FormatType.custom,
                                                         format: '##.##',
@@ -493,7 +496,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                             .override(
                                                               fontFamily:
                                                                   'Outfit',
-                                                              color: widget
+                                                              color: widget!
                                                                           .difMargem <
                                                                       0.0
                                                                   ? FlutterFlowTheme.of(
@@ -510,23 +513,23 @@ class _UnViewFrameIndicadoresWidgetState
                                               ],
                                             ),
                                           ),
-                                        ].divide(const SizedBox(width: 3.0)),
+                                        ].divide(SizedBox(width: 3.0)),
                                       ),
                                     ],
                                   ),
                                 ),
-                              ].divide(const SizedBox(width: 5.0)),
+                              ].divide(SizedBox(width: 5.0)),
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 AlignedTooltip(
                                   content: Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                    padding: EdgeInsets.all(10.0),
                                     child: Text(
                                       valueOrDefault<String>(
                                         'Número de vendas: ${functions.doubleToInt(valueOrDefault<double>(
-                                              widget.nVendas,
+                                              widget!.nVendas,
                                               0.0,
                                             )).toString()}',
                                         '0',
@@ -545,35 +548,27 @@ class _UnViewFrameIndicadoresWidgetState
                                   offset: 4.0,
                                   preferredDirection: AxisDirection.down,
                                   borderRadius: BorderRadius.circular(8.0),
-                                  backgroundColor: const Color(0xFFFF8800),
+                                  backgroundColor: Color(0xFFFF8800),
                                   elevation: 4.0,
                                   tailBaseWidth: 20.0,
                                   tailLength: 16.0,
-                                  waitDuration: const Duration(milliseconds: 0),
-                                  showDuration: const Duration(milliseconds: 0),
+                                  waitDuration: Duration(milliseconds: 0),
+                                  showDuration: Duration(milliseconds: 0),
                                   triggerMode: TooltipTriggerMode.tap,
                                   child: MouseRegion(
                                     opaque: true,
                                     cursor: SystemMouseCursors.click ??
                                         MouseCursor.defer,
-                                    onEnter: ((event) async {
-                                      safeSetState(() =>
-                                          _model.mouseRegionHovered3 = true);
-                                    }),
-                                    onExit: ((event) async {
-                                      safeSetState(() =>
-                                          _model.mouseRegionHovered3 = false);
-                                    }),
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      color: const Color(0xFF00BD30),
+                                      color: Color(0xFF00BD30),
                                       elevation: 0.0,
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(7.0),
+                                        padding: EdgeInsets.all(7.0),
                                         child: Icon(
                                           Icons.shopping_cart_rounded,
                                           color:
@@ -582,6 +577,14 @@ class _UnViewFrameIndicadoresWidgetState
                                         ),
                                       ),
                                     ),
+                                    onEnter: ((event) async {
+                                      safeSetState(() =>
+                                          _model.mouseRegionHovered3 = true);
+                                    }),
+                                    onExit: ((event) async {
+                                      safeSetState(() =>
+                                          _model.mouseRegionHovered3 = false);
+                                    }),
                                   ),
                                 ),
                                 Expanded(
@@ -593,7 +596,7 @@ class _UnViewFrameIndicadoresWidgetState
                                       AutoSizeText(
                                         functions
                                             .doubleToInt(valueOrDefault<double>(
-                                              widget.nVendas,
+                                              widget!.nVendas,
                                               0.0,
                                             ))
                                             .toString(),
@@ -634,7 +637,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                         ),
                                                   ),
                                                 ),
-                                                if (widget.difNVendas! >= 0.0)
+                                                if (widget!.difNVendas! >= 0.0)
                                                   Icon(
                                                     Icons.trending_up,
                                                     color: FlutterFlowTheme.of(
@@ -642,7 +645,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                         .success,
                                                     size: 17.0,
                                                   ),
-                                                if (widget.difNVendas! < 0.0)
+                                                if (widget!.difNVendas! < 0.0)
                                                   Icon(
                                                     Icons
                                                         .trending_down_outlined,
@@ -651,12 +654,12 @@ class _UnViewFrameIndicadoresWidgetState
                                                         .error,
                                                     size: 17.0,
                                                   ),
-                                                if (widget.difNVendas! >=
+                                                if (widget!.difNVendas! >=
                                                     -200.0)
                                                   AutoSizeText(
                                                     valueOrDefault<String>(
                                                       '${formatNumber(
-                                                        widget.difNVendas,
+                                                        widget!.difNVendas,
                                                         formatType:
                                                             FormatType.custom,
                                                         format: '##.##',
@@ -672,7 +675,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                             .override(
                                                               fontFamily:
                                                                   'Outfit',
-                                                              color: widget
+                                                              color: widget!
                                                                           .difNVendas! <
                                                                       0.0
                                                                   ? FlutterFlowTheme.of(
@@ -689,22 +692,22 @@ class _UnViewFrameIndicadoresWidgetState
                                               ],
                                             ),
                                           ),
-                                        ].divide(const SizedBox(width: 3.0)),
+                                        ].divide(SizedBox(width: 3.0)),
                                       ),
                                     ],
                                   ),
                                 ),
-                              ].divide(const SizedBox(width: 5.0)),
+                              ].divide(SizedBox(width: 5.0)),
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 AlignedTooltip(
                                   content: Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                    padding: EdgeInsets.all(10.0),
                                     child: Text(
                                       valueOrDefault<String>(
-                                        'Descontos: ${widget.descontos.toString()}',
+                                        'Descontos: ${widget!.descontos.toString()}',
                                         '0',
                                       ),
                                       style: FlutterFlowTheme.of(context)
@@ -721,35 +724,27 @@ class _UnViewFrameIndicadoresWidgetState
                                   offset: 4.0,
                                   preferredDirection: AxisDirection.down,
                                   borderRadius: BorderRadius.circular(8.0),
-                                  backgroundColor: const Color(0xFFFF8800),
+                                  backgroundColor: Color(0xFFFF8800),
                                   elevation: 4.0,
                                   tailBaseWidth: 20.0,
                                   tailLength: 16.0,
-                                  waitDuration: const Duration(milliseconds: 0),
-                                  showDuration: const Duration(milliseconds: 0),
+                                  waitDuration: Duration(milliseconds: 0),
+                                  showDuration: Duration(milliseconds: 0),
                                   triggerMode: TooltipTriggerMode.tap,
                                   child: MouseRegion(
                                     opaque: true,
                                     cursor: SystemMouseCursors.click ??
                                         MouseCursor.defer,
-                                    onEnter: ((event) async {
-                                      safeSetState(() =>
-                                          _model.mouseRegionHovered4 = true);
-                                    }),
-                                    onExit: ((event) async {
-                                      safeSetState(() =>
-                                          _model.mouseRegionHovered4 = false);
-                                    }),
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      color: const Color(0xFFFF0010),
+                                      color: Color(0xFFFF0010),
                                       elevation: 0.0,
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(7.0),
+                                        padding: EdgeInsets.all(7.0),
                                         child: Icon(
                                           Icons.percent_rounded,
                                           color:
@@ -758,6 +753,14 @@ class _UnViewFrameIndicadoresWidgetState
                                         ),
                                       ),
                                     ),
+                                    onEnter: ((event) async {
+                                      safeSetState(() =>
+                                          _model.mouseRegionHovered4 = true);
+                                    }),
+                                    onExit: ((event) async {
+                                      safeSetState(() =>
+                                          _model.mouseRegionHovered4 = false);
+                                    }),
                                   ),
                                 ),
                                 Expanded(
@@ -770,7 +773,7 @@ class _UnViewFrameIndicadoresWidgetState
                                         valueOrDefault<String>(
                                           functions.realFormat(
                                               valueOrDefault<String>(
-                                            widget.descontos.toString(),
+                                            widget!.descontos.toString(),
                                             '0',
                                           )),
                                           '0',
@@ -812,7 +815,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                         ),
                                                   ),
                                                 ),
-                                                if (widget.difDescontos >= 0.0)
+                                                if (widget!.difDescontos >= 0.0)
                                                   Icon(
                                                     Icons.trending_up,
                                                     color: FlutterFlowTheme.of(
@@ -820,7 +823,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                         .success,
                                                     size: 17.0,
                                                   ),
-                                                if (widget.difDescontos < 0.0)
+                                                if (widget!.difDescontos < 0.0)
                                                   Icon(
                                                     Icons
                                                         .trending_down_outlined,
@@ -829,13 +832,13 @@ class _UnViewFrameIndicadoresWidgetState
                                                         .error,
                                                     size: 17.0,
                                                   ),
-                                                if (widget.difDescontos >=
+                                                if (widget!.difDescontos >=
                                                     -200.0)
                                                   AutoSizeText(
                                                     valueOrDefault<String>(
                                                       '${valueOrDefault<String>(
                                                         formatNumber(
-                                                          widget.difDescontos,
+                                                          widget!.difDescontos,
                                                           formatType:
                                                               FormatType.custom,
                                                           format: '##.##',
@@ -853,7 +856,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                             .override(
                                                               fontFamily:
                                                                   'Outfit',
-                                                              color: widget
+                                                              color: widget!
                                                                           .difDescontos <
                                                                       0.0
                                                                   ? FlutterFlowTheme.of(
@@ -870,14 +873,14 @@ class _UnViewFrameIndicadoresWidgetState
                                               ],
                                             ),
                                           ),
-                                        ].divide(const SizedBox(width: 2.0)),
+                                        ].divide(SizedBox(width: 2.0)),
                                       ),
                                     ],
                                   ),
                                 ),
-                              ].divide(const SizedBox(width: 5.0)),
+                              ].divide(SizedBox(width: 5.0)),
                             ),
-                          ].divide(const SizedBox(height: 10.0)),
+                          ].divide(SizedBox(height: 10.0)),
                         ),
                       ),
                       Expanded(
@@ -889,13 +892,13 @@ class _UnViewFrameIndicadoresWidgetState
                               children: [
                                 AlignedTooltip(
                                   content: Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                    padding: EdgeInsets.all(10.0),
                                     child: Text(
                                       valueOrDefault<String>(
                                         'Ticket Médio: ${valueOrDefault<String>(
                                           functions.realFormat(
                                               valueOrDefault<String>(
-                                            widget.ticketMedio.toString(),
+                                            widget!.ticketMedio.toString(),
                                             '0',
                                           )),
                                           '0',
@@ -916,35 +919,27 @@ class _UnViewFrameIndicadoresWidgetState
                                   offset: 4.0,
                                   preferredDirection: AxisDirection.down,
                                   borderRadius: BorderRadius.circular(8.0),
-                                  backgroundColor: const Color(0xFFFF8800),
+                                  backgroundColor: Color(0xFFFF8800),
                                   elevation: 4.0,
                                   tailBaseWidth: 20.0,
                                   tailLength: 16.0,
-                                  waitDuration: const Duration(milliseconds: 0),
-                                  showDuration: const Duration(milliseconds: 0),
+                                  waitDuration: Duration(milliseconds: 0),
+                                  showDuration: Duration(milliseconds: 0),
                                   triggerMode: TooltipTriggerMode.tap,
                                   child: MouseRegion(
                                     opaque: true,
                                     cursor: SystemMouseCursors.click ??
                                         MouseCursor.defer,
-                                    onEnter: ((event) async {
-                                      safeSetState(() =>
-                                          _model.mouseRegionHovered5 = true);
-                                    }),
-                                    onExit: ((event) async {
-                                      safeSetState(() =>
-                                          _model.mouseRegionHovered5 = false);
-                                    }),
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      color: const Color(0xFFFF494B),
+                                      color: Color(0xFFFF494B),
                                       elevation: 0.0,
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(7.0),
+                                        padding: EdgeInsets.all(7.0),
                                         child: Icon(
                                           Icons.timeline,
                                           color:
@@ -953,6 +948,14 @@ class _UnViewFrameIndicadoresWidgetState
                                         ),
                                       ),
                                     ),
+                                    onEnter: ((event) async {
+                                      safeSetState(() =>
+                                          _model.mouseRegionHovered5 = true);
+                                    }),
+                                    onExit: ((event) async {
+                                      safeSetState(() =>
+                                          _model.mouseRegionHovered5 = false);
+                                    }),
                                   ),
                                 ),
                                 Expanded(
@@ -964,7 +967,7 @@ class _UnViewFrameIndicadoresWidgetState
                                       AutoSizeText(
                                         valueOrDefault<String>(
                                           functions.realFormat(
-                                              widget.ticketMedio.toString()),
+                                              widget!.ticketMedio.toString()),
                                           '0',
                                         ),
                                         maxLines: 1,
@@ -1003,7 +1006,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                         ),
                                                   ),
                                                 ),
-                                                if (widget.difTicketMedio >=
+                                                if (widget!.difTicketMedio >=
                                                     0.0)
                                                   Icon(
                                                     Icons.trending_up,
@@ -1012,7 +1015,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                         .success,
                                                     size: 17.0,
                                                   ),
-                                                if (widget.difTicketMedio <
+                                                if (widget!.difTicketMedio <
                                                     0.0)
                                                   Icon(
                                                     Icons
@@ -1022,12 +1025,12 @@ class _UnViewFrameIndicadoresWidgetState
                                                         .error,
                                                     size: 17.0,
                                                   ),
-                                                if (widget.difTicketMedio >=
+                                                if (widget!.difTicketMedio >=
                                                     -200.0)
                                                   AutoSizeText(
                                                     valueOrDefault<String>(
                                                       '${formatNumber(
-                                                        widget.difTicketMedio,
+                                                        widget!.difTicketMedio,
                                                         formatType:
                                                             FormatType.custom,
                                                         format: '##.##',
@@ -1043,7 +1046,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                             .override(
                                                               fontFamily:
                                                                   'Outfit',
-                                                              color: widget
+                                                              color: widget!
                                                                           .difTicketMedio <
                                                                       0.0
                                                                   ? FlutterFlowTheme.of(
@@ -1060,23 +1063,23 @@ class _UnViewFrameIndicadoresWidgetState
                                               ],
                                             ),
                                           ),
-                                        ].divide(const SizedBox(width: 2.0)),
+                                        ].divide(SizedBox(width: 2.0)),
                                       ),
                                     ],
                                   ),
                                 ),
-                              ].divide(const SizedBox(width: 5.0)),
+                              ].divide(SizedBox(width: 5.0)),
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 AlignedTooltip(
                                   content: Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                    padding: EdgeInsets.all(10.0),
                                     child: Text(
                                       valueOrDefault<String>(
                                         'Mix de Produtos: ${valueOrDefault<String>(
-                                          widget.mixProdutos?.toString(),
+                                          widget!.mixProdutos?.toString(),
                                           '0',
                                         )}',
                                         '0',
@@ -1095,35 +1098,27 @@ class _UnViewFrameIndicadoresWidgetState
                                   offset: 4.0,
                                   preferredDirection: AxisDirection.down,
                                   borderRadius: BorderRadius.circular(8.0),
-                                  backgroundColor: const Color(0xFFFF8800),
+                                  backgroundColor: Color(0xFFFF8800),
                                   elevation: 4.0,
                                   tailBaseWidth: 20.0,
                                   tailLength: 16.0,
-                                  waitDuration: const Duration(milliseconds: 0),
-                                  showDuration: const Duration(milliseconds: 0),
+                                  waitDuration: Duration(milliseconds: 0),
+                                  showDuration: Duration(milliseconds: 0),
                                   triggerMode: TooltipTriggerMode.tap,
                                   child: MouseRegion(
                                     opaque: true,
                                     cursor: SystemMouseCursors.click ??
                                         MouseCursor.defer,
-                                    onEnter: ((event) async {
-                                      safeSetState(() =>
-                                          _model.mouseRegionHovered6 = true);
-                                    }),
-                                    onExit: ((event) async {
-                                      safeSetState(() =>
-                                          _model.mouseRegionHovered6 = false);
-                                    }),
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      color: const Color(0xFFFF691A),
+                                      color: Color(0xFFFF691A),
                                       elevation: 0.0,
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(7.0),
+                                        padding: EdgeInsets.all(7.0),
                                         child: FaIcon(
                                           FontAwesomeIcons.boxes,
                                           color:
@@ -1132,6 +1127,14 @@ class _UnViewFrameIndicadoresWidgetState
                                         ),
                                       ),
                                     ),
+                                    onEnter: ((event) async {
+                                      safeSetState(() =>
+                                          _model.mouseRegionHovered6 = true);
+                                    }),
+                                    onExit: ((event) async {
+                                      safeSetState(() =>
+                                          _model.mouseRegionHovered6 = false);
+                                    }),
                                   ),
                                 ),
                                 Expanded(
@@ -1143,7 +1146,7 @@ class _UnViewFrameIndicadoresWidgetState
                                       AutoSizeText(
                                         functions
                                             .doubleToInt(valueOrDefault<double>(
-                                              widget.mixProdutos,
+                                              widget!.mixProdutos,
                                               0.0,
                                             ))
                                             .toString(),
@@ -1183,7 +1186,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                         ),
                                                   ),
                                                 ),
-                                                if (widget.difMixProduto >=
+                                                if (widget!.difMixProduto >=
                                                     0.0)
                                                   Icon(
                                                     Icons.trending_up,
@@ -1192,7 +1195,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                         .success,
                                                     size: 17.0,
                                                   ),
-                                                if (widget.difMixProduto < 0.0)
+                                                if (widget!.difMixProduto < 0.0)
                                                   Icon(
                                                     Icons
                                                         .trending_down_outlined,
@@ -1201,13 +1204,13 @@ class _UnViewFrameIndicadoresWidgetState
                                                         .error,
                                                     size: 17.0,
                                                   ),
-                                                if (widget.difMixProduto >=
+                                                if (widget!.difMixProduto >=
                                                     -200.0)
                                                   AutoSizeText(
                                                     valueOrDefault<String>(
                                                       '${valueOrDefault<String>(
                                                         formatNumber(
-                                                          widget.difMixProduto,
+                                                          widget!.difMixProduto,
                                                           formatType:
                                                               FormatType.custom,
                                                           format: '##.##',
@@ -1225,7 +1228,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                             .override(
                                                               fontFamily:
                                                                   'Outfit',
-                                                              color: widget
+                                                              color: widget!
                                                                           .difMixProduto <
                                                                       0.0
                                                                   ? FlutterFlowTheme.of(
@@ -1242,23 +1245,23 @@ class _UnViewFrameIndicadoresWidgetState
                                               ],
                                             ),
                                           ),
-                                        ].divide(const SizedBox(width: 2.0)),
+                                        ].divide(SizedBox(width: 2.0)),
                                       ),
                                     ],
                                   ),
                                 ),
-                              ].divide(const SizedBox(width: 5.0)),
+                              ].divide(SizedBox(width: 5.0)),
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 AlignedTooltip(
                                   content: Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                    padding: EdgeInsets.all(10.0),
                                     child: Text(
                                       valueOrDefault<String>(
                                         'Clientes variados: ${valueOrDefault<String>(
-                                          widget.clientes?.toString(),
+                                          widget!.clientes?.toString(),
                                           '0',
                                         )}',
                                         '0',
@@ -1277,25 +1280,17 @@ class _UnViewFrameIndicadoresWidgetState
                                   offset: 4.0,
                                   preferredDirection: AxisDirection.down,
                                   borderRadius: BorderRadius.circular(8.0),
-                                  backgroundColor: const Color(0xFFFF8800),
+                                  backgroundColor: Color(0xFFFF8800),
                                   elevation: 4.0,
                                   tailBaseWidth: 20.0,
                                   tailLength: 16.0,
-                                  waitDuration: const Duration(milliseconds: 0),
-                                  showDuration: const Duration(milliseconds: 0),
+                                  waitDuration: Duration(milliseconds: 0),
+                                  showDuration: Duration(milliseconds: 0),
                                   triggerMode: TooltipTriggerMode.tap,
                                   child: MouseRegion(
                                     opaque: true,
                                     cursor: SystemMouseCursors.click ??
                                         MouseCursor.defer,
-                                    onEnter: ((event) async {
-                                      safeSetState(() =>
-                                          _model.mouseRegionHovered7 = true);
-                                    }),
-                                    onExit: ((event) async {
-                                      safeSetState(() =>
-                                          _model.mouseRegionHovered7 = false);
-                                    }),
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,
                                       color:
@@ -1306,7 +1301,7 @@ class _UnViewFrameIndicadoresWidgetState
                                             BorderRadius.circular(8.0),
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(7.0),
+                                        padding: EdgeInsets.all(7.0),
                                         child: Icon(
                                           Icons.groups_sharp,
                                           color:
@@ -1315,6 +1310,14 @@ class _UnViewFrameIndicadoresWidgetState
                                         ),
                                       ),
                                     ),
+                                    onEnter: ((event) async {
+                                      safeSetState(() =>
+                                          _model.mouseRegionHovered7 = true);
+                                    }),
+                                    onExit: ((event) async {
+                                      safeSetState(() =>
+                                          _model.mouseRegionHovered7 = false);
+                                    }),
                                   ),
                                 ),
                                 Expanded(
@@ -1326,7 +1329,7 @@ class _UnViewFrameIndicadoresWidgetState
                                       AutoSizeText(
                                         functions
                                             .doubleToInt(valueOrDefault<double>(
-                                              widget.clientes,
+                                              widget!.clientes,
                                               0.0,
                                             ))
                                             .toString(),
@@ -1366,7 +1369,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                         ),
                                                   ),
                                                 ),
-                                                if (widget
+                                                if (widget!
                                                         .difClienteVariadoss! >=
                                                     0.0)
                                                   Icon(
@@ -1376,7 +1379,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                         .success,
                                                     size: 17.0,
                                                   ),
-                                                if (widget
+                                                if (widget!
                                                         .difClienteVariadoss! <
                                                     0.0)
                                                   Icon(
@@ -1387,13 +1390,13 @@ class _UnViewFrameIndicadoresWidgetState
                                                         .error,
                                                     size: 17.0,
                                                   ),
-                                                if (widget
+                                                if (widget!
                                                         .difClienteVariadoss! >=
                                                     -200.0)
                                                   AutoSizeText(
                                                     valueOrDefault<String>(
                                                       '${formatNumber(
-                                                        widget
+                                                        widget!
                                                             .difClienteVariadoss,
                                                         formatType:
                                                             FormatType.custom,
@@ -1410,7 +1413,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                             .override(
                                                               fontFamily:
                                                                   'Outfit',
-                                                              color: widget
+                                                              color: widget!
                                                                           .difClienteVariadoss! <
                                                                       0.0
                                                                   ? FlutterFlowTheme.of(
@@ -1427,24 +1430,24 @@ class _UnViewFrameIndicadoresWidgetState
                                               ],
                                             ),
                                           ),
-                                        ].divide(const SizedBox(width: 2.0)),
+                                        ].divide(SizedBox(width: 2.0)),
                                       ),
                                     ],
                                   ),
                                 ),
-                              ].divide(const SizedBox(width: 5.0)),
+                              ].divide(SizedBox(width: 5.0)),
                             ),
                             Row(
                               mainAxisSize: MainAxisSize.max,
                               children: [
                                 AlignedTooltip(
                                   content: Padding(
-                                    padding: const EdgeInsets.all(10.0),
+                                    padding: EdgeInsets.all(10.0),
                                     child: Text(
                                       valueOrDefault<String>(
                                         'Custo de Mercadoria Vendida: ${valueOrDefault<String>(
                                           functions.realFormat(
-                                              widget.cmv.toString()),
+                                              widget!.cmv.toString()),
                                           '0',
                                         )}',
                                         '0',
@@ -1463,35 +1466,27 @@ class _UnViewFrameIndicadoresWidgetState
                                   offset: 4.0,
                                   preferredDirection: AxisDirection.down,
                                   borderRadius: BorderRadius.circular(8.0),
-                                  backgroundColor: const Color(0xFFFF8800),
+                                  backgroundColor: Color(0xFFFF8800),
                                   elevation: 4.0,
                                   tailBaseWidth: 20.0,
                                   tailLength: 16.0,
-                                  waitDuration: const Duration(milliseconds: 0),
-                                  showDuration: const Duration(milliseconds: 0),
+                                  waitDuration: Duration(milliseconds: 0),
+                                  showDuration: Duration(milliseconds: 0),
                                   triggerMode: TooltipTriggerMode.tap,
                                   child: MouseRegion(
                                     opaque: true,
                                     cursor: SystemMouseCursors.click ??
                                         MouseCursor.defer,
-                                    onEnter: ((event) async {
-                                      safeSetState(() =>
-                                          _model.mouseRegionHovered8 = true);
-                                    }),
-                                    onExit: ((event) async {
-                                      safeSetState(() =>
-                                          _model.mouseRegionHovered8 = false);
-                                    }),
                                     child: Card(
                                       clipBehavior: Clip.antiAliasWithSaveLayer,
-                                      color: const Color(0xFFFFC519),
+                                      color: Color(0xFFFFC519),
                                       elevation: 0.0,
                                       shape: RoundedRectangleBorder(
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                       ),
                                       child: Padding(
-                                        padding: const EdgeInsets.all(7.0),
+                                        padding: EdgeInsets.all(7.0),
                                         child: Icon(
                                           Icons.monetization_on_outlined,
                                           color:
@@ -1500,6 +1495,14 @@ class _UnViewFrameIndicadoresWidgetState
                                         ),
                                       ),
                                     ),
+                                    onEnter: ((event) async {
+                                      safeSetState(() =>
+                                          _model.mouseRegionHovered8 = true);
+                                    }),
+                                    onExit: ((event) async {
+                                      safeSetState(() =>
+                                          _model.mouseRegionHovered8 = false);
+                                    }),
                                   ),
                                 ),
                                 Expanded(
@@ -1512,7 +1515,7 @@ class _UnViewFrameIndicadoresWidgetState
                                         valueOrDefault<String>(
                                           functions.realFormat(
                                               valueOrDefault<String>(
-                                            widget.cmv.toString(),
+                                            widget!.cmv.toString(),
                                             '0',
                                           )),
                                           '0',
@@ -1552,7 +1555,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                         ),
                                                   ),
                                                 ),
-                                                if (widget.difCmv >= 0.0)
+                                                if (widget!.difCmv >= 0.0)
                                                   Icon(
                                                     Icons.trending_up,
                                                     color: FlutterFlowTheme.of(
@@ -1560,7 +1563,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                         .success,
                                                     size: 17.0,
                                                   ),
-                                                if (widget.difCmv < 0.0)
+                                                if (widget!.difCmv < 0.0)
                                                   Icon(
                                                     Icons
                                                         .trending_down_outlined,
@@ -1569,12 +1572,12 @@ class _UnViewFrameIndicadoresWidgetState
                                                         .error,
                                                     size: 17.0,
                                                   ),
-                                                if (widget.difCmv >= -200.0)
+                                                if (widget!.difCmv >= -200.0)
                                                   AutoSizeText(
                                                     valueOrDefault<String>(
                                                       '${valueOrDefault<String>(
                                                         formatNumber(
-                                                          widget.difCmv,
+                                                          widget!.difCmv,
                                                           formatType:
                                                               FormatType.custom,
                                                           format: '##.##',
@@ -1592,7 +1595,7 @@ class _UnViewFrameIndicadoresWidgetState
                                                             .override(
                                                               fontFamily:
                                                                   'Outfit',
-                                                              color: widget
+                                                              color: widget!
                                                                           .difCmv <
                                                                       0.0
                                                                   ? FlutterFlowTheme.of(
@@ -1609,19 +1612,19 @@ class _UnViewFrameIndicadoresWidgetState
                                               ],
                                             ),
                                           ),
-                                        ].divide(const SizedBox(width: 2.0)),
+                                        ].divide(SizedBox(width: 2.0)),
                                       ),
                                     ],
                                   ),
                                 ),
-                              ].divide(const SizedBox(width: 5.0)),
+                              ].divide(SizedBox(width: 5.0)),
                             ),
-                          ].divide(const SizedBox(height: 10.0)),
+                          ].divide(SizedBox(height: 10.0)),
                         ),
                       ),
                     ]
-                        .divide(const SizedBox(width: 10.0))
-                        .addToStart(const SizedBox(width: 0.0)),
+                        .divide(SizedBox(width: 10.0))
+                        .addToStart(SizedBox(width: 0.0)),
                   ),
                 ],
               ),

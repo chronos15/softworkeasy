@@ -1,4 +1,7 @@
 import '/backend/api_requests/api_calls.dart';
+import '/backend/api_requests/api_manager.dart';
+import '/backend/schema/enums/enums.dart';
+import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
@@ -22,9 +25,9 @@ Future getToken(BuildContext context) async {
     cnpj: FFAppState().ConfigGlobaisServer.cnpj,
   );
 
-  if ((gettoken.succeeded ?? true)) {
+  if ((gettoken?.succeeded ?? true)) {
     FFAppState().Token = GetTokenCall.token(
-      (gettoken.jsonBody ?? ''),
+      (gettoken?.jsonBody ?? ''),
     )!;
     FFAppState().update(() {});
   } else {
@@ -39,9 +42,9 @@ Future getToken(BuildContext context) async {
       cnpj: FFAppState().ConfigGlobaisServer.cnpj,
     );
 
-    if ((gettokenSecundario.succeeded ?? true)) {
+    if ((gettokenSecundario?.succeeded ?? true)) {
       FFAppState().Token = GetTokenCall.token(
-        (gettokenSecundario.jsonBody ?? ''),
+        (gettokenSecundario?.jsonBody ?? ''),
       )!;
       FFAppState().update(() {});
       return;
@@ -95,7 +98,7 @@ Future verifyConnection(BuildContext context) async {
   connectionTrue = await actions.testConnectionServer(
     'http://${FFAppState().ConfigGlobaisServer.host}:${FFAppState().ConfigGlobaisServer.porta.toString()}/${FFAppState().ConfigGlobaisServer.path}/auth/testconnection',
   );
-  if (!connectionTrue) {
+  if (!connectionTrue!) {
     await actions.elegantNotificationError(
       context,
       'Falha',
@@ -107,7 +110,7 @@ Future verifyConnection(BuildContext context) async {
       'fromright',
     );
   }
-  FFAppState().isConnected = connectionTrue;
+  FFAppState().isConnected = connectionTrue!;
 }
 
 Future verifyConfigFromIni(BuildContext context) async {
@@ -115,11 +118,11 @@ Future verifyConfigFromIni(BuildContext context) async {
   String? decryptValue;
 
   returnFromReadIni = await actions.loadIniFile();
-  if (returnFromReadIni != '') {
+  if (returnFromReadIni != null && returnFromReadIni != '') {
     decryptValue = await actions.decryptAES256(
       returnFromReadIni,
     );
-    if (decryptValue != '') {
+    if (decryptValue != null && decryptValue != '') {
       FFAppState().updateConfigGlobaisServerStruct(
         (e) => e
           ..path = functions.readFromValueKey(decryptValue)?[0]

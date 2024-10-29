@@ -10,14 +10,18 @@ import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/form_field_controller.dart';
 import '/frame_components/un_view_frame_chart_expansive/un_view_frame_chart_expansive_widget.dart';
 import '/frame_components/un_view_frame_vazio/un_view_frame_vazio_widget.dart';
+import 'dart:math';
 import '/custom_code/widgets/index.dart' as custom_widgets;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'dart:async';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'un_view_frame_chart_vendas_model.dart';
 export 'un_view_frame_chart_vendas_model.dart';
@@ -119,7 +123,7 @@ class _UnViewFrameChartVendasWidgetState
 
     return Shortcuts(
       shortcuts: {
-        const SingleActivator(
+        SingleActivator(
           LogicalKeyboardKey.f5,
         ): VoidCallbackIntent(() async {
           await Future.wait([
@@ -153,12 +157,12 @@ class _UnViewFrameChartVendasWidgetState
           focusNode: _model.unViewFrameChartVendasShortcutsFocusNode,
           child: GestureDetector(
               onTap: () => _model
-                      .unViewFrameChartVendasShortcutsFocusNode.canRequestFocus
+                      .unViewFrameChartVendasShortcutsFocusNode!.canRequestFocus
                   ? FocusScope.of(context).requestFocus(
                       _model.unViewFrameChartVendasShortcutsFocusNode)
                   : FocusScope.of(context).unfocus(),
               child: Padding(
-                padding: const EdgeInsets.all(12.0),
+                padding: EdgeInsets.all(12.0),
                 child: Material(
                   color: Colors.transparent,
                   elevation: 0.0,
@@ -172,7 +176,7 @@ class _UnViewFrameChartVendasWidgetState
                       color: FlutterFlowTheme.of(context).secondaryBackground,
                       borderRadius: BorderRadius.circular(12.0),
                       border: Border.all(
-                        color: const Color(0x69636B91),
+                        color: Color(0x69636B91),
                       ),
                     ),
                     child: Column(
@@ -182,7 +186,7 @@ class _UnViewFrameChartVendasWidgetState
                           child: Column(
                             children: [
                               Align(
-                                alignment: const Alignment(-1.0, 0),
+                                alignment: Alignment(-1.0, 0),
                                 child: TabBar(
                                   labelColor:
                                       FlutterFlowTheme.of(context).primary,
@@ -209,8 +213,8 @@ class _UnViewFrameChartVendasWidgetState
                                   indicatorColor:
                                       FlutterFlowTheme.of(context).primary,
                                   indicatorWeight: 0.5,
-                                  padding: const EdgeInsets.all(4.0),
-                                  tabs: const [
+                                  padding: EdgeInsets.all(4.0),
+                                  tabs: [
                                     Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -336,7 +340,7 @@ class _UnViewFrameChartVendasWidgetState
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.
                                           if (!snapshot.hasData) {
-                                            return const Center(
+                                            return Center(
                                               child: UnViewFrameLoadingWidget(),
                                             );
                                           }
@@ -353,17 +357,19 @@ class _UnViewFrameChartVendasWidgetState
                                                   child: Container(
                                                     width: double.infinity,
                                                     height: 100.0,
-                                                    decoration: const BoxDecoration(),
+                                                    decoration: BoxDecoration(),
                                                     child: Stack(
                                                       children: [
                                                         if (VendaDashTotaisCall
                                                                     .valueList(
                                                               columnSemanalDesktopVendaDashTotaisResponse
                                                                   .jsonBody,
-                                                            )!.isEmpty)
+                                                            )!
+                                                                .length <=
+                                                            0)
                                                           Align(
                                                             alignment:
-                                                                const AlignmentDirectional(
+                                                                AlignmentDirectional(
                                                                     0.0, 0.0),
                                                             child:
                                                                 wrapWithModel(
@@ -391,22 +397,24 @@ class _UnViewFrameChartVendasWidgetState
                                                                         .valueList(
                                                                   columnSemanalDesktopVendaDashTotaisResponse
                                                                       .jsonBody,
-                                                                )!.isNotEmpty) &&
+                                                                )!
+                                                                    .length >=
+                                                                1) &&
                                                             (_model.semanalTypeSelected ==
                                                                 'Linha'))
                                                           Align(
                                                             alignment:
-                                                                const AlignmentDirectional(
+                                                                AlignmentDirectional(
                                                                     0.0, 0.0),
                                                             child: Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           20.0,
                                                                           10.0,
                                                                           0.0),
-                                                              child: SizedBox(
+                                                              child: Container(
                                                                 width: double
                                                                     .infinity,
                                                                 height: double
@@ -475,18 +483,20 @@ class _UnViewFrameChartVendasWidgetState
                                                                         .valueList(
                                                                   columnSemanalDesktopVendaDashTotaisResponse
                                                                       .jsonBody,
-                                                                )!.isNotEmpty) &&
+                                                                )!
+                                                                    .length >=
+                                                                1) &&
                                                             (_model.semanalTypeSelected ==
                                                                 'Valores vs Quantidades'))
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         40.0,
                                                                         10.0,
                                                                         0.0),
-                                                            child: SizedBox(
+                                                            child: Container(
                                                               width: double
                                                                   .infinity,
                                                               height: double
@@ -569,11 +579,11 @@ class _UnViewFrameChartVendasWidgetState
                                                           ),
                                                         Align(
                                                           alignment:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   -1.0, -1.0),
                                                           child: Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         10.0,
                                                                         0.0,
@@ -591,7 +601,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                       .transparent,
                                                               onTap: () async {
                                                                 // datepickermensaldesktop
-                                                                final datePickedDate =
+                                                                final _datePickedDate =
                                                                     await showDatePicker(
                                                                   context:
                                                                       context,
@@ -651,17 +661,17 @@ class _UnViewFrameChartVendasWidgetState
                                                                   },
                                                                 );
 
-                                                                if (datePickedDate !=
+                                                                if (_datePickedDate !=
                                                                     null) {
                                                                   safeSetState(
                                                                       () {
                                                                     _model.datePicked =
                                                                         DateTime(
-                                                                      datePickedDate
+                                                                      _datePickedDate
                                                                           .year,
-                                                                      datePickedDate
+                                                                      _datePickedDate
                                                                           .month,
-                                                                      datePickedDate
+                                                                      _datePickedDate
                                                                           .day,
                                                                     );
                                                                   });
@@ -705,13 +715,13 @@ class _UnViewFrameChartVendasWidgetState
                                                                     border:
                                                                         Border
                                                                             .all(
-                                                                      color: const Color(
+                                                                      color: Color(
                                                                           0x53636B91),
                                                                     ),
                                                                   ),
                                                                   child:
                                                                       Padding(
-                                                                    padding: const EdgeInsetsDirectional
+                                                                    padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             0.0,
@@ -727,7 +737,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                       children:
                                                                           [
                                                                         Align(
-                                                                          alignment: const AlignmentDirectional(
+                                                                          alignment: AlignmentDirectional(
                                                                               -1.0,
                                                                               -1.0),
                                                                           child:
@@ -741,9 +751,9 @@ class _UnViewFrameChartVendasWidgetState
                                                                                 size: 24.0,
                                                                               ),
                                                                               Align(
-                                                                                alignment: const AlignmentDirectional(0.0, 0.0),
+                                                                                alignment: AlignmentDirectional(0.0, 0.0),
                                                                                 child: Padding(
-                                                                                  padding: const EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
+                                                                                  padding: EdgeInsetsDirectional.fromSTEB(5.0, 0.0, 5.0, 0.0),
                                                                                   child: Column(
                                                                                     mainAxisSize: MainAxisSize.max,
                                                                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -775,7 +785,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                                   ),
                                                                                 ),
                                                                               ),
-                                                                              const Align(
+                                                                              Align(
                                                                                 alignment: AlignmentDirectional(-1.0, 0.0),
                                                                                 child: Icon(
                                                                                   Icons.keyboard_arrow_down,
@@ -797,11 +807,11 @@ class _UnViewFrameChartVendasWidgetState
                                                                           Expanded(
                                                                             child:
                                                                                 Align(
-                                                                              alignment: const AlignmentDirectional(1.0, 0.0),
+                                                                              alignment: AlignmentDirectional(1.0, 0.0),
                                                                               child: Padding(
-                                                                                padding: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+                                                                                padding: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
                                                                                 child: FlutterFlowChoiceChips(
-                                                                                  options: const [
+                                                                                  options: [
                                                                                     ChipData('Linha'),
                                                                                     ChipData('Valores vs Quantidades')
                                                                                   ],
@@ -823,7 +833,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                                     iconColor: FlutterFlowTheme.of(context).primary,
                                                                                     iconSize: 12.0,
                                                                                     elevation: 1.0,
-                                                                                    borderColor: const Color(0x2357636C),
+                                                                                    borderColor: Color(0x2357636C),
                                                                                     borderRadius: BorderRadius.circular(350.0),
                                                                                   ),
                                                                                   unselectedChipStyle: ChipStyle(
@@ -865,12 +875,12 @@ class _UnViewFrameChartVendasWidgetState
                                                                           Expanded(
                                                                             child:
                                                                                 Align(
-                                                                              alignment: const AlignmentDirectional(1.0, 0.0),
+                                                                              alignment: AlignmentDirectional(1.0, 0.0),
                                                                               child: FlutterFlowDropDown<String>(
                                                                                 controller: _model.dpdMobileTypeSemanalValueController ??= FormFieldController<String>(
                                                                                   _model.dpdMobileTypeSemanalValue ??= _model.semanalTypeSelected,
                                                                                 ),
-                                                                                options: const [
+                                                                                options: [
                                                                                   'Linha',
                                                                                   'Valores vs Quantidades'
                                                                                 ],
@@ -909,7 +919,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                                 borderColor: FlutterFlowTheme.of(context).secondaryText,
                                                                                 borderWidth: 0.0,
                                                                                 borderRadius: 300.0,
-                                                                                margin: const EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
+                                                                                margin: EdgeInsetsDirectional.fromSTEB(12.0, 0.0, 12.0, 0.0),
                                                                                 hidesUnderline: true,
                                                                                 isOverButton: false,
                                                                                 isSearchable: true,
@@ -917,8 +927,8 @@ class _UnViewFrameChartVendasWidgetState
                                                                               ),
                                                                             ),
                                                                           ),
-                                                                      ].divide(const SizedBox(width: 5.0)).addToStart(
-                                                                              const SizedBox(width: 7.0)),
+                                                                      ].divide(SizedBox(width: 5.0)).addToStart(
+                                                                              SizedBox(width: 7.0)),
                                                                     ),
                                                                   ),
                                                                 ),
@@ -930,17 +940,19 @@ class _UnViewFrameChartVendasWidgetState
                                                                     .valueList(
                                                               columnSemanalDesktopVendaDashTotaisResponse
                                                                   .jsonBody,
-                                                            )!.isNotEmpty)
+                                                            )!
+                                                                .length >=
+                                                            1)
                                                           Align(
                                                             alignment:
-                                                                const AlignmentDirectional(
+                                                                AlignmentDirectional(
                                                                     1.0, -1.0),
                                                             child: Builder(
                                                               builder:
                                                                   (context) =>
                                                                       Padding(
                                                                 padding:
-                                                                    const EdgeInsetsDirectional
+                                                                    EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             3.0,
@@ -982,9 +994,9 @@ class _UnViewFrameChartVendasWidgetState
                                                                           backgroundColor:
                                                                               Colors.transparent,
                                                                           alignment:
-                                                                              const AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                              AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
                                                                           child:
-                                                                              SizedBox(
+                                                                              Container(
                                                                             height:
                                                                                 MediaQuery.sizeOf(context).height * 0.9,
                                                                             width:
@@ -1181,7 +1193,7 @@ class _UnViewFrameChartVendasWidgetState
                                                   ),
                                                 ),
                                               ),
-                                              const Divider(
+                                              Divider(
                                                 height: 3.0,
                                                 thickness: 0.5,
                                                 indent: 20.0,
@@ -1191,7 +1203,9 @@ class _UnViewFrameChartVendasWidgetState
                                               if (VendaDashTotaisCall.valueList(
                                                     columnSemanalDesktopVendaDashTotaisResponse
                                                         .jsonBody,
-                                                  )!.isNotEmpty)
+                                                  )!
+                                                      .length >=
+                                                  1)
                                                 wrapWithModel(
                                                   model:
                                                       _model.chartTotaisModel1,
@@ -1400,9 +1414,9 @@ class _UnViewFrameChartVendasWidgetState
                                                     'chartTotaisOnPageLoadAnimation']!),
                                             ]
                                                 .addToStart(
-                                                    const SizedBox(height: 5.0))
+                                                    SizedBox(height: 5.0))
                                                 .addToEnd(
-                                                    const SizedBox(height: 5.0)),
+                                                    SizedBox(height: 5.0)),
                                           ).animateOnPageLoad(animationsMap[
                                               'columnOnPageLoadAnimation']!);
                                         },
@@ -1419,7 +1433,7 @@ class _UnViewFrameChartVendasWidgetState
                                               child: Container(
                                                 width: double.infinity,
                                                 height: 100.0,
-                                                decoration: const BoxDecoration(),
+                                                decoration: BoxDecoration(),
                                                 child: Stack(
                                                   children: [
                                                     if (_model
@@ -1496,7 +1510,7 @@ class _UnViewFrameChartVendasWidgetState
                                                           // Customize what your widget looks like when it's loading.
                                                           if (!snapshot
                                                               .hasData) {
-                                                            return const Center(
+                                                            return Center(
                                                               child:
                                                                   UnViewFrameLoadingWidget(),
                                                             );
@@ -1525,13 +1539,13 @@ class _UnViewFrameChartVendasWidgetState
                                                                       Expanded(
                                                                         child:
                                                                             Padding(
-                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
                                                                               0.0,
                                                                               35.0,
                                                                               10.0,
                                                                               20.0),
                                                                           child:
-                                                                              SizedBox(
+                                                                              Container(
                                                                             width:
                                                                                 double.infinity,
                                                                             height:
@@ -1593,13 +1607,13 @@ class _UnViewFrameChartVendasWidgetState
                                                                       Expanded(
                                                                         child:
                                                                             Padding(
-                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
                                                                               0.0,
                                                                               35.0,
                                                                               10.0,
                                                                               20.0),
                                                                           child:
-                                                                              SizedBox(
+                                                                              Container(
                                                                             width:
                                                                                 double.infinity,
                                                                             height:
@@ -1661,13 +1675,13 @@ class _UnViewFrameChartVendasWidgetState
                                                                       Expanded(
                                                                         child:
                                                                             Padding(
-                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
                                                                               0.0,
                                                                               35.0,
                                                                               10.0,
                                                                               20.0),
                                                                           child:
-                                                                              SizedBox(
+                                                                              Container(
                                                                             width:
                                                                                 double.infinity,
                                                                             height:
@@ -1722,7 +1736,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                           ),
                                                                         ),
                                                                       ),
-                                                                    const Divider(
+                                                                    Divider(
                                                                       height:
                                                                           3.0,
                                                                       thickness:
@@ -1917,7 +1931,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                 ),
                                                                 Align(
                                                                   alignment:
-                                                                      const AlignmentDirectional(
+                                                                      AlignmentDirectional(
                                                                           1.0,
                                                                           -1.0),
                                                                   child:
@@ -1925,7 +1939,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                     builder:
                                                                         (context) =>
                                                                             Padding(
-                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
                                                                           0.0,
                                                                           3.0,
                                                                           3.0,
@@ -1960,8 +1974,8 @@ class _UnViewFrameChartVendasWidgetState
                                                                                 elevation: 0,
                                                                                 insetPadding: EdgeInsets.zero,
                                                                                 backgroundColor: Colors.transparent,
-                                                                                alignment: const AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
-                                                                                child: SizedBox(
+                                                                                alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                child: Container(
                                                                                   height: MediaQuery.sizeOf(context).height * 0.9,
                                                                                   width: MediaQuery.sizeOf(context).width * 0.9,
                                                                                   child: UnViewFrameChartExpansiveWidget(
@@ -2295,7 +2309,7 @@ class _UnViewFrameChartVendasWidgetState
                                                           // Customize what your widget looks like when it's loading.
                                                           if (!snapshot
                                                               .hasData) {
-                                                            return const Center(
+                                                            return Center(
                                                               child:
                                                                   UnViewFrameLoadingWidget(),
                                                             );
@@ -2324,13 +2338,13 @@ class _UnViewFrameChartVendasWidgetState
                                                                       Expanded(
                                                                         child:
                                                                             Padding(
-                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
                                                                               0.0,
                                                                               35.0,
                                                                               0.0,
                                                                               20.0),
                                                                           child:
-                                                                              SizedBox(
+                                                                              Container(
                                                                             width:
                                                                                 double.infinity,
                                                                             height:
@@ -2392,7 +2406,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                       Expanded(
                                                                         child:
                                                                             Padding(
-                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
                                                                               0.0,
                                                                               35.0,
                                                                               10.0,
@@ -2425,7 +2439,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                                     actions: [
                                                                                       TextButton(
                                                                                         onPressed: () => Navigator.pop(alertDialogContext),
-                                                                                        child: const Text('Ok'),
+                                                                                        child: Text('Ok'),
                                                                                       ),
                                                                                     ],
                                                                                   );
@@ -2433,7 +2447,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                               );
                                                                             },
                                                                             child:
-                                                                                SizedBox(
+                                                                                Container(
                                                                               width: double.infinity,
                                                                               height: double.infinity,
                                                                               child: custom_widgets.DataTimeChartWithColumnComparate(
@@ -2493,13 +2507,13 @@ class _UnViewFrameChartVendasWidgetState
                                                                       Expanded(
                                                                         child:
                                                                             Padding(
-                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
                                                                               0.0,
                                                                               35.0,
                                                                               10.0,
                                                                               20.0),
                                                                           child:
-                                                                              SizedBox(
+                                                                              Container(
                                                                             width:
                                                                                 double.infinity,
                                                                             height:
@@ -2560,7 +2574,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                           ),
                                                                         ),
                                                                       ),
-                                                                    const Divider(
+                                                                    Divider(
                                                                       height:
                                                                           3.0,
                                                                       thickness:
@@ -2731,7 +2745,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                 ),
                                                                 Align(
                                                                   alignment:
-                                                                      const AlignmentDirectional(
+                                                                      AlignmentDirectional(
                                                                           1.0,
                                                                           -1.0),
                                                                   child:
@@ -2739,7 +2753,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                     builder:
                                                                         (context) =>
                                                                             Padding(
-                                                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                      padding: EdgeInsetsDirectional.fromSTEB(
                                                                           0.0,
                                                                           3.0,
                                                                           3.0,
@@ -2776,8 +2790,8 @@ class _UnViewFrameChartVendasWidgetState
                                                                                 elevation: 0,
                                                                                 insetPadding: EdgeInsets.zero,
                                                                                 backgroundColor: Colors.transparent,
-                                                                                alignment: const AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
-                                                                                child: SizedBox(
+                                                                                alignment: AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                child: Container(
                                                                                   height: MediaQuery.sizeOf(context).height * 0.9,
                                                                                   width: MediaQuery.sizeOf(context).width * 0.9,
                                                                                   child: UnViewFrameChartExpansiveWidget(
@@ -2948,7 +2962,7 @@ class _UnViewFrameChartVendasWidgetState
                                                       ),
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   0.0,
                                                                   0.0,
@@ -2963,10 +2977,10 @@ class _UnViewFrameChartVendasWidgetState
                                                               double.infinity,
                                                           height: 42.0,
                                                           decoration:
-                                                              const BoxDecoration(),
+                                                              BoxDecoration(),
                                                           child: Align(
                                                             alignment:
-                                                                const AlignmentDirectional(
+                                                                AlignmentDirectional(
                                                                     -1.0, -1.0),
                                                             child:
                                                                 SingleChildScrollView(
@@ -2984,7 +2998,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                         .center,
                                                                 children: [
                                                                   Padding(
-                                                                    padding: const EdgeInsetsDirectional
+                                                                    padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             12.0,
                                                                             0.0,
@@ -2992,7 +3006,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                             0.0),
                                                                     child:
                                                                         FlutterFlowChoiceChips(
-                                                                      options: const [
+                                                                      options: [
                                                                         ChipData(
                                                                             'Dia'),
                                                                         ChipData(
@@ -3038,7 +3052,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                         elevation:
                                                                             1.0,
                                                                         borderColor:
-                                                                            const Color(0x2357636C),
+                                                                            Color(0x2357636C),
                                                                         borderRadius:
                                                                             BorderRadius.circular(350.0),
                                                                       ),
@@ -3087,7 +3101,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                   ),
                                                                   Align(
                                                                     alignment:
-                                                                        const AlignmentDirectional(
+                                                                        AlignmentDirectional(
                                                                             1.0,
                                                                             0.0),
                                                                     child: FlutterFlowDropDown<
@@ -3175,13 +3189,13 @@ class _UnViewFrameChartVendasWidgetState
                                                                       elevation:
                                                                           0.0,
                                                                       borderColor:
-                                                                          const Color(
+                                                                          Color(
                                                                               0x5A57636C),
                                                                       borderWidth:
                                                                           0.0,
                                                                       borderRadius:
                                                                           300.0,
-                                                                      margin: const EdgeInsetsDirectional.fromSTEB(
+                                                                      margin: EdgeInsetsDirectional.fromSTEB(
                                                                           12.0,
                                                                           0.0,
                                                                           12.0,
@@ -3198,7 +3212,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                   ),
                                                                   Align(
                                                                     alignment:
-                                                                        const AlignmentDirectional(
+                                                                        AlignmentDirectional(
                                                                             1.0,
                                                                             0.0),
                                                                     child: FlutterFlowDropDown<
@@ -3291,13 +3305,13 @@ class _UnViewFrameChartVendasWidgetState
                                                                       elevation:
                                                                           0.0,
                                                                       borderColor:
-                                                                          const Color(
+                                                                          Color(
                                                                               0x5A57636C),
                                                                       borderWidth:
                                                                           0.0,
                                                                       borderRadius:
                                                                           300.0,
-                                                                      margin: const EdgeInsetsDirectional.fromSTEB(
+                                                                      margin: EdgeInsetsDirectional.fromSTEB(
                                                                           12.0,
                                                                           0.0,
                                                                           12.0,
@@ -3313,10 +3327,10 @@ class _UnViewFrameChartVendasWidgetState
                                                                     ),
                                                                   ),
                                                                 ]
-                                                                    .divide(const SizedBox(
+                                                                    .divide(SizedBox(
                                                                         width:
                                                                             5.0))
-                                                                    .addToEnd(const SizedBox(
+                                                                    .addToEnd(SizedBox(
                                                                         width:
                                                                             40.0)),
                                                               ),
@@ -3327,11 +3341,11 @@ class _UnViewFrameChartVendasWidgetState
                                                     ),
                                                     Align(
                                                       alignment:
-                                                          const AlignmentDirectional(
+                                                          AlignmentDirectional(
                                                               -1.0, 1.0),
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     12.0,
                                                                     5.0,
@@ -3348,12 +3362,12 @@ class _UnViewFrameChartVendasWidgetState
                                                             ))
                                                               Align(
                                                                 alignment:
-                                                                    const AlignmentDirectional(
+                                                                    AlignmentDirectional(
                                                                         -1.0,
                                                                         1.0),
                                                                 child:
                                                                     FlutterFlowChoiceChips(
-                                                                  options: const [
+                                                                  options: [
                                                                     ChipData(
                                                                         'Linha'),
                                                                     ChipData(
@@ -3408,7 +3422,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                     elevation:
                                                                         1.0,
                                                                     borderColor:
-                                                                        const Color(
+                                                                        Color(
                                                                             0x2357636C),
                                                                     borderRadius:
                                                                         BorderRadius.circular(
@@ -3482,7 +3496,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                       _model
                                                                           .semanalTypeSelected,
                                                                 ),
-                                                                options: const [
+                                                                options: [
                                                                   'Linha',
                                                                   'Coluna',
                                                                   'Valores vs Quantidades'
@@ -3569,7 +3583,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                     0.0,
                                                                 borderRadius:
                                                                     300.0,
-                                                                margin: const EdgeInsetsDirectional
+                                                                margin: EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         12.0,
                                                                         0.0,
@@ -3594,8 +3608,8 @@ class _UnViewFrameChartVendasWidgetState
                                             ),
                                           ),
                                         ]
-                                            .addToStart(const SizedBox(height: 5.0))
-                                            .addToEnd(const SizedBox(height: 5.0)),
+                                            .addToStart(SizedBox(height: 5.0))
+                                            .addToEnd(SizedBox(height: 5.0)),
                                       ),
                                     ),
                                     KeepAliveWidgetWrapper(
@@ -3638,14 +3652,14 @@ class _UnViewFrameChartVendasWidgetState
                                         builder: (context, snapshot) {
                                           // Customize what your widget looks like when it's loading.
                                           if (!snapshot.hasData) {
-                                            return const Center(
+                                            return Center(
                                               child: UnViewFrameLoadingWidget(),
                                             );
                                           }
                                           final stackAnualDesktopVendaDashAnoMesResponse =
                                               snapshot.data!;
 
-                                          return SizedBox(
+                                          return Container(
                                             width: double.infinity,
                                             height: double.infinity,
                                             child: Stack(
@@ -3666,13 +3680,13 @@ class _UnViewFrameChartVendasWidgetState
                                                       Expanded(
                                                         child: Padding(
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       30.0,
                                                                       10.0,
                                                                       0.0),
-                                                          child: SizedBox(
+                                                          child: Container(
                                                             width:
                                                                 double.infinity,
                                                             height:
@@ -3739,13 +3753,13 @@ class _UnViewFrameChartVendasWidgetState
                                                       Expanded(
                                                         child: Padding(
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       30.0,
                                                                       10.0,
                                                                       0.0),
-                                                          child: SizedBox(
+                                                          child: Container(
                                                             width:
                                                                 double.infinity,
                                                             height:
@@ -3814,17 +3828,17 @@ class _UnViewFrameChartVendasWidgetState
                                                       Expanded(
                                                         child: Align(
                                                           alignment:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   0.0, 0.0),
                                                           child: Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         30.0,
                                                                         10.0,
                                                                         0.0),
-                                                            child: SizedBox(
+                                                            child: Container(
                                                               width: double
                                                                   .infinity,
                                                               height: double
@@ -3875,13 +3889,13 @@ class _UnViewFrameChartVendasWidgetState
                                                       Expanded(
                                                         child: Padding(
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       0.0,
                                                                       40.0,
                                                                       10.0,
                                                                       0.0),
-                                                          child: SizedBox(
+                                                          child: Container(
                                                             width:
                                                                 double.infinity,
                                                             height:
@@ -3935,7 +3949,7 @@ class _UnViewFrameChartVendasWidgetState
                                                           ),
                                                         ),
                                                       ),
-                                                    const Divider(
+                                                    Divider(
                                                       height: 3.0,
                                                       thickness: 0.5,
                                                       indent: 20.0,
@@ -4064,7 +4078,7 @@ class _UnViewFrameChartVendasWidgetState
                                                       ),
                                                     ),
                                                   ].addToEnd(
-                                                      const SizedBox(height: 10.0)),
+                                                      SizedBox(height: 10.0)),
                                                 ),
                                                 Material(
                                                   color: Colors.transparent,
@@ -4072,7 +4086,7 @@ class _UnViewFrameChartVendasWidgetState
                                                   child: Container(
                                                     width: double.infinity,
                                                     height: 42.0,
-                                                    decoration: const BoxDecoration(),
+                                                    decoration: BoxDecoration(),
                                                     child: Row(
                                                       mainAxisSize:
                                                           MainAxisSize.max,
@@ -4097,7 +4111,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                   tablet: false,
                                                                 ))
                                                                   Padding(
-                                                                    padding: const EdgeInsetsDirectional
+                                                                    padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             12.0,
                                                                             0.0,
@@ -4105,7 +4119,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                             0.0),
                                                                     child:
                                                                         FlutterFlowChoiceChips(
-                                                                      options: const [
+                                                                      options: [
                                                                         ChipData(
                                                                             'Linha'),
                                                                         ChipData(
@@ -4149,7 +4163,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                         elevation:
                                                                             1.0,
                                                                         borderColor:
-                                                                            const Color(0x2357636C),
+                                                                            Color(0x2357636C),
                                                                         borderRadius:
                                                                             BorderRadius.circular(350.0),
                                                                       ),
@@ -4209,7 +4223,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                 ))
                                                                   Align(
                                                                     alignment:
-                                                                        const AlignmentDirectional(
+                                                                        AlignmentDirectional(
                                                                             1.0,
                                                                             0.0),
                                                                     child: FlutterFlowDropDown<
@@ -4221,7 +4235,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                         _model.dpdMobileTypeAnualValue ??=
                                                                             _model.anualTypeSelected,
                                                                       ),
-                                                                      options: const [
+                                                                      options: [
                                                                         'Linha',
                                                                         'Linha (Comparada)',
                                                                         'Coluna',
@@ -4302,7 +4316,7 @@ class _UnViewFrameChartVendasWidgetState
                                                                           0.0,
                                                                       borderRadius:
                                                                           300.0,
-                                                                      margin: const EdgeInsetsDirectional.fromSTEB(
+                                                                      margin: EdgeInsetsDirectional.fromSTEB(
                                                                           12.0,
                                                                           0.0,
                                                                           12.0,
@@ -4318,11 +4332,11 @@ class _UnViewFrameChartVendasWidgetState
                                                                     ),
                                                                   ),
                                                               ]
-                                                                  .divide(const SizedBox(
+                                                                  .divide(SizedBox(
                                                                       width:
                                                                           5.0))
                                                                   .addToStart(
-                                                                      const SizedBox(
+                                                                      SizedBox(
                                                                           width:
                                                                               10.0)),
                                                             ),
@@ -4330,7 +4344,7 @@ class _UnViewFrameChartVendasWidgetState
                                                         ),
                                                         Align(
                                                           alignment:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   1.0, 0.0),
                                                           child:
                                                               FlutterFlowDropDown<
@@ -4447,7 +4461,7 @@ class _UnViewFrameChartVendasWidgetState
                                                             borderWidth: 0.0,
                                                             borderRadius: 300.0,
                                                             margin:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         12.0,
                                                                         0.0,
@@ -4463,14 +4477,14 @@ class _UnViewFrameChartVendasWidgetState
                                                         ),
                                                         Align(
                                                           alignment:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   1.0, -1.0),
                                                           child: Builder(
                                                             builder:
                                                                 (context) =>
                                                                     Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           0.0,
                                                                           0.0,
@@ -4511,9 +4525,9 @@ class _UnViewFrameChartVendasWidgetState
                                                                         backgroundColor:
                                                                             Colors.transparent,
                                                                         alignment:
-                                                                            const AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                            AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
                                                                         child:
-                                                                            SizedBox(
+                                                                            Container(
                                                                           height:
                                                                               MediaQuery.sizeOf(context).height * 0.9,
                                                                           width:
@@ -4656,7 +4670,7 @@ class _UnViewFrameChartVendasWidgetState
                                                           ),
                                                         ),
                                                       ].divide(
-                                                          const SizedBox(width: 5.0)),
+                                                          SizedBox(width: 5.0)),
                                                     ),
                                                   ),
                                                 ),

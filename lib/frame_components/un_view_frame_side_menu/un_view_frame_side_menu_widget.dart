@@ -4,11 +4,15 @@ import '/flutter_flow/flutter_flow_animations.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import 'dart:math';
 import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'un_view_frame_side_menu_model.dart';
 export 'un_view_frame_side_menu_model.dart';
 
@@ -25,7 +29,7 @@ class UnViewFrameSideMenuWidget extends StatefulWidget {
     required this.callBackVendas,
     required this.callBackProdutos,
     required this.callBackFinanceiro,
-  }) : isExpansible = isExpansible ?? false;
+  }) : this.isExpansible = isExpansible ?? false;
 
   final Pages? pageSelected;
   final Future Function()? callBackHome;
@@ -87,7 +91,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
             curve: Curves.easeInOut,
             delay: 50.0.ms,
             duration: 650.0.ms,
-            color: const Color(0xFF0064DA),
+            color: Color(0xFF0064DA),
             begin: 1.0,
             end: 0.0,
           ),
@@ -100,7 +104,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
             curve: Curves.easeInOut,
             delay: 50.0.ms,
             duration: 650.0.ms,
-            color: const Color(0xFF0064DA),
+            color: Color(0xFF0064DA),
             begin: 1.0,
             end: 0.0,
           ),
@@ -113,7 +117,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
             curve: Curves.easeInOut,
             delay: 50.0.ms,
             duration: 650.0.ms,
-            color: const Color(0xFF0064DA),
+            color: Color(0xFF0064DA),
             begin: 1.0,
             end: 0.0,
           ),
@@ -126,7 +130,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
             curve: Curves.easeInOut,
             delay: 50.0.ms,
             duration: 650.0.ms,
-            color: const Color(0xFF0064DA),
+            color: Color(0xFF0064DA),
             begin: 1.0,
             end: 0.0,
           ),
@@ -141,8 +145,8 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
             curve: Curves.easeInOut,
             delay: 100.0.ms,
             duration: 330.0.ms,
-            begin: const Offset(0.0, 0.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 0.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeIn,
@@ -160,7 +164,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
             curve: Curves.easeInOut,
             delay: 50.0.ms,
             duration: 650.0.ms,
-            color: const Color(0xFF0064DA),
+            color: Color(0xFF0064DA),
             begin: 1.0,
             end: 0.0,
           ),
@@ -173,7 +177,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
             curve: Curves.easeInOut,
             delay: 50.0.ms,
             duration: 650.0.ms,
-            color: const Color(0xFF0064DA),
+            color: Color(0xFF0064DA),
             begin: 1.0,
             end: 0.0,
           ),
@@ -186,7 +190,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
             curve: Curves.easeInOut,
             delay: 50.0.ms,
             duration: 650.0.ms,
-            color: const Color(0xFF0064DA),
+            color: Color(0xFF0064DA),
             begin: 1.0,
             end: 0.0,
           ),
@@ -199,7 +203,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
             curve: Curves.easeInOut,
             delay: 50.0.ms,
             duration: 650.0.ms,
-            color: const Color(0xFF0064DA),
+            color: Color(0xFF0064DA),
             begin: 1.0,
             end: 0.0,
           ),
@@ -212,7 +216,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
             curve: Curves.easeInOut,
             delay: 50.0.ms,
             duration: 650.0.ms,
-            color: const Color(0xFF0064DA),
+            color: Color(0xFF0064DA),
             begin: 1.0,
             end: 0.0,
           ),
@@ -225,7 +229,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
             curve: Curves.easeInOut,
             delay: 50.0.ms,
             duration: 650.0.ms,
-            color: const Color(0xFF0064DA),
+            color: Color(0xFF0064DA),
             begin: 1.0,
             end: 0.0,
           ),
@@ -240,8 +244,8 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
             curve: Curves.easeInOut,
             delay: 100.0.ms,
             duration: 330.0.ms,
-            begin: const Offset(0.0, 0.0),
-            end: const Offset(0.0, 0.0),
+            begin: Offset(0.0, 0.0),
+            end: Offset(0.0, 0.0),
           ),
           FadeEffect(
             curve: Curves.easeIn,
@@ -259,7 +263,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
             curve: Curves.easeInOut,
             delay: 50.0.ms,
             duration: 650.0.ms,
-            color: const Color(0xFF0064DA),
+            color: Color(0xFF0064DA),
             begin: 1.0,
             end: 0.0,
           ),
@@ -272,7 +276,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
             curve: Curves.easeInOut,
             delay: 50.0.ms,
             duration: 650.0.ms,
-            color: const Color(0xFF0064DA),
+            color: Color(0xFF0064DA),
             begin: 1.0,
             end: 0.0,
           ),
@@ -285,7 +289,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
             curve: Curves.easeInOut,
             delay: 50.0.ms,
             duration: 650.0.ms,
-            color: const Color(0xFF0064DA),
+            color: Color(0xFF0064DA),
             begin: 1.0,
             end: 0.0,
           ),
@@ -298,7 +302,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
             curve: Curves.easeInOut,
             delay: 250.0.ms,
             duration: 650.0.ms,
-            color: const Color(0xFF0064DA),
+            color: Color(0xFF0064DA),
             begin: 1.0,
             end: 0.0,
           ),
@@ -311,7 +315,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
             curve: Curves.easeInOut,
             delay: 150.0.ms,
             duration: 650.0.ms,
-            color: const Color(0xFF0064DA),
+            color: Color(0xFF0064DA),
             begin: 1.0,
             end: 0.0,
           ),
@@ -324,7 +328,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
             curve: Curves.easeInOut,
             delay: 50.0.ms,
             duration: 650.0.ms,
-            color: const Color(0xFF0064DA),
+            color: Color(0xFF0064DA),
             begin: 1.0,
             end: 0.0,
           ),
@@ -353,14 +357,6 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
     return MouseRegion(
       opaque: false,
       cursor: MouseCursor.defer ?? MouseCursor.defer,
-      onEnter: ((event) async {
-        safeSetState(() => _model.mouseRegionHovered = true);
-        await widget.mouseRegionEnter?.call();
-      }),
-      onExit: ((event) async {
-        safeSetState(() => _model.mouseRegionHovered = false);
-        await widget.mouseRegionExit?.call();
-      }),
       child: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
@@ -368,7 +364,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
             child: Material(
               color: Colors.transparent,
               elevation: 0.0,
-              shape: const RoundedRectangleBorder(
+              shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(0.0),
                   bottomRight: Radius.circular(12.0),
@@ -377,7 +373,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                 ),
               ),
               child: ClipRRect(
-                borderRadius: const BorderRadius.only(
+                borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(0.0),
                   bottomRight: Radius.circular(12.0),
                   topLeft: Radius.circular(0.0),
@@ -388,7 +384,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                   height: double.infinity,
                   decoration: BoxDecoration(
                     color: FlutterFlowTheme.of(context).sideMenu,
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       bottomLeft: Radius.circular(0.0),
                       bottomRight: Radius.circular(12.0),
                       topLeft: Radius.circular(0.0),
@@ -404,7 +400,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                     children: [
                       Expanded(
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               12.0, 0.0, 10.0, 0.0),
                           child: SingleChildScrollView(
                             primary: false,
@@ -435,7 +431,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                       height: 40.0,
                                       decoration: BoxDecoration(
                                         color:
-                                            widget.pageSelected == Pages.Inicio
+                                            widget!.pageSelected == Pages.Inicio
                                                 ? FlutterFlowTheme.of(context)
                                                     .primary
                                                 : Colors.transparent,
@@ -449,15 +445,15 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                         children: [
                                           Stack(
                                             alignment:
-                                                const AlignmentDirectional(-1.0, 0.0),
+                                                AlignmentDirectional(-1.0, 0.0),
                                             children: [
                                               Padding(
-                                                padding: const EdgeInsetsDirectional
+                                                padding: EdgeInsetsDirectional
                                                     .fromSTEB(
                                                         7.0, 0.0, 7.0, 0.0),
                                                 child: Icon(
                                                   Icons.home_sharp,
-                                                  color: widget.pageSelected ==
+                                                  color: widget!.pageSelected ==
                                                           Pages.Inicio
                                                       ? FlutterFlowTheme.of(
                                                               context)
@@ -471,7 +467,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                               ),
                                             ],
                                           ),
-                                          if (widget.isExpansible)
+                                          if (widget!.isExpansible)
                                             Expanded(
                                               child: Text(
                                                 'Ínicio',
@@ -480,7 +476,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                     .bodyMedium
                                                     .override(
                                                       fontFamily: 'Outfit',
-                                                      color: widget
+                                                      color: widget!
                                                                   .pageSelected ==
                                                               Pages.Inicio
                                                           ? FlutterFlowTheme.of(
@@ -505,7 +501,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                   scrollDirection: Axis.vertical,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 5.0, 0.0, 0.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
@@ -551,7 +547,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                           ),
                                           child: Container(
                                             width: double.infinity,
-                                            constraints: const BoxConstraints(
+                                            constraints: BoxConstraints(
                                               minHeight: 50.0,
                                             ),
                                             decoration: BoxDecoration(
@@ -566,14 +562,14 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                     width: double.infinity,
                                                     height: 40.0,
                                                     decoration: BoxDecoration(
-                                                      color: (widget
+                                                      color: (widget!
                                                                       .pageSelected ==
                                                                   Pages
                                                                       .Painel) ||
-                                                              (widget.pageSelected ==
+                                                              (widget!.pageSelected ==
                                                                   Pages
                                                                       .Vendas) ||
-                                                              (widget.pageSelected ==
+                                                              (widget!.pageSelected ==
                                                                   Pages
                                                                       .Financeiro)
                                                           ? FlutterFlowTheme.of(
@@ -593,12 +589,12 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                       children: [
                                                         Stack(
                                                           alignment:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   -1.0, 0.0),
                                                           children: [
                                                             Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           7.0,
                                                                           0.0,
@@ -607,14 +603,14 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                               child: Icon(
                                                                 Icons
                                                                     .bar_chart_rounded,
-                                                                color: (widget
+                                                                color: (widget!
                                                                                 .pageSelected ==
                                                                             Pages
                                                                                 .Painel) ||
-                                                                        (widget.pageSelected ==
+                                                                        (widget!.pageSelected ==
                                                                             Pages
                                                                                 .Vendas) ||
-                                                                        (widget.pageSelected ==
+                                                                        (widget!.pageSelected ==
                                                                             Pages
                                                                                 .Financeiro)
                                                                     ? FlutterFlowTheme.of(
@@ -630,7 +626,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                             ),
                                                           ],
                                                         ),
-                                                        if (widget
+                                                        if (widget!
                                                             .isExpansible)
                                                           Expanded(
                                                             child: Text(
@@ -641,11 +637,11 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                                   .override(
                                                                     fontFamily:
                                                                         'Outfit',
-                                                                    color: (widget.pageSelected == Pages.Painel) ||
-                                                                            (widget.pageSelected ==
+                                                                    color: (widget!.pageSelected == Pages.Painel) ||
+                                                                            (widget!.pageSelected ==
                                                                                 Pages
                                                                                     .Vendas) ||
-                                                                            (widget.pageSelected ==
+                                                                            (widget!.pageSelected ==
                                                                                 Pages
                                                                                     .Financeiro)
                                                                         ? FlutterFlowTheme.of(context)
@@ -659,13 +655,13 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                                   ),
                                                             ),
                                                           ),
-                                                        if (widget
+                                                        if (widget!
                                                                 .isExpansible &&
                                                             _model
                                                                 .subMenuDashboard)
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         7.0,
                                                                         0.0,
@@ -674,14 +670,14 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                             child: Icon(
                                                               Icons
                                                                   .keyboard_arrow_up_sharp,
-                                                              color: (widget
+                                                              color: (widget!
                                                                               .pageSelected ==
                                                                           Pages
                                                                               .Painel) ||
-                                                                      (widget.pageSelected ==
+                                                                      (widget!.pageSelected ==
                                                                           Pages
                                                                               .Vendas) ||
-                                                                      (widget.pageSelected ==
+                                                                      (widget!.pageSelected ==
                                                                           Pages
                                                                               .Financeiro)
                                                                   ? FlutterFlowTheme.of(
@@ -695,13 +691,13 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                                 animationsMap[
                                                                     'iconOnPageLoadAnimation3']!),
                                                           ),
-                                                        if (widget
+                                                        if (widget!
                                                                 .isExpansible &&
                                                             !_model
                                                                 .subMenuDashboard)
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         7.0,
                                                                         0.0,
@@ -710,14 +706,14 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                             child: Icon(
                                                               Icons
                                                                   .keyboard_arrow_down_sharp,
-                                                              color: (widget
+                                                              color: (widget!
                                                                               .pageSelected ==
                                                                           Pages
                                                                               .Painel) ||
-                                                                      (widget.pageSelected ==
+                                                                      (widget!.pageSelected ==
                                                                           Pages
                                                                               .Vendas) ||
-                                                                      (widget.pageSelected ==
+                                                                      (widget!.pageSelected ==
                                                                           Pages
                                                                               .Financeiro)
                                                                   ? FlutterFlowTheme.of(
@@ -737,7 +733,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                   if (_model.subMenuDashboard)
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   18.0,
                                                                   0.0,
@@ -749,7 +745,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         5.0,
@@ -805,12 +801,12 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                                             .center,
                                                                     children: [
                                                                       Stack(
-                                                                        alignment: const AlignmentDirectional(
+                                                                        alignment: AlignmentDirectional(
                                                                             -1.0,
                                                                             0.0),
                                                                         children: [
                                                                           Padding(
-                                                                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
                                                                                 7.0,
                                                                                 0.0,
                                                                                 7.0,
@@ -836,14 +832,14 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                                               width: 3.0,
                                                                               height: 30.0,
                                                                               decoration: BoxDecoration(
-                                                                                color: widget.pageSelected == Pages.Painel ? FlutterFlowTheme.of(context).primary : Colors.transparent,
+                                                                                color: widget!.pageSelected == Pages.Painel ? FlutterFlowTheme.of(context).primary : Colors.transparent,
                                                                                 borderRadius: BorderRadius.circular(10.0),
                                                                               ),
                                                                             ),
                                                                           ),
                                                                         ],
                                                                       ),
-                                                                      if (widget
+                                                                      if (widget!
                                                                           .isExpansible)
                                                                         Expanded(
                                                                           child:
@@ -864,7 +860,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         5.0,
@@ -920,12 +916,12 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                                             .center,
                                                                     children: [
                                                                       Stack(
-                                                                        alignment: const AlignmentDirectional(
+                                                                        alignment: AlignmentDirectional(
                                                                             -1.0,
                                                                             0.0),
                                                                         children: [
                                                                           Padding(
-                                                                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
                                                                                 7.0,
                                                                                 0.0,
                                                                                 7.0,
@@ -951,14 +947,14 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                                               width: 3.0,
                                                                               height: 30.0,
                                                                               decoration: BoxDecoration(
-                                                                                color: widget.pageSelected == Pages.Vendas ? FlutterFlowTheme.of(context).primary : Colors.transparent,
+                                                                                color: widget!.pageSelected == Pages.Vendas ? FlutterFlowTheme.of(context).primary : Colors.transparent,
                                                                                 borderRadius: BorderRadius.circular(10.0),
                                                                               ),
                                                                             ),
                                                                           ),
                                                                         ],
                                                                       ),
-                                                                      if (widget
+                                                                      if (widget!
                                                                           .isExpansible)
                                                                         Expanded(
                                                                           child:
@@ -979,7 +975,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         5.0,
@@ -1035,12 +1031,12 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                                             .center,
                                                                     children: [
                                                                       Stack(
-                                                                        alignment: const AlignmentDirectional(
+                                                                        alignment: AlignmentDirectional(
                                                                             -1.0,
                                                                             0.0),
                                                                         children: [
                                                                           Padding(
-                                                                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
                                                                                 7.0,
                                                                                 0.0,
                                                                                 7.0,
@@ -1066,14 +1062,14 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                                               width: 3.0,
                                                                               height: 30.0,
                                                                               decoration: BoxDecoration(
-                                                                                color: widget.pageSelected == Pages.Financeiro ? FlutterFlowTheme.of(context).primary : Colors.transparent,
+                                                                                color: widget!.pageSelected == Pages.Financeiro ? FlutterFlowTheme.of(context).primary : Colors.transparent,
                                                                                 borderRadius: BorderRadius.circular(10.0),
                                                                               ),
                                                                             ),
                                                                           ),
                                                                         ],
                                                                       ),
-                                                                      if (widget
+                                                                      if (widget!
                                                                           .isExpansible)
                                                                         Expanded(
                                                                           child:
@@ -1115,7 +1111,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                   scrollDirection: Axis.vertical,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 5.0, 0.0, 0.0),
                                       child: InkWell(
                                         splashColor: Colors.transparent,
@@ -1160,7 +1156,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                           ),
                                           child: Container(
                                             width: double.infinity,
-                                            constraints: const BoxConstraints(
+                                            constraints: BoxConstraints(
                                               minHeight: 50.0,
                                             ),
                                             decoration: BoxDecoration(
@@ -1175,14 +1171,14 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                     width: double.infinity,
                                                     height: 40.0,
                                                     decoration: BoxDecoration(
-                                                      color: (widget
+                                                      color: (widget!
                                                                       .pageSelected ==
                                                                   Pages
                                                                       .Clientes) ||
-                                                              (widget.pageSelected ==
+                                                              (widget!.pageSelected ==
                                                                   Pages
                                                                       .Produtos) ||
-                                                              (widget.pageSelected ==
+                                                              (widget!.pageSelected ==
                                                                   Pages
                                                                       .Forncedores)
                                                           ? FlutterFlowTheme.of(
@@ -1202,12 +1198,12 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                       children: [
                                                         Stack(
                                                           alignment:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   -1.0, 0.0),
                                                           children: [
                                                             Padding(
                                                               padding:
-                                                                  const EdgeInsetsDirectional
+                                                                  EdgeInsetsDirectional
                                                                       .fromSTEB(
                                                                           7.0,
                                                                           0.0,
@@ -1216,14 +1212,14 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                               child: Icon(
                                                                 Icons
                                                                     .playlist_add_circle_rounded,
-                                                                color: (widget
+                                                                color: (widget!
                                                                                 .pageSelected ==
                                                                             Pages
                                                                                 .Clientes) ||
-                                                                        (widget.pageSelected ==
+                                                                        (widget!.pageSelected ==
                                                                             Pages
                                                                                 .Produtos) ||
-                                                                        (widget.pageSelected ==
+                                                                        (widget!.pageSelected ==
                                                                             Pages
                                                                                 .Forncedores)
                                                                     ? FlutterFlowTheme.of(
@@ -1239,7 +1235,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                             ),
                                                           ],
                                                         ),
-                                                        if (widget
+                                                        if (widget!
                                                             .isExpansible)
                                                           Expanded(
                                                             child: Text(
@@ -1250,11 +1246,11 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                                   .override(
                                                                     fontFamily:
                                                                         'Outfit',
-                                                                    color: (widget.pageSelected == Pages.Clientes) ||
-                                                                            (widget.pageSelected ==
+                                                                    color: (widget!.pageSelected == Pages.Clientes) ||
+                                                                            (widget!.pageSelected ==
                                                                                 Pages
                                                                                     .Produtos) ||
-                                                                            (widget.pageSelected ==
+                                                                            (widget!.pageSelected ==
                                                                                 Pages
                                                                                     .Forncedores)
                                                                         ? FlutterFlowTheme.of(context)
@@ -1270,11 +1266,11 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                           ),
                                                         if (_model
                                                                 .subMenuCadastro &&
-                                                            widget
+                                                            widget!
                                                                 .isExpansible)
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         7.0,
                                                                         0.0,
@@ -1283,14 +1279,14 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                             child: Icon(
                                                               Icons
                                                                   .keyboard_arrow_up_sharp,
-                                                              color: (widget
+                                                              color: (widget!
                                                                               .pageSelected ==
                                                                           Pages
                                                                               .Clientes) ||
-                                                                      (widget.pageSelected ==
+                                                                      (widget!.pageSelected ==
                                                                           Pages
                                                                               .Produtos) ||
-                                                                      (widget.pageSelected ==
+                                                                      (widget!.pageSelected ==
                                                                           Pages
                                                                               .Forncedores)
                                                                   ? FlutterFlowTheme.of(
@@ -1304,13 +1300,13 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                                 animationsMap[
                                                                     'iconOnPageLoadAnimation9']!),
                                                           ),
-                                                        if (widget
+                                                        if (widget!
                                                                 .isExpansible &&
                                                             !_model
                                                                 .subMenuCadastro)
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         7.0,
                                                                         0.0,
@@ -1319,14 +1315,14 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                             child: Icon(
                                                               Icons
                                                                   .keyboard_arrow_down_sharp,
-                                                              color: (widget
+                                                              color: (widget!
                                                                               .pageSelected ==
                                                                           Pages
                                                                               .Clientes) ||
-                                                                      (widget.pageSelected ==
+                                                                      (widget!.pageSelected ==
                                                                           Pages
                                                                               .Produtos) ||
-                                                                      (widget.pageSelected ==
+                                                                      (widget!.pageSelected ==
                                                                           Pages
                                                                               .Forncedores)
                                                                   ? FlutterFlowTheme.of(
@@ -1346,7 +1342,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                   if (_model.subMenuCadastro)
                                                     Padding(
                                                       padding:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   18.0,
                                                                   0.0,
@@ -1358,7 +1354,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                         children: [
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         5.0,
@@ -1414,12 +1410,12 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                                             .center,
                                                                     children: [
                                                                       Stack(
-                                                                        alignment: const AlignmentDirectional(
+                                                                        alignment: AlignmentDirectional(
                                                                             -1.0,
                                                                             0.0),
                                                                         children: [
                                                                           Padding(
-                                                                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
                                                                                 7.0,
                                                                                 0.0,
                                                                                 7.0,
@@ -1445,14 +1441,14 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                                               width: 3.0,
                                                                               height: 30.0,
                                                                               decoration: BoxDecoration(
-                                                                                color: widget.pageSelected == Pages.Clientes ? FlutterFlowTheme.of(context).primary : Colors.transparent,
+                                                                                color: widget!.pageSelected == Pages.Clientes ? FlutterFlowTheme.of(context).primary : Colors.transparent,
                                                                                 borderRadius: BorderRadius.circular(10.0),
                                                                               ),
                                                                             ),
                                                                           ),
                                                                         ],
                                                                       ),
-                                                                      if (widget
+                                                                      if (widget!
                                                                           .isExpansible)
                                                                         Expanded(
                                                                           child:
@@ -1473,7 +1469,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         5.0,
@@ -1525,12 +1521,12 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                                             .center,
                                                                     children: [
                                                                       Stack(
-                                                                        alignment: const AlignmentDirectional(
+                                                                        alignment: AlignmentDirectional(
                                                                             -1.0,
                                                                             0.0),
                                                                         children: [
                                                                           Padding(
-                                                                            padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                            padding: EdgeInsetsDirectional.fromSTEB(
                                                                                 7.0,
                                                                                 0.0,
                                                                                 7.0,
@@ -1556,14 +1552,14 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                                               width: 3.0,
                                                                               height: 30.0,
                                                                               decoration: BoxDecoration(
-                                                                                color: widget.pageSelected == Pages.Produtos ? FlutterFlowTheme.of(context).primary : Colors.transparent,
+                                                                                color: widget!.pageSelected == Pages.Produtos ? FlutterFlowTheme.of(context).primary : Colors.transparent,
                                                                                 borderRadius: BorderRadius.circular(10.0),
                                                                               ),
                                                                             ),
                                                                           ),
                                                                         ],
                                                                       ),
-                                                                      if (widget
+                                                                      if (widget!
                                                                           .isExpansible)
                                                                         Expanded(
                                                                           child:
@@ -1584,7 +1580,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                           ),
                                                           Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         0.0,
                                                                         5.0,
@@ -1622,12 +1618,12 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                                   children: [
                                                                     Stack(
                                                                       alignment:
-                                                                          const AlignmentDirectional(
+                                                                          AlignmentDirectional(
                                                                               -1.0,
                                                                               0.0),
                                                                       children: [
                                                                         Padding(
-                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
                                                                               7.0,
                                                                               0.0,
                                                                               7.0,
@@ -1659,14 +1655,14 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                                                 30.0,
                                                                             decoration:
                                                                                 BoxDecoration(
-                                                                              color: widget.pageSelected == Pages.Forncedores ? FlutterFlowTheme.of(context).primary : Colors.transparent,
+                                                                              color: widget!.pageSelected == Pages.Forncedores ? FlutterFlowTheme.of(context).primary : Colors.transparent,
                                                                               borderRadius: BorderRadius.circular(10.0),
                                                                             ),
                                                                           ),
                                                                         ),
                                                                       ],
                                                                     ),
-                                                                    if (widget
+                                                                    if (widget!
                                                                         .isExpansible)
                                                                       Expanded(
                                                                         child:
@@ -1715,7 +1711,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                     children: [
                                       Align(
                                         alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
+                                            AlignmentDirectional(0.0, 0.0),
                                         child: Stack(
                                           children: [
                                             Material(
@@ -1759,14 +1755,14 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                                   FlutterFlowTheme.of(context)
                                                       .error,
                                               elevation: 2.0,
-                                              padding: const EdgeInsets.all(7.0),
+                                              padding: EdgeInsets.all(7.0),
                                               position: badges.BadgePosition
                                                   .topStart(),
                                               animationType: badges
                                                   .BadgeAnimationType.scale,
                                               toAnimate: true,
                                               child: Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     0.0, 0.0),
                                                 child: FlutterFlowIconButton(
                                                   borderColor:
@@ -1829,7 +1825,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                       ),
                                     ],
                                   ),
-                              ].divide(const SizedBox(height: 5.0)),
+                              ].divide(SizedBox(height: 5.0)),
                             ),
                           ),
                         ),
@@ -1842,9 +1838,9 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                         color: FlutterFlowTheme.of(context).alternate,
                       ),
                       Align(
-                        alignment: const AlignmentDirectional(-1.0, 1.0),
+                        alignment: AlignmentDirectional(-1.0, 1.0),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 20.0, 0.0, 0.0),
                           child: InkWell(
                             splashColor: Colors.transparent,
@@ -1861,7 +1857,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                   ),
                                 }.withoutNulls,
                                 extra: <String, dynamic>{
-                                  kTransitionInfoKey: const TransitionInfo(
+                                  kTransitionInfoKey: TransitionInfo(
                                     hasTransition: true,
                                     transitionType: PageTransitionType.fade,
                                   ),
@@ -1873,16 +1869,16 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                               mainAxisAlignment: MainAxisAlignment.center,
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                SizedBox(
+                                Container(
                                   height: 50.0,
                                   child: Stack(
                                     children: [
                                       Align(
                                         alignment:
-                                            const AlignmentDirectional(0.0, 0.0),
+                                            AlignmentDirectional(0.0, 0.0),
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   7.0, 0.0, 7.0, 0.0),
                                           child: Icon(
                                             Icons.settings_rounded,
@@ -1916,7 +1912,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                           ),
                                     ),
                                   ),
-                                if (widget.isExpansible)
+                                if (widget!.isExpansible)
                                   Expanded(
                                     child: Text(
                                       'Configuração',
@@ -1937,7 +1933,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
+                            EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 40.0),
                         child: InkWell(
                           splashColor: Colors.transparent,
                           focusColor: Colors.transparent,
@@ -1957,14 +1953,14 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Align(
-                                alignment: const AlignmentDirectional(0.0, 1.0),
-                                child: SizedBox(
+                                alignment: AlignmentDirectional(0.0, 1.0),
+                                child: Container(
                                   height: 50.0,
                                   child: Stack(
-                                    alignment: const AlignmentDirectional(-1.0, 0.0),
+                                    alignment: AlignmentDirectional(-1.0, 0.0),
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             7.0, 0.0, 7.0, 0.0),
                                         child: Icon(
                                           Icons.exit_to_app_rounded,
@@ -1978,7 +1974,7 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
                                   ),
                                 ),
                               ),
-                              if (widget.isExpansible)
+                              if (widget!.isExpansible)
                                 Expanded(
                                   child: Text(
                                     'Loggout',
@@ -2008,6 +2004,14 @@ class _UnViewFrameSideMenuWidgetState extends State<UnViewFrameSideMenuWidget>
           ),
         ],
       ),
+      onEnter: ((event) async {
+        safeSetState(() => _model.mouseRegionHovered = true);
+        await widget.mouseRegionEnter?.call();
+      }),
+      onExit: ((event) async {
+        safeSetState(() => _model.mouseRegionHovered = false);
+        await widget.mouseRegionExit?.call();
+      }),
     );
   }
 }
