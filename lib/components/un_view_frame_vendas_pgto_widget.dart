@@ -214,7 +214,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                                 CrossAxisAlignment.end,
                                             children: [
                                               Text(
-                                                'N°',
+                                                'N° Vendas',
                                                 maxLines: 1,
                                                 style:
                                                     FlutterFlowTheme.of(context)
@@ -313,7 +313,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                   crossAxisAlignment: CrossAxisAlignment.end,
                                   children: [
                                     Text(
-                                      'N°',
+                                      'N° Vendas',
                                       maxLines: 1,
                                       style: FlutterFlowTheme.of(context)
                                           .bodyMedium
@@ -439,7 +439,7 @@ class _UnViewFrameVendasPgtoWidgetState
                                                             const AlignmentDirectional(
                                                                 0.0, 0.0),
                                                         child: AutoSizeText(
-                                                          'Números',
+                                                          'N° Vendas',
                                                           textAlign:
                                                               TextAlign.center,
                                                           maxLines: 1,

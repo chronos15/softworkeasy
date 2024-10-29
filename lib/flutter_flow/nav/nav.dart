@@ -90,18 +90,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         ),
         FFRoute(
           name: 'unViewFormLogin',
-          path: '/unViewFormLogin',
+          path: '/Login',
           builder: (context, params) => const UnViewFormLoginWidget(),
         ),
         FFRoute(
           name: 'unViewFormPrincipal',
-          path: '/unViewFormPrincipal',
+          path: '/Principal',
           requireAuth: true,
           builder: (context, params) => const UnViewFormPrincipalWidget(),
         ),
         FFRoute(
           name: 'unViewFormSettings',
-          path: '/unViewFormSettings',
+          path: '/Configuracao',
           builder: (context, params) => UnViewFormSettingsWidget(
             iTabInitial: params.getParam(
               'iTabInitial',
@@ -111,7 +111,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
         ),
         FFRoute(
           name: 'unViewFormClienteDetails',
-          path: '/unViewFormClienteDetails',
+          path: '/DetalhesClientes',
           builder: (context, params) => UnViewFormClienteDetailsWidget(
             iTabInitial: params.getParam(
               'iTabInitial',
@@ -288,7 +288,7 @@ class FFRoute {
 
           if (requireAuth && !appStateNotifier.loggedIn) {
             appStateNotifier.setRedirectLocationIfUnset(state.uri.toString());
-            return '/unViewFormLogin';
+            return '/Login';
           }
           return null;
         },

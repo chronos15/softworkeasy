@@ -15,3 +15,5 @@ export 'change_orientation.dart' show changeOrientation;
 export 'inject_user_agent.dart' show injectUserAgent;
 export 'timeout_a_p_i_recall.dart' show timeoutAPIRecall;
 export 'test_connection_server.dart' show testConnectionServer;
+export 'cript_a_e_s256.dart' show criptAES256;
+export 'load_ini_file.dart' show loadIniFile;

@@ -6,6 +6,7 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import 'dart:async';
+import '/actions/actions.dart' as action_blocks;
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:auto_size_text/auto_size_text.dart';
@@ -48,6 +49,9 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
         return;
       }
       if (FFAppState().ConfigGlobaisServer.hostPrimario != '') {
+        if (isWeb) {
+          await action_blocks.verifyConfigFromIni(context);
+        }
         _model.disableByError = true;
         _model.sMessageError = 'Realizando conexão com o servidor...';
         _model.bTentarNovamente = false;
@@ -197,24 +201,30 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
           }
         }
       } else {
-        context.pushNamedAuth(
-          'unViewFormSettings',
-          context.mounted,
-          queryParameters: {
-            'iTabInitial': serializeParam(
-              0,
-              ParamType.int,
-            ),
-          }.withoutNulls,
-          extra: <String, dynamic>{
-            kTransitionInfoKey: const TransitionInfo(
-              hasTransition: true,
-              transitionType: PageTransitionType.bottomToTop,
-            ),
-          },
-        );
+        if (isWeb) {
+          await action_blocks.verifyConfigFromIni(context);
+          safeSetState(() {});
+          return;
+        } else {
+          context.pushNamedAuth(
+            'unViewFormSettings',
+            context.mounted,
+            queryParameters: {
+              'iTabInitial': serializeParam(
+                0,
+                ParamType.int,
+              ),
+            }.withoutNulls,
+            extra: <String, dynamic>{
+              kTransitionInfoKey: const TransitionInfo(
+                hasTransition: true,
+                transitionType: PageTransitionType.bottomToTop,
+              ),
+            },
+          );
 
-        return;
+          return;
+        }
       }
     });
 
@@ -1059,59 +1069,19 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                           ).animateOnPageLoad(animationsMap[
                                               'buttonOnPageLoadAnimation1']!),
                                         ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
-                                                  0.0, 24.0, 0.0, 24.0),
-                                          child: Row(
-                                            mainAxisSize: MainAxisSize.max,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              SelectionArea(
-                                                  child: AutoSizeText(
-                                                'Não consegue conectar? ',
-                                                style: FlutterFlowTheme.of(
-                                                        context)
-                                                    .bodyMedium
-                                                    .override(
-                                                      fontFamily: 'Readex Pro',
-                                                      color:
-                                                          FlutterFlowTheme.of(
-                                                                  context)
-                                                              .primaryText,
-                                                      letterSpacing: 0.0,
-                                                    ),
-                                              )),
-                                              InkWell(
-                                                splashColor: Colors.transparent,
-                                                focusColor: Colors.transparent,
-                                                hoverColor: Colors.transparent,
-                                                highlightColor:
-                                                    Colors.transparent,
-                                                onTap: () async {
-                                                  context.pushNamed(
-                                                    'unViewFormSettings',
-                                                    queryParameters: {
-                                                      'iTabInitial':
-                                                          serializeParam(
-                                                        0,
-                                                        ParamType.int,
-                                                      ),
-                                                    }.withoutNulls,
-                                                    extra: <String, dynamic>{
-                                                      kTransitionInfoKey:
-                                                          const TransitionInfo(
-                                                        hasTransition: true,
-                                                        transitionType:
-                                                            PageTransitionType
-                                                                .bottomToTop,
-                                                      ),
-                                                    },
-                                                  );
-                                                },
-                                                child: Text(
-                                                  'Obter Acesso',
+                                        if (!isWeb)
+                                          Padding(
+                                            padding:
+                                                const EdgeInsetsDirectional.fromSTEB(
+                                                    0.0, 24.0, 0.0, 24.0),
+                                            child: Row(
+                                              mainAxisSize: MainAxisSize.max,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                SelectionArea(
+                                                    child: AutoSizeText(
+                                                  'Não consegue conectar? ',
                                                   style: FlutterFlowTheme.of(
                                                           context)
                                                       .bodyMedium
@@ -1121,16 +1091,60 @@ class _UnViewFormLoginWidgetState extends State<UnViewFormLoginWidget>
                                                         color:
                                                             FlutterFlowTheme.of(
                                                                     context)
-                                                                .primary,
+                                                                .primaryText,
                                                         letterSpacing: 0.0,
-                                                        fontWeight:
-                                                            FontWeight.normal,
                                                       ),
+                                                )),
+                                                InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    context.pushNamed(
+                                                      'unViewFormSettings',
+                                                      queryParameters: {
+                                                        'iTabInitial':
+                                                            serializeParam(
+                                                          0,
+                                                          ParamType.int,
+                                                        ),
+                                                      }.withoutNulls,
+                                                      extra: <String, dynamic>{
+                                                        kTransitionInfoKey:
+                                                            const TransitionInfo(
+                                                          hasTransition: true,
+                                                          transitionType:
+                                                              PageTransitionType
+                                                                  .bottomToTop,
+                                                        ),
+                                                      },
+                                                    );
+                                                  },
+                                                  child: Text(
+                                                    'Obter Acesso',
+                                                    style: FlutterFlowTheme.of(
+                                                            context)
+                                                        .bodyMedium
+                                                        .override(
+                                                          fontFamily:
+                                                              'Readex Pro',
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          letterSpacing: 0.0,
+                                                          fontWeight:
+                                                              FontWeight.normal,
+                                                        ),
+                                                  ),
                                                 ),
-                                              ),
-                                            ].divide(const SizedBox(width: 5.0)),
+                                              ].divide(const SizedBox(width: 5.0)),
+                                            ),
                                           ),
-                                        ),
                                       ],
                                     ),
                                   ),

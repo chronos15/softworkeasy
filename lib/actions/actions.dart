@@ -4,6 +4,7 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'dart:async';
 import '/actions/actions.dart' as action_blocks;
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 
 Future getToken(BuildContext context) async {
@@ -107,4 +108,53 @@ Future verifyConnection(BuildContext context) async {
     );
   }
   FFAppState().isConnected = connectionTrue;
+}
+
+Future verifyConfigFromIni(BuildContext context) async {
+  String? returnFromReadIni;
+  String? decryptValue;
+
+  returnFromReadIni = await actions.loadIniFile();
+  if (returnFromReadIni != '') {
+    decryptValue = await actions.decryptAES256(
+      returnFromReadIni,
+    );
+    if (decryptValue != '') {
+      FFAppState().updateConfigGlobaisServerStruct(
+        (e) => e
+          ..path = functions.readFromValueKey(decryptValue)?[0]
+          ..cnpj = functions.readFromValueKey(decryptValue)?[1]
+          ..hostPrimario = functions.readFromValueKey(decryptValue)?[2]
+          ..hostSecundario = functions.readFromValueKey(decryptValue)?[3]
+          ..porta = valueOrDefault<int>(
+            functions.strintToInt(functions.readFromValueKey(decryptValue)?[4]),
+            3040,
+          ),
+      );
+      FFAppState().update(() {});
+    } else {
+      await actions.elegantNotificationError(
+        context,
+        'Falha',
+        'Falha ao descriptografar chave de configuração .ini!',
+        FlutterFlowTheme.of(context).primaryBackground,
+        FlutterFlowTheme.of(context).secondaryBackground,
+        360.0,
+        'topcenter',
+        'fromtop',
+      );
+    }
+  } else {
+    await actions.elegantNotificationError(
+      context,
+      'Falha',
+      'Falha ao ler arquivo de configuração .INI!',
+      FlutterFlowTheme.of(context).primaryBackground,
+      FlutterFlowTheme.of(context).secondaryBackground,
+      360.0,
+      'topcenter',
+      'fromtop',
+    );
+    return;
+  }
 }

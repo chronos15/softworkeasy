@@ -17,16 +17,15 @@ class UnViewFrameDashPainelModel
 
   int? iDateSub = 0;
 
-  bool isLoadingVendedor = false;
-
-  bool isLoadingPgto = false;
+  bool isAllLoading = false;
 
   ///  State fields for stateful widgets in this component.
 
   final unViewFrameDashPainelShortcutsFocusNode = FocusNode();
   Completer<ApiCallResponse>? apiRequestCompleter3;
-  Completer<ApiCallResponse>? apiRequestCompleter5;
   Completer<ApiCallResponse>? apiRequestCompleter6;
+  Completer<ApiCallResponse>? apiRequestCompleter5;
+  Completer<ApiCallResponse>? apiRequestCompleter7;
   Completer<ApiCallResponse>? apiRequestCompleter2;
   Completer<ApiCallResponse>? apiRequestCompleter1;
   Completer<ApiCallResponse>? apiRequestCompleter4;
@@ -54,8 +53,8 @@ class UnViewFrameDashPainelModel
   late UnViewFrameVazioModel unViewFrameVazioHoraModel2;
   // Model for unViewFrameIndicadores component.
   late UnViewFrameIndicadoresModel unViewFrameIndicadoresModel2;
-  // Model for unViewFrameVazio component.
-  late UnViewFrameVazioModel unViewFrameVazioModel;
+  // Model for unViewFrameVazioHora.
+  late UnViewFrameVazioModel unViewFrameVazioHoraModel3;
   // Model for unViewFrameVendasPgto component.
   late UnViewFrameVendasPgtoModel unViewFrameVendasPgtoModel;
   // Model for unviewFrameVendasVendedorDesktop.
@@ -84,7 +83,8 @@ class UnViewFrameDashPainelModel
         createModel(context, () => UnViewFrameVazioModel());
     unViewFrameIndicadoresModel2 =
         createModel(context, () => UnViewFrameIndicadoresModel());
-    unViewFrameVazioModel = createModel(context, () => UnViewFrameVazioModel());
+    unViewFrameVazioHoraModel3 =
+        createModel(context, () => UnViewFrameVazioModel());
     unViewFrameVendasPgtoModel =
         createModel(context, () => UnViewFrameVendasPgtoModel());
     unviewFrameVendasVendedorDesktopModel =
@@ -105,7 +105,7 @@ class UnViewFrameDashPainelModel
     unViewFrameIndicadoresModel1.dispose();
     unViewFrameVazioHoraModel2.dispose();
     unViewFrameIndicadoresModel2.dispose();
-    unViewFrameVazioModel.dispose();
+    unViewFrameVazioHoraModel3.dispose();
     unViewFrameVendasPgtoModel.dispose();
     unviewFrameVendasVendedorDesktopModel.dispose();
     unviewFrameVendasVendedorMobileModel.dispose();
@@ -127,6 +127,21 @@ class UnViewFrameDashPainelModel
     }
   }
 
+  Future waitForApiRequestCompleted6({
+    double minWait = 0,
+    double maxWait = double.infinity,
+  }) async {
+    final stopwatch = Stopwatch()..start();
+    while (true) {
+      await Future.delayed(const Duration(milliseconds: 50));
+      final timeElapsed = stopwatch.elapsedMilliseconds;
+      final requestComplete = apiRequestCompleter6?.isCompleted ?? false;
+      if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
+        break;
+      }
+    }
+  }
+
   Future waitForApiRequestCompleted5({
     double minWait = 0,
     double maxWait = double.infinity,
@@ -142,7 +157,7 @@ class UnViewFrameDashPainelModel
     }
   }
 
-  Future waitForApiRequestCompleted6({
+  Future waitForApiRequestCompleted7({
     double minWait = 0,
     double maxWait = double.infinity,
   }) async {
@@ -150,7 +165,7 @@ class UnViewFrameDashPainelModel
     while (true) {
       await Future.delayed(const Duration(milliseconds: 50));
       final timeElapsed = stopwatch.elapsedMilliseconds;
-      final requestComplete = apiRequestCompleter6?.isCompleted ?? false;
+      final requestComplete = apiRequestCompleter7?.isCompleted ?? false;
       if (timeElapsed > maxWait || (requestComplete && timeElapsed > minWait)) {
         break;
       }

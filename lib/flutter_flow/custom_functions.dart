@@ -799,3 +799,25 @@ List<dynamic>? emptyJsonList() {
   // return empty json list
   return <dynamic>[];
 }
+
+List<String>? readFromValueKey(String? value) {
+  if (value == null || value.isEmpty) {
+    return null;
+  }
+
+  /// Divide a string pelo delimitador "|"
+  return value.split('|');
+}
+
+int? strintToInt(String? value) {
+  // value string to int
+  if (value == null) {
+    return null;
+  }
+
+  try {
+    return int.parse(value);
+  } catch (e) {
+    return null;
+  }
+}

@@ -11,10 +11,10 @@ class UnViewFormSettingsModel
   final formKey = GlobalKey<FormState>();
   // Model for unViewFrameHeader component.
   late UnViewFrameHeaderModel unViewFrameHeaderModel;
-  // State field(s) for TabBar widget.
-  TabController? tabBarController;
-  int get tabBarCurrentIndex =>
-      tabBarController != null ? tabBarController!.index : 0;
+  // State field(s) for tbSettings widget.
+  TabController? tbSettingsController;
+  int get tbSettingsCurrentIndex =>
+      tbSettingsController != null ? tbSettingsController!.index : 0;
 
   // State field(s) for EmailAddressField widget.
   FocusNode? emailAddressFieldFocusNode1;
@@ -99,7 +99,7 @@ class UnViewFormSettingsModel
   @override
   void dispose() {
     unViewFrameHeaderModel.dispose();
-    tabBarController?.dispose();
+    tbSettingsController?.dispose();
     emailAddressFieldFocusNode1?.dispose();
     emailAddressFieldTextController1?.dispose();
 

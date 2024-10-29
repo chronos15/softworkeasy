@@ -11,17 +11,18 @@ import 'package:flutter/material.dart';
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
 import 'package:encrypt/encrypt.dart'
-    as encrypt; // Adiciona um alias ao pacote encrypt
+    as encrypt; // Mantém o alias para o pacote encrypt
 
-Future<String> decryptAES256(String? encryptedValue) async {
-  // Decrypt AES256 value
+Future<String> criptAES256(String? value) async {
+  // Encrypt AES256 value
   final key =
       encrypt.Key.fromUtf8('-now#msswfppajverpsavancarsempre'); // 32 bytes
   final iv = encrypt.IV.fromUtf8('fppavancarsempre'); // 16 bytes
 
   final encrypter =
       encrypt.Encrypter(encrypt.AES(key, mode: encrypt.AESMode.cbc));
-  final decryptedValue = encrypter.decrypt64(encryptedValue!, iv: iv);
 
-  return decryptedValue;
+  final encryptedValue = encrypter.encrypt(value!, iv: iv);
+
+  return encryptedValue.base64;
 }

@@ -10,13 +10,13 @@ import 'package:flutter/material.dart';
 // Begin custom action code
 // DO NOT REMOVE OR MODIFY THE CODE ABOVE!
 
-import 'package:windows_single_instance/windows_single_instance.dart';
+/*import 'package:windows_single_instance/windows_single_instance.dart';
 import 'dart:io';
 import 'dart:ffi';
-import 'package:win32/win32.dart';
+import 'package:win32/win32.dart';*/
 
 Future<void> oneCallApplication() async {
-  final args = <String>[];
+/*  final args = <String>[];
   // Função de callback chamada quando uma segunda instância é detectada
   if (Platform.isWindows) {
     await WindowsSingleInstance.ensureSingleInstance(
@@ -32,5 +32,5 @@ Future<void> oneCallApplication() async {
         }
       },
     );
-  }
+  }*/
 }

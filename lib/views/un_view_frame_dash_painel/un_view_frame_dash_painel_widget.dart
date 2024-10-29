@@ -167,8 +167,6 @@ class _UnViewFrameDashPainelWidgetState
         const SingleActivator(
           LogicalKeyboardKey.f5,
         ): VoidCallbackIntent(() async {
-          await action_blocks.verifyConnection(context);
-          safeSetState(() {});
           _model.iDateSub = () {
             if (_model.choiceChipsValue == 'Hoje') {
               return 0;
@@ -184,15 +182,18 @@ class _UnViewFrameDashPainelWidgetState
               return 1;
             }
           }();
-          _model.isLoadingVendedor = true;
-          _model.isLoadingPgto = true;
+          _model.isAllLoading = true;
+          safeSetState(() {});
+          await action_blocks.verifyConnection(context);
           safeSetState(() {});
           if (_model.iDateSub! <= 2) {
             safeSetState(() => _model.apiRequestCompleter3 = null);
           } else {
-            HapticFeedback.lightImpact();
+            safeSetState(() => _model.apiRequestCompleter6 = null);
           }
 
+          _model.isAllLoading = false;
+          safeSetState(() {});
           await Future.wait([
             Future(() async {
               safeSetState(() => _model.apiRequestCompleter5 = null);
@@ -203,7 +204,7 @@ class _UnViewFrameDashPainelWidgetState
               }
             }),
             Future(() async {
-              safeSetState(() => _model.apiRequestCompleter6 = null);
+              safeSetState(() => _model.apiRequestCompleter7 = null);
               if (animationsMap['stackOnActionTriggerAnimation2'] != null) {
                 await animationsMap['stackOnActionTriggerAnimation2']!
                     .controller
@@ -212,24 +213,12 @@ class _UnViewFrameDashPainelWidgetState
             }),
             Future(() async {
               safeSetState(() => _model.apiRequestCompleter2 = null);
-              await _model.waitForApiRequestCompleted2(
-                  minWait: 100, maxWait: 500);
-              _model.isLoadingPgto = false;
-              safeSetState(() {});
             }),
             Future(() async {
               safeSetState(() => _model.apiRequestCompleter1 = null);
-              await _model.waitForApiRequestCompleted1(
-                  minWait: 100, maxWait: 500);
-              _model.isLoadingVendedor = false;
-              safeSetState(() {});
             }),
             Future(() async {
               safeSetState(() => _model.apiRequestCompleter4 = null);
-              await _model.waitForApiRequestCompleted4(
-                  minWait: 100, maxWait: 500);
-              _model.isLoadingVendedor = false;
-              safeSetState(() {});
             }),
           ]);
         }),
@@ -445,9 +434,6 @@ class _UnViewFrameDashPainelWidgetState
                                               safeSetState(() =>
                                                   _model.choiceChipsValue =
                                                       val?.firstOrNull);
-                                              await action_blocks
-                                                  .verifyConnection(context);
-                                              safeSetState(() {});
                                               _model.iDateSub = () {
                                                 if (_model.choiceChipsValue ==
                                                     'Hoje') {
@@ -472,20 +458,23 @@ class _UnViewFrameDashPainelWidgetState
                                                   return 1;
                                                 }
                                               }();
-                                              _model.isLoadingVendedor = true;
-                                              _model.isLoadingPgto = true;
+                                              _model.isAllLoading = true;
+                                              safeSetState(() {});
+                                              await action_blocks
+                                                  .verifyConnection(context);
                                               safeSetState(() {});
                                               if (_model.iDateSub! <= 2) {
                                                 safeSetState(() => _model
                                                         .apiRequestCompleter3 =
                                                     null);
-                                                await _model
-                                                    .waitForApiRequestCompleted3(
-                                                        minWait: 300);
                                               } else {
-                                                HapticFeedback.lightImpact();
+                                                safeSetState(() => _model
+                                                        .apiRequestCompleter6 =
+                                                    null);
                                               }
 
+                                              _model.isAllLoading = false;
+                                              safeSetState(() {});
                                               await Future.wait([
                                                 Future(() async {
                                                   safeSetState(() => _model
@@ -502,7 +491,7 @@ class _UnViewFrameDashPainelWidgetState
                                                 }),
                                                 Future(() async {
                                                   safeSetState(() => _model
-                                                          .apiRequestCompleter6 =
+                                                          .apiRequestCompleter7 =
                                                       null);
                                                   if (animationsMap[
                                                           'stackOnActionTriggerAnimation2'] !=
@@ -517,36 +506,16 @@ class _UnViewFrameDashPainelWidgetState
                                                   safeSetState(() => _model
                                                           .apiRequestCompleter2 =
                                                       null);
-                                                  await _model
-                                                      .waitForApiRequestCompleted2(
-                                                          minWait: 100,
-                                                          maxWait: 500);
-                                                  _model.isLoadingPgto = false;
-                                                  safeSetState(() {});
                                                 }),
                                                 Future(() async {
                                                   safeSetState(() => _model
                                                           .apiRequestCompleter1 =
                                                       null);
-                                                  await _model
-                                                      .waitForApiRequestCompleted1(
-                                                          minWait: 100,
-                                                          maxWait: 500);
-                                                  _model.isLoadingVendedor =
-                                                      false;
-                                                  safeSetState(() {});
                                                 }),
                                                 Future(() async {
                                                   safeSetState(() => _model
                                                           .apiRequestCompleter4 =
                                                       null);
-                                                  await _model
-                                                      .waitForApiRequestCompleted4(
-                                                          minWait: 100,
-                                                          maxWait: 500);
-                                                  _model.isLoadingVendedor =
-                                                      false;
-                                                  safeSetState(() {});
                                                 }),
                                               ]);
                                             },
@@ -634,6 +603,7 @@ class _UnViewFrameDashPainelWidgetState
                                         Expanded(
                                           child: Container(
                                             width: 100.0,
+                                            height: 280.0,
                                             constraints: const BoxConstraints(
                                               maxHeight: 280.0,
                                             ),
@@ -708,82 +678,16 @@ class _UnViewFrameDashPainelWidgetState
                                                           mainAxisSize:
                                                               MainAxisSize.max,
                                                           children: [
-                                                            Expanded(
-                                                              flex: 4,
-                                                              child: FutureBuilder<
-                                                                  ApiCallResponse>(
-                                                                future: (_model.apiRequestCompleter3 ??= Completer<
-                                                                        ApiCallResponse>()
-                                                                      ..complete(
-                                                                          VendaDashDiaHoraCall
-                                                                              .call(
-                                                                        ip: FFAppState()
-                                                                            .ConfigGlobaisServer
-                                                                            .host,
-                                                                        porta: FFAppState()
-                                                                            .ConfigGlobaisServer
-                                                                            .porta,
-                                                                        path: FFAppState()
-                                                                            .ConfigGlobaisServer
-                                                                            .path,
-                                                                        token: FFAppState()
-                                                                            .Token,
-                                                                        filterDate:
-                                                                            '?\$Filter=(DATA eq \'${dateTimeFormat(
-                                                                          "MM-dd-yyyy",
-                                                                          functions.difDateWithInteger(
-                                                                              _model.iDateSub,
-                                                                              getCurrentTimestamp),
-                                                                          locale:
-                                                                              FFLocalizations.of(context).languageCode,
-                                                                        )}\' )',
-                                                                      )))
-                                                                    .future,
-                                                                builder: (context,
-                                                                    snapshot) {
-                                                                  // Customize what your widget looks like when it's loading.
-                                                                  if (!snapshot
-                                                                      .hasData) {
-                                                                    return const Center(
-                                                                      child:
-                                                                          UnViewFrameLoadingWidget(),
-                                                                    );
-                                                                  }
-                                                                  final containerVendaDashDiaHoraResponse =
-                                                                      snapshot
-                                                                          .data!;
-
-                                                                  return Material(
-                                                                    color: Colors
-                                                                        .transparent,
-                                                                    elevation:
-                                                                        0.0,
-                                                                    shape:
-                                                                        RoundedRectangleBorder(
-                                                                      borderRadius:
-                                                                          BorderRadius.circular(
-                                                                              10.0),
-                                                                    ),
-                                                                    child:
-                                                                        Container(
-                                                                      width: double
-                                                                          .infinity,
-                                                                      height:
-                                                                          280.0,
-                                                                      constraints:
-                                                                          const BoxConstraints(
-                                                                        maxHeight:
-                                                                            280.0,
-                                                                      ),
-                                                                      decoration:
-                                                                          BoxDecoration(
-                                                                        borderRadius:
-                                                                            BorderRadius.circular(10.0),
-                                                                      ),
-                                                                      child: FutureBuilder<
-                                                                          ApiCallResponse>(
-                                                                        future:
-                                                                            VendaDashTotaisCall.call(
+                                                            if (!_model
+                                                                .isAllLoading)
+                                                              Expanded(
+                                                                flex: 4,
+                                                                child: FutureBuilder<
+                                                                    ApiCallResponse>(
+                                                                  future: (_model.apiRequestCompleter3 ??= Completer<
+                                                                          ApiCallResponse>()
+                                                                        ..complete(
+                                                                            VendaDashDiaHoraCall.call(
                                                                           ip: FFAppState()
                                                                               .ConfigGlobaisServer
                                                                               .host,
@@ -796,207 +700,271 @@ class _UnViewFrameDashPainelWidgetState
                                                                           token:
                                                                               FFAppState().Token,
                                                                           filterDate:
-                                                                              '',
-                                                                        ),
-                                                                        builder:
-                                                                            (context,
-                                                                                snapshot) {
-                                                                          // Customize what your widget looks like when it's loading.
-                                                                          if (!snapshot
-                                                                              .hasData) {
-                                                                            return const Center(
-                                                                              child: UnViewFrameLoadingWidget(),
-                                                                            );
-                                                                          }
-                                                                          final stackVendaDashTotaisResponse =
-                                                                              snapshot.data!;
+                                                                              '?\$Filter=(DATA eq \'${dateTimeFormat(
+                                                                            "MM-dd-yyyy",
+                                                                            functions.difDateWithInteger(_model.iDateSub,
+                                                                                getCurrentTimestamp),
+                                                                            locale:
+                                                                                FFLocalizations.of(context).languageCode,
+                                                                          )}\' )',
+                                                                        )))
+                                                                      .future,
+                                                                  builder: (context,
+                                                                      snapshot) {
+                                                                    // Customize what your widget looks like when it's loading.
+                                                                    if (!snapshot
+                                                                        .hasData) {
+                                                                      return const Center(
+                                                                        child:
+                                                                            UnViewFrameLoadingWidget(),
+                                                                      );
+                                                                    }
+                                                                    final containerVendaDashDiaHoraResponse =
+                                                                        snapshot
+                                                                            .data!;
 
-                                                                          return Stack(
-                                                                            children: [
-                                                                              if ((_model.iDateSub! <= 2) &&
-                                                                                  (FFAppState().isConnected &&
-                                                                                      (VendaDashDiaHoraCall.valueLista(
+                                                                    return Material(
+                                                                      color: Colors
+                                                                          .transparent,
+                                                                      elevation:
+                                                                          0.0,
+                                                                      shape:
+                                                                          RoundedRectangleBorder(
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(10.0),
+                                                                      ),
+                                                                      child:
+                                                                          Container(
+                                                                        width: double
+                                                                            .infinity,
+                                                                        height:
+                                                                            280.0,
+                                                                        constraints:
+                                                                            const BoxConstraints(
+                                                                          maxHeight:
+                                                                              280.0,
+                                                                        ),
+                                                                        decoration:
+                                                                            BoxDecoration(
+                                                                          borderRadius:
+                                                                              BorderRadius.circular(10.0),
+                                                                        ),
+                                                                        child:
+                                                                            Visibility(
+                                                                          visible:
+                                                                              !_model.isAllLoading,
+                                                                          child:
+                                                                              FutureBuilder<ApiCallResponse>(
+                                                                            future: (_model.apiRequestCompleter6 ??= Completer<ApiCallResponse>()
+                                                                                  ..complete(VendaDashTotaisCall.call(
+                                                                                    ip: FFAppState().ConfigGlobaisServer.host,
+                                                                                    porta: FFAppState().ConfigGlobaisServer.porta,
+                                                                                    path: FFAppState().ConfigGlobaisServer.path,
+                                                                                    token: FFAppState().Token,
+                                                                                    filterDate: '',
+                                                                                  )))
+                                                                                .future,
+                                                                            builder:
+                                                                                (context, snapshot) {
+                                                                              // Customize what your widget looks like when it's loading.
+                                                                              if (!snapshot.hasData) {
+                                                                                return const Center(
+                                                                                  child: UnViewFrameLoadingWidget(),
+                                                                                );
+                                                                              }
+                                                                              final stackDashTotaisVendaDashTotaisResponse = snapshot.data!;
+
+                                                                              return Stack(
+                                                                                children: [
+                                                                                  if ((_model.iDateSub! <= 2) &&
+                                                                                      (FFAppState().isConnected &&
+                                                                                          (VendaDashDiaHoraCall.valueLista(
+                                                                                                containerVendaDashDiaHoraResponse.jsonBody,
+                                                                                              )!.isNotEmpty)))
+                                                                                    Align(
+                                                                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                                                                      child: SizedBox(
+                                                                                        width: double.infinity,
+                                                                                        height: double.infinity,
+                                                                                        child: custom_widgets.DataTimeChartWithAreaString(
+                                                                                          width: double.infinity,
+                                                                                          height: double.infinity,
+                                                                                          sTitulo: 'Vendas por Horas ${_model.choiceChipsValue}',
+                                                                                          sDateFormat: 'sad',
+                                                                                          bVisibleMarker: true,
+                                                                                          colorLine: FlutterFlowTheme.of(context).primary,
+                                                                                          intervalAxisX: 1.0,
+                                                                                          colorLine2: FlutterFlowTheme.of(context).primary,
+                                                                                          numberDate: 5,
+                                                                                          vListValueY: VendaDashDiaHoraCall.totalValueY(
                                                                                             containerVendaDashDiaHoraResponse.jsonBody,
-                                                                                          )!.isNotEmpty)))
-                                                                                Align(
-                                                                                  alignment: const AlignmentDirectional(0.0, 0.0),
-                                                                                  child: SizedBox(
-                                                                                    width: double.infinity,
-                                                                                    height: double.infinity,
-                                                                                    child: custom_widgets.DataTimeChartWithAreaString(
-                                                                                      width: double.infinity,
-                                                                                      height: double.infinity,
-                                                                                      sTitulo: 'Vendas por Horas ${_model.choiceChipsValue}',
-                                                                                      sDateFormat: 'sad',
-                                                                                      bVisibleMarker: true,
-                                                                                      colorLine: FlutterFlowTheme.of(context).primary,
-                                                                                      intervalAxisX: 1.0,
-                                                                                      colorLine2: FlutterFlowTheme.of(context).primary,
-                                                                                      numberDate: 5,
-                                                                                      vListValueY: VendaDashDiaHoraCall.totalValueY(
-                                                                                        containerVendaDashDiaHoraResponse.jsonBody,
-                                                                                      )!,
-                                                                                      sListValueX: VendaDashDiaHoraCall.horaValueX(
-                                                                                        containerVendaDashDiaHoraResponse.jsonBody,
-                                                                                      )!
-                                                                                          .map((e) => e.toString())
-                                                                                          .toList(),
-                                                                                      sConcatInfoPlus: 'h',
-                                                                                    ),
-                                                                                  ),
-                                                                                ),
-                                                                              if ((_model.iDateSub! >= 7) && FFAppState().isConnected)
-                                                                                SizedBox(
-                                                                                  width: double.infinity,
-                                                                                  height: double.infinity,
-                                                                                  child: custom_widgets.DataTimeChartWithArea(
-                                                                                    width: double.infinity,
-                                                                                    height: double.infinity,
-                                                                                    sTitulo: 'Vendas por Período ${_model.choiceChipsValue}',
-                                                                                    sDateFormat: 'dd/MM',
-                                                                                    bVisibleMarker: true,
-                                                                                    colorLine: FlutterFlowTheme.of(context).primary,
-                                                                                    intervalAxisX: () {
-                                                                                      if (_model.iDateSub == 30) {
-                                                                                        return 5.0;
-                                                                                      } else if (_model.iDateSub == 90) {
-                                                                                        return 10.0;
-                                                                                      } else {
-                                                                                        return 1.0;
-                                                                                      }
-                                                                                    }(),
-                                                                                    colorLine2: FlutterFlowTheme.of(context).primary,
-                                                                                    sListValueX: functions.difDateWithIntegerList(_model.iDateSub, getCurrentTimestamp)!,
-                                                                                    vListValueY: functions.listDateByValues(
-                                                                                        getCurrentTimestamp,
-                                                                                        functions
-                                                                                            .dateFormatToDateTimeList(VendaDashTotaisCall.valueX(
-                                                                                              stackVendaDashTotaisResponse.jsonBody,
-                                                                                            )?.toList())
-                                                                                            ?.toList(),
-                                                                                        VendaDashTotaisCall.valueY(
-                                                                                          stackVendaDashTotaisResponse.jsonBody,
-                                                                                        )?.toList(),
-                                                                                        _model.iDateSub)!,
-                                                                                    numberDate: _model.iDateSub!,
-                                                                                  ),
-                                                                                ),
-                                                                              if ((!FFAppState().isConnected ||
-                                                                                      (VendaDashDiaHoraCall.valueLista(
+                                                                                          )!,
+                                                                                          sListValueX: VendaDashDiaHoraCall.horaValueX(
                                                                                             containerVendaDashDiaHoraResponse.jsonBody,
-                                                                                          )!.isEmpty)) &&
-                                                                                  (_model.iDateSub! <= 2))
-                                                                                Align(
-                                                                                  alignment: const AlignmentDirectional(0.0, 0.0),
-                                                                                  child: wrapWithModel(
-                                                                                    model: _model.unViewFrameVazioHoraModel1,
-                                                                                    updateCallback: () => safeSetState(() {}),
-                                                                                    updateOnChange: true,
-                                                                                    child: const UnViewFrameVazioWidget(
-                                                                                      sTitulo: 'Não existem dados nesse período',
-                                                                                      sMessage: 'Verifique seus filtros e tente novamente!',
-                                                                                    ),
-                                                                                  ),
-                                                                                ),
-                                                                              if ((_model.iDateSub! >= 7) && !FFAppState().isConnected)
-                                                                                Align(
-                                                                                  alignment: const AlignmentDirectional(0.0, 0.0),
-                                                                                  child: wrapWithModel(
-                                                                                    model: _model.unViewFrameVazioDashTotaisModel,
-                                                                                    updateCallback: () => safeSetState(() {}),
-                                                                                    updateOnChange: true,
-                                                                                    child: const UnViewFrameVazioWidget(
-                                                                                      sTitulo: 'Não existem dados nesse período',
-                                                                                      sMessage: 'Verifique seus filtros e tente novamente!',
-                                                                                    ),
-                                                                                  ),
-                                                                                ),
-                                                                              if ((FFAppState().isConnected && (_model.iDateSub! >= 7)) || (FFAppState().isConnected && (_model.iDateSub! <= 2)))
-                                                                                Align(
-                                                                                  alignment: const AlignmentDirectional(1.0, -1.0),
-                                                                                  child: Builder(
-                                                                                    builder: (context) => Padding(
-                                                                                      padding: const EdgeInsetsDirectional.fromSTEB(0.0, 3.0, 3.0, 0.0),
-                                                                                      child: FlutterFlowIconButton(
-                                                                                        borderColor: Colors.transparent,
-                                                                                        borderRadius: 7.0,
-                                                                                        borderWidth: 1.0,
-                                                                                        buttonSize: 35.0,
-                                                                                        icon: Icon(
-                                                                                          Icons.zoom_out_map_rounded,
-                                                                                          color: FlutterFlowTheme.of(context).alternate,
-                                                                                          size: 20.0,
+                                                                                          )!
+                                                                                              .map((e) => e.toString())
+                                                                                              .toList(),
+                                                                                          sConcatInfoPlus: 'h',
                                                                                         ),
-                                                                                        onPressed: () async {
-                                                                                          await showDialog(
-                                                                                            context: context,
-                                                                                            builder: (dialogContext) {
-                                                                                              return Dialog(
-                                                                                                elevation: 0,
-                                                                                                insetPadding: EdgeInsets.zero,
-                                                                                                backgroundColor: Colors.transparent,
-                                                                                                alignment: const AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
-                                                                                                child: SizedBox(
-                                                                                                  height: MediaQuery.sizeOf(context).height * 0.9,
-                                                                                                  width: MediaQuery.sizeOf(context).width * 0.9,
-                                                                                                  child: UnViewFrameChartExpansiveWidget(
-                                                                                                    sTitulo: '${_model.iDateSub! >= 7 ? 'Vendas por Período ' : 'Vendas por Horário '}${_model.choiceChipsValue}',
-                                                                                                    listValueX: functions.difDateWithIntegerList(_model.iDateSub, getCurrentTimestamp),
-                                                                                                    listValueY: _model.iDateSub! >= 7
-                                                                                                        ? functions.listDateByValues(
-                                                                                                            getCurrentTimestamp,
-                                                                                                            functions
-                                                                                                                .dateFormatToDateTimeList(VendaDashTotaisCall.valueX(
-                                                                                                                  stackVendaDashTotaisResponse.jsonBody,
-                                                                                                                )?.toList())
-                                                                                                                ?.toList(),
-                                                                                                            VendaDashTotaisCall.valueY(
-                                                                                                              stackVendaDashTotaisResponse.jsonBody,
-                                                                                                            )?.toList(),
-                                                                                                            _model.iDateSub)!
-                                                                                                        : VendaDashDiaHoraCall.totalValueY(
-                                                                                                            containerVendaDashDiaHoraResponse.jsonBody,
-                                                                                                          )!,
-                                                                                                    interval: () {
-                                                                                                      if (_model.iDateSub == 30) {
-                                                                                                        return 5.0;
-                                                                                                      } else if (_model.iDateSub == 90) {
-                                                                                                        return 10.0;
-                                                                                                      } else {
-                                                                                                        return 1.0;
-                                                                                                      }
-                                                                                                    }(),
-                                                                                                    iDatesGen: _model.iDateSub!,
-                                                                                                    iTipoChart: valueOrDefault<int>(
-                                                                                                      _model.iDateSub! >= 7 ? 0 : 1,
-                                                                                                      0,
-                                                                                                    ),
-                                                                                                    listValueXString: _model.iDateSub! >= 7
-                                                                                                        ? VendaDashTotaisCall.valueX(
-                                                                                                            stackVendaDashTotaisResponse.jsonBody,
-                                                                                                          )
-                                                                                                        : VendaDashDiaHoraCall.horaValueX(
-                                                                                                            containerVendaDashDiaHoraResponse.jsonBody,
-                                                                                                          )?.map((e) => e.toString()).toList(),
-                                                                                                  ),
-                                                                                                ),
-                                                                                              );
-                                                                                            },
-                                                                                          );
-                                                                                        },
                                                                                       ),
                                                                                     ),
-                                                                                  ),
-                                                                                ),
-                                                                            ],
-                                                                          );
-                                                                        },
+                                                                                  if ((_model.iDateSub! >= 7) &&
+                                                                                      (FFAppState().isConnected &&
+                                                                                          (VendaDashTotaisCall.valueList(
+                                                                                                stackDashTotaisVendaDashTotaisResponse.jsonBody,
+                                                                                              )!.isNotEmpty)))
+                                                                                    SizedBox(
+                                                                                      width: double.infinity,
+                                                                                      height: double.infinity,
+                                                                                      child: custom_widgets.DataTimeChartWithArea(
+                                                                                        width: double.infinity,
+                                                                                        height: double.infinity,
+                                                                                        sTitulo: 'Vendas por Período ${_model.choiceChipsValue}',
+                                                                                        sDateFormat: 'dd/MM',
+                                                                                        bVisibleMarker: true,
+                                                                                        colorLine: FlutterFlowTheme.of(context).primary,
+                                                                                        intervalAxisX: () {
+                                                                                          if (_model.iDateSub == 30) {
+                                                                                            return 5.0;
+                                                                                          } else if (_model.iDateSub == 90) {
+                                                                                            return 10.0;
+                                                                                          } else {
+                                                                                            return 1.0;
+                                                                                          }
+                                                                                        }(),
+                                                                                        colorLine2: FlutterFlowTheme.of(context).primary,
+                                                                                        sListValueX: functions.difDateWithIntegerList(_model.iDateSub, getCurrentTimestamp)!,
+                                                                                        vListValueY: functions.listDateByValues(
+                                                                                            getCurrentTimestamp,
+                                                                                            functions
+                                                                                                .dateFormatToDateTimeList(VendaDashTotaisCall.valueX(
+                                                                                                  stackDashTotaisVendaDashTotaisResponse.jsonBody,
+                                                                                                )?.toList())
+                                                                                                ?.toList(),
+                                                                                            VendaDashTotaisCall.valueY(
+                                                                                              stackDashTotaisVendaDashTotaisResponse.jsonBody,
+                                                                                            )?.toList(),
+                                                                                            _model.iDateSub)!,
+                                                                                        numberDate: _model.iDateSub!,
+                                                                                      ),
+                                                                                    ),
+                                                                                  if ((!FFAppState().isConnected ||
+                                                                                          (VendaDashDiaHoraCall.valueLista(
+                                                                                                containerVendaDashDiaHoraResponse.jsonBody,
+                                                                                              )!.isEmpty)) &&
+                                                                                      (_model.iDateSub! <= 2))
+                                                                                    Align(
+                                                                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                                                                      child: wrapWithModel(
+                                                                                        model: _model.unViewFrameVazioHoraModel1,
+                                                                                        updateCallback: () => safeSetState(() {}),
+                                                                                        updateOnChange: true,
+                                                                                        child: const UnViewFrameVazioWidget(
+                                                                                          sTitulo: 'Não existem dados nesse período',
+                                                                                          sMessage: 'Verifique seus filtros e tente novamente!',
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  if ((_model.iDateSub! >= 7) && !FFAppState().isConnected)
+                                                                                    Align(
+                                                                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                                                                      child: wrapWithModel(
+                                                                                        model: _model.unViewFrameVazioDashTotaisModel,
+                                                                                        updateCallback: () => safeSetState(() {}),
+                                                                                        updateOnChange: true,
+                                                                                        child: const UnViewFrameVazioWidget(
+                                                                                          sTitulo: 'Não existem dados nesse período',
+                                                                                          sMessage: 'Verifique seus filtros e tente novamente!',
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                  if ((FFAppState().isConnected && (_model.iDateSub! >= 7)) || (FFAppState().isConnected && (_model.iDateSub! <= 2)))
+                                                                                    Align(
+                                                                                      alignment: const AlignmentDirectional(1.0, -1.0),
+                                                                                      child: Builder(
+                                                                                        builder: (context) => Padding(
+                                                                                          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 3.0, 3.0, 0.0),
+                                                                                          child: FlutterFlowIconButton(
+                                                                                            borderColor: Colors.transparent,
+                                                                                            borderRadius: 7.0,
+                                                                                            borderWidth: 1.0,
+                                                                                            buttonSize: 35.0,
+                                                                                            icon: Icon(
+                                                                                              Icons.zoom_out_map_rounded,
+                                                                                              color: FlutterFlowTheme.of(context).alternate,
+                                                                                              size: 20.0,
+                                                                                            ),
+                                                                                            onPressed: () async {
+                                                                                              await showDialog(
+                                                                                                context: context,
+                                                                                                builder: (dialogContext) {
+                                                                                                  return Dialog(
+                                                                                                    elevation: 0,
+                                                                                                    insetPadding: EdgeInsets.zero,
+                                                                                                    backgroundColor: Colors.transparent,
+                                                                                                    alignment: const AlignmentDirectional(0.0, 0.0).resolve(Directionality.of(context)),
+                                                                                                    child: SizedBox(
+                                                                                                      height: MediaQuery.sizeOf(context).height * 0.9,
+                                                                                                      width: MediaQuery.sizeOf(context).width * 0.9,
+                                                                                                      child: UnViewFrameChartExpansiveWidget(
+                                                                                                        sTitulo: '${_model.iDateSub! >= 7 ? 'Vendas por Período ' : 'Vendas por Horário '}${_model.choiceChipsValue}',
+                                                                                                        listValueX: functions.difDateWithIntegerList(_model.iDateSub, getCurrentTimestamp),
+                                                                                                        listValueY: _model.iDateSub! >= 7
+                                                                                                            ? functions.listDateByValues(
+                                                                                                                getCurrentTimestamp,
+                                                                                                                functions
+                                                                                                                    .dateFormatToDateTimeList(VendaDashTotaisCall.valueX(
+                                                                                                                      stackDashTotaisVendaDashTotaisResponse.jsonBody,
+                                                                                                                    )?.toList())
+                                                                                                                    ?.toList(),
+                                                                                                                VendaDashTotaisCall.valueY(
+                                                                                                                  stackDashTotaisVendaDashTotaisResponse.jsonBody,
+                                                                                                                )?.toList(),
+                                                                                                                _model.iDateSub)!
+                                                                                                            : VendaDashDiaHoraCall.totalValueY(
+                                                                                                                containerVendaDashDiaHoraResponse.jsonBody,
+                                                                                                              )!,
+                                                                                                        interval: () {
+                                                                                                          if (_model.iDateSub == 30) {
+                                                                                                            return 5.0;
+                                                                                                          } else if (_model.iDateSub == 90) {
+                                                                                                            return 10.0;
+                                                                                                          } else {
+                                                                                                            return 1.0;
+                                                                                                          }
+                                                                                                        }(),
+                                                                                                        iDatesGen: _model.iDateSub!,
+                                                                                                        iTipoChart: valueOrDefault<int>(
+                                                                                                          _model.iDateSub! >= 7 ? 0 : 1,
+                                                                                                          0,
+                                                                                                        ),
+                                                                                                        listValueXString: _model.iDateSub! >= 7
+                                                                                                            ? VendaDashTotaisCall.valueX(
+                                                                                                                stackDashTotaisVendaDashTotaisResponse.jsonBody,
+                                                                                                              )
+                                                                                                            : VendaDashDiaHoraCall.horaValueX(
+                                                                                                                containerVendaDashDiaHoraResponse.jsonBody,
+                                                                                                              )?.map((e) => e.toString()).toList(),
+                                                                                                      ),
+                                                                                                    ),
+                                                                                                  );
+                                                                                                },
+                                                                                              );
+                                                                                            },
+                                                                                          ),
+                                                                                        ),
+                                                                                      ),
+                                                                                    ),
+                                                                                ],
+                                                                              );
+                                                                            },
+                                                                          ),
+                                                                        ),
                                                                       ),
-                                                                    ),
-                                                                  );
-                                                                },
+                                                                    );
+                                                                  },
+                                                                ),
                                                               ),
-                                                            ),
                                                           ],
                                                         ),
                                                       ),
@@ -1015,10 +983,472 @@ class _UnViewFrameDashPainelWidgetState
                                                         mainAxisSize:
                                                             MainAxisSize.max,
                                                         children: [
+                                                          if (!_model
+                                                              .isAllLoading)
+                                                            Expanded(
+                                                              child: FutureBuilder<
+                                                                  ApiCallResponse>(
+                                                                future: (_model.apiRequestCompleter5 ??= Completer<
+                                                                        ApiCallResponse>()
+                                                                      ..complete(
+                                                                          VendaTotalIndicadoresCall
+                                                                              .call(
+                                                                        ip: FFAppState()
+                                                                            .ConfigGlobaisServer
+                                                                            .host,
+                                                                        porta: FFAppState()
+                                                                            .ConfigGlobaisServer
+                                                                            .porta,
+                                                                        path: FFAppState()
+                                                                            .ConfigGlobaisServer
+                                                                            .path,
+                                                                        token: FFAppState()
+                                                                            .Token,
+                                                                        dataInicio:
+                                                                            valueOrDefault<String>(
+                                                                          dateTimeFormat(
+                                                                            "yyyy-MM-dd",
+                                                                            functions.difDateWithInteger(
+                                                                                valueOrDefault<int>(
+                                                                                  _model.iDateSub,
+                                                                                  0,
+                                                                                ),
+                                                                                getCurrentTimestamp),
+                                                                            locale:
+                                                                                FFLocalizations.of(context).languageCode,
+                                                                          ),
+                                                                          '2024-09-15',
+                                                                        ),
+                                                                        dataFinal:
+                                                                            dateTimeFormat(
+                                                                          "yyyy-MM-dd",
+                                                                          getCurrentTimestamp,
+                                                                          locale:
+                                                                              FFLocalizations.of(context).languageCode,
+                                                                        ),
+                                                                      )))
+                                                                    .future,
+                                                                builder: (context,
+                                                                    snapshot) {
+                                                                  // Customize what your widget looks like when it's loading.
+                                                                  if (!snapshot
+                                                                      .hasData) {
+                                                                    return const Center(
+                                                                      child:
+                                                                          UnViewFrameLoadingWidget(),
+                                                                    );
+                                                                  }
+                                                                  final stackIndicadoresVendaTotalIndicadoresResponse =
+                                                                      snapshot
+                                                                          .data!;
+
+                                                                  return Stack(
+                                                                    alignment:
+                                                                        const AlignmentDirectional(
+                                                                            0.0,
+                                                                            0.0),
+                                                                    children: [
+                                                                      if (FFAppState()
+                                                                          .isConnected)
+                                                                        wrapWithModel(
+                                                                          model:
+                                                                              _model.unViewFrameIndicadoresModel1,
+                                                                          updateCallback: () =>
+                                                                              safeSetState(() {}),
+                                                                          child:
+                                                                              UnViewFrameIndicadoresWidget(
+                                                                            rentabilidade:
+                                                                                valueOrDefault<double>(
+                                                                              functions.listJsonToDouble(
+                                                                                  getJsonField(
+                                                                                    stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                    r'''$..value''',
+                                                                                  ),
+                                                                                  0,
+                                                                                  'TotalLucro'),
+                                                                              0.0,
+                                                                            ),
+                                                                            clientes:
+                                                                                valueOrDefault<double>(
+                                                                              functions.listJsonToDouble(
+                                                                                  getJsonField(
+                                                                                    stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                    r'''$..value''',
+                                                                                  ),
+                                                                                  0,
+                                                                                  'NumeroClientes'),
+                                                                              0.0,
+                                                                            ),
+                                                                            margemLucro:
+                                                                                valueOrDefault<double>(
+                                                                              functions.listJsonToDouble(
+                                                                                  getJsonField(
+                                                                                    stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                    r'''$..value''',
+                                                                                  ),
+                                                                                  0,
+                                                                                  'MargemLucro'),
+                                                                              0.0,
+                                                                            ),
+                                                                            mixProdutos:
+                                                                                valueOrDefault<double>(
+                                                                              functions.listJsonToDouble(
+                                                                                  getJsonField(
+                                                                                    stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                    r'''$..value''',
+                                                                                  ),
+                                                                                  0,
+                                                                                  'Mix_Produto'),
+                                                                              0.0,
+                                                                            ),
+                                                                            nVendas:
+                                                                                valueOrDefault<double>(
+                                                                              functions.listJsonToDouble(
+                                                                                  getJsonField(
+                                                                                    stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                    r'''$..value''',
+                                                                                  ),
+                                                                                  0,
+                                                                                  'NumeroPed'),
+                                                                              0.0,
+                                                                            ),
+                                                                            ticketMedio:
+                                                                                valueOrDefault<double>(
+                                                                              functions.listJsonToDouble(
+                                                                                  getJsonField(
+                                                                                    stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                    r'''$..value''',
+                                                                                  ),
+                                                                                  0,
+                                                                                  'ValorMedia'),
+                                                                              0.0,
+                                                                            ),
+                                                                            faturamento:
+                                                                                valueOrDefault<double>(
+                                                                              functions.listJsonToDouble(
+                                                                                  getJsonField(
+                                                                                    stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                    r'''$..value''',
+                                                                                  ),
+                                                                                  0,
+                                                                                  'TotalVenda'),
+                                                                              0.0,
+                                                                            ),
+                                                                            difFaturamento:
+                                                                                valueOrDefault<double>(
+                                                                              ((valueOrDefault<double>(
+                                                                                            functions.listJsonToDouble(
+                                                                                                getJsonField(
+                                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                  r'''$..value''',
+                                                                                                ),
+                                                                                                0,
+                                                                                                'TotalVenda'),
+                                                                                            0.0,
+                                                                                          ) /
+                                                                                          valueOrDefault<double>(
+                                                                                            functions.listJsonToDouble(
+                                                                                                getJsonField(
+                                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                  r'''$..value''',
+                                                                                                ),
+                                                                                                1,
+                                                                                                'TotalVenda'),
+                                                                                            0.0,
+                                                                                          )) -
+                                                                                      1) *
+                                                                                  100,
+                                                                              0.0,
+                                                                            ),
+                                                                            difMargem:
+                                                                                valueOrDefault<double>(
+                                                                              ((valueOrDefault<double>(
+                                                                                            functions.listJsonToDouble(
+                                                                                                getJsonField(
+                                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                  r'''$..value''',
+                                                                                                ),
+                                                                                                0,
+                                                                                                'MargemLucro'),
+                                                                                            0.0,
+                                                                                          ) /
+                                                                                          valueOrDefault<double>(
+                                                                                            functions.listJsonToDouble(
+                                                                                                getJsonField(
+                                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                  r'''$..value''',
+                                                                                                ),
+                                                                                                1,
+                                                                                                'MargemLucro'),
+                                                                                            0.0,
+                                                                                          )) -
+                                                                                      1) *
+                                                                                  100,
+                                                                              0.0,
+                                                                            ),
+                                                                            difNVendas:
+                                                                                valueOrDefault<double>(
+                                                                              ((valueOrDefault<double>(
+                                                                                            functions.listJsonToDouble(
+                                                                                                getJsonField(
+                                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                  r'''$..value''',
+                                                                                                ),
+                                                                                                0,
+                                                                                                'NumeroPed'),
+                                                                                            0.0,
+                                                                                          ) /
+                                                                                          valueOrDefault<double>(
+                                                                                            functions.listJsonToDouble(
+                                                                                                getJsonField(
+                                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                  r'''$..value''',
+                                                                                                ),
+                                                                                                1,
+                                                                                                'NumeroPed'),
+                                                                                            0.0,
+                                                                                          )) -
+                                                                                      1) *
+                                                                                  100,
+                                                                              0.0,
+                                                                            ),
+                                                                            difTicketMedio:
+                                                                                valueOrDefault<double>(
+                                                                              ((valueOrDefault<double>(
+                                                                                            functions.listJsonToDouble(
+                                                                                                getJsonField(
+                                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                  r'''$..value''',
+                                                                                                ),
+                                                                                                0,
+                                                                                                'ValorMedia'),
+                                                                                            0.0,
+                                                                                          ) /
+                                                                                          valueOrDefault<double>(
+                                                                                            functions.listJsonToDouble(
+                                                                                                getJsonField(
+                                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                  r'''$..value''',
+                                                                                                ),
+                                                                                                1,
+                                                                                                'ValorMedia'),
+                                                                                            0.0,
+                                                                                          )) -
+                                                                                      1) *
+                                                                                  100,
+                                                                              0.0,
+                                                                            ),
+                                                                            difMixProduto:
+                                                                                valueOrDefault<double>(
+                                                                              ((valueOrDefault<double>(
+                                                                                            functions.listJsonToDouble(
+                                                                                                getJsonField(
+                                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                  r'''$..value''',
+                                                                                                ),
+                                                                                                0,
+                                                                                                'Mix_Produto'),
+                                                                                            0.0,
+                                                                                          ) /
+                                                                                          valueOrDefault<double>(
+                                                                                            functions.listJsonToDouble(
+                                                                                                getJsonField(
+                                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                  r'''$..value''',
+                                                                                                ),
+                                                                                                1,
+                                                                                                'Mix_Produto'),
+                                                                                            0.0,
+                                                                                          )) -
+                                                                                      1) *
+                                                                                  100,
+                                                                              0.0,
+                                                                            ),
+                                                                            difClienteVariadoss:
+                                                                                valueOrDefault<double>(
+                                                                              ((valueOrDefault<double>(
+                                                                                            functions.listJsonToDouble(
+                                                                                                getJsonField(
+                                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                  r'''$..value''',
+                                                                                                ),
+                                                                                                0,
+                                                                                                'NumeroClientes'),
+                                                                                            0.0,
+                                                                                          ) /
+                                                                                          valueOrDefault<double>(
+                                                                                            functions.listJsonToDouble(
+                                                                                                getJsonField(
+                                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                  r'''$..value''',
+                                                                                                ),
+                                                                                                1,
+                                                                                                'NumeroClientes'),
+                                                                                            0.0,
+                                                                                          )) -
+                                                                                      1) *
+                                                                                  100,
+                                                                              0.0,
+                                                                            ),
+                                                                            descontos:
+                                                                                valueOrDefault<double>(
+                                                                              functions.listJsonToDouble(
+                                                                                  getJsonField(
+                                                                                    stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                    r'''$..value''',
+                                                                                  ),
+                                                                                  0,
+                                                                                  'descontosTotal'),
+                                                                              0.0,
+                                                                            ),
+                                                                            difDescontos:
+                                                                                valueOrDefault<double>(
+                                                                              ((valueOrDefault<double>(
+                                                                                            functions.listJsonToDouble(
+                                                                                                getJsonField(
+                                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                  r'''$..value''',
+                                                                                                ),
+                                                                                                0,
+                                                                                                'descontosTotal'),
+                                                                                            0.0,
+                                                                                          ) /
+                                                                                          valueOrDefault<double>(
+                                                                                            functions.listJsonToDouble(
+                                                                                                getJsonField(
+                                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                  r'''$..value''',
+                                                                                                ),
+                                                                                                1,
+                                                                                                'descontosTotal'),
+                                                                                            0.0,
+                                                                                          )) -
+                                                                                      1) *
+                                                                                  100,
+                                                                              0.0,
+                                                                            ),
+                                                                            cmv:
+                                                                                valueOrDefault<double>(
+                                                                              functions.listJsonToDouble(
+                                                                                  getJsonField(
+                                                                                    stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                    r'''$..value''',
+                                                                                  ),
+                                                                                  0,
+                                                                                  'cmv'),
+                                                                              0.0,
+                                                                            ),
+                                                                            difCmv:
+                                                                                valueOrDefault<double>(
+                                                                              ((valueOrDefault<double>(
+                                                                                            functions.listJsonToDouble(
+                                                                                                getJsonField(
+                                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                  r'''$..value''',
+                                                                                                ),
+                                                                                                0,
+                                                                                                'cmv'),
+                                                                                            0.0,
+                                                                                          ) /
+                                                                                          valueOrDefault<double>(
+                                                                                            functions.listJsonToDouble(
+                                                                                                getJsonField(
+                                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                  r'''$..value''',
+                                                                                                ),
+                                                                                                1,
+                                                                                                'cmv'),
+                                                                                            0.0,
+                                                                                          )) -
+                                                                                      1) *
+                                                                                  100,
+                                                                              0.0,
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      if (!FFAppState()
+                                                                          .isConnected)
+                                                                        Align(
+                                                                          alignment: const AlignmentDirectional(
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              wrapWithModel(
+                                                                            model:
+                                                                                _model.unViewFrameVazioHoraModel2,
+                                                                            updateCallback: () =>
+                                                                                safeSetState(() {}),
+                                                                            updateOnChange:
+                                                                                true,
+                                                                            child:
+                                                                                const UnViewFrameVazioWidget(
+                                                                              sTitulo: 'Falha',
+                                                                              sMessage: 'Verifique sua conexão e tente novamente!',
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                    ],
+                                                                  ).animateOnActionTrigger(
+                                                                    animationsMap[
+                                                                        'stackOnActionTriggerAnimation1']!,
+                                                                  );
+                                                                },
+                                                              ),
+                                                            ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                ]
+                                                    .divide(
+                                                        const SizedBox(width: 10.0))
+                                                    .around(
+                                                        const SizedBox(width: 10.0)),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      mainAxisSize: MainAxisSize.max,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Column(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: [
+                                              if (responsiveVisibility(
+                                                context: context,
+                                                desktop: false,
+                                              ))
+                                                Material(
+                                                  color: Colors.transparent,
+                                                  elevation: 0.0,
+                                                  shape: RoundedRectangleBorder(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            12.0),
+                                                  ),
+                                                  child: Container(
+                                                    width: double.infinity,
+                                                    height: 270.0,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              12.0),
+                                                    ),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.max,
+                                                      children: [
+                                                        if (!_model
+                                                            .isAllLoading)
                                                           Expanded(
                                                             child: FutureBuilder<
                                                                 ApiCallResponse>(
-                                                              future: (_model.apiRequestCompleter5 ??= Completer<
+                                                              future: (_model.apiRequestCompleter7 ??= Completer<
                                                                       ApiCallResponse>()
                                                                     ..complete(
                                                                         VendaTotalIndicadoresCall
@@ -1069,7 +1499,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                         UnViewFrameLoadingWidget(),
                                                                   );
                                                                 }
-                                                                final stackIndicadoresVendaTotalIndicadoresResponse =
+                                                                final stackIndicadoresMobileVendaTotalIndicadoresResponse =
                                                                     snapshot
                                                                         .data!;
 
@@ -1083,7 +1513,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                         .isConnected)
                                                                       wrapWithModel(
                                                                         model: _model
-                                                                            .unViewFrameIndicadoresModel1,
+                                                                            .unViewFrameIndicadoresModel2,
                                                                         updateCallback:
                                                                             () =>
                                                                                 safeSetState(() {}),
@@ -1093,7 +1523,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                               valueOrDefault<double>(
                                                                             functions.listJsonToDouble(
                                                                                 getJsonField(
-                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                  stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                   r'''$..value''',
                                                                                 ),
                                                                                 0,
@@ -1104,7 +1534,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                               valueOrDefault<double>(
                                                                             functions.listJsonToDouble(
                                                                                 getJsonField(
-                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                  stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                   r'''$..value''',
                                                                                 ),
                                                                                 0,
@@ -1115,7 +1545,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                               valueOrDefault<double>(
                                                                             functions.listJsonToDouble(
                                                                                 getJsonField(
-                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                  stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                   r'''$..value''',
                                                                                 ),
                                                                                 0,
@@ -1126,7 +1556,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                               valueOrDefault<double>(
                                                                             functions.listJsonToDouble(
                                                                                 getJsonField(
-                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                  stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                   r'''$..value''',
                                                                                 ),
                                                                                 0,
@@ -1137,7 +1567,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                               valueOrDefault<double>(
                                                                             functions.listJsonToDouble(
                                                                                 getJsonField(
-                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                  stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                   r'''$..value''',
                                                                                 ),
                                                                                 0,
@@ -1148,7 +1578,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                               valueOrDefault<double>(
                                                                             functions.listJsonToDouble(
                                                                                 getJsonField(
-                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                  stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                   r'''$..value''',
                                                                                 ),
                                                                                 0,
@@ -1159,7 +1589,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                               valueOrDefault<double>(
                                                                             functions.listJsonToDouble(
                                                                                 getJsonField(
-                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                  stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                   r'''$..value''',
                                                                                 ),
                                                                                 0,
@@ -1171,7 +1601,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                             ((valueOrDefault<double>(
                                                                                           functions.listJsonToDouble(
                                                                                               getJsonField(
-                                                                                                stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                                 r'''$..value''',
                                                                                               ),
                                                                                               0,
@@ -1181,7 +1611,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                                         valueOrDefault<double>(
                                                                                           functions.listJsonToDouble(
                                                                                               getJsonField(
-                                                                                                stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                                 r'''$..value''',
                                                                                               ),
                                                                                               1,
@@ -1197,7 +1627,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                             ((valueOrDefault<double>(
                                                                                           functions.listJsonToDouble(
                                                                                               getJsonField(
-                                                                                                stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                                 r'''$..value''',
                                                                                               ),
                                                                                               0,
@@ -1207,7 +1637,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                                         valueOrDefault<double>(
                                                                                           functions.listJsonToDouble(
                                                                                               getJsonField(
-                                                                                                stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                                 r'''$..value''',
                                                                                               ),
                                                                                               1,
@@ -1223,7 +1653,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                             ((valueOrDefault<double>(
                                                                                           functions.listJsonToDouble(
                                                                                               getJsonField(
-                                                                                                stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                                 r'''$..value''',
                                                                                               ),
                                                                                               0,
@@ -1233,7 +1663,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                                         valueOrDefault<double>(
                                                                                           functions.listJsonToDouble(
                                                                                               getJsonField(
-                                                                                                stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                                 r'''$..value''',
                                                                                               ),
                                                                                               1,
@@ -1249,7 +1679,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                             ((valueOrDefault<double>(
                                                                                           functions.listJsonToDouble(
                                                                                               getJsonField(
-                                                                                                stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                                 r'''$..value''',
                                                                                               ),
                                                                                               0,
@@ -1259,7 +1689,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                                         valueOrDefault<double>(
                                                                                           functions.listJsonToDouble(
                                                                                               getJsonField(
-                                                                                                stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                                 r'''$..value''',
                                                                                               ),
                                                                                               1,
@@ -1275,7 +1705,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                             ((valueOrDefault<double>(
                                                                                           functions.listJsonToDouble(
                                                                                               getJsonField(
-                                                                                                stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                                 r'''$..value''',
                                                                                               ),
                                                                                               0,
@@ -1285,7 +1715,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                                         valueOrDefault<double>(
                                                                                           functions.listJsonToDouble(
                                                                                               getJsonField(
-                                                                                                stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                                 r'''$..value''',
                                                                                               ),
                                                                                               1,
@@ -1301,7 +1731,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                             ((valueOrDefault<double>(
                                                                                           functions.listJsonToDouble(
                                                                                               getJsonField(
-                                                                                                stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                                 r'''$..value''',
                                                                                               ),
                                                                                               0,
@@ -1311,7 +1741,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                                         valueOrDefault<double>(
                                                                                           functions.listJsonToDouble(
                                                                                               getJsonField(
-                                                                                                stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                                 r'''$..value''',
                                                                                               ),
                                                                                               1,
@@ -1326,7 +1756,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                               valueOrDefault<double>(
                                                                             functions.listJsonToDouble(
                                                                                 getJsonField(
-                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                  stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                   r'''$..value''',
                                                                                 ),
                                                                                 0,
@@ -1338,7 +1768,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                             ((valueOrDefault<double>(
                                                                                           functions.listJsonToDouble(
                                                                                               getJsonField(
-                                                                                                stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                                 r'''$..value''',
                                                                                               ),
                                                                                               0,
@@ -1348,7 +1778,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                                         valueOrDefault<double>(
                                                                                           functions.listJsonToDouble(
                                                                                               getJsonField(
-                                                                                                stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                                 r'''$..value''',
                                                                                               ),
                                                                                               1,
@@ -1363,7 +1793,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                               double>(
                                                                             functions.listJsonToDouble(
                                                                                 getJsonField(
-                                                                                  stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                  stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                   r'''$..value''',
                                                                                 ),
                                                                                 0,
@@ -1375,7 +1805,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                             ((valueOrDefault<double>(
                                                                                           functions.listJsonToDouble(
                                                                                               getJsonField(
-                                                                                                stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                                 r'''$..value''',
                                                                                               ),
                                                                                               0,
@@ -1385,7 +1815,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                                         valueOrDefault<double>(
                                                                                           functions.listJsonToDouble(
                                                                                               getJsonField(
-                                                                                                stackIndicadoresVendaTotalIndicadoresResponse.jsonBody,
+                                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
                                                                                                 r'''$..value''',
                                                                                               ),
                                                                                               1,
@@ -1407,7 +1837,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                         child:
                                                                             wrapWithModel(
                                                                           model:
-                                                                              _model.unViewFrameVazioHoraModel2,
+                                                                              _model.unViewFrameVazioHoraModel3,
                                                                           updateCallback: () =>
                                                                               safeSetState(() {}),
                                                                           updateOnChange:
@@ -1424,483 +1854,11 @@ class _UnViewFrameDashPainelWidgetState
                                                                   ],
                                                                 ).animateOnActionTrigger(
                                                                   animationsMap[
-                                                                      'stackOnActionTriggerAnimation1']!,
+                                                                      'stackOnActionTriggerAnimation2']!,
                                                                 );
                                                               },
                                                             ),
                                                           ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                ]
-                                                    .divide(
-                                                        const SizedBox(width: 10.0))
-                                                    .around(
-                                                        const SizedBox(width: 10.0)),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisSize: MainAxisSize.max,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Expanded(
-                                          flex: 2,
-                                          child: Column(
-                                            mainAxisSize: MainAxisSize.max,
-                                            children: [
-                                              if (responsiveVisibility(
-                                                context: context,
-                                                desktop: false,
-                                              ))
-                                                Material(
-                                                  color: Colors.transparent,
-                                                  elevation: 0.0,
-                                                  shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            12.0),
-                                                  ),
-                                                  child: Container(
-                                                    width: double.infinity,
-                                                    height: 270.0,
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              12.0),
-                                                    ),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.max,
-                                                      children: [
-                                                        Expanded(
-                                                          child: FutureBuilder<
-                                                              ApiCallResponse>(
-                                                            future: (_model
-                                                                        .apiRequestCompleter6 ??=
-                                                                    Completer<
-                                                                        ApiCallResponse>()
-                                                                      ..complete(
-                                                                          VendaTotalIndicadoresCall
-                                                                              .call(
-                                                                        ip: FFAppState()
-                                                                            .ConfigGlobaisServer
-                                                                            .host,
-                                                                        porta: FFAppState()
-                                                                            .ConfigGlobaisServer
-                                                                            .porta,
-                                                                        path: FFAppState()
-                                                                            .ConfigGlobaisServer
-                                                                            .path,
-                                                                        token: FFAppState()
-                                                                            .Token,
-                                                                        dataInicio:
-                                                                            valueOrDefault<String>(
-                                                                          dateTimeFormat(
-                                                                            "yyyy-MM-dd",
-                                                                            functions.difDateWithInteger(
-                                                                                valueOrDefault<int>(
-                                                                                  _model.iDateSub,
-                                                                                  0,
-                                                                                ),
-                                                                                getCurrentTimestamp),
-                                                                            locale:
-                                                                                FFLocalizations.of(context).languageCode,
-                                                                          ),
-                                                                          '2024-09-15',
-                                                                        ),
-                                                                        dataFinal:
-                                                                            dateTimeFormat(
-                                                                          "yyyy-MM-dd",
-                                                                          getCurrentTimestamp,
-                                                                          locale:
-                                                                              FFLocalizations.of(context).languageCode,
-                                                                        ),
-                                                                      )))
-                                                                .future,
-                                                            builder: (context,
-                                                                snapshot) {
-                                                              // Customize what your widget looks like when it's loading.
-                                                              if (!snapshot
-                                                                  .hasData) {
-                                                                return const UnViewFrameLoadingWidget();
-                                                              }
-                                                              final stackIndicadoresMobileVendaTotalIndicadoresResponse =
-                                                                  snapshot
-                                                                      .data!;
-
-                                                              return Stack(
-                                                                alignment:
-                                                                    const AlignmentDirectional(
-                                                                        0.0,
-                                                                        0.0),
-                                                                children: [
-                                                                  if ((VendaTotalIndicadoresCall
-                                                                                  .valueLista(
-                                                                            stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                          )!.isNotEmpty) &&
-                                                                      stackIndicadoresMobileVendaTotalIndicadoresResponse
-                                                                          .succeeded)
-                                                                    wrapWithModel(
-                                                                      model: _model
-                                                                          .unViewFrameIndicadoresModel2,
-                                                                      updateCallback:
-                                                                          () =>
-                                                                              safeSetState(() {}),
-                                                                      updateOnChange:
-                                                                          true,
-                                                                      child:
-                                                                          UnViewFrameIndicadoresWidget(
-                                                                        rentabilidade:
-                                                                            valueOrDefault<double>(
-                                                                          functions.listJsonToDouble(
-                                                                              getJsonField(
-                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                r'''$..value''',
-                                                                              ),
-                                                                              0,
-                                                                              'TotalLucro'),
-                                                                          0.0,
-                                                                        ),
-                                                                        clientes:
-                                                                            valueOrDefault<double>(
-                                                                          functions.listJsonToDouble(
-                                                                              getJsonField(
-                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                r'''$..value''',
-                                                                              ),
-                                                                              0,
-                                                                              'NumeroClientes'),
-                                                                          0.0,
-                                                                        ),
-                                                                        margemLucro:
-                                                                            valueOrDefault<double>(
-                                                                          functions.listJsonToDouble(
-                                                                              getJsonField(
-                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                r'''$..value''',
-                                                                              ),
-                                                                              0,
-                                                                              'MargemLucro'),
-                                                                          0.0,
-                                                                        ),
-                                                                        mixProdutos:
-                                                                            valueOrDefault<double>(
-                                                                          functions.listJsonToDouble(
-                                                                              getJsonField(
-                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                r'''$..value''',
-                                                                              ),
-                                                                              0,
-                                                                              'Mix_Produto'),
-                                                                          0.0,
-                                                                        ),
-                                                                        nVendas:
-                                                                            valueOrDefault<double>(
-                                                                          functions.listJsonToDouble(
-                                                                              getJsonField(
-                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                r'''$..value''',
-                                                                              ),
-                                                                              0,
-                                                                              'NumeroPed'),
-                                                                          0.0,
-                                                                        ),
-                                                                        ticketMedio:
-                                                                            valueOrDefault<double>(
-                                                                          functions.listJsonToDouble(
-                                                                              getJsonField(
-                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                r'''$..value''',
-                                                                              ),
-                                                                              0,
-                                                                              'ValorMedia'),
-                                                                          0.0,
-                                                                        ),
-                                                                        faturamento:
-                                                                            valueOrDefault<double>(
-                                                                          functions.listJsonToDouble(
-                                                                              getJsonField(
-                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                r'''$..value''',
-                                                                              ),
-                                                                              0,
-                                                                              'TotalVenda'),
-                                                                          0.0,
-                                                                        ),
-                                                                        difFaturamento:
-                                                                            valueOrDefault<double>(
-                                                                          ((valueOrDefault<double>(
-                                                                                        functions.listJsonToDouble(
-                                                                                            getJsonField(
-                                                                                              stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                              r'''$..value''',
-                                                                                            ),
-                                                                                            0,
-                                                                                            'TotalVenda'),
-                                                                                        0.0,
-                                                                                      ) /
-                                                                                      valueOrDefault<double>(
-                                                                                        functions.listJsonToDouble(
-                                                                                            getJsonField(
-                                                                                              stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                              r'''$..value''',
-                                                                                            ),
-                                                                                            1,
-                                                                                            'TotalVenda'),
-                                                                                        0.0,
-                                                                                      )) -
-                                                                                  1) *
-                                                                              100,
-                                                                          0.0,
-                                                                        ),
-                                                                        difMargem:
-                                                                            valueOrDefault<double>(
-                                                                          ((valueOrDefault<double>(
-                                                                                        functions.listJsonToDouble(
-                                                                                            getJsonField(
-                                                                                              stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                              r'''$..value''',
-                                                                                            ),
-                                                                                            0,
-                                                                                            'MargemLucro'),
-                                                                                        0.0,
-                                                                                      ) /
-                                                                                      valueOrDefault<double>(
-                                                                                        functions.listJsonToDouble(
-                                                                                            getJsonField(
-                                                                                              stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                              r'''$..value''',
-                                                                                            ),
-                                                                                            1,
-                                                                                            'MargemLucro'),
-                                                                                        0.0,
-                                                                                      )) -
-                                                                                  1) *
-                                                                              100,
-                                                                          0.0,
-                                                                        ),
-                                                                        difNVendas:
-                                                                            valueOrDefault<double>(
-                                                                          ((valueOrDefault<double>(
-                                                                                        functions.listJsonToDouble(
-                                                                                            getJsonField(
-                                                                                              stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                              r'''$..value''',
-                                                                                            ),
-                                                                                            0,
-                                                                                            'NumeroPed'),
-                                                                                        0.0,
-                                                                                      ) /
-                                                                                      valueOrDefault<double>(
-                                                                                        functions.listJsonToDouble(
-                                                                                            getJsonField(
-                                                                                              stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                              r'''$..value''',
-                                                                                            ),
-                                                                                            1,
-                                                                                            'NumeroPed'),
-                                                                                        0.0,
-                                                                                      )) -
-                                                                                  1) *
-                                                                              100,
-                                                                          0.0,
-                                                                        ),
-                                                                        difTicketMedio:
-                                                                            valueOrDefault<double>(
-                                                                          ((valueOrDefault<double>(
-                                                                                        functions.listJsonToDouble(
-                                                                                            getJsonField(
-                                                                                              stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                              r'''$..value''',
-                                                                                            ),
-                                                                                            0,
-                                                                                            'ValorMedia'),
-                                                                                        0.0,
-                                                                                      ) /
-                                                                                      valueOrDefault<double>(
-                                                                                        functions.listJsonToDouble(
-                                                                                            getJsonField(
-                                                                                              stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                              r'''$..value''',
-                                                                                            ),
-                                                                                            1,
-                                                                                            'ValorMedia'),
-                                                                                        0.0,
-                                                                                      )) -
-                                                                                  1) *
-                                                                              100,
-                                                                          0.0,
-                                                                        ),
-                                                                        difMixProduto:
-                                                                            valueOrDefault<double>(
-                                                                          ((valueOrDefault<double>(
-                                                                                        functions.listJsonToDouble(
-                                                                                            getJsonField(
-                                                                                              stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                              r'''$..value''',
-                                                                                            ),
-                                                                                            0,
-                                                                                            'Mix_Produto'),
-                                                                                        0.0,
-                                                                                      ) /
-                                                                                      valueOrDefault<double>(
-                                                                                        functions.listJsonToDouble(
-                                                                                            getJsonField(
-                                                                                              stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                              r'''$..value''',
-                                                                                            ),
-                                                                                            1,
-                                                                                            'Mix_Produto'),
-                                                                                        0.0,
-                                                                                      )) -
-                                                                                  1) *
-                                                                              100,
-                                                                          0.0,
-                                                                        ),
-                                                                        difClienteVariadoss:
-                                                                            valueOrDefault<double>(
-                                                                          ((valueOrDefault<double>(
-                                                                                        functions.listJsonToDouble(
-                                                                                            getJsonField(
-                                                                                              stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                              r'''$..value''',
-                                                                                            ),
-                                                                                            0,
-                                                                                            'NumeroClientes'),
-                                                                                        0.0,
-                                                                                      ) /
-                                                                                      valueOrDefault<double>(
-                                                                                        functions.listJsonToDouble(
-                                                                                            getJsonField(
-                                                                                              stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                              r'''$..value''',
-                                                                                            ),
-                                                                                            1,
-                                                                                            'NumeroClientes'),
-                                                                                        0.0,
-                                                                                      )) -
-                                                                                  1) *
-                                                                              100,
-                                                                          0.0,
-                                                                        ),
-                                                                        descontos:
-                                                                            valueOrDefault<double>(
-                                                                          functions.listJsonToDouble(
-                                                                              getJsonField(
-                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                r'''$..value''',
-                                                                              ),
-                                                                              0,
-                                                                              'descontosTotal'),
-                                                                          0.0,
-                                                                        ),
-                                                                        difDescontos:
-                                                                            valueOrDefault<double>(
-                                                                          ((valueOrDefault<double>(
-                                                                                        functions.listJsonToDouble(
-                                                                                            getJsonField(
-                                                                                              stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                              r'''$..value''',
-                                                                                            ),
-                                                                                            0,
-                                                                                            'descontosTotal'),
-                                                                                        0.0,
-                                                                                      ) /
-                                                                                      valueOrDefault<double>(
-                                                                                        functions.listJsonToDouble(
-                                                                                            getJsonField(
-                                                                                              stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                              r'''$..value''',
-                                                                                            ),
-                                                                                            1,
-                                                                                            'descontosTotal'),
-                                                                                        0.0,
-                                                                                      )) -
-                                                                                  1) *
-                                                                              100,
-                                                                          0.0,
-                                                                        ),
-                                                                        cmv: valueOrDefault<
-                                                                            double>(
-                                                                          functions.listJsonToDouble(
-                                                                              getJsonField(
-                                                                                stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                r'''$..value''',
-                                                                              ),
-                                                                              0,
-                                                                              'cmv'),
-                                                                          0.0,
-                                                                        ),
-                                                                        difCmv:
-                                                                            valueOrDefault<double>(
-                                                                          ((valueOrDefault<double>(
-                                                                                        functions.listJsonToDouble(
-                                                                                            getJsonField(
-                                                                                              stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                              r'''$..value''',
-                                                                                            ),
-                                                                                            0,
-                                                                                            'cmv'),
-                                                                                        0.0,
-                                                                                      ) /
-                                                                                      valueOrDefault<double>(
-                                                                                        functions.listJsonToDouble(
-                                                                                            getJsonField(
-                                                                                              stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                                              r'''$..value''',
-                                                                                            ),
-                                                                                            1,
-                                                                                            'cmv'),
-                                                                                        0.0,
-                                                                                      )) -
-                                                                                  1) *
-                                                                              100,
-                                                                          0.0,
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                  if ((VendaTotalIndicadoresCall
-                                                                                  .valueLista(
-                                                                            stackIndicadoresMobileVendaTotalIndicadoresResponse.jsonBody,
-                                                                          )!.isEmpty) &&
-                                                                      !stackIndicadoresMobileVendaTotalIndicadoresResponse
-                                                                          .succeeded)
-                                                                    Container(
-                                                                      decoration:
-                                                                          const BoxDecoration(),
-                                                                      child:
-                                                                          wrapWithModel(
-                                                                        model: _model
-                                                                            .unViewFrameVazioModel,
-                                                                        updateCallback:
-                                                                            () =>
-                                                                                safeSetState(() {}),
-                                                                        updateOnChange:
-                                                                            true,
-                                                                        child:
-                                                                            UnViewFrameVazioWidget(
-                                                                          sTitulo: !stackIndicadoresMobileVendaTotalIndicadoresResponse.succeeded
-                                                                              ? 'Falha ao realizar conexão'
-                                                                              : 'Não existem dados nesse período',
-                                                                          sMessage: !stackIndicadoresMobileVendaTotalIndicadoresResponse.succeeded
-                                                                              ? 'Verifique sua conexão e tente novamente!'
-                                                                              : 'Verifique seus filtros e tente novamente!',
-                                                                        ),
-                                                                      ),
-                                                                    ),
-                                                                ],
-                                                              ).animateOnActionTrigger(
-                                                                animationsMap[
-                                                                    'stackOnActionTriggerAnimation2']!,
-                                                              );
-                                                            },
-                                                          ),
-                                                        ),
                                                       ],
                                                     ),
                                                   ),
@@ -1985,7 +1943,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                 child: Stack(
                                                                   children: [
                                                                     if (!_model
-                                                                        .isLoadingPgto)
+                                                                        .isAllLoading)
                                                                       FutureBuilder<
                                                                           ApiCallResponse>(
                                                                         future: (_model.apiRequestCompleter2 ??= Completer<ApiCallResponse>()
@@ -2111,7 +2069,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                   child: Stack(
                                                                     children: [
                                                                       if (!_model
-                                                                          .isLoadingVendedor)
+                                                                          .isAllLoading)
                                                                         FutureBuilder<
                                                                             ApiCallResponse>(
                                                                           future: (_model.apiRequestCompleter1 ??= Completer<ApiCallResponse>()
@@ -2258,7 +2216,7 @@ class _UnViewFrameDashPainelWidgetState
                                                                   child:
                                                                       Visibility(
                                                                     visible: !_model
-                                                                        .isLoadingVendedor,
+                                                                        .isAllLoading,
                                                                     child: FutureBuilder<
                                                                         ApiCallResponse>(
                                                                       future: (_model

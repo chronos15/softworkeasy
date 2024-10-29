@@ -223,7 +223,7 @@ class _UnviewFrameVendasVendedorWidgetState
                                           CrossAxisAlignment.end,
                                       children: [
                                         Text(
-                                          'N°',
+                                          'N° Vendas',
                                           maxLines: 1,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
@@ -317,7 +317,7 @@ class _UnviewFrameVendasVendedorWidgetState
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                'N°',
+                                'N° Vendas',
                                 maxLines: 1,
                                 style: FlutterFlowTheme.of(context)
                                     .bodyMedium
@@ -432,7 +432,7 @@ class _UnviewFrameVendasVendedorWidgetState
                               label: DefaultTextStyle.merge(
                                 softWrap: true,
                                 child: Text(
-                                  'Quantidade',
+                                  'N° Vendas',
                                   style: FlutterFlowTheme.of(context)
                                       .labelLarge
                                       .override(
@@ -524,7 +524,10 @@ class _UnviewFrameVendasVendedorWidgetState
                                                       ) *
                                                       100) /
                                                   valueOrDefault<double>(
-                                                    widget.totalAcumulado,
+                                                    getJsonField(
+                                                      widget.valueJson?.first,
+                                                      r'''$..total''',
+                                                    ),
                                                     0.0,
                                                   )) /
                                               100,
@@ -576,7 +579,7 @@ class _UnviewFrameVendasVendedorWidgetState
                                         ),
                                       ),
                                       Container(
-                                        width: 75.0,
+                                        width: 50.0,
                                         decoration: const BoxDecoration(),
                                         child: AutoSizeText(
                                           valueOrDefault<String>(
@@ -599,21 +602,31 @@ class _UnviewFrameVendasVendedorWidgetState
                                             )}%',
                                             '0',
                                           ),
-                                          textAlign: TextAlign.center,
+                                          textAlign: TextAlign.start,
                                           maxLines: 1,
                                           style: FlutterFlowTheme.of(context)
                                               .bodyMedium
                                               .override(
                                                 fontFamily: 'Readex Pro',
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
+                                                color: valueOrDefault<Color>(
+                                                  functions.addColorFromInt(
+                                                      valueOrDefault<int>(
+                                                        listVendedorIndex * 25,
+                                                        0,
+                                                      ),
+                                                      FlutterFlowTheme.of(
+                                                              context)
+                                                          .primary),
+                                                  FlutterFlowTheme.of(context)
+                                                      .primary,
+                                                ),
+                                                fontSize: 12.0,
                                                 letterSpacing: 0.0,
                                                 fontWeight: FontWeight.w300,
                                               ),
                                         ),
                                       ),
-                                    ].divide(const SizedBox(width: 5.0)),
+                                    ].divide(const SizedBox(width: 2.0)),
                                   ),
                                 ],
                               ),

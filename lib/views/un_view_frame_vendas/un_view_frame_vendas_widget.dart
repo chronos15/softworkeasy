@@ -80,13 +80,20 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
         trigger: AnimationTrigger.onPageLoad,
         applyInitialState: false,
         effectsBuilder: () => [
-          VisibilityEffect(duration: 100.ms),
+          VisibilityEffect(duration: 280.ms),
           FadeEffect(
             curve: Curves.easeInOut,
-            delay: 100.0.ms,
+            delay: 280.0.ms,
             duration: 300.0.ms,
             begin: 0.0,
             end: 1.0,
+          ),
+          ShimmerEffect(
+            curve: Curves.easeInOut,
+            delay: 280.0.ms,
+            duration: 300.0.ms,
+            color: const Color(0x80FFFFFF),
+            angle: 0.524,
           ),
         ],
       ),
@@ -201,8 +208,12 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
         const SingleActivator(
           LogicalKeyboardKey.f5,
         ): VoidCallbackIntent(() async {
+          _model.isAllLoading = true;
+          _model.updatePage(() {});
           safeSetState(() => _model.apiRequestCompleter = null);
-          await _model.waitForApiRequestCompleted();
+          await _model.waitForApiRequestCompleted(minWait: 300);
+          _model.isAllLoading = false;
+          _model.updatePage(() {});
         }),
       },
       child: Actions(
@@ -310,36 +321,15 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                   });
                                 }
                                 if (_model.datePicked != null) {
-                                  if (animationsMap[
-                                          'containerOnActionTriggerAnimation'] !=
-                                      null) {
-                                    safeSetState(
-                                        () => hasContainerTriggered = true);
-                                    SchedulerBinding.instance.addPostFrameCallback(
-                                        (_) async => animationsMap[
-                                                'containerOnActionTriggerAnimation']!
-                                            .controller
-                                          ..reset()
-                                          ..repeat());
-                                  }
                                   _model.dateSelected = _model.datePicked;
+                                  _model.isAllLoading = true;
                                   _model.updatePage(() {});
                                   safeSetState(
                                       () => _model.apiRequestCompleter = null);
-                                  await _model.waitForApiRequestCompleted();
-                                  await Future.delayed(
-                                      const Duration(milliseconds: 500));
-                                  if (animationsMap[
-                                          'containerOnActionTriggerAnimation'] !=
-                                      null) {
-                                    safeSetState(
-                                        () => hasContainerTriggered = true);
-                                    SchedulerBinding.instance.addPostFrameCallback(
-                                        (_) async => await animationsMap[
-                                                'containerOnActionTriggerAnimation']!
-                                            .controller
-                                            .forward());
-                                  }
+                                  await _model.waitForApiRequestCompleted(
+                                      minWait: 300);
+                                  _model.isAllLoading = false;
+                                  _model.updatePage(() {});
                                 } else {
                                   return;
                                 }
@@ -781,135 +771,431 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                         color: const Color(0x69636B91),
                                       ),
                                     ),
-                                    child: FutureBuilder<ApiCallResponse>(
-                                      future: (_model.apiRequestCompleter ??=
-                                              Completer<ApiCallResponse>()
-                                                ..complete(
-                                                    VendaDashTotaisCall.call(
-                                                  ip: FFAppState()
-                                                      .ConfigGlobaisServer
-                                                      .host,
-                                                  porta: FFAppState()
-                                                      .ConfigGlobaisServer
-                                                      .porta,
-                                                  path: FFAppState()
-                                                      .ConfigGlobaisServer
-                                                      .path,
-                                                  token: FFAppState().Token,
-                                                  filterDate:
-                                                      '?\$Filter=(DATA eq \'${dateTimeFormat(
-                                                    "MM-dd-yyyy",
-                                                    _model.dateSelected,
-                                                    locale: FFLocalizations.of(
-                                                            context)
-                                                        .languageCode,
-                                                  )}\')',
-                                                )))
-                                          .future,
-                                      builder: (context, snapshot) {
-                                        // Customize what your widget looks like when it's loading.
-                                        if (!snapshot.hasData) {
-                                          return const Center(
-                                            child: UnViewFrameLoadingWidget(),
-                                          );
-                                        }
-                                        final containerVendaDashTotaisResponse =
-                                            snapshot.data!;
+                                    child: Visibility(
+                                      visible: !_model.isAllLoading,
+                                      child: FutureBuilder<ApiCallResponse>(
+                                        future: (_model.apiRequestCompleter ??=
+                                                Completer<ApiCallResponse>()
+                                                  ..complete(
+                                                      VendaDashTotaisCall.call(
+                                                    ip: FFAppState()
+                                                        .ConfigGlobaisServer
+                                                        .host,
+                                                    porta: FFAppState()
+                                                        .ConfigGlobaisServer
+                                                        .porta,
+                                                    path: FFAppState()
+                                                        .ConfigGlobaisServer
+                                                        .path,
+                                                    token: FFAppState().Token,
+                                                    filterDate:
+                                                        '?\$Filter=(DATA eq \'${dateTimeFormat(
+                                                      "MM-dd-yyyy",
+                                                      _model.dateSelected,
+                                                      locale:
+                                                          FFLocalizations.of(
+                                                                  context)
+                                                              .languageCode,
+                                                    )}\')',
+                                                  )))
+                                            .future,
+                                        builder: (context, snapshot) {
+                                          // Customize what your widget looks like when it's loading.
+                                          if (!snapshot.hasData) {
+                                            return const Center(
+                                              child: UnViewFrameLoadingWidget(),
+                                            );
+                                          }
+                                          final containerVendaDashTotaisResponse =
+                                              snapshot.data!;
 
-                                        return Material(
-                                          color: Colors.transparent,
-                                          elevation: 0.0,
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(12.0),
-                                          ),
-                                          child: Container(
-                                            height: 370.0,
-                                            decoration: BoxDecoration(
+                                          return Material(
+                                            color: Colors.transparent,
+                                            elevation: 0.0,
+                                            shape: RoundedRectangleBorder(
                                               borderRadius:
                                                   BorderRadius.circular(12.0),
                                             ),
-                                            child: Stack(
-                                              children: [
-                                                Padding(
-                                                  padding: const EdgeInsetsDirectional
-                                                      .fromSTEB(
-                                                          12.0, 0.0, 12.0, 0.0),
-                                                  child: Column(
-                                                    mainAxisSize:
-                                                        MainAxisSize.min,
-                                                    crossAxisAlignment:
-                                                        CrossAxisAlignment
-                                                            .start,
-                                                    children: [
-                                                      Text(
-                                                        'Visão Geral',
-                                                        style: FlutterFlowTheme
-                                                                .of(context)
-                                                            .bodyMedium
-                                                            .override(
-                                                              fontFamily:
-                                                                  'Readex Pro',
-                                                              fontSize: 20.0,
-                                                              letterSpacing:
-                                                                  0.0,
-                                                            ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    0.0,
-                                                                    50.0,
-                                                                    0.0),
-                                                        child: AutoSizeText(
-                                                          'Obtenha uma visão geral rápida do desempenho do seu negócio.',
-                                                          maxLines: 1,
+                                            child: Container(
+                                              height: 370.0,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(12.0),
+                                              ),
+                                              child: Stack(
+                                                children: [
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsetsDirectional
+                                                            .fromSTEB(12.0, 0.0,
+                                                                12.0, 0.0),
+                                                    child: Column(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Text(
+                                                          'Visão Geral',
                                                           style: FlutterFlowTheme
                                                                   .of(context)
                                                               .bodyMedium
                                                               .override(
                                                                 fontFamily:
-                                                                    'Outfit',
-                                                                fontSize: 16.0,
+                                                                    'Readex Pro',
+                                                                fontSize: 20.0,
                                                                 letterSpacing:
                                                                     0.0,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w300,
                                                               ),
                                                         ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    10.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Expanded(
-                                                              child: Material(
-                                                                color: Colors
-                                                                    .transparent,
-                                                                elevation: 0.0,
-                                                                shape:
-                                                                    RoundedRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              5.0),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      0.0,
+                                                                      50.0,
+                                                                      0.0),
+                                                          child: AutoSizeText(
+                                                            'Obtenha uma visão geral rápida do desempenho do seu negócio.',
+                                                            maxLines: 1,
+                                                            style: FlutterFlowTheme
+                                                                    .of(context)
+                                                                .bodyMedium
+                                                                .override(
+                                                                  fontFamily:
+                                                                      'Outfit',
+                                                                  fontSize:
+                                                                      16.0,
+                                                                  letterSpacing:
+                                                                      0.0,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w300,
                                                                 ),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      10.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Expanded(
+                                                                child: Material(
+                                                                  color: Colors
+                                                                      .transparent,
+                                                                  elevation:
+                                                                      0.0,
+                                                                  shape:
+                                                                      RoundedRectangleBorder(
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            5.0),
+                                                                  ),
+                                                                  child:
+                                                                      Container(
+                                                                    width: double
+                                                                        .infinity,
+                                                                    height:
+                                                                        100.0,
+                                                                    decoration:
+                                                                        BoxDecoration(
+                                                                      color: FlutterFlowTheme.of(
+                                                                              context)
+                                                                          .primaryBackground,
+                                                                      borderRadius:
+                                                                          BorderRadius.circular(
+                                                                              5.0),
+                                                                      border:
+                                                                          Border
+                                                                              .all(
+                                                                        color: FlutterFlowTheme.of(context)
+                                                                            .primaryBackground,
+                                                                        width:
+                                                                            0.0,
+                                                                      ),
+                                                                    ),
+                                                                    child: Row(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children:
+                                                                          [
+                                                                        Column(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children: [
+                                                                            Expanded(
+                                                                              child: Padding(
+                                                                                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 12.0),
+                                                                                child: Column(
+                                                                                  mainAxisSize: MainAxisSize.max,
+                                                                                  mainAxisAlignment: MainAxisAlignment.center,
+                                                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                  children: [
+                                                                                    Text(
+                                                                                      'Saldo Variável',
+                                                                                      style: FlutterFlowTheme.of(context).labelMedium.override(
+                                                                                            fontFamily: 'Outfit',
+                                                                                            color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                            fontSize: 14.0,
+                                                                                            letterSpacing: 0.0,
+                                                                                            fontWeight: FontWeight.normal,
+                                                                                          ),
+                                                                                    ),
+                                                                                    Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      children: [
+                                                                                        Padding(
+                                                                                          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 4.0, 0.0),
+                                                                                          child: Text(
+                                                                                            valueOrDefault<String>(
+                                                                                              functions.realFormat(valueOrDefault<String>(
+                                                                                                VendaDashTotaisCall.variacaoValor(
+                                                                                                  containerVendaDashTotaisResponse.jsonBody,
+                                                                                                )?.first.toString(),
+                                                                                                '0',
+                                                                                              )),
+                                                                                              '0',
+                                                                                            ),
+                                                                                            style: FlutterFlowTheme.of(context).headlineMedium.override(
+                                                                                                  fontFamily: 'Outfit',
+                                                                                                  color: FlutterFlowTheme.of(context).primaryText,
+                                                                                                  fontSize: 24.0,
+                                                                                                  letterSpacing: 0.0,
+                                                                                                  fontWeight: FontWeight.normal,
+                                                                                                ),
+                                                                                          ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation1']!),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                    Row(
+                                                                                      mainAxisSize: MainAxisSize.max,
+                                                                                      children: [
+                                                                                        RichText(
+                                                                                          textScaler: MediaQuery.of(context).textScaler,
+                                                                                          text: TextSpan(
+                                                                                            children: [
+                                                                                              TextSpan(
+                                                                                                text: valueOrDefault<String>(
+                                                                                                  dateTimeFormat(
+                                                                                                    "dd/MM/yyyy",
+                                                                                                    functions
+                                                                                                        .dateFormatToDateTimeList(VendaDashTotaisCall.dataAnt(
+                                                                                                          containerVendaDashTotaisResponse.jsonBody,
+                                                                                                        )?.take(1).toList().toList())
+                                                                                                        ?.first,
+                                                                                                    locale: FFLocalizations.of(context).languageCode,
+                                                                                                  ),
+                                                                                                  'Sem informação.',
+                                                                                                ),
+                                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                      fontFamily: 'Outfit',
+                                                                                                      color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                                      fontSize: 12.0,
+                                                                                                      letterSpacing: 0.0,
+                                                                                                      fontWeight: FontWeight.w300,
+                                                                                                    ),
+                                                                                              ),
+                                                                                              const TextSpan(
+                                                                                                text: ' - ',
+                                                                                                style: TextStyle(),
+                                                                                              ),
+                                                                                              TextSpan(
+                                                                                                text: valueOrDefault<String>(
+                                                                                                  dateTimeFormat(
+                                                                                                    "dd/MM/yyyy",
+                                                                                                    functions
+                                                                                                        .dateFormatToDateTimeList(VendaDashTotaisCall.valueX(
+                                                                                                          containerVendaDashTotaisResponse.jsonBody,
+                                                                                                        )?.take(1).toList().toList())
+                                                                                                        ?.first,
+                                                                                                    locale: FFLocalizations.of(context).languageCode,
+                                                                                                  ),
+                                                                                                  'Sem informação.',
+                                                                                                ),
+                                                                                                style: GoogleFonts.getFont(
+                                                                                                  'Outfit',
+                                                                                                  color: FlutterFlowTheme.of(context).primary,
+                                                                                                  fontWeight: FontWeight.w300,
+                                                                                                  fontSize: 12.0,
+                                                                                                ),
+                                                                                              )
+                                                                                            ],
+                                                                                            style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                                  fontFamily: 'Readex Pro',
+                                                                                                  color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                                  letterSpacing: 0.0,
+                                                                                                ),
+                                                                                          ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ],
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                        if (VendaDashTotaisCall.valueList(
+                                                                              containerVendaDashTotaisResponse.jsonBody,
+                                                                            )!.isNotEmpty)
+                                                                          Column(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.min,
+                                                                            children: [
+                                                                              Expanded(
+                                                                                child: Padding(
+                                                                                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 5.0, 5.0),
+                                                                                  child: Container(
+                                                                                    height: 50.0,
+                                                                                    decoration: const BoxDecoration(),
+                                                                                    child: Stack(
+                                                                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                                                                      children: [
+                                                                                        Align(
+                                                                                          alignment: const AlignmentDirectional(0.0, 0.0),
+                                                                                          child: SizedBox(
+                                                                                            width: 100.0,
+                                                                                            height: 100.0,
+                                                                                            child: custom_widgets.DegradeCircular(
+                                                                                              width: 100.0,
+                                                                                              height: 100.0,
+                                                                                              value: valueOrDefault<double>(
+                                                                                                valueOrDefault<double>(
+                                                                                                      VendaDashTotaisCall.variacaoMargem(
+                                                                                                        containerVendaDashTotaisResponse.jsonBody,
+                                                                                                      )?.first,
+                                                                                                      0.0,
+                                                                                                    ) /
+                                                                                                    100,
+                                                                                                0.0,
+                                                                                              ),
+                                                                                              sizeBox: 80.0,
+                                                                                            ),
+                                                                                          ),
+                                                                                        ),
+                                                                                        Align(
+                                                                                          alignment: const AlignmentDirectional(0.0, 0.0),
+                                                                                          child: Row(
+                                                                                            mainAxisSize: MainAxisSize.min,
+                                                                                            mainAxisAlignment: MainAxisAlignment.center,
+                                                                                            children: [
+                                                                                              Stack(
+                                                                                                children: [
+                                                                                                  if (valueOrDefault<bool>(
+                                                                                                    VendaDashTotaisCall.variacaoMargem(
+                                                                                                          containerVendaDashTotaisResponse.jsonBody,
+                                                                                                        )!
+                                                                                                            .first >=
+                                                                                                        0.0,
+                                                                                                    true,
+                                                                                                  ))
+                                                                                                    Padding(
+                                                                                                      padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 4.0, 0.0),
+                                                                                                      child: Icon(
+                                                                                                        Icons.arrow_upward_rounded,
+                                                                                                        color: FlutterFlowTheme.of(context).success,
+                                                                                                        size: 20.0,
+                                                                                                      ).animateOnPageLoad(animationsMap['iconOnPageLoadAnimation1']!),
+                                                                                                    ),
+                                                                                                  if (valueOrDefault<bool>(
+                                                                                                    VendaDashTotaisCall.variacaoMargem(
+                                                                                                          containerVendaDashTotaisResponse.jsonBody,
+                                                                                                        )!
+                                                                                                            .first <
+                                                                                                        0.0,
+                                                                                                    true,
+                                                                                                  ))
+                                                                                                    Padding(
+                                                                                                      padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 4.0, 0.0),
+                                                                                                      child: Icon(
+                                                                                                        Icons.arrow_downward_rounded,
+                                                                                                        color: FlutterFlowTheme.of(context).error,
+                                                                                                        size: 20.0,
+                                                                                                      ).animateOnPageLoad(animationsMap['iconOnPageLoadAnimation2']!),
+                                                                                                    ),
+                                                                                                ],
+                                                                                              ),
+                                                                                              Padding(
+                                                                                                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+                                                                                                child: Text(
+                                                                                                  '${valueOrDefault<String>(
+                                                                                                    formatNumber(
+                                                                                                      VendaDashTotaisCall.variacaoMargem(
+                                                                                                        containerVendaDashTotaisResponse.jsonBody,
+                                                                                                      )?.first,
+                                                                                                      formatType: FormatType.custom,
+                                                                                                      format: '##.##',
+                                                                                                      locale: 'pt_br',
+                                                                                                    ),
+                                                                                                    '0',
+                                                                                                  )}%',
+                                                                                                  style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                                        fontFamily: 'Readex Pro',
+                                                                                                        color: VendaDashTotaisCall.variacaoMargem(
+                                                                                                                  containerVendaDashTotaisResponse.jsonBody,
+                                                                                                                )!
+                                                                                                                    .first <
+                                                                                                                0.0
+                                                                                                            ? FlutterFlowTheme.of(context).error
+                                                                                                            : FlutterFlowTheme.of(context).success,
+                                                                                                        fontSize: 12.0,
+                                                                                                        letterSpacing: 0.0,
+                                                                                                        fontWeight: FontWeight.normal,
+                                                                                                      ),
+                                                                                                ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation2']!),
+                                                                                              ),
+                                                                                            ],
+                                                                                          ),
+                                                                                        ),
+                                                                                      ],
+                                                                                    ),
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                      ].addToStart(const SizedBox(width: 12.0)).addToEnd(
+                                                                              const SizedBox(width: 12.0)),
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ].divide(const SizedBox(
+                                                                width: 10.0)),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      10.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Expanded(
                                                                 child:
                                                                     Container(
-                                                                  width: double
-                                                                      .infinity,
-                                                                  height: 100.0,
+                                                                  width: 80.0,
+                                                                  height: 80.0,
                                                                   decoration:
                                                                       BoxDecoration(
                                                                     color: FlutterFlowTheme.of(
@@ -917,785 +1203,496 @@ class _UnViewFrameVendasWidgetState extends State<UnViewFrameVendasWidget>
                                                                         .primaryBackground,
                                                                     borderRadius:
                                                                         BorderRadius.circular(
-                                                                            5.0),
-                                                                    border:
-                                                                        Border
-                                                                            .all(
-                                                                      color: FlutterFlowTheme.of(
-                                                                              context)
-                                                                          .primaryBackground,
-                                                                      width:
-                                                                          0.0,
-                                                                    ),
+                                                                            12.0),
                                                                   ),
-                                                                  child: Row(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Column(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        children: [
-                                                                          Expanded(
-                                                                            child:
-                                                                                Padding(
-                                                                              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 12.0, 0.0, 12.0),
-                                                                              child: Column(
-                                                                                mainAxisSize: MainAxisSize.max,
-                                                                                mainAxisAlignment: MainAxisAlignment.center,
-                                                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                                                children: [
-                                                                                  Text(
-                                                                                    'Saldo Variável',
-                                                                                    style: FlutterFlowTheme.of(context).labelMedium.override(
-                                                                                          fontFamily: 'Outfit',
-                                                                                          color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                          fontSize: 14.0,
-                                                                                          letterSpacing: 0.0,
-                                                                                          fontWeight: FontWeight.normal,
-                                                                                        ),
-                                                                                  ),
-                                                                                  Row(
-                                                                                    mainAxisSize: MainAxisSize.max,
-                                                                                    children: [
-                                                                                      Padding(
-                                                                                        padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 4.0, 0.0),
-                                                                                        child: Text(
-                                                                                          valueOrDefault<String>(
-                                                                                            functions.realFormat(valueOrDefault<String>(
-                                                                                              VendaDashTotaisCall.variacaoValor(
-                                                                                                containerVendaDashTotaisResponse.jsonBody,
-                                                                                              )?.first.toString(),
-                                                                                              '0',
-                                                                                            )),
-                                                                                            '0',
-                                                                                          ),
-                                                                                          style: FlutterFlowTheme.of(context).headlineMedium.override(
-                                                                                                fontFamily: 'Outfit',
-                                                                                                color: FlutterFlowTheme.of(context).primaryText,
-                                                                                                fontSize: 24.0,
-                                                                                                letterSpacing: 0.0,
-                                                                                                fontWeight: FontWeight.normal,
-                                                                                              ),
-                                                                                        ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation1']!),
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                  Row(
-                                                                                    mainAxisSize: MainAxisSize.max,
-                                                                                    children: [
-                                                                                      RichText(
-                                                                                        textScaler: MediaQuery.of(context).textScaler,
-                                                                                        text: TextSpan(
-                                                                                          children: [
-                                                                                            TextSpan(
-                                                                                              text: valueOrDefault<String>(
-                                                                                                dateTimeFormat(
-                                                                                                  "dd/MM/yyyy",
-                                                                                                  functions
-                                                                                                      .dateFormatToDateTimeList(VendaDashTotaisCall.dataAnt(
-                                                                                                        containerVendaDashTotaisResponse.jsonBody,
-                                                                                                      )?.take(1).toList().toList())
-                                                                                                      ?.first,
-                                                                                                  locale: FFLocalizations.of(context).languageCode,
-                                                                                                ),
-                                                                                                'Sem informação.',
-                                                                                              ),
-                                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                    fontFamily: 'Outfit',
-                                                                                                    color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                                    fontSize: 12.0,
-                                                                                                    letterSpacing: 0.0,
-                                                                                                    fontWeight: FontWeight.w300,
-                                                                                                  ),
-                                                                                            ),
-                                                                                            const TextSpan(
-                                                                                              text: ' - ',
-                                                                                              style: TextStyle(),
-                                                                                            ),
-                                                                                            TextSpan(
-                                                                                              text: valueOrDefault<String>(
-                                                                                                dateTimeFormat(
-                                                                                                  "dd/MM/yyyy",
-                                                                                                  functions
-                                                                                                      .dateFormatToDateTimeList(VendaDashTotaisCall.valueX(
-                                                                                                        containerVendaDashTotaisResponse.jsonBody,
-                                                                                                      )?.take(1).toList().toList())
-                                                                                                      ?.first,
-                                                                                                  locale: FFLocalizations.of(context).languageCode,
-                                                                                                ),
-                                                                                                'Sem informação.',
-                                                                                              ),
-                                                                                              style: GoogleFonts.getFont(
-                                                                                                'Outfit',
-                                                                                                color: FlutterFlowTheme.of(context).primary,
-                                                                                                fontWeight: FontWeight.w300,
-                                                                                                fontSize: 12.0,
-                                                                                              ),
-                                                                                            )
-                                                                                          ],
-                                                                                          style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                                fontFamily: 'Readex Pro',
-                                                                                                color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                                letterSpacing: 0.0,
-                                                                                              ),
-                                                                                        ),
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                ],
-                                                                              ),
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                      if (VendaDashTotaisCall.valueList(
-                                                                            containerVendaDashTotaisResponse.jsonBody,
-                                                                          )!.isNotEmpty)
-                                                                        Column(
-                                                                          mainAxisSize:
-                                                                              MainAxisSize.min,
-                                                                          children: [
-                                                                            Expanded(
-                                                                              child: Padding(
-                                                                                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 5.0, 5.0, 5.0),
-                                                                                child: Container(
-                                                                                  height: 50.0,
-                                                                                  decoration: const BoxDecoration(),
-                                                                                  child: Stack(
-                                                                                    alignment: const AlignmentDirectional(0.0, 0.0),
-                                                                                    children: [
-                                                                                      Align(
-                                                                                        alignment: const AlignmentDirectional(0.0, 0.0),
-                                                                                        child: SizedBox(
-                                                                                          width: 100.0,
-                                                                                          height: 100.0,
-                                                                                          child: custom_widgets.DegradeCircular(
-                                                                                            width: 100.0,
-                                                                                            height: 100.0,
-                                                                                            value: valueOrDefault<double>(
-                                                                                              valueOrDefault<double>(
-                                                                                                    VendaDashTotaisCall.variacaoMargem(
-                                                                                                      containerVendaDashTotaisResponse.jsonBody,
-                                                                                                    )?.first,
-                                                                                                    0.0,
-                                                                                                  ) /
-                                                                                                  100,
-                                                                                              0.0,
-                                                                                            ),
-                                                                                            sizeBox: 80.0,
-                                                                                          ),
-                                                                                        ),
-                                                                                      ),
-                                                                                      Align(
-                                                                                        alignment: const AlignmentDirectional(0.0, 0.0),
-                                                                                        child: Row(
-                                                                                          mainAxisSize: MainAxisSize.min,
-                                                                                          mainAxisAlignment: MainAxisAlignment.center,
-                                                                                          children: [
-                                                                                            Stack(
-                                                                                              children: [
-                                                                                                if (valueOrDefault<bool>(
-                                                                                                  VendaDashTotaisCall.variacaoMargem(
-                                                                                                        containerVendaDashTotaisResponse.jsonBody,
-                                                                                                      )!
-                                                                                                          .first >=
-                                                                                                      0.0,
-                                                                                                  true,
-                                                                                                ))
-                                                                                                  Padding(
-                                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 4.0, 0.0),
-                                                                                                    child: Icon(
-                                                                                                      Icons.arrow_upward_rounded,
-                                                                                                      color: FlutterFlowTheme.of(context).success,
-                                                                                                      size: 20.0,
-                                                                                                    ).animateOnPageLoad(animationsMap['iconOnPageLoadAnimation1']!),
-                                                                                                  ),
-                                                                                                if (valueOrDefault<bool>(
-                                                                                                  VendaDashTotaisCall.variacaoMargem(
-                                                                                                        containerVendaDashTotaisResponse.jsonBody,
-                                                                                                      )!
-                                                                                                          .first <
-                                                                                                      0.0,
-                                                                                                  true,
-                                                                                                ))
-                                                                                                  Padding(
-                                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 4.0, 0.0),
-                                                                                                    child: Icon(
-                                                                                                      Icons.arrow_downward_rounded,
-                                                                                                      color: FlutterFlowTheme.of(context).error,
-                                                                                                      size: 20.0,
-                                                                                                    ).animateOnPageLoad(animationsMap['iconOnPageLoadAnimation2']!),
-                                                                                                  ),
-                                                                                              ],
-                                                                                            ),
-                                                                                            Padding(
-                                                                                              padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
-                                                                                              child: Text(
-                                                                                                '${valueOrDefault<String>(
-                                                                                                  formatNumber(
-                                                                                                    VendaDashTotaisCall.variacaoMargem(
-                                                                                                      containerVendaDashTotaisResponse.jsonBody,
-                                                                                                    )?.first,
-                                                                                                    formatType: FormatType.custom,
-                                                                                                    format: '##.##',
-                                                                                                    locale: 'pt_br',
-                                                                                                  ),
-                                                                                                  '0',
-                                                                                                )}%',
-                                                                                                style: FlutterFlowTheme.of(context).bodySmall.override(
-                                                                                                      fontFamily: 'Readex Pro',
-                                                                                                      color: VendaDashTotaisCall.variacaoMargem(
-                                                                                                                containerVendaDashTotaisResponse.jsonBody,
-                                                                                                              )!
-                                                                                                                  .first <
-                                                                                                              0.0
-                                                                                                          ? FlutterFlowTheme.of(context).error
-                                                                                                          : FlutterFlowTheme.of(context).success,
-                                                                                                      fontSize: 12.0,
-                                                                                                      letterSpacing: 0.0,
-                                                                                                      fontWeight: FontWeight.normal,
-                                                                                                    ),
-                                                                                              ).animateOnPageLoad(animationsMap['textOnPageLoadAnimation2']!),
-                                                                                            ),
-                                                                                          ],
-                                                                                        ),
-                                                                                      ),
-                                                                                    ],
-                                                                                  ),
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                    ]
-                                                                        .addToStart(const SizedBox(
-                                                                            width:
-                                                                                12.0))
-                                                                        .addToEnd(const SizedBox(
-                                                                            width:
-                                                                                12.0)),
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ].divide(const SizedBox(
-                                                              width: 10.0)),
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    10.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Expanded(
-                                                              child: Container(
-                                                                width: 80.0,
-                                                                height: 80.0,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryBackground,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12.0),
-                                                                ),
-                                                                child: Padding(
-                                                                  padding: const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          12.0,
-                                                                          0.0,
-                                                                          12.0,
-                                                                          0.0),
-                                                                  child: Column(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        children:
-                                                                            [
-                                                                          Icon(
-                                                                            Icons.attach_money_rounded,
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).secondaryText,
-                                                                            size:
-                                                                                24.0,
-                                                                          ),
-                                                                          Expanded(
-                                                                            child:
-                                                                                AutoSizeText(
-                                                                              valueOrDefault<String>(
-                                                                                functions.realFormat(valueOrDefault<String>(
-                                                                                  VendaDashTotaisCall.valueY(
-                                                                                    containerVendaDashTotaisResponse.jsonBody,
-                                                                                  )?.first.toString(),
-                                                                                  '0',
-                                                                                )),
-                                                                                '0',
-                                                                              ),
-                                                                              maxLines: 1,
-                                                                              minFontSize: 10.0,
-                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                    fontFamily: 'Readex Pro',
-                                                                                    color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                    fontSize: 26.0,
-                                                                                    letterSpacing: 0.0,
-                                                                                  ),
-                                                                            ),
-                                                                          ),
-                                                                        ].divide(const SizedBox(width: 10.0)),
-                                                                      ),
-                                                                      Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        children: [
-                                                                          Expanded(
-                                                                            child:
-                                                                                AutoSizeText(
-                                                                              'Receita total',
-                                                                              textAlign: TextAlign.start,
-                                                                              maxLines: 1,
-                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                    fontFamily: 'Outfit',
-                                                                                    fontSize: 16.0,
-                                                                                    letterSpacing: 0.0,
-                                                                                    fontWeight: FontWeight.w300,
-                                                                                  ),
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Expanded(
-                                                              child: Container(
-                                                                width: 80.0,
-                                                                height: 80.0,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryBackground,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12.0),
-                                                                ),
-                                                                child: Padding(
-                                                                  padding: const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          12.0,
-                                                                          0.0,
-                                                                          12.0,
-                                                                          0.0),
-                                                                  child: Column(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        children:
-                                                                            [
-                                                                          Icon(
-                                                                            Icons.shopping_cart_rounded,
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).secondaryText,
-                                                                            size:
-                                                                                24.0,
-                                                                          ),
-                                                                          Expanded(
-                                                                            child:
-                                                                                AutoSizeText(
-                                                                              valueOrDefault<String>(
-                                                                                VendaDashTotaisCall.pedido(
-                                                                                  containerVendaDashTotaisResponse.jsonBody,
-                                                                                )?.first.toString(),
-                                                                                '0',
-                                                                              ),
-                                                                              maxLines: 1,
-                                                                              minFontSize: 10.0,
-                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                    fontFamily: 'Readex Pro',
-                                                                                    color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                    fontSize: 26.0,
-                                                                                    letterSpacing: 0.0,
-                                                                                  ),
-                                                                            ),
-                                                                          ),
-                                                                        ].divide(const SizedBox(width: 10.0)),
-                                                                      ),
-                                                                      Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        children: [
-                                                                          Expanded(
-                                                                            child:
-                                                                                AutoSizeText(
-                                                                              'Pedidos Realizados',
-                                                                              textAlign: TextAlign.start,
-                                                                              maxLines: 1,
-                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                    fontFamily: 'Outfit',
-                                                                                    fontSize: 16.0,
-                                                                                    letterSpacing: 0.0,
-                                                                                    fontWeight: FontWeight.w300,
-                                                                                  ),
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          ].divide(const SizedBox(
-                                                              width: 10.0)),
-                                                        ),
-                                                      ),
-                                                      Padding(
-                                                        padding:
-                                                            const EdgeInsetsDirectional
-                                                                .fromSTEB(
-                                                                    0.0,
-                                                                    10.0,
-                                                                    0.0,
-                                                                    0.0),
-                                                        child: Row(
-                                                          mainAxisSize:
-                                                              MainAxisSize.max,
-                                                          children: [
-                                                            Expanded(
-                                                              child: Container(
-                                                                width: 80.0,
-                                                                height: 80.0,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primary,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12.0),
-                                                                ),
-                                                                child: Padding(
-                                                                  padding: const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          12.0,
-                                                                          0.0,
-                                                                          12.0,
-                                                                          0.0),
-                                                                  child: Column(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        children:
-                                                                            [
-                                                                          Icon(
-                                                                            Icons.done,
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).primaryBackground,
-                                                                            size:
-                                                                                24.0,
-                                                                          ),
-                                                                          Expanded(
-                                                                            child:
-                                                                                Column(
-                                                                              mainAxisSize: MainAxisSize.max,
-                                                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                                                              children: [
-                                                                                AutoSizeText(
-                                                                                  valueOrDefault<String>(
-                                                                                    functions.realFormat(valueOrDefault<String>(
-                                                                                      VendaDashTotaisCall.lucro(
-                                                                                        containerVendaDashTotaisResponse.jsonBody,
-                                                                                      )?.first.toString(),
-                                                                                      '0',
-                                                                                    )),
-                                                                                    '0',
-                                                                                  ),
-                                                                                  maxLines: 1,
-                                                                                  minFontSize: 10.0,
-                                                                                  style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                        fontFamily: 'Readex Pro',
-                                                                                        color: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                        fontSize: 26.0,
-                                                                                        letterSpacing: 0.0,
-                                                                                      ),
-                                                                                ),
-                                                                              ],
-                                                                            ),
-                                                                          ),
-                                                                        ].divide(const SizedBox(width: 10.0)),
-                                                                      ),
+                                                                  child:
                                                                       Padding(
-                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                    padding: const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            12.0,
                                                                             0.0,
-                                                                            5.0,
-                                                                            0.0,
+                                                                            12.0,
                                                                             0.0),
-                                                                        child:
-                                                                            Row(
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Row(
                                                                           mainAxisSize:
                                                                               MainAxisSize.max,
                                                                           children:
                                                                               [
+                                                                            Icon(
+                                                                              Icons.attach_money_rounded,
+                                                                              color: FlutterFlowTheme.of(context).secondaryText,
+                                                                              size: 24.0,
+                                                                            ),
                                                                             Expanded(
                                                                               child: AutoSizeText(
-                                                                                'Total Lucro',
+                                                                                valueOrDefault<String>(
+                                                                                  functions.realFormat(valueOrDefault<String>(
+                                                                                    VendaDashTotaisCall.valueY(
+                                                                                      containerVendaDashTotaisResponse.jsonBody,
+                                                                                    )?.first.toString(),
+                                                                                    '0',
+                                                                                  )),
+                                                                                  '0',
+                                                                                ),
+                                                                                maxLines: 1,
+                                                                                minFontSize: 10.0,
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      fontFamily: 'Readex Pro',
+                                                                                      color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                      fontSize: 26.0,
+                                                                                      letterSpacing: 0.0,
+                                                                                    ),
+                                                                              ),
+                                                                            ),
+                                                                          ].divide(const SizedBox(width: 10.0)),
+                                                                        ),
+                                                                        Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children: [
+                                                                            Expanded(
+                                                                              child: AutoSizeText(
+                                                                                'Receita total',
                                                                                 textAlign: TextAlign.start,
                                                                                 maxLines: 1,
                                                                                 style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                       fontFamily: 'Outfit',
-                                                                                      color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                                       fontSize: 16.0,
                                                                                       letterSpacing: 0.0,
                                                                                       fontWeight: FontWeight.w300,
                                                                                     ),
                                                                               ),
                                                                             ),
-                                                                            AlignedTooltip(
-                                                                              content: Padding(
-                                                                                padding: const EdgeInsetsDirectional.fromSTEB(12.0, 4.0, 12.0, 4.0),
-                                                                                child: Text(
-                                                                                  'Margem (%) de lucro.',
-                                                                                  style: FlutterFlowTheme.of(context).bodyLarge.override(
-                                                                                        fontFamily: 'Outfit',
-                                                                                        fontSize: 14.0,
-                                                                                        letterSpacing: 0.0,
-                                                                                      ),
+                                                                          ],
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                              Expanded(
+                                                                child:
+                                                                    Container(
+                                                                  width: 80.0,
+                                                                  height: 80.0,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryBackground,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            12.0),
+                                                                  ),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            12.0,
+                                                                            0.0,
+                                                                            12.0,
+                                                                            0.0),
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children:
+                                                                              [
+                                                                            Icon(
+                                                                              Icons.shopping_cart_rounded,
+                                                                              color: FlutterFlowTheme.of(context).secondaryText,
+                                                                              size: 24.0,
+                                                                            ),
+                                                                            Expanded(
+                                                                              child: AutoSizeText(
+                                                                                valueOrDefault<String>(
+                                                                                  VendaDashTotaisCall.pedido(
+                                                                                    containerVendaDashTotaisResponse.jsonBody,
+                                                                                  )?.first.toString(),
+                                                                                  '0',
                                                                                 ),
+                                                                                maxLines: 1,
+                                                                                minFontSize: 10.0,
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      fontFamily: 'Readex Pro',
+                                                                                      color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                      fontSize: 26.0,
+                                                                                      letterSpacing: 0.0,
+                                                                                    ),
                                                                               ),
-                                                                              offset: 4.0,
-                                                                              preferredDirection: AxisDirection.down,
-                                                                              borderRadius: BorderRadius.circular(8.0),
-                                                                              backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                              elevation: 4.0,
-                                                                              tailBaseWidth: 24.0,
-                                                                              tailLength: 12.0,
-                                                                              waitDuration: const Duration(milliseconds: 100),
-                                                                              showDuration: const Duration(milliseconds: 1500),
-                                                                              triggerMode: TooltipTriggerMode.tap,
-                                                                              child: Container(
-                                                                                width: 100.0,
-                                                                                height: 25.0,
-                                                                                decoration: BoxDecoration(
-                                                                                  borderRadius: BorderRadius.circular(12.0),
-                                                                                  border: Border.all(
-                                                                                    color: FlutterFlowTheme.of(context).primaryBackground,
-                                                                                  ),
-                                                                                ),
-                                                                                child: Text(
-                                                                                  valueOrDefault<String>(
-                                                                                    '${valueOrDefault<String>(
-                                                                                      VendaDashTotaisCall.margemLucro(
-                                                                                        containerVendaDashTotaisResponse.jsonBody,
-                                                                                      )?.first.toString(),
+                                                                            ),
+                                                                          ].divide(const SizedBox(width: 10.0)),
+                                                                        ),
+                                                                        Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children: [
+                                                                            Expanded(
+                                                                              child: AutoSizeText(
+                                                                                'Pedidos Realizados',
+                                                                                textAlign: TextAlign.start,
+                                                                                maxLines: 1,
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      fontFamily: 'Outfit',
+                                                                                      fontSize: 16.0,
+                                                                                      letterSpacing: 0.0,
+                                                                                      fontWeight: FontWeight.w300,
+                                                                                    ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ].divide(const SizedBox(
+                                                                width: 10.0)),
+                                                          ),
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsetsDirectional
+                                                                  .fromSTEB(
+                                                                      0.0,
+                                                                      10.0,
+                                                                      0.0,
+                                                                      0.0),
+                                                          child: Row(
+                                                            mainAxisSize:
+                                                                MainAxisSize
+                                                                    .max,
+                                                            children: [
+                                                              Expanded(
+                                                                child:
+                                                                    Container(
+                                                                  width: 80.0,
+                                                                  height: 80.0,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primary,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            12.0),
+                                                                  ),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            12.0,
+                                                                            0.0,
+                                                                            12.0,
+                                                                            0.0),
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children:
+                                                                              [
+                                                                            Icon(
+                                                                              Icons.done,
+                                                                              color: FlutterFlowTheme.of(context).primaryBackground,
+                                                                              size: 24.0,
+                                                                            ),
+                                                                            Expanded(
+                                                                              child: Column(
+                                                                                mainAxisSize: MainAxisSize.max,
+                                                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                                                children: [
+                                                                                  AutoSizeText(
+                                                                                    valueOrDefault<String>(
+                                                                                      functions.realFormat(valueOrDefault<String>(
+                                                                                        VendaDashTotaisCall.lucro(
+                                                                                          containerVendaDashTotaisResponse.jsonBody,
+                                                                                        )?.first.toString(),
+                                                                                        '0',
+                                                                                      )),
                                                                                       '0',
-                                                                                    )}%',
-                                                                                    '0',
+                                                                                    ),
+                                                                                    maxLines: 1,
+                                                                                    minFontSize: 10.0,
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          fontFamily: 'Readex Pro',
+                                                                                          color: FlutterFlowTheme.of(context).primaryBackground,
+                                                                                          fontSize: 26.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                        ),
                                                                                   ),
-                                                                                  textAlign: TextAlign.center,
+                                                                                ],
+                                                                              ),
+                                                                            ),
+                                                                          ].divide(const SizedBox(width: 10.0)),
+                                                                        ),
+                                                                        Padding(
+                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              5.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Row(
+                                                                            mainAxisSize:
+                                                                                MainAxisSize.max,
+                                                                            children:
+                                                                                [
+                                                                              Expanded(
+                                                                                child: AutoSizeText(
+                                                                                  'Total Lucro',
+                                                                                  textAlign: TextAlign.start,
+                                                                                  maxLines: 1,
                                                                                   style: FlutterFlowTheme.of(context).bodyMedium.override(
                                                                                         fontFamily: 'Outfit',
                                                                                         color: FlutterFlowTheme.of(context).secondaryBackground,
-                                                                                        fontSize: 14.0,
+                                                                                        fontSize: 16.0,
                                                                                         letterSpacing: 0.0,
                                                                                         fontWeight: FontWeight.w300,
                                                                                       ),
                                                                                 ),
                                                                               ),
-                                                                            ),
-                                                                          ].divide(const SizedBox(width: 5.0)),
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                            Expanded(
-                                                              child: Container(
-                                                                width: 80.0,
-                                                                height: 80.0,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .primaryBackground,
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              12.0),
-                                                                ),
-                                                                child: Padding(
-                                                                  padding: const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          12.0,
-                                                                          0.0,
-                                                                          12.0,
-                                                                          0.0),
-                                                                  child: Column(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .max,
-                                                                    mainAxisAlignment:
-                                                                        MainAxisAlignment
-                                                                            .center,
-                                                                    children: [
-                                                                      Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        children:
-                                                                            [
-                                                                          Icon(
-                                                                            Icons.speed_rounded,
-                                                                            color:
-                                                                                FlutterFlowTheme.of(context).secondaryText,
-                                                                            size:
-                                                                                24.0,
-                                                                          ),
-                                                                          Expanded(
-                                                                            child:
-                                                                                AutoSizeText(
-                                                                              valueOrDefault<String>(
-                                                                                functions.realFormat(valueOrDefault<String>(
-                                                                                  VendaDashTotaisCall.valorMedia(
-                                                                                    containerVendaDashTotaisResponse.jsonBody,
-                                                                                  )?.first.toString(),
-                                                                                  '0',
-                                                                                )),
-                                                                                '0',
+                                                                              AlignedTooltip(
+                                                                                content: Padding(
+                                                                                  padding: const EdgeInsetsDirectional.fromSTEB(12.0, 4.0, 12.0, 4.0),
+                                                                                  child: Text(
+                                                                                    'Margem (%) de lucro.',
+                                                                                    style: FlutterFlowTheme.of(context).bodyLarge.override(
+                                                                                          fontFamily: 'Outfit',
+                                                                                          fontSize: 14.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
+                                                                                offset: 4.0,
+                                                                                preferredDirection: AxisDirection.down,
+                                                                                borderRadius: BorderRadius.circular(8.0),
+                                                                                backgroundColor: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                elevation: 4.0,
+                                                                                tailBaseWidth: 24.0,
+                                                                                tailLength: 12.0,
+                                                                                waitDuration: const Duration(milliseconds: 100),
+                                                                                showDuration: const Duration(milliseconds: 1500),
+                                                                                triggerMode: TooltipTriggerMode.tap,
+                                                                                child: Container(
+                                                                                  width: 100.0,
+                                                                                  height: 25.0,
+                                                                                  decoration: BoxDecoration(
+                                                                                    borderRadius: BorderRadius.circular(12.0),
+                                                                                    border: Border.all(
+                                                                                      color: FlutterFlowTheme.of(context).primaryBackground,
+                                                                                    ),
+                                                                                  ),
+                                                                                  child: Text(
+                                                                                    valueOrDefault<String>(
+                                                                                      '${valueOrDefault<String>(
+                                                                                        VendaDashTotaisCall.margemLucro(
+                                                                                          containerVendaDashTotaisResponse.jsonBody,
+                                                                                        )?.first.toString(),
+                                                                                        '0',
+                                                                                      )}%',
+                                                                                      '0',
+                                                                                    ),
+                                                                                    textAlign: TextAlign.center,
+                                                                                    style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                          fontFamily: 'Outfit',
+                                                                                          color: FlutterFlowTheme.of(context).secondaryBackground,
+                                                                                          fontSize: 14.0,
+                                                                                          letterSpacing: 0.0,
+                                                                                          fontWeight: FontWeight.w300,
+                                                                                        ),
+                                                                                  ),
+                                                                                ),
                                                                               ),
-                                                                              maxLines: 1,
-                                                                              minFontSize: 10.0,
-                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                    fontFamily: 'Readex Pro',
-                                                                                    color: FlutterFlowTheme.of(context).secondaryText,
-                                                                                    fontSize: 26.0,
-                                                                                    letterSpacing: 0.0,
-                                                                                  ),
-                                                                            ),
+                                                                            ].divide(const SizedBox(width: 5.0)),
                                                                           ),
-                                                                        ].divide(const SizedBox(width: 10.0)),
-                                                                      ),
-                                                                      Row(
-                                                                        mainAxisSize:
-                                                                            MainAxisSize.max,
-                                                                        children: [
-                                                                          Expanded(
-                                                                            child:
-                                                                                AutoSizeText(
-                                                                              'Médias de pedidos',
-                                                                              textAlign: TextAlign.start,
-                                                                              maxLines: 1,
-                                                                              style: FlutterFlowTheme.of(context).bodyMedium.override(
-                                                                                    fontFamily: 'Outfit',
-                                                                                    fontSize: 16.0,
-                                                                                    letterSpacing: 0.0,
-                                                                                    fontWeight: FontWeight.w300,
-                                                                                  ),
-                                                                            ),
-                                                                          ),
-                                                                        ],
-                                                                      ),
-                                                                    ],
+                                                                        ),
+                                                                      ],
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ].divide(const SizedBox(
-                                                              width: 10.0)),
+                                                              Expanded(
+                                                                child:
+                                                                    Container(
+                                                                  width: 80.0,
+                                                                  height: 80.0,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: FlutterFlowTheme.of(
+                                                                            context)
+                                                                        .primaryBackground,
+                                                                    borderRadius:
+                                                                        BorderRadius.circular(
+                                                                            12.0),
+                                                                  ),
+                                                                  child:
+                                                                      Padding(
+                                                                    padding: const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            12.0,
+                                                                            0.0,
+                                                                            12.0,
+                                                                            0.0),
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .max,
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children:
+                                                                              [
+                                                                            Icon(
+                                                                              Icons.speed_rounded,
+                                                                              color: FlutterFlowTheme.of(context).secondaryText,
+                                                                              size: 24.0,
+                                                                            ),
+                                                                            Expanded(
+                                                                              child: AutoSizeText(
+                                                                                valueOrDefault<String>(
+                                                                                  functions.realFormat(valueOrDefault<String>(
+                                                                                    VendaDashTotaisCall.valorMedia(
+                                                                                      containerVendaDashTotaisResponse.jsonBody,
+                                                                                    )?.first.toString(),
+                                                                                    '0',
+                                                                                  )),
+                                                                                  '0',
+                                                                                ),
+                                                                                maxLines: 1,
+                                                                                minFontSize: 10.0,
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      fontFamily: 'Readex Pro',
+                                                                                      color: FlutterFlowTheme.of(context).secondaryText,
+                                                                                      fontSize: 26.0,
+                                                                                      letterSpacing: 0.0,
+                                                                                    ),
+                                                                              ),
+                                                                            ),
+                                                                          ].divide(const SizedBox(width: 10.0)),
+                                                                        ),
+                                                                        Row(
+                                                                          mainAxisSize:
+                                                                              MainAxisSize.max,
+                                                                          children: [
+                                                                            Expanded(
+                                                                              child: AutoSizeText(
+                                                                                'Médias de pedidos',
+                                                                                textAlign: TextAlign.start,
+                                                                                maxLines: 1,
+                                                                                style: FlutterFlowTheme.of(context).bodyMedium.override(
+                                                                                      fontFamily: 'Outfit',
+                                                                                      fontSize: 16.0,
+                                                                                      letterSpacing: 0.0,
+                                                                                      fontWeight: FontWeight.w300,
+                                                                                    ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ],
+                                                                    ),
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ].divide(const SizedBox(
+                                                                width: 10.0)),
+                                                          ),
                                                         ),
-                                                      ),
-                                                    ]
-                                                        .addToStart(const SizedBox(
-                                                            height: 15.0))
-                                                        .addToEnd(const SizedBox(
-                                                            height: 10.0)),
-                                                  ),
-                                                ),
-                                                Align(
-                                                  alignment:
-                                                      const AlignmentDirectional(
-                                                          1.0, -1.0),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsetsDirectional
-                                                            .fromSTEB(0.0, 10.0,
-                                                                10.0, 0.0),
-                                                    child:
-                                                        FlutterFlowIconButton(
-                                                      borderRadius: 8.0,
-                                                      buttonSize: 40.0,
-                                                      icon: Icon(
-                                                        Icons.update_rounded,
-                                                        color:
-                                                            FlutterFlowTheme.of(
-                                                                    context)
-                                                                .primary,
-                                                        size: 20.0,
-                                                      ),
-                                                      showLoadingIndicator:
-                                                          true,
-                                                      onPressed: () async {
-                                                        safeSetState(() => _model
-                                                                .apiRequestCompleter =
-                                                            null);
-                                                        await _model
-                                                            .waitForApiRequestCompleted(
-                                                                minWait: 300);
-                                                      },
+                                                      ]
+                                                          .addToStart(const SizedBox(
+                                                              height: 15.0))
+                                                          .addToEnd(const SizedBox(
+                                                              height: 10.0)),
                                                     ),
                                                   ),
-                                                ),
-                                              ],
+                                                  Align(
+                                                    alignment:
+                                                        const AlignmentDirectional(
+                                                            1.0, -1.0),
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsetsDirectional
+                                                              .fromSTEB(
+                                                                  0.0,
+                                                                  10.0,
+                                                                  10.0,
+                                                                  0.0),
+                                                      child:
+                                                          FlutterFlowIconButton(
+                                                        borderRadius: 8.0,
+                                                        buttonSize: 40.0,
+                                                        icon: Icon(
+                                                          Icons.update_rounded,
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .primary,
+                                                          size: 20.0,
+                                                        ),
+                                                        showLoadingIndicator:
+                                                            true,
+                                                        onPressed: () async {
+                                                          _model.isAllLoading =
+                                                              true;
+                                                          _model.updatePage(
+                                                              () {});
+                                                          safeSetState(() =>
+                                                              _model.apiRequestCompleter =
+                                                                  null);
+                                                          await _model
+                                                              .waitForApiRequestCompleted(
+                                                                  minWait: 300);
+                                                          _model.isAllLoading =
+                                                              false;
+                                                          _model.updatePage(
+                                                              () {});
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ),
-                                        )
-                                            .animateOnPageLoad(animationsMap[
-                                                'containerOnPageLoadAnimation']!)
-                                            .animateOnActionTrigger(
-                                                animationsMap[
-                                                    'containerOnActionTriggerAnimation']!,
-                                                hasBeenTriggered:
-                                                    hasContainerTriggered);
-                                      },
+                                          )
+                                              .animateOnPageLoad(animationsMap[
+                                                  'containerOnPageLoadAnimation']!)
+                                              .animateOnActionTrigger(
+                                                  animationsMap[
+                                                      'containerOnActionTriggerAnimation']!,
+                                                  hasBeenTriggered:
+                                                      hasContainerTriggered);
+                                        },
+                                      ),
                                     ),
                                   ),
                                 ),

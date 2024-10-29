@@ -1,4 +1,5 @@
 import '/flutter_flow/flutter_flow_animations.dart';
+import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/frame_components/un_view_frame_card_hor/un_view_frame_card_hor_widget.dart';
@@ -59,8 +60,8 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
                   .controller
                   .forward(from: 0.0));
         }
-        if (animationsMap['iconOnActionTriggerAnimation'] != null) {
-          animationsMap['iconOnActionTriggerAnimation']!
+        if (animationsMap['iconButtonOnActionTriggerAnimation'] != null) {
+          animationsMap['iconButtonOnActionTriggerAnimation']!
               .controller
               .forward(from: 0.0);
         }
@@ -69,8 +70,8 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
         FFAppState().update(() {});
         await Future.wait([
           Future(() async {
-            if (animationsMap['iconOnActionTriggerAnimation'] != null) {
-              animationsMap['iconOnActionTriggerAnimation']!
+            if (animationsMap['iconButtonOnActionTriggerAnimation'] != null) {
+              animationsMap['iconButtonOnActionTriggerAnimation']!
                   .controller
                   .reverse();
             }
@@ -102,7 +103,7 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
           ),
         ],
       ),
-      'iconOnPageLoadAnimation': AnimationInfo(
+      'iconButtonOnPageLoadAnimation': AnimationInfo(
         trigger: AnimationTrigger.onPageLoad,
         applyInitialState: true,
         effectsBuilder: () => [
@@ -116,7 +117,7 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
           ),
         ],
       ),
-      'iconOnActionTriggerAnimation': AnimationInfo(
+      'iconButtonOnActionTriggerAnimation': AnimationInfo(
         trigger: AnimationTrigger.onActionTrigger,
         applyInitialState: true,
         effectsBuilder: () => [
@@ -392,13 +393,21 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
                                 children: [
                                   Padding(
                                     padding: const EdgeInsetsDirectional.fromSTEB(
-                                        7.0, 0.0, 7.0, 0.0),
-                                    child: InkWell(
-                                      splashColor: Colors.transparent,
-                                      focusColor: Colors.transparent,
-                                      hoverColor: Colors.transparent,
-                                      highlightColor: Colors.transparent,
-                                      onTap: () async {
+                                        0.0, 0.0, 10.0, 0.0),
+                                    child: FlutterFlowIconButton(
+                                      borderRadius: 50.0,
+                                      buttonSize: 45.0,
+                                      hoverColor: const Color(0x5B0C7FFF),
+                                      hoverIconColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                      icon: Icon(
+                                        Icons.keyboard_arrow_down_rounded,
+                                        color: FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                        size: 24.0,
+                                      ),
+                                      onPressed: () async {
                                         if (FFAppState().menuRapidoExpanded) {
                                           FFAppState().menuRapidoExpanded =
                                               false;
@@ -412,10 +421,10 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
                                                 .reverse();
                                           }
                                           if (animationsMap[
-                                                  'iconOnActionTriggerAnimation'] !=
+                                                  'iconButtonOnActionTriggerAnimation'] !=
                                               null) {
                                             animationsMap[
-                                                    'iconOnActionTriggerAnimation']!
+                                                    'iconButtonOnActionTriggerAnimation']!
                                                 .controller
                                                 .reverse();
                                           }
@@ -426,10 +435,10 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
                                           await Future.wait([
                                             Future(() async {
                                               if (animationsMap[
-                                                      'iconOnActionTriggerAnimation'] !=
+                                                      'iconButtonOnActionTriggerAnimation'] !=
                                                   null) {
                                                 animationsMap[
-                                                        'iconOnActionTriggerAnimation']!
+                                                        'iconButtonOnActionTriggerAnimation']!
                                                     .controller
                                                     .forward(from: 0.0);
                                               }
@@ -453,18 +462,12 @@ class _UnViewFrameHomeWidgetState extends State<UnViewFrameHomeWidget>
                                           ]);
                                         }
                                       },
-                                      child: Icon(
-                                        Icons.keyboard_arrow_down_sharp,
-                                        color: FlutterFlowTheme.of(context)
-                                            .primaryText,
-                                        size: 20.0,
-                                      ),
                                     )
                                         .animateOnPageLoad(animationsMap[
-                                            'iconOnPageLoadAnimation']!)
+                                            'iconButtonOnPageLoadAnimation']!)
                                         .animateOnActionTrigger(
                                           animationsMap[
-                                              'iconOnActionTriggerAnimation']!,
+                                              'iconButtonOnActionTriggerAnimation']!,
                                         ),
                                   ),
                                 ],

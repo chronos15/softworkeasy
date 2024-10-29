@@ -13,6 +13,8 @@ class UnViewFrameVendasModel extends FlutterFlowModel<UnViewFrameVendasWidget> {
 
   DateTime? dateSelectedSemanal;
 
+  bool isAllLoading = false;
+
   ///  State fields for stateful widgets in this component.
 
   final unViewFrameVendasShortcutsFocusNode = FocusNode();

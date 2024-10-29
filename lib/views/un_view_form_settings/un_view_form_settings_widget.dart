@@ -37,7 +37,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
     super.initState();
     _model = createModel(context, () => UnViewFormSettingsModel());
 
-    _model.tabBarController = TabController(
+    _model.tbSettingsController = TabController(
       vsync: this,
       length: 2,
       initialIndex: min(
@@ -327,8 +327,8 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                         ],
                                                       ),
                                                     ],
-                                                    controller:
-                                                        _model.tabBarController,
+                                                    controller: _model
+                                                        .tbSettingsController,
                                                     onTap: (i) async {
                                                       [
                                                         () async {},
@@ -339,8 +339,8 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                 ),
                                                 Expanded(
                                                   child: TabBarView(
-                                                    controller:
-                                                        _model.tabBarController,
+                                                    controller: _model
+                                                        .tbSettingsController,
                                                     children: [
                                                       KeepAliveWidgetWrapper(
                                                         builder: (context) =>
@@ -391,6 +391,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                               focusNode: _model.emailAddressFieldFocusNode1,
                                                                               autofocus: false,
                                                                               textInputAction: TextInputAction.next,
+                                                                              readOnly: !isWeb,
                                                                               obscureText: false,
                                                                               decoration: InputDecoration(
                                                                                 labelText: 'Path',
@@ -475,6 +476,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                               focusNode: _model.emailAddressFieldFocusNode2,
                                                                               autofocus: false,
                                                                               textInputAction: TextInputAction.next,
+                                                                              readOnly: !isWeb,
                                                                               obscureText: false,
                                                                               decoration: InputDecoration(
                                                                                 labelText: 'CNPJ',
@@ -563,6 +565,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                               focusNode: _model.emailAddressFieldFocusNode3,
                                                                               autofocus: false,
                                                                               textInputAction: TextInputAction.next,
+                                                                              readOnly: !isWeb,
                                                                               obscureText: false,
                                                                               decoration: InputDecoration(
                                                                                 labelText: 'IP Primário',
@@ -648,6 +651,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                               focusNode: _model.emailAddressFieldFocusNode4,
                                                                               autofocus: false,
                                                                               textInputAction: TextInputAction.next,
+                                                                              readOnly: !isWeb,
                                                                               obscureText: false,
                                                                               decoration: InputDecoration(
                                                                                 labelText: 'IP Secundário',
@@ -733,6 +737,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                               focusNode: _model.emailAddressFieldFocusNode5,
                                                                               autofocus: false,
                                                                               textInputAction: TextInputAction.done,
+                                                                              readOnly: !isWeb,
                                                                               obscureText: false,
                                                                               decoration: InputDecoration(
                                                                                 labelText: 'Porta',
@@ -818,6 +823,7 @@ class _UnViewFormSettingsWidgetState extends State<UnViewFormSettingsWidget>
                                                                               focusNode: _model.emailAddressFieldFocusNode6,
                                                                               autofocus: false,
                                                                               textInputAction: TextInputAction.done,
+                                                                              readOnly: !isWeb,
                                                                               obscureText: false,
                                                                               decoration: InputDecoration(
                                                                                 labelText: 'Terminal',

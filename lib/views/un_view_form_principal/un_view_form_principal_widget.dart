@@ -15,7 +15,6 @@ import '/views/un_view_frame_produtos/un_view_frame_produtos_widget.dart';
 import '/views/un_view_frame_vendas/un_view_frame_vendas_widget.dart';
 import '/views/un_view_lista_clientes/un_view_lista_clientes_widget.dart';
 import '/views/unview_frame_dashboard_financeiro/unview_frame_dashboard_financeiro_widget.dart';
-import 'dart:ui';
 import '/actions/actions.dart' as action_blocks;
 import '/custom_code/actions/index.dart' as actions;
 import '/flutter_flow/custom_functions.dart' as functions;
@@ -164,19 +163,6 @@ class _UnViewFormPrincipalWidgetState extends State<UnViewFormPrincipalWidget>
             duration: 600.0.ms,
             begin: 0.0,
             end: 1.0,
-          ),
-        ],
-      ),
-      'containerOnPageLoadAnimation': AnimationInfo(
-        trigger: AnimationTrigger.onPageLoad,
-        effectsBuilder: () => [
-          VisibilityEffect(duration: 1.ms),
-          ShimmerEffect(
-            curve: Curves.easeInOut,
-            delay: 0.0.ms,
-            duration: 600.0.ms,
-            color: const Color(0x80FFFFFF),
-            angle: 0.524,
           ),
         ],
       ),
@@ -497,64 +483,50 @@ class _UnViewFormPrincipalWidgetState extends State<UnViewFormPrincipalWidget>
                                                   width: 0.0,
                                                 ),
                                               ),
-                                              child: ClipRect(
-                                                child: ImageFiltered(
-                                                  imageFilter: ImageFilter.blur(
-                                                    sigmaX: 0.0,
-                                                    sigmaY: 0.0,
-                                                  ),
-                                                  child: Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(10.0),
-                                                    child: InkWell(
-                                                      splashColor:
-                                                          Colors.transparent,
-                                                      focusColor:
-                                                          Colors.transparent,
-                                                      hoverColor:
-                                                          Colors.transparent,
-                                                      highlightColor:
-                                                          Colors.transparent,
-                                                      onTap: () async {
-                                                        await Navigator.push(
-                                                          context,
-                                                          PageTransition(
-                                                            type:
-                                                                PageTransitionType
-                                                                    .fade,
-                                                            child:
-                                                                FlutterFlowExpandedImageView(
-                                                              image:
-                                                                  Image.asset(
-                                                                'assets/images/SOFTWORK__2_-removebg-preview-transformed_(1).png',
-                                                                fit: BoxFit
-                                                                    .contain,
-                                                              ),
-                                                              allowRotation:
-                                                                  true,
-                                                              tag: 'imageTag1',
-                                                              useHeroAnimation:
-                                                                  true,
-                                                            ),
-                                                          ),
-                                                        );
-                                                      },
-                                                      child: Hero(
-                                                        tag: 'imageTag1',
-                                                        transitionOnUserGestures:
-                                                            true,
-                                                        child: ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      8.0),
-                                                          child: Image.asset(
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(10.0),
+                                                child: InkWell(
+                                                  splashColor:
+                                                      Colors.transparent,
+                                                  focusColor:
+                                                      Colors.transparent,
+                                                  hoverColor:
+                                                      Colors.transparent,
+                                                  highlightColor:
+                                                      Colors.transparent,
+                                                  onTap: () async {
+                                                    await Navigator.push(
+                                                      context,
+                                                      PageTransition(
+                                                        type: PageTransitionType
+                                                            .fade,
+                                                        child:
+                                                            FlutterFlowExpandedImageView(
+                                                          image: Image.asset(
                                                             'assets/images/SOFTWORK__2_-removebg-preview-transformed_(1).png',
-                                                            width: 200.0,
-                                                            height: 200.0,
-                                                            fit: BoxFit.cover,
+                                                            fit: BoxFit.contain,
                                                           ),
+                                                          allowRotation: true,
+                                                          tag: 'imageTag1',
+                                                          useHeroAnimation:
+                                                              true,
                                                         ),
+                                                      ),
+                                                    );
+                                                  },
+                                                  child: Hero(
+                                                    tag: 'imageTag1',
+                                                    transitionOnUserGestures:
+                                                        true,
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8.0),
+                                                      child: Image.asset(
+                                                        'assets/images/SOFTWORK__2_-removebg-preview-transformed_(1).png',
+                                                        width: 200.0,
+                                                        height: 200.0,
+                                                        fit: BoxFit.scaleDown,
                                                       ),
                                                     ),
                                                   ),
@@ -562,8 +534,7 @@ class _UnViewFormPrincipalWidgetState extends State<UnViewFormPrincipalWidget>
                                               ),
                                             ),
                                           ),
-                                        ).animateOnPageLoad(animationsMap[
-                                            'containerOnPageLoadAnimation']!),
+                                        ),
                                       ),
                                     if (_model.pageSelected == Pages.Inicio)
                                       Align(
